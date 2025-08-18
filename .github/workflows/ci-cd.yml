@@ -1,0 +1,473 @@
+name: OMTX-Hub CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'backend/**'
+      - 'frontend/**'
+      - '.github/workflows/**'
+      - 'Dockerfile'
+      - 'requirements.txt'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+      - 'frontend/**'
+      - '.github/workflows/**'
+      - 'Dockerfile'
+      - 'requirements.txt'
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER_NAME }}
+  GKE_REGION: ${{ secrets.GKE_REGION }}
+  DOCKER_REGISTRY: gcr.io
+  IMAGE_NAME: omtx-hub-backend
+  DEPLOYMENT_NAME: omtx-hub-backend
+
+jobs:
+  # Security scanning and vulnerability assessment
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+  # Backend testing and validation
+  backend-test:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+    
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+        
+    - name: Install dependencies
+      run: |
+        cd backend
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov pytest-asyncio httpx
+        
+    - name: Set up test environment
+      run: |
+        cd backend
+        export GOOGLE_CLOUD_PROJECT=test-project
+        export ENVIRONMENT=test
+        export REDIS_HOST=localhost
+        export REDIS_PORT=6379
+        
+    - name: Run unit tests
+      run: |
+        cd backend
+        python -m pytest tests/ -v --cov=. --cov-report=xml --cov-report=term
+        
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./backend/coverage.xml
+        flags: backend
+        name: backend-coverage
+        
+    - name: Lint with flake8
+      run: |
+        cd backend
+        pip install flake8
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        
+    - name: Type checking with mypy
+      run: |
+        cd backend
+        pip install mypy
+        mypy . --ignore-missing-imports || true
+
+  # Frontend testing and validation
+  frontend-test:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        npm ci
+        
+    - name: Run frontend tests
+      run: |
+        npm run test -- --coverage --watchAll=false
+        
+    - name: Upload frontend coverage
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage/lcov.info
+        flags: frontend
+        name: frontend-coverage
+        
+    - name: Lint frontend code
+      run: |
+        npm run lint
+        
+    - name: Type check frontend
+      run: |
+        npm run type-check
+        
+    - name: Build frontend
+      run: |
+        npm run build
+
+  # Load testing
+  load-test:
+    name: Load Testing
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install load testing dependencies
+      run: |
+        cd backend
+        pip install -r requirements.txt
+        pip install locust
+        
+    - name: Run load tests
+      run: |
+        cd backend/testing
+        python load_test_suite.py --headless --users 50 --spawn-rate 5 --run-time 60s
+
+  # Build and push Docker image
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    needs: [security-scan, backend-test, frontend-test]
+    if: github.event_name == 'push'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        
+    - name: Configure Docker for GCR
+      run: |
+        gcloud auth configure-docker
+        
+    - name: Get short SHA
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      
+    - name: Build Docker image
+      run: |
+        docker build \
+          -t $DOCKER_REGISTRY/$PROJECT_ID/$IMAGE_NAME:${{ steps.vars.outputs.sha_short }} \
+          -t $DOCKER_REGISTRY/$PROJECT_ID/$IMAGE_NAME:latest \
+          -t $DOCKER_REGISTRY/$PROJECT_ID/$IMAGE_NAME:${{ github.ref_name }} \
+          .
+          
+    - name: Run container security scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: ${{ env.DOCKER_REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.sha_short }}
+        format: 'sarif'
+        output: 'trivy-image-results.sarif'
+        
+    - name: Upload image scan results
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: 'trivy-image-results.sarif'
+        
+    - name: Push Docker image
+      run: |
+        docker push $DOCKER_REGISTRY/$PROJECT_ID/$IMAGE_NAME:${{ steps.vars.outputs.sha_short }}
+        docker push $DOCKER_REGISTRY/$PROJECT_ID/$IMAGE_NAME:latest
+        docker push $DOCKER_REGISTRY/$PROJECT_ID/$IMAGE_NAME:${{ github.ref_name }}
+
+  # Deploy to staging environment
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [build-and-push]
+    if: github.ref == 'refs/heads/develop'
+    environment: staging
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        
+    - name: Get GKE credentials
+      run: |
+        gcloud container clusters get-credentials $GKE_CLUSTER --region $GKE_REGION
+        
+    - name: Get short SHA
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      
+    - name: Deploy to staging
+      run: |
+        cd infrastructure/k8s
+        
+        # Update image tag
+        sed -i "s|gcr.io/PROJECT_ID/omtx-hub-backend:latest|$DOCKER_REGISTRY/$PROJECT_ID/$IMAGE_NAME:${{ steps.vars.outputs.sha_short }}|g" backend-deployment.yaml
+        
+        # Apply to staging namespace
+        kubectl apply -f namespace.yaml
+        kubectl apply -f configmap.yaml -n omtx-hub-staging
+        kubectl apply -f secrets.yaml -n omtx-hub-staging
+        kubectl apply -f backend-deployment.yaml -n omtx-hub-staging
+        kubectl apply -f backend-service.yaml -n omtx-hub-staging
+        
+        # Wait for rollout
+        kubectl rollout status deployment/$DEPLOYMENT_NAME -n omtx-hub-staging --timeout=600s
+        
+    - name: Run staging health check
+      run: |
+        # Get staging service endpoint
+        STAGING_IP=$(kubectl get service omtx-hub-backend-lb -n omtx-hub-staging -o jsonpath='{.status.loadBalancer.ingress[0].ip}' || echo "pending")
+        
+        if [[ "$STAGING_IP" != "pending" && "$STAGING_IP" != "" ]]; then
+          echo "Testing staging endpoint: http://$STAGING_IP/health"
+          curl -f "http://$STAGING_IP/health" || exit 1
+          echo "Staging health check passed"
+        else
+          echo "Staging IP not yet available, skipping health check"
+        fi
+
+  # Deploy to production environment
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build-and-push, load-test]
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        
+    - name: Get GKE credentials
+      run: |
+        gcloud container clusters get-credentials $GKE_CLUSTER --region $GKE_REGION
+        
+    - name: Get short SHA
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      
+    - name: Pre-deployment health check
+      run: |
+        # Check current production health
+        PROD_IP=$(kubectl get service omtx-hub-backend-lb -n omtx-hub -o jsonpath='{.status.loadBalancer.ingress[0].ip}' || echo "")
+        if [[ "$PROD_IP" != "" ]]; then
+          curl -f "http://$PROD_IP/health" || echo "Production health check failed - proceeding with caution"
+        fi
+        
+    - name: Deploy to production
+      run: |
+        cd infrastructure/k8s
+        
+        # Update image tag
+        sed -i "s|gcr.io/PROJECT_ID/omtx-hub-backend:latest|$DOCKER_REGISTRY/$PROJECT_ID/$IMAGE_NAME:${{ steps.vars.outputs.sha_short }}|g" backend-deployment.yaml
+        
+        # Apply production configuration
+        kubectl apply -f namespace.yaml
+        kubectl apply -f configmap.yaml -n omtx-hub
+        # Note: secrets should be managed separately in production
+        kubectl apply -f backend-deployment.yaml -n omtx-hub
+        kubectl apply -f backend-service.yaml -n omtx-hub
+        kubectl apply -f ingress.yaml -n omtx-hub
+        kubectl apply -f hpa.yaml -n omtx-hub
+        
+        # Wait for rollout with timeout
+        kubectl rollout status deployment/$DEPLOYMENT_NAME -n omtx-hub --timeout=600s
+        
+    - name: Post-deployment verification
+      run: |
+        # Wait for pods to be ready
+        kubectl wait --for=condition=ready pod -l app=omtx-hub-backend -n omtx-hub --timeout=300s
+        
+        # Check service endpoints
+        kubectl get pods -n omtx-hub -l app=omtx-hub-backend
+        kubectl get services -n omtx-hub
+        
+        # Test health endpoint
+        PROD_IP=$(kubectl get service omtx-hub-backend-lb -n omtx-hub -o jsonpath='{.status.loadBalancer.ingress[0].ip}' || echo "pending")
+        
+        if [[ "$PROD_IP" != "pending" && "$PROD_IP" != "" ]]; then
+          echo "Testing production endpoint: http://$PROD_IP/health"
+          
+          # Retry health check with backoff
+          for i in {1..10}; do
+            if curl -f "http://$PROD_IP/health"; then
+              echo "Production health check passed"
+              break
+            else
+              echo "Health check attempt $i failed, retrying in 30s..."
+              sleep 30
+            fi
+            
+            if [[ $i -eq 10 ]]; then
+              echo "Production health check failed after 10 attempts"
+              exit 1
+            fi
+          done
+        else
+          echo "Production IP not yet available"
+        fi
+        
+    - name: Run production smoke tests
+      run: |
+        cd backend/testing
+        python -c "
+import requests
+import sys
+import os
+
+# Get production endpoint
+prod_ip = os.getenv('PROD_IP', 'localhost')
+base_url = f'http://{prod_ip}'
+
+# Smoke tests
+tests = [
+    ('Health Check', f'{base_url}/health'),
+    ('API Status', f'{base_url}/api/v3/health/status'),
+    ('System Status', f'{base_url}/api/system/status')
+]
+
+failed_tests = []
+for test_name, url in tests:
+    try:
+        response = requests.get(url, timeout=30)
+        if response.status_code == 200:
+            print(f'✅ {test_name}: PASSED')
+        else:
+            print(f'❌ {test_name}: FAILED (status: {response.status_code})')
+            failed_tests.append(test_name)
+    except Exception as e:
+        print(f'❌ {test_name}: ERROR ({str(e)})')
+        failed_tests.append(test_name)
+
+if failed_tests:
+    print(f'Failed tests: {failed_tests}')
+    sys.exit(1)
+else:
+    print('🎉 All smoke tests passed!')
+"
+        
+    - name: Rollback on failure
+      if: failure()
+      run: |
+        echo "Deployment failed, initiating rollback..."
+        kubectl rollout undo deployment/$DEPLOYMENT_NAME -n omtx-hub
+        kubectl rollout status deployment/$DEPLOYMENT_NAME -n omtx-hub --timeout=300s
+        echo "Rollback completed"
+
+  # Notify deployment status
+  notify:
+    name: Notify Deployment Status
+    runs-on: ubuntu-latest
+    needs: [deploy-staging, deploy-production]
+    if: always()
+    
+    steps:
+    - name: Notify success
+      if: ${{ needs.deploy-production.result == 'success' || needs.deploy-staging.result == 'success' }}
+      run: |
+        echo "🎉 Deployment successful!"
+        echo "Environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}"
+        echo "Commit: ${{ github.sha }}"
+        echo "Author: ${{ github.actor }}"
+        
+    - name: Notify failure
+      if: ${{ needs.deploy-production.result == 'failure' || needs.deploy-staging.result == 'failure' }}
+      run: |
+        echo "❌ Deployment failed!"
+        echo "Environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}"
+        echo "Commit: ${{ github.sha }}"
+        echo "Author: ${{ github.actor }}"
+
+  # Cleanup old images (run weekly)
+  cleanup:
+    name: Cleanup Old Images
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    
+    steps:
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        
+    - name: Cleanup old Docker images
+      run: |
+        # Keep last 10 images, delete older ones
+        gcloud container images list-tags $DOCKER_REGISTRY/$PROJECT_ID/$IMAGE_NAME \
+          --limit=999999 --sort-by=TIMESTAMP \
+          --format="get(digest)" | tail -n +11 | \
+        while read digest; do
+          gcloud container images delete $DOCKER_REGISTRY/$PROJECT_ID/$IMAGE_NAME@$digest --force-delete-tags --quiet
+        done

@@ -1,0 +1,197 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: omtx-hub-backend
+  namespace: omtx-hub
+  labels:
+    app: omtx-hub-backend
+    component: api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: omtx-hub-backend
+  template:
+    metadata:
+      labels:
+        app: omtx-hub-backend
+        component: api
+    spec:
+      serviceAccountName: omtx-hub-service-account
+      containers:
+      - name: backend
+        image: gcr.io/PROJECT_ID/omtx-hub-backend:latest
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        env:
+        # Load from ConfigMap
+        - name: GOOGLE_CLOUD_PROJECT
+          valueFrom:
+            configMapKeyRef:
+              name: omtx-hub-config
+              key: GOOGLE_CLOUD_PROJECT
+        - name: ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: omtx-hub-config
+              key: ENVIRONMENT
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: omtx-hub-config
+              key: LOG_LEVEL
+        - name: API_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: omtx-hub-config
+              key: API_HOST
+        - name: API_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: omtx-hub-config
+              key: API_PORT
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: omtx-hub-config
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: omtx-hub-config
+              key: REDIS_PORT
+        - name: RATE_LIMIT_ENABLED
+          valueFrom:
+            configMapKeyRef:
+              name: omtx-hub-config
+              key: RATE_LIMIT_ENABLED
+        - name: ENABLE_TRACING
+          valueFrom:
+            configMapKeyRef:
+              name: omtx-hub-config
+              key: ENABLE_TRACING
+        - name: WORKERS
+          valueFrom:
+            configMapKeyRef:
+              name: omtx-hub-config
+              key: WORKERS
+        
+        # Load from Secrets
+        - name: GCP_CREDENTIALS_JSON
+          valueFrom:
+            secretKeyRef:
+              name: omtx-hub-secrets
+              key: GCP_CREDENTIALS_JSON
+        - name: MODAL_TOKEN_ID
+          valueFrom:
+            secretKeyRef:
+              name: omtx-hub-secrets
+              key: MODAL_TOKEN_ID
+        - name: MODAL_TOKEN_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: omtx-hub-secrets
+              key: MODAL_TOKEN_SECRET
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: omtx-hub-secrets
+              key: REDIS_PASSWORD
+        - name: JWT_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: omtx-hub-secrets
+              key: JWT_SECRET_KEY
+        - name: MODAL_WEBHOOK_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: omtx-hub-secrets
+              key: MODAL_WEBHOOK_SECRET
+        
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 45
+          periodSeconds: 20
+          timeoutSeconds: 10
+          failureThreshold: 3
+        
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        
+        # Graceful shutdown
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              - "sleep 10"
+        
+        # Security context
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1000
+          readOnlyRootFilesystem: false
+          capabilities:
+            drop:
+            - ALL
+        
+        # Volume mounts for temporary files
+        volumeMounts:
+        - name: tmp-volume
+          mountPath: /tmp
+        - name: gcp-credentials
+          mountPath: /etc/gcp
+          readOnly: true
+      
+      volumes:
+      - name: tmp-volume
+        emptyDir: {}
+      - name: gcp-credentials
+        secret:
+          secretName: omtx-hub-secrets
+          items:
+          - key: GCP_CREDENTIALS_JSON
+            path: credentials.json
+      
+      # Pod security context
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      
+      # Node selection for better performance
+      nodeSelector:
+        node-type: "compute-optimized"
+      
+      # Spread pods across nodes for high availability
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - omtx-hub-backend
+              topologyKey: kubernetes.io/hostname

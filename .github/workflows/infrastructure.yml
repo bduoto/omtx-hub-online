@@ -1,0 +1,468 @@
+name: Infrastructure Management
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'infrastructure/terraform/**'
+      - '.github/workflows/infrastructure.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'infrastructure/terraform/**'
+      - '.github/workflows/infrastructure.yml'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Terraform action to perform'
+        required: true
+        default: 'plan'
+        type: choice
+        options:
+        - plan
+        - apply
+        - destroy
+      environment:
+        description: 'Environment to target'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+        - staging
+        - production
+
+env:
+  TF_VERSION: '1.6.0'
+  TF_WORKING_DIR: './infrastructure/terraform'
+
+jobs:
+  terraform-validate:
+    name: Terraform Validate
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
+        
+    - name: Terraform Format Check
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform fmt -check -recursive
+      
+    - name: Terraform Init
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform init -backend=false
+      
+    - name: Terraform Validate
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform validate
+
+  terraform-security-scan:
+    name: Terraform Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run tfsec
+      uses: aquasecurity/tfsec-action@v1.0.3
+      with:
+        working_directory: ${{ env.TF_WORKING_DIR }}
+        format: sarif
+        
+    - name: Upload tfsec results
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: tfsec.sarif
+
+  terraform-plan-staging:
+    name: Terraform Plan (Staging)
+    runs-on: ubuntu-latest
+    needs: [terraform-validate, terraform-security-scan]
+    if: github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'staging')
+    environment: staging
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ secrets.GCP_PROJECT_ID_STAGING }}
+        
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
+        
+    - name: Create terraform.tfvars
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: |
+        cat > terraform.tfvars << EOF
+        project_id = "${{ secrets.GCP_PROJECT_ID_STAGING }}"
+        region = "${{ secrets.GCP_REGION }}"
+        environment = "staging"
+        node_machine_type = "e2-standard-2"
+        min_node_count = 1
+        max_node_count = 5
+        enable_preemptible_nodes = true
+        enable_backup = false
+        backup_retention_days = 7
+        EOF
+        
+    - name: Terraform Init
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: |
+        terraform init \
+          -backend-config="bucket=${{ secrets.TERRAFORM_STATE_BUCKET }}" \
+          -backend-config="prefix=staging/infrastructure"
+          
+    - name: Terraform Workspace
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: |
+        terraform workspace select staging || terraform workspace new staging
+        
+    - name: Terraform Plan
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      id: plan
+      run: |
+        terraform plan -detailed-exitcode -out=tfplan
+        echo "plan_exitcode=$?" >> $GITHUB_OUTPUT
+        
+    - name: Upload plan artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: terraform-plan-staging
+        path: ${{ env.TF_WORKING_DIR }}/tfplan
+        
+    - name: Comment PR with plan
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const { exec } = require('child_process');
+          
+          exec('cd ${{ env.TF_WORKING_DIR }} && terraform show -no-color tfplan', (error, stdout, stderr) => {
+            if (error) {
+              console.error(`Error: ${error}`);
+              return;
+            }
+            
+            const planOutput = stdout.slice(0, 65000); // GitHub comment limit
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## Terraform Plan (Staging)
+          
+          \`\`\`terraform
+          ${planOutput}
+          \`\`\`
+          
+          Plan exit code: ${{ steps.plan.outputs.plan_exitcode }}
+          - 0: No changes
+          - 1: Error
+          - 2: Changes present`
+            });
+          });
+
+  terraform-apply-staging:
+    name: Terraform Apply (Staging)
+    runs-on: ubuntu-latest
+    needs: [terraform-plan-staging]
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'apply' && github.event.inputs.environment == 'staging'
+    environment: staging
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ secrets.GCP_PROJECT_ID_STAGING }}
+        
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
+        
+    - name: Download plan artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: terraform-plan-staging
+        path: ${{ env.TF_WORKING_DIR }}
+        
+    - name: Terraform Init
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: |
+        terraform init \
+          -backend-config="bucket=${{ secrets.TERRAFORM_STATE_BUCKET }}" \
+          -backend-config="prefix=staging/infrastructure"
+          
+    - name: Terraform Workspace
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform workspace select staging
+      
+    - name: Terraform Apply
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform apply -auto-approve tfplan
+
+  terraform-plan-production:
+    name: Terraform Plan (Production)
+    runs-on: ubuntu-latest
+    needs: [terraform-validate, terraform-security-scan]
+    if: github.ref == 'refs/heads/main' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'production')
+    environment: production
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY_PROD }}
+        project_id: ${{ secrets.GCP_PROJECT_ID_PROD }}
+        
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
+        
+    - name: Create terraform.tfvars
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: |
+        cat > terraform.tfvars << EOF
+        project_id = "${{ secrets.GCP_PROJECT_ID_PROD }}"
+        region = "${{ secrets.GCP_REGION }}"
+        environment = "production"
+        node_machine_type = "e2-standard-8"
+        min_node_count = 3
+        max_node_count = 20
+        enable_preemptible_nodes = false
+        enable_backup = true
+        backup_retention_days = 30
+        enable_monitoring = true
+        enable_memorystore = true
+        master_authorized_networks = [
+          {
+            cidr_block = "${{ secrets.OFFICE_CIDR }}"
+            display_name = "Office network"
+          },
+          {
+            cidr_block = "${{ secrets.CI_CD_CIDR }}"
+            display_name = "CI/CD network"
+          }
+        ]
+        EOF
+        
+    - name: Terraform Init
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: |
+        terraform init \
+          -backend-config="bucket=${{ secrets.TERRAFORM_STATE_BUCKET_PROD }}" \
+          -backend-config="prefix=production/infrastructure"
+          
+    - name: Terraform Workspace
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: |
+        terraform workspace select production || terraform workspace new production
+        
+    - name: Terraform Plan
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform plan -detailed-exitcode -out=tfplan-prod
+      
+    - name: Upload plan artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: terraform-plan-production
+        path: ${{ env.TF_WORKING_DIR }}/tfplan-prod
+
+  terraform-apply-production:
+    name: Terraform Apply (Production)
+    runs-on: ubuntu-latest
+    needs: [terraform-plan-production]
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'apply' && github.event.inputs.environment == 'production'
+    environment: production
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY_PROD }}
+        project_id: ${{ secrets.GCP_PROJECT_ID_PROD }}
+        
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
+        
+    - name: Download plan artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: terraform-plan-production
+        path: ${{ env.TF_WORKING_DIR }}
+        
+    - name: Terraform Init
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: |
+        terraform init \
+          -backend-config="bucket=${{ secrets.TERRAFORM_STATE_BUCKET_PROD }}" \
+          -backend-config="prefix=production/infrastructure"
+          
+    - name: Terraform Workspace
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform workspace select production
+      
+    - name: Pre-apply verification
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: |
+        echo "=== Pre-apply State Check ==="
+        terraform state list
+        echo "=== Plan Summary ==="
+        terraform show tfplan-prod
+        
+    - name: Terraform Apply
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform apply -auto-approve tfplan-prod
+      
+    - name: Post-apply verification
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: |
+        echo "=== Infrastructure Outputs ==="
+        terraform output
+        
+        echo "=== Cluster Connection Test ==="
+        CLUSTER_NAME=$(terraform output -raw cluster_name)
+        CLUSTER_REGION=$(terraform output -raw region)
+        PROJECT_ID=$(terraform output -raw project_id)
+        
+        gcloud container clusters get-credentials $CLUSTER_NAME --region $CLUSTER_REGION --project $PROJECT_ID
+        kubectl cluster-info
+        kubectl get nodes
+
+  terraform-destroy:
+    name: Terraform Destroy
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'destroy'
+    environment: ${{ github.event.inputs.environment }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set environment variables
+      run: |
+        if [ "${{ github.event.inputs.environment }}" == "production" ]; then
+          echo "GCP_SA_KEY=${{ secrets.GCP_SA_KEY_PROD }}" >> $GITHUB_ENV
+          echo "GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID_PROD }}" >> $GITHUB_ENV
+          echo "STATE_BUCKET=${{ secrets.TERRAFORM_STATE_BUCKET_PROD }}" >> $GITHUB_ENV
+        else
+          echo "GCP_SA_KEY=${{ secrets.GCP_SA_KEY }}" >> $GITHUB_ENV
+          echo "GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID_STAGING }}" >> $GITHUB_ENV
+          echo "STATE_BUCKET=${{ secrets.TERRAFORM_STATE_BUCKET }}" >> $GITHUB_ENV
+        fi
+        
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        service_account_key: ${{ env.GCP_SA_KEY }}
+        project_id: ${{ env.GCP_PROJECT_ID }}
+        
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
+        
+    - name: Create terraform.tfvars
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: |
+        cat > terraform.tfvars << EOF
+        project_id = "${{ env.GCP_PROJECT_ID }}"
+        region = "${{ secrets.GCP_REGION }}"
+        environment = "${{ github.event.inputs.environment }}"
+        EOF
+        
+    - name: Terraform Init
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: |
+        terraform init \
+          -backend-config="bucket=${{ env.STATE_BUCKET }}" \
+          -backend-config="prefix=${{ github.event.inputs.environment }}/infrastructure"
+          
+    - name: Terraform Workspace
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform workspace select ${{ github.event.inputs.environment }}
+      
+    - name: Terraform Destroy Plan
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform plan -destroy -out=destroy-plan
+      
+    - name: Manual approval required
+      run: |
+        echo "⚠️  DESTRUCTIVE OPERATION PLANNED ⚠️"
+        echo "Environment: ${{ github.event.inputs.environment }}"
+        echo "This will destroy ALL infrastructure in the environment."
+        echo "Review the destroy plan carefully before proceeding."
+        
+    - name: Terraform Destroy
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform apply destroy-plan
+
+  cost-estimation:
+    name: Cost Estimation
+    runs-on: ubuntu-latest
+    needs: [terraform-plan-staging, terraform-plan-production]
+    if: always() && (needs.terraform-plan-staging.result == 'success' || needs.terraform-plan-production.result == 'success')
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Infracost
+      uses: infracost/actions/setup@v2
+      with:
+        api-key: ${{ secrets.INFRACOST_API_KEY }}
+        
+    - name: Download plan artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: plans/
+        
+    - name: Generate cost estimates
+      run: |
+        # Staging cost estimate
+        if [ -f "plans/terraform-plan-staging/tfplan" ]; then
+          infracost breakdown --path ${{ env.TF_WORKING_DIR }} \
+            --terraform-plan-path plans/terraform-plan-staging/tfplan \
+            --format json --out-file staging-cost.json
+        fi
+        
+        # Production cost estimate  
+        if [ -f "plans/terraform-plan-production/tfplan-prod" ]; then
+          infracost breakdown --path ${{ env.TF_WORKING_DIR }} \
+            --terraform-plan-path plans/terraform-plan-production/tfplan-prod \
+            --format json --out-file production-cost.json
+        fi
+        
+    - name: Comment cost estimate
+      if: github.event_name == 'pull_request'
+      uses: infracost/actions/comment@v1
+      with:
+        path: staging-cost.json
+        behavior: update

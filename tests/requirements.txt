@@ -1,0 +1,57 @@
+# Testing dependencies for OMTX-Hub integration tests
+
+# Core testing framework
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+pytest-xdist>=3.3.0
+pytest-timeout>=2.1.0
+pytest-mock>=3.11.0
+
+# HTTP client for API testing
+httpx>=0.24.0
+requests>=2.31.0
+
+# Test data generation and validation
+Faker>=19.0.0
+factory-boy>=3.3.0
+pydantic>=2.0.0
+
+# Database testing
+pytest-postgresql>=5.0.0
+pytest-redis>=3.0.0
+
+# Kubernetes testing
+pytest-kubernetes>=1.2.0
+kubernetes>=27.0.0
+
+# Load testing
+locust>=2.16.0
+
+# Security testing
+bandit>=1.7.0
+safety>=2.3.0
+
+# Code quality
+flake8>=6.0.0
+black>=23.0.0
+isort>=5.12.0
+mypy>=1.5.0
+
+# Mock and test utilities
+responses>=0.23.0
+freezegun>=1.2.0
+testcontainers>=3.7.0
+
+# Reporting and visualization
+pytest-html>=3.2.0
+pytest-json-report>=1.5.0
+allure-pytest>=2.13.0
+
+# Performance testing
+pytest-benchmark>=4.0.0
+memory-profiler>=0.61.0
+
+# Environment management
+python-dotenv>=1.0.0
+environs>=9.5.0

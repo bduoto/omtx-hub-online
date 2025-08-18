@@ -254,6 +254,149 @@ class BatchResultsScenario(WorkloadScenario):
             self.record_response(response_time, False, str(e))
             return False
 
+class RateLimitTestScenario(WorkloadScenario):
+    """Test rate limiting functionality"""
+    
+    def __init__(self):
+        super().__init__("rate_limit_test", weight=0.15)
+        
+    async def execute(self, session: aiohttp.ClientSession, user_context: Dict[str, Any]) -> bool:
+        """Test rate limiting endpoints"""
+        start_time = time.time()
+        
+        try:
+            # Test rate limit status
+            user_id = user_context.get('user_id', f"load_test_user_{random.randint(1, 100)}")
+            
+            async with session.get(
+                f"{session._connector._base_url}/api/v3/rate-limit/status",
+                params={"user_id": user_id},
+                timeout=aiohttp.ClientTimeout(total=10)
+            ) as response:
+                response_time = (time.time() - start_time) * 1000
+                
+                # Accept success and rate limit responses
+                if response.status in [200, 429, 503]:
+                    self.record_response(response_time, True)
+                    return True
+                else:
+                    error_text = await response.text()
+                    self.record_response(response_time, False, f"HTTP {response.status}: {error_text}")
+                    return False
+                    
+        except Exception as e:
+            response_time = (time.time() - start_time) * 1000
+            self.record_response(response_time, False, str(e))
+            return False
+
+class HealthCheckScenario(WorkloadScenario):
+    """Test health check endpoints"""
+    
+    def __init__(self):
+        super().__init__("health_checks", weight=0.1)
+        
+    async def execute(self, session: aiohttp.ClientSession, user_context: Dict[str, Any]) -> bool:
+        """Test health check endpoints"""
+        start_time = time.time()
+        
+        try:
+            # Test different health endpoints
+            endpoints = [
+                "/api/v3/health/status",
+                "/api/v3/health/services", 
+                "/api/v3/health/metrics",
+                "/api/v3/health/slo"
+            ]
+            endpoint = random.choice(endpoints)
+            
+            async with session.get(
+                f"{session._connector._base_url}{endpoint}",
+                timeout=aiohttp.ClientTimeout(total=10)
+            ) as response:
+                response_time = (time.time() - start_time) * 1000
+                
+                # Accept success and service unavailable
+                if response.status in [200, 503]:
+                    self.record_response(response_time, True)
+                    return True
+                else:
+                    error_text = await response.text()
+                    self.record_response(response_time, False, f"HTTP {response.status}: {error_text}")
+                    return False
+                    
+        except Exception as e:
+            response_time = (time.time() - start_time) * 1000
+            self.record_response(response_time, False, str(e))
+            return False
+
+class ResourceQuotaScenario(WorkloadScenario):
+    """Test resource quota management"""
+    
+    def __init__(self):
+        super().__init__("resource_quota", weight=0.1)
+        
+    async def execute(self, session: aiohttp.ClientSession, user_context: Dict[str, Any]) -> bool:
+        """Test resource quota endpoints"""
+        start_time = time.time()
+        
+        try:
+            user_id = user_context.get('user_id', f"load_test_user_{random.randint(1, 100)}")
+            
+            # Test quota status
+            async with session.get(
+                f"{session._connector._base_url}/api/v3/resources/quotas",
+                params={"user_id": user_id},
+                timeout=aiohttp.ClientTimeout(total=10)
+            ) as response:
+                response_time = (time.time() - start_time) * 1000
+                
+                if response.status in [200, 503]:
+                    self.record_response(response_time, True)
+                    return True
+                else:
+                    error_text = await response.text()
+                    self.record_response(response_time, False, f"HTTP {response.status}: {error_text}")
+                    return False
+                    
+        except Exception as e:
+            response_time = (time.time() - start_time) * 1000
+            self.record_response(response_time, False, str(e))
+            return False
+
+class PerformanceAPIScenario(WorkloadScenario):
+    """Test ultra-fast performance APIs"""
+    
+    def __init__(self):
+        super().__init__("performance_api", weight=0.2)
+        
+    async def execute(self, session: aiohttp.ClientSession, user_context: Dict[str, Any]) -> bool:
+        """Test performance-optimized endpoints"""
+        start_time = time.time()
+        
+        try:
+            user_id = user_context.get('user_id', 'load_test_user')
+            
+            # Test ultra-fast results API
+            async with session.get(
+                f"{session._connector._base_url}/api/v2/results/ultra-fast",
+                params={"user_id": user_id, "limit": 10},
+                timeout=aiohttp.ClientTimeout(total=5)
+            ) as response:
+                response_time = (time.time() - start_time) * 1000
+                
+                if response.status in [200, 404]:
+                    self.record_response(response_time, True)
+                    return True
+                else:
+                    error_text = await response.text()
+                    self.record_response(response_time, False, f"HTTP {response.status}: {error_text}")
+                    return False
+                    
+        except Exception as e:
+            response_time = (time.time() - start_time) * 1000
+            self.record_response(response_time, False, str(e))
+            return False
+
 class VirtualUser:
     """Simulates a single user's behavior"""
     
@@ -304,7 +447,11 @@ class ProductionLoadTester:
             BatchSubmissionScenario(),
             BatchStatusScenario(),
             BatchListScenario(),
-            BatchResultsScenario()
+            BatchResultsScenario(),
+            RateLimitTestScenario(),
+            HealthCheckScenario(),
+            ResourceQuotaScenario(),
+            PerformanceAPIScenario()
         ]
         self.virtual_users: List[VirtualUser] = []
         self.results: List[LoadTestResult] = []
@@ -559,29 +706,275 @@ class ProductionLoadTester:
             report.append("❌ Throughput: LOW (<20 RPS)")
         
         return "\n".join(report)
+    
+    async def run_production_validation(self) -> Dict[str, Any]:
+        """
+        Run comprehensive production validation tests
+        Tests all production services under realistic load
+        """
+        logger.info("🏭 Running production validation test suite...")
+        
+        validation_results = {
+            'test_start_time': datetime.utcnow().isoformat(),
+            'test_results': {},
+            'slo_validation': {},
+            'production_health': {},
+            'overall_status': 'PASS'
+        }
+        
+        try:
+            # Run comprehensive test suite
+            smoke_result = await self.run_smoke_test()
+            load_result = await self.run_load_test()
+            stress_result = await self.run_stress_test()
+            
+            validation_results['test_results'] = {
+                'smoke_test': asdict(smoke_result),
+                'load_test': asdict(load_result),
+                'stress_test': asdict(stress_result)
+            }
+            
+            # Validate against production SLOs
+            slo_validation = await self._validate_production_slos(load_result)
+            validation_results['slo_validation'] = slo_validation
+            
+            # Check production service health
+            health_check = await self._check_production_health()
+            validation_results['production_health'] = health_check
+            
+            # Determine overall status
+            if (slo_validation.get('overall_compliance', False) and 
+                health_check.get('all_systems_healthy', False) and
+                load_result.error_rate_percentage < 1.0):
+                validation_results['overall_status'] = 'PASS'
+            else:
+                validation_results['overall_status'] = 'FAIL'
+            
+            logger.info(f"🎯 Production validation: {validation_results['overall_status']}")
+            
+        except Exception as e:
+            logger.error(f"❌ Production validation failed: {e}")
+            validation_results['overall_status'] = 'ERROR'
+            validation_results['error'] = str(e)
+        
+        validation_results['test_end_time'] = datetime.utcnow().isoformat()
+        return validation_results
+    
+    async def _validate_production_slos(self, load_result: LoadTestResult) -> Dict[str, Any]:
+        """Validate performance against production SLOs"""
+        
+        # Production SLO targets
+        slo_targets = {
+            'error_rate_threshold': 1.0,        # Max 1% error rate
+            'p95_response_time_threshold': 500.0, # Max 500ms P95
+            'throughput_threshold': 50.0,        # Min 50 RPS
+            'availability_threshold': 99.9       # Min 99.9% availability
+        }
+        
+        slo_results = {}
+        
+        # Error rate SLO
+        slo_results['error_rate'] = {
+            'target': slo_targets['error_rate_threshold'],
+            'actual': load_result.error_rate_percentage,
+            'passed': load_result.error_rate_percentage <= slo_targets['error_rate_threshold'],
+            'severity': 'critical'
+        }
+        
+        # Response time SLO
+        slo_results['p95_response_time'] = {
+            'target': slo_targets['p95_response_time_threshold'],
+            'actual': load_result.p95_response_time_ms,
+            'passed': load_result.p95_response_time_ms <= slo_targets['p95_response_time_threshold'],
+            'severity': 'high'
+        }
+        
+        # Throughput SLO
+        slo_results['throughput'] = {
+            'target': slo_targets['throughput_threshold'],
+            'actual': load_result.requests_per_second,
+            'passed': load_result.requests_per_second >= slo_targets['throughput_threshold'],
+            'severity': 'medium'
+        }
+        
+        # Availability SLO
+        availability = 100 - load_result.error_rate_percentage
+        slo_results['availability'] = {
+            'target': slo_targets['availability_threshold'],
+            'actual': availability,
+            'passed': availability >= slo_targets['availability_threshold'],
+            'severity': 'critical'
+        }
+        
+        # Overall compliance
+        total_slos = len(slo_results)
+        passed_slos = sum(1 for slo in slo_results.values() if slo['passed'])
+        critical_failures = sum(1 for slo in slo_results.values() if not slo['passed'] and slo['severity'] == 'critical')
+        
+        slo_results['overall_compliance'] = passed_slos == total_slos and critical_failures == 0
+        slo_results['compliance_percentage'] = (passed_slos / total_slos) * 100
+        slo_results['critical_failures'] = critical_failures
+        
+        return slo_results
+    
+    async def _check_production_health(self) -> Dict[str, Any]:
+        """Check health of all production services"""
+        
+        health_results = {
+            'services_checked': [],
+            'healthy_services': 0,
+            'degraded_services': 0,
+            'unhealthy_services': 0,
+            'all_systems_healthy': False
+        }
+        
+        # Health check endpoints to test
+        health_endpoints = [
+            "/health",                          # Basic health
+            "/api/v3/health/status",           # System health
+            "/api/v3/monitoring/health",       # APM health
+            "/api/v3/rate-limit/metrics",      # Rate limiter health
+            "/api/v3/resources/metrics",       # Quota manager health
+            "/api/v3/indexer/metrics",         # Indexer health
+        ]
+        
+        try:
+            async with aiohttp.ClientSession() as session:
+                for endpoint in health_endpoints:
+                    try:
+                        async with session.get(
+                            f"{self.config.base_url}{endpoint}",
+                            timeout=aiohttp.ClientTimeout(total=10)
+                        ) as response:
+                            
+                            service_name = endpoint.split('/')[-1] or 'health'
+                            
+                            if response.status == 200:
+                                status = 'healthy'
+                                health_results['healthy_services'] += 1
+                            elif response.status == 503:
+                                status = 'degraded'
+                                health_results['degraded_services'] += 1
+                            else:
+                                status = 'unhealthy'
+                                health_results['unhealthy_services'] += 1
+                            
+                            health_results['services_checked'].append({
+                                'service': service_name,
+                                'endpoint': endpoint,
+                                'status': status,
+                                'response_code': response.status
+                            })
+                            
+                    except Exception as e:
+                        health_results['services_checked'].append({
+                            'service': endpoint.split('/')[-1] or 'health',
+                            'endpoint': endpoint,
+                            'status': 'error',
+                            'error': str(e)
+                        })
+                        health_results['unhealthy_services'] += 1
+            
+            # Determine overall health
+            total_services = len(health_results['services_checked'])
+            healthy_percentage = (health_results['healthy_services'] / total_services) * 100 if total_services > 0 else 0
+            
+            health_results['all_systems_healthy'] = (
+                health_results['unhealthy_services'] == 0 and
+                healthy_percentage >= 80  # At least 80% of services healthy
+            )
+            health_results['healthy_percentage'] = healthy_percentage
+            
+        except Exception as e:
+            logger.error(f"❌ Error checking production health: {e}")
+            health_results['error'] = str(e)
+        
+        return health_results
 
 async def main():
     """Example usage of the load testing framework"""
+    import argparse
+    
     logging.basicConfig(level=logging.INFO)
+    
+    parser = argparse.ArgumentParser(description="Production Load Testing Suite")
+    parser.add_argument("--url", default="http://localhost:8002", help="Target URL")
+    parser.add_argument("--users", type=int, default=20, help="Max concurrent users")
+    parser.add_argument("--duration", type=int, default=60, help="Test duration (seconds)")
+    parser.add_argument("--test-type", choices=["smoke", "load", "stress", "spike", "production"], 
+                       default="load", help="Type of test to run")
+    parser.add_argument("--output", help="Output file for results (JSON)")
+    
+    args = parser.parse_args()
     
     # Configure load test
     config = StressTestConfig(
-        base_url="http://localhost:8000",
-        max_concurrent_users=20,
-        test_duration=60,
-        ramp_up_duration=20,
-        ramp_down_duration=10
+        base_url=args.url,
+        max_concurrent_users=args.users,
+        test_duration=args.duration,
+        ramp_up_duration=min(30, args.duration // 3),
+        ramp_down_duration=min(15, args.duration // 6)
     )
     
     tester = ProductionLoadTester(config)
     
-    # Run test suite
-    await tester.run_smoke_test()
-    await tester.run_load_test()
-    await tester.run_stress_test()
+    # Run specified test type
+    if args.test_type == "smoke":
+        result = await tester.run_smoke_test()
+        print(f"\n🔥 SMOKE TEST RESULTS")
+        print(f"Requests/Second: {result.requests_per_second:.1f}")
+        print(f"Error Rate: {result.error_rate_percentage:.1f}%")
+        print(f"P95 Response Time: {result.p95_response_time_ms:.1f}ms")
+        
+    elif args.test_type == "load":
+        result = await tester.run_load_test()
+        print(f"\n📊 LOAD TEST RESULTS")
+        print(f"Requests/Second: {result.requests_per_second:.1f}")
+        print(f"Error Rate: {result.error_rate_percentage:.1f}%")
+        print(f"P95 Response Time: {result.p95_response_time_ms:.1f}ms")
+        
+    elif args.test_type == "stress":
+        result = await tester.run_stress_test()
+        print(f"\n💪 STRESS TEST RESULTS")
+        print(f"Requests/Second: {result.requests_per_second:.1f}")
+        print(f"Error Rate: {result.error_rate_percentage:.1f}%")
+        print(f"P95 Response Time: {result.p95_response_time_ms:.1f}ms")
+        
+    elif args.test_type == "spike":
+        result = await tester.run_spike_test()
+        print(f"\n⚡ SPIKE TEST RESULTS")
+        print(f"Requests/Second: {result.requests_per_second:.1f}")
+        print(f"Error Rate: {result.error_rate_percentage:.1f}%")
+        print(f"P95 Response Time: {result.p95_response_time_ms:.1f}ms")
+        
+    elif args.test_type == "production":
+        validation_results = await tester.run_production_validation()
+        print(f"\n🏭 PRODUCTION VALIDATION RESULTS")
+        print(f"Overall Status: {validation_results['overall_status']}")
+        
+        slo_validation = validation_results.get('slo_validation', {})
+        print(f"SLO Compliance: {slo_validation.get('compliance_percentage', 0):.1f}%")
+        
+        health_check = validation_results.get('production_health', {})
+        print(f"System Health: {health_check.get('healthy_percentage', 0):.1f}% healthy")
+        
+        # Show detailed results
+        if slo_validation:
+            print(f"\n📊 SLO Validation:")
+            for slo_name, slo_data in slo_validation.items():
+                if isinstance(slo_data, dict) and 'passed' in slo_data:
+                    status = "✅ PASS" if slo_data['passed'] else "❌ FAIL"
+                    print(f"  {slo_name}: {status} (Target: {slo_data.get('target')}, Actual: {slo_data.get('actual')})")
+        
+        # Save detailed results if requested
+        if args.output:
+            with open(args.output, 'w') as f:
+                json.dump(validation_results, f, indent=2, default=str)
+            print(f"\n💾 Detailed results saved to: {args.output}")
     
-    # Generate report
-    print(tester.generate_report())
+    # Generate standard report
+    if args.test_type != "production":
+        print(tester.generate_report())
 
 if __name__ == "__main__":
     asyncio.run(main())

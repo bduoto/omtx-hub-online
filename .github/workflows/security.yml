@@ -1,0 +1,305 @@
+name: Security Monitoring
+
+on:
+  schedule:
+    # Run security scans daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  # Dependency vulnerability scanning
+  dependency-scan:
+    name: Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        language: [ 'python', 'javascript' ]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Python dependency scan
+      if: matrix.language == 'python'
+      run: |
+        cd backend
+        pip install safety
+        safety check --json --output safety-report.json || true
+        
+    - name: JavaScript dependency scan  
+      if: matrix.language == 'javascript'
+      run: |
+        npm audit --audit-level=moderate --json > npm-audit.json || true
+        
+    - name: Upload dependency scan results
+      uses: actions/upload-artifact@v3
+      with:
+        name: dependency-scan-${{ matrix.language }}
+        path: |
+          backend/safety-report.json
+          npm-audit.json
+
+  # SAST (Static Application Security Testing)
+  sast-scan:
+    name: Static Application Security Testing
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: python, javascript
+        queries: security-and-quality
+        
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v3
+      
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:python,javascript"
+
+  # Secret scanning
+  secret-scan:
+    name: Secret Scanning
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run TruffleHog
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: main
+        head: HEAD
+        extra_args: --debug --only-verified
+
+  # Container security scanning
+  container-scan:
+    name: Container Security Scan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Build test image
+      run: |
+        docker build -t omtx-hub-security-test .
+        
+    - name: Run Trivy container scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'omtx-hub-security-test'
+        format: 'sarif'
+        output: 'trivy-container-results.sarif'
+        
+    - name: Upload container scan results
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: 'trivy-container-results.sarif'
+        
+    - name: Run Snyk container scan
+      uses: snyk/actions/docker@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        image: omtx-hub-security-test
+        args: --severity-threshold=high
+
+  # Infrastructure security scanning
+  infrastructure-scan:
+    name: Infrastructure Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run Checkov
+      uses: bridgecrewio/checkov-action@master
+      with:
+        directory: .
+        framework: terraform,kubernetes,dockerfile
+        output_format: sarif
+        output_file_path: checkov-results.sarif
+        
+    - name: Upload Checkov results
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: checkov-results.sarif
+
+  # Runtime security monitoring
+  runtime-security:
+    name: Runtime Security Check
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Check deployed application security
+      run: |
+        # Check for common security headers
+        curl -I https://api.omtx-hub.com/health | grep -E "(X-Frame-Options|X-Content-Type-Options|Strict-Transport-Security)" || echo "Security headers missing"
+        
+        # Check for exposed sensitive endpoints
+        STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://api.omtx-hub.com/admin)
+        if [ "$STATUS" != "404" ] && [ "$STATUS" != "401" ] && [ "$STATUS" != "403" ]; then
+          echo "WARNING: Admin endpoint may be exposed"
+        fi
+        
+        # Check SSL certificate
+        echo | openssl s_client -servername api.omtx-hub.com -connect api.omtx-hub.com:443 2>/dev/null | openssl x509 -noout -dates
+
+  # Security compliance check
+  compliance-check:
+    name: Security Compliance Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Check security documentation
+      run: |
+        # Check for required security files
+        REQUIRED_FILES=(
+          "SECURITY.md"
+          ".github/security.yml"
+          "infrastructure/k8s/rbac.yaml"
+          "infrastructure/k8s/secrets.yaml"
+        )
+        
+        MISSING_FILES=()
+        for file in "${REQUIRED_FILES[@]}"; do
+          if [ ! -f "$file" ]; then
+            MISSING_FILES+=("$file")
+          fi
+        done
+        
+        if [ ${#MISSING_FILES[@]} -ne 0 ]; then
+          echo "❌ Missing security files:"
+          printf '%s\n' "${MISSING_FILES[@]}"
+          exit 1
+        else
+          echo "✅ All required security files present"
+        fi
+        
+    - name: Check Kubernetes security policies
+      run: |
+        cd infrastructure/k8s
+        
+        # Check for security contexts
+        if ! grep -r "securityContext" *.yaml; then
+          echo "❌ No security contexts found in Kubernetes manifests"
+          exit 1
+        fi
+        
+        # Check for resource limits
+        if ! grep -r "resources:" *.yaml; then
+          echo "❌ No resource limits found in Kubernetes manifests"
+          exit 1
+        fi
+        
+        # Check for network policies
+        if [ ! -f "rbac.yaml" ]; then
+          echo "❌ Network policies not found"
+          exit 1
+        fi
+        
+        echo "✅ Kubernetes security policies validated"
+
+  # Generate security report
+  security-report:
+    name: Generate Security Report
+    runs-on: ubuntu-latest
+    needs: [dependency-scan, sast-scan, secret-scan, container-scan, infrastructure-scan, compliance-check]
+    if: always()
+    
+    steps:
+    - name: Download all artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: security-artifacts/
+        
+    - name: Generate security summary
+      run: |
+        echo "# Security Scan Summary" > security-report.md
+        echo "**Date**: $(date)" >> security-report.md
+        echo "**Commit**: ${{ github.sha }}" >> security-report.md
+        echo "**Branch**: ${{ github.ref_name }}" >> security-report.md
+        echo "" >> security-report.md
+        
+        echo "## Scan Results" >> security-report.md
+        echo "| Scan Type | Status |" >> security-report.md
+        echo "|-----------|--------|" >> security-report.md
+        echo "| Dependency Scan | ${{ needs.dependency-scan.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> security-report.md
+        echo "| SAST Scan | ${{ needs.sast-scan.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> security-report.md
+        echo "| Secret Scan | ${{ needs.secret-scan.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> security-report.md
+        echo "| Container Scan | ${{ needs.container-scan.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> security-report.md
+        echo "| Infrastructure Scan | ${{ needs.infrastructure-scan.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> security-report.md
+        echo "| Compliance Check | ${{ needs.compliance-check.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> security-report.md
+        echo "" >> security-report.md
+        
+        # Add recommendations
+        echo "## Security Recommendations" >> security-report.md
+        echo "- Keep dependencies updated regularly" >> security-report.md
+        echo "- Review and rotate secrets quarterly" >> security-report.md
+        echo "- Monitor runtime security logs" >> security-report.md
+        echo "- Conduct regular penetration testing" >> security-report.md
+        echo "- Implement zero-trust network policies" >> security-report.md
+        
+        cat security-report.md
+        
+    - name: Upload security report
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-report
+        path: security-report.md
+        
+    - name: Notify security team
+      if: failure()
+      run: |
+        echo "🚨 Security scan failures detected!"
+        echo "Please review the security report and address any issues."
+        echo "Commit: ${{ github.sha }}"
+        echo "Author: ${{ github.actor }}"
+
+  # Security metrics collection
+  security-metrics:
+    name: Security Metrics Collection
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Collect security metrics
+      run: |
+        # Placeholder for security metrics collection
+        # In a real implementation, this would:
+        # - Query security scanning APIs
+        # - Collect vulnerability counts
+        # - Track security debt over time
+        # - Send metrics to monitoring system
+        
+        echo "Collecting security metrics..."
+        echo "- Total vulnerabilities: TBD"
+        echo "- Critical vulnerabilities: TBD"  
+        echo "- Security coverage: TBD"
+        echo "- Compliance score: TBD"

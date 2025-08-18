@@ -44,25 +44,41 @@ from api.chai1_endpoints import router as chai1_router
 # Import Modal for calling deployed functions
 import modal
 
-# Import Modal for predictions
+# Import Modal for predictions - with graceful degradation
+MODAL_AVAILABLE = False
+boltz2_predict_modal = None
+chai1_predict_modal = None
+
 try:
     import modal
-    # Don't import the modal_app to avoid authentication conflicts
-    # from models.boltz2_model import app as modal_app
-    boltz2_predict_modal = modal.Function.from_name("omtx-hub-boltz2-persistent", "boltz2_predict_modal")
-    # rfantibody_predict_modal = modal.Function.from_name("omtx-hub-rfantibody-phase2", "rfantibody_predict")
-    chai1_predict_modal = modal.Function.from_name("omtx-hub-chai1", "chai1_predict_modal")
-    print("✅ Modal functions loaded successfully")
+    print("📡 Modal library imported successfully")
+    
+    # Try to load Modal functions with graceful error handling
+    try:
+        boltz2_predict_modal = modal.Function.from_name("omtx-hub-boltz2-persistent", "boltz2_predict_modal")
+        print("✅ Boltz2 Modal function loaded")
+    except Exception as e:
+        print(f"⚠️ Boltz2 Modal function not available: {e}")
+    
+    try:
+        chai1_predict_modal = modal.Function.from_name("omtx-hub-chai1", "chai1_predict_modal")
+        print("✅ Chai1 Modal function loaded")
+    except Exception as e:
+        print(f"⚠️ Chai1 Modal function not available: {e}")
+    
+    # Mark Modal as available if at least one function loaded
+    if boltz2_predict_modal or chai1_predict_modal:
+        MODAL_AVAILABLE = True
+        print("✅ Modal services available")
+    else:
+        print("⚠️ No Modal functions available - authentication may be required")
+        
 except ImportError as e:
-    print(f"❌ Could not import Modal: {e}")
-    boltz2_predict_modal = None
-    # rfantibody_predict_modal = None
-    chai1_predict_modal = None
+    print(f"❌ Modal library not installed: {e}")
+    print("   Install with: pip install modal")
 except Exception as e:
-    print(f"❌ Could not load Modal functions: {e}")
-    boltz2_predict_modal = None
-    # rfantibody_predict_modal = None
-    chai1_predict_modal = None
+    print(f"⚠️ Modal initialization failed: {e}")
+    print("   Application will start with limited functionality")
 
 # Import GCP database layer
 from database.unified_job_manager import unified_job_manager
@@ -248,6 +264,14 @@ app.include_router(ultra_fast_router, tags=["Ultra Fast Unified API"])
 from api.batch_completion_monitoring import router as batch_completion_router
 app.include_router(batch_completion_router, tags=["Batch Completion Monitoring"])
 
+# Include webhook handlers (PRODUCTION WEBHOOK ARCHITECTURE)
+from api.webhook_handlers import router as webhook_router
+app.include_router(webhook_router, tags=["Modal Webhooks"])
+
+# Include webhook management API
+from api.webhook_management import router as webhook_management_router
+app.include_router(webhook_management_router, tags=["Webhook Management"])
+
 # Initialize post-processing integration
 try:
     from services.post_processing_integration import initialize_integration
@@ -367,25 +391,40 @@ async def process_pending_job(job: dict):
 @app.on_event("startup")
 async def startup_event():
     """Start background services when FastAPI starts"""
+    print("🚀 Starting OMTX-Hub Backend...")
     
-    # Initialize GCP storage buckets
+    # Initialize GCP services (graceful degradation)
     print("🗂️ Initializing GCP services...")
     await initialize_gcp_services()
     
-    # Initialize performance indexes
-    print("🔧 Setting up performance optimizations...")
-    await performance_indexes.ensure_indexes_exist()
+    # Initialize performance indexes (only if GCP available)
+    if unified_job_manager.available:
+        print("🔧 Setting up performance optimizations...")
+        try:
+            await performance_indexes.ensure_indexes_exist()
+            print("✅ Performance indexes initialized")
+        except Exception as e:
+            print(f"⚠️ Performance indexes setup failed: {e}")
+    else:
+        print("⚠️ Skipping performance indexes - GCP not available")
     
-    # Background job processor DISABLED to prevent unwanted Modal submissions
-    # asyncio.create_task(background_job_processor())
-    print("⚠️ Background job processor DISABLED (prevents unwanted Modal submissions)")
+    # Start Modal completion checker (only if Modal available)
+    if MODAL_AVAILABLE:
+        try:
+            asyncio.create_task(start_completion_checker())
+            print("🚀 Modal completion checker started")
+        except Exception as e:
+            print(f"⚠️ Modal completion checker failed to start: {e}")
+    else:
+        print("⚠️ Modal completion checker disabled - Modal not available")
     
-    # Start Modal completion checker service
-    asyncio.create_task(start_completion_checker())
-    print("🚀 Modal completion checker started")
+    # Service availability summary
+    print("\n📊 Service Availability Summary:")
+    print(f"   • GCP Firestore: {'✅ Available' if unified_job_manager.available else '❌ Unavailable'}")
+    print(f"   • Modal Functions: {'✅ Available' if MODAL_AVAILABLE else '❌ Unavailable'}")
+    print(f"   • Application Status: {'🟢 Ready with limitations' if not (unified_job_manager.available and MODAL_AVAILABLE) else '🟢 Fully operational'}")
     
-    # Modal monitoring replaced with on-demand status checking in APIs
-    print("✅ Modal job status checking ready (on-demand via API calls)")
+    print("✅ OMTX-Hub Backend startup complete")
 
 @app.on_event("shutdown")
 async def shutdown_event():
@@ -400,14 +439,19 @@ async def shutdown_event():
 
 # Initialize GCP services on startup
 async def initialize_gcp_services():
-    """Initialize GCP Firestore and Cloud Storage"""
+    """Initialize GCP Firestore and Cloud Storage with graceful degradation"""
     try:
         if unified_job_manager.available:
             print("✅ GCP services (Firestore + Cloud Storage) initialized successfully")
         else:
-            print("⚠️ GCP services not fully available - check credentials")
+            print("⚠️ GCP services not available")
+            print("   • Check GCP_CREDENTIALS_JSON environment variable")
+            print("   • Verify GOOGLE_CLOUD_PROJECT is set")
+            print("   • Ensure service account has proper permissions")
+            print("   • Application will start with limited functionality")
     except Exception as e:
         print(f"❌ Error initializing GCP services: {e}")
+        print("   Application will start with limited functionality")
 
 # Job processing functions (updated for GCP)
 async def process_boltz2_job(job_id: str, input_data: dict):

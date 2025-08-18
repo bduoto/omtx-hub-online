@@ -162,10 +162,24 @@ class ModalAuthService:
         self._cache_timestamp = None
         logger.info("Modal credentials cache cleared")
     
+    def ensure_authenticated(self):
+        """Ensure Modal authentication is available and set environment variables"""
+        token_id, token_secret = self.get_credentials()
+
+        if not token_id or not token_secret:
+            logger.error("❌ Modal authentication failed - no credentials available")
+            raise Exception("Modal authentication required. Please run: modal token set")
+
+        # Set environment variables for Modal client
+        os.environ['MODAL_TOKEN_ID'] = token_id
+        os.environ['MODAL_TOKEN_SECRET'] = token_secret
+
+        logger.info("✅ Modal authentication configured successfully")
+
     def get_auth_status(self) -> Dict[str, any]:
         """Get authentication status for debugging/monitoring"""
         token_id, token_secret = self.get_credentials()
-        
+
         return {
             "credentials_available": bool(token_id and token_secret),
             "cache_valid": self._is_cache_valid(),

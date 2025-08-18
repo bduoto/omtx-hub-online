@@ -1,0 +1,61 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+metadata:
+  name: omtx-hub-production
+
+# Namespace to deploy to
+namespace: omtx-hub
+
+# Resources to include
+resources:
+- namespace.yaml
+- configmap.yaml
+- secrets.yaml
+- rbac.yaml
+- redis.yaml
+- backend-deployment.yaml
+- backend-service.yaml
+- ingress.yaml
+- hpa.yaml
+- monitoring.yaml
+
+# Common labels to apply to all resources
+commonLabels:
+  app: omtx-hub
+  version: v1.0.0
+  environment: production
+
+# Common annotations
+commonAnnotations:
+  deployment.kubernetes.io/revision: "1"
+  managed-by: "kustomize"
+
+# Image transformations
+images:
+- name: gcr.io/PROJECT_ID/omtx-hub-backend
+  newTag: latest
+
+# Configuration patches
+patchesStrategicMerge:
+- |-
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: omtx-hub-backend
+    namespace: omtx-hub
+  spec:
+    template:
+      metadata:
+        annotations:
+          prometheus.io/scrape: "true"
+          prometheus.io/port: "8000"
+          prometheus.io/path: "/metrics"
+
+# Resource quotas
+quota:
+- count/persistentvolumeclaims: 10
+- requests.cpu: "20"
+- requests.memory: 40Gi
+- limits.cpu: "40"
+- limits.memory: 80Gi

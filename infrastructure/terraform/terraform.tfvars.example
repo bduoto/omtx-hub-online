@@ -1,0 +1,115 @@
+# Example Terraform Variables Configuration
+# Copy this file to terraform.tfvars and customize for your environment
+
+# Required: GCP Project Configuration
+project_id = "your-gcp-project-id"
+region     = "us-central1"
+zones      = ["us-central1-a", "us-central1-b", "us-central1-c"]
+
+# Environment Configuration
+environment = "production"  # or "staging", "development"
+
+# Network Configuration
+subnet_cidr   = "10.10.0.0/24"
+pods_cidr     = "10.20.0.0/16"
+services_cidr = "10.30.0.0/16"
+master_cidr   = "10.40.0.0/28"
+
+# GKE Configuration
+cluster_version    = "1.28"
+node_machine_type  = "e2-standard-4"  # 4 vCPUs, 16GB RAM
+node_disk_size     = 100              # GB
+node_disk_type     = "pd-standard"    # or "pd-ssd" for better performance
+
+# Autoscaling Configuration
+node_count         = 1    # Initial nodes per zone
+min_node_count     = 1    # Minimum nodes per zone
+max_node_count     = 10   # Maximum nodes per zone
+
+# Cost Optimization (for non-production environments)
+enable_preemptible_nodes = false  # Set to true for staging/dev
+enable_spot_nodes        = false  # Set to true for additional cost savings
+
+# Security Configuration
+enable_network_policy    = true
+enable_private_nodes     = true
+enable_workload_identity = true
+
+# Master authorized networks (restrict access in production)
+master_authorized_networks = [
+  {
+    cidr_block   = "0.0.0.0/0"
+    display_name = "All networks - CONFIGURE FOR PRODUCTION"
+  }
+  # Example: Restrict to office IP
+  # {
+  #   cidr_block   = "203.0.113.0/24"
+  #   display_name = "Office network"
+  # }
+]
+
+# Feature Flags
+enable_autopilot            = false  # Set to true for fully managed nodes
+enable_backup               = true
+enable_logging              = true
+enable_monitoring           = true
+enable_memorystore          = true   # Redis cache
+enable_cloud_sql            = false  # PostgreSQL database (optional)
+enable_global_load_balancer = true
+
+# SSL Configuration (if using global load balancer)
+ssl_domains = [
+  "api.omtx-hub.com",
+  "api-staging.omtx-hub.com"
+]
+
+# Backup Configuration
+backup_retention_days = 30
+
+# Resource Quotas
+resource_quotas = {
+  cpu_limit     = "1000"     # Total CPU cores
+  memory_limit  = "4000Gi"   # Total memory
+  storage_limit = "10Ti"     # Total storage
+}
+
+# Production Example Configuration
+# project_id = "omtx-hub-prod"
+# environment = "production"
+# node_machine_type = "e2-standard-8"  # More powerful for production
+# min_node_count = 3                   # Higher minimum for HA
+# max_node_count = 20                  # Higher maximum for scale
+# enable_private_nodes = true
+# enable_backup = true
+# master_authorized_networks = [
+#   {
+#     cidr_block   = "203.0.113.0/24"
+#     display_name = "Office network"
+#   },
+#   {
+#     cidr_block   = "198.51.100.0/24"
+#     display_name = "CI/CD network"
+#   }
+# ]
+
+# Staging Example Configuration
+# project_id = "omtx-hub-staging"
+# environment = "staging"
+# node_machine_type = "e2-standard-2"   # Smaller for staging
+# min_node_count = 1
+# max_node_count = 5
+# enable_preemptible_nodes = true       # Cost savings
+# enable_backup = false                 # Not needed for staging
+# backup_retention_days = 7
+
+# Development Example Configuration
+# project_id = "omtx-hub-dev"
+# environment = "development"
+# node_machine_type = "e2-medium"       # Minimal for dev
+# min_node_count = 1
+# max_node_count = 3
+# enable_preemptible_nodes = true
+# enable_spot_nodes = true              # Maximum cost savings
+# enable_backup = false
+# enable_memorystore = false            # Use in-cluster Redis
+# enable_monitoring = false             # Reduce costs

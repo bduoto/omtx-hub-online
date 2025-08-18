@@ -12,6 +12,7 @@ import logging
 import asyncio
 import platform
 import psutil
+import os
 from typing import Dict, Any, List, Optional, Callable
 from datetime import datetime, timedelta
 from dataclasses import dataclass, asdict
@@ -20,6 +21,49 @@ from contextlib import asynccontextmanager
 from enum import Enum
 
 import json
+
+# Integration with our new architecture components
+try:
+    from middleware.rate_limiter import rate_limiter
+    RATE_LIMITER_AVAILABLE = True
+except ImportError:
+    logger.warning("⚠️ Rate limiter not available for APM integration")
+    RATE_LIMITER_AVAILABLE = False
+
+try:
+    from services.resource_quota_manager import resource_quota_manager
+    QUOTA_MANAGER_AVAILABLE = True
+except ImportError:
+    logger.warning("⚠️ Resource quota manager not available for APM integration")
+    QUOTA_MANAGER_AVAILABLE = False
+
+try:
+    from services.gcp_results_indexer import gcp_results_indexer
+    GCP_INDEXER_AVAILABLE = True
+except ImportError:
+    logger.warning("⚠️ GCP results indexer not available for APM integration")
+    GCP_INDEXER_AVAILABLE = False
+
+try:
+    from monitoring.health_check_service import health_check_service
+    HEALTH_CHECK_AVAILABLE = True
+except ImportError:
+    logger.warning("⚠️ Health check service not available for APM integration")
+    HEALTH_CHECK_AVAILABLE = False
+
+# OpenTelemetry integration (optional)
+try:
+    from opentelemetry import trace, metrics
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.metrics import MeterProvider
+    from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+    from opentelemetry.exporter.otlp.proto.grpc.metric_exporter import OTLPMetricExporter
+    from opentelemetry.sdk.trace.export import BatchSpanProcessor
+    from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
+    OTEL_AVAILABLE = True
+except ImportError:
+    logger.info("ℹ️ OpenTelemetry not available, using built-in monitoring")
+    OTEL_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 
@@ -309,6 +353,8 @@ class ProductionAPMService:
     - Performance profiling and bottleneck detection
     - System health monitoring
     - Batch job specific monitoring
+    - Integration with rate limiter and quota manager
+    - OpenTelemetry support
     - Custom dashboard data export
     """
     
@@ -323,6 +369,11 @@ class ProductionAPMService:
         self.system_monitor = SystemHealthMonitor()
         self.batch_monitor = BatchJobMonitor()
         
+        # OpenTelemetry integration
+        self.otel_tracer = None
+        self.otel_meter = None
+        self._initialize_otel()
+        
         # Performance thresholds for alerting
         self.alert_thresholds = {
             'cpu_percent': 85,
@@ -330,13 +381,274 @@ class ProductionAPMService:
             'disk_percent': 90,
             'error_rate': 10,
             'response_time_p95': 5000,  # 5 seconds
-            'batch_failure_rate': 15
+            'batch_failure_rate': 15,
+            'rate_limit_violations': 50,  # per hour
+            'quota_violations': 20,       # per hour
+            'cache_hit_rate': 80,         # minimum percentage
+            'redis_errors': 10            # per hour
         }
         
         # Background monitoring task
         self.monitoring_task: Optional[asyncio.Task] = None
         self.is_running = False
         
+        # Performance counters
+        self.counters = {
+            'requests_total': 0,
+            'requests_successful': 0,
+            'requests_failed': 0,
+            'rate_limit_violations': 0,
+            'quota_violations': 0,
+            'cache_hits': 0,
+            'cache_misses': 0,
+            'redis_errors': 0,
+            'modal_calls': 0,
+            'modal_successes': 0,
+            'modal_failures': 0
+        }
+    
+    def _initialize_otel(self):
+        """Initialize OpenTelemetry if available"""
+        if not OTEL_AVAILABLE:
+            return
+        
+        try:
+            # Configure tracing
+            trace.set_tracer_provider(TracerProvider())
+            
+            # OTLP endpoint from environment
+            otlp_endpoint = os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT")
+            if otlp_endpoint:
+                otlp_exporter = OTLPSpanExporter(endpoint=otlp_endpoint)
+                span_processor = BatchSpanProcessor(otlp_exporter)
+                trace.get_tracer_provider().add_span_processor(span_processor)
+                logger.info(f"✅ OpenTelemetry tracing configured with endpoint: {otlp_endpoint}")
+            
+            self.otel_tracer = trace.get_tracer(__name__)
+            
+            # Configure metrics
+            if os.getenv("OTEL_EXPORTER_OTLP_METRICS_ENDPOINT"):
+                metric_exporter = OTLPMetricExporter(
+                    endpoint=os.getenv("OTEL_EXPORTER_OTLP_METRICS_ENDPOINT")
+                )
+                metric_reader = PeriodicExportingMetricReader(
+                    exporter=metric_exporter,
+                    export_interval_millis=30000  # 30 seconds
+                )
+                metrics.set_meter_provider(MeterProvider(metric_readers=[metric_reader]))
+                self.otel_meter = metrics.get_meter(__name__)
+                logger.info("✅ OpenTelemetry metrics configured")
+                
+        except Exception as e:
+            logger.warning(f"⚠️ Failed to initialize OpenTelemetry: {e}")
+    
+    def increment_counter(self, counter_name: str, value: int = 1, tags: Dict[str, str] = None):
+        """Increment a performance counter"""
+        if counter_name in self.counters:
+            self.counters[counter_name] += value
+        
+        # Also record as metric
+        self.record_metric(f"counter.{counter_name}", value, tags, MetricType.COUNTER)
+        
+        # OpenTelemetry counter
+        if self.otel_meter:
+            try:
+                counter = self.otel_meter.create_counter(f"omtx_{counter_name}")
+                attributes = tags or {}
+                counter.add(value, attributes)
+            except Exception as e:
+                logger.debug(f"Failed to record OTel counter: {e}")
+    
+    async def collect_architecture_metrics(self) -> Dict[str, Any]:
+        """Collect metrics from our new architecture components"""
+        
+        architecture_metrics = {}
+        
+        # Rate Limiter Metrics
+        if RATE_LIMITER_AVAILABLE:
+            try:
+                rate_metrics = rate_limiter.get_metrics()
+                architecture_metrics['rate_limiter'] = rate_metrics
+                
+                # Record key metrics
+                self.record_metric("rate_limiter.requests_checked", rate_metrics.get('requests_checked', 0))
+                self.record_metric("rate_limiter.requests_allowed", rate_metrics.get('requests_allowed', 0))
+                self.record_metric("rate_limiter.requests_denied", rate_metrics.get('requests_denied', 0))
+                self.record_metric("rate_limiter.allow_rate", rate_metrics.get('allow_rate', 0))
+                
+            except Exception as e:
+                logger.error(f"❌ Error collecting rate limiter metrics: {e}")
+                architecture_metrics['rate_limiter'] = {'error': str(e)}
+        
+        # Resource Quota Manager Metrics
+        if QUOTA_MANAGER_AVAILABLE:
+            try:
+                quota_metrics = resource_quota_manager.get_metrics()
+                architecture_metrics['quota_manager'] = quota_metrics
+                
+                # Record key metrics
+                self.record_metric("quota.checks", quota_metrics.get('quota_checks', 0))
+                self.record_metric("quota.violations", quota_metrics.get('quota_violations', 0))
+                self.record_metric("quota.active_users", quota_metrics.get('active_users', 0))
+                
+            except Exception as e:
+                logger.error(f"❌ Error collecting quota manager metrics: {e}")
+                architecture_metrics['quota_manager'] = {'error': str(e)}
+        
+        # GCP Results Indexer Metrics
+        if GCP_INDEXER_AVAILABLE:
+            try:
+                indexer_metrics = gcp_results_indexer.get_indexer_metrics()
+                architecture_metrics['gcp_indexer'] = indexer_metrics
+                
+                # Record key metrics
+                self.record_metric("indexer.jobs_indexed", indexer_metrics.get('jobs_indexed', 0))
+                self.record_metric("indexer.cache_hit_rate", indexer_metrics.get('cache_hit_rate', 0))
+                self.record_metric("indexer.queue_size", indexer_metrics.get('queue_size', 0))
+                
+            except Exception as e:
+                logger.error(f"❌ Error collecting indexer metrics: {e}")
+                architecture_metrics['gcp_indexer'] = {'error': str(e)}
+        
+        # Health Check Service Metrics
+        if HEALTH_CHECK_AVAILABLE:
+            try:
+                health_metrics = health_check_service.get_health_metrics()
+                architecture_metrics['health_check'] = health_metrics
+                
+                # Record key metrics
+                self.record_metric("health.total_checks", health_metrics.get('total_checks', 0))
+                self.record_metric("health.success_rate", health_metrics.get('success_rate', 0))
+                self.record_metric("health.slo_breaches", health_metrics.get('slo_breaches', 0))
+                self.record_metric("health.services_monitored", health_metrics.get('services_monitored', 0))
+                
+                # Get system health status
+                system_health = await health_check_service.get_system_health()
+                architecture_metrics['system_health'] = {
+                    'overall_status': system_health.get('overall_status', 'unknown'),
+                    'services_count': len(system_health.get('services', {})),
+                    'slo_compliance_rate': system_health.get('slo_summary', {}).get('slo_compliance_rate', 0),
+                    'slo_breaches': system_health.get('slo_summary', {}).get('slo_breaches', 0)
+                }
+                
+            except Exception as e:
+                logger.error(f"❌ Error collecting health check metrics: {e}")
+                architecture_metrics['health_check'] = {'error': str(e)}
+        
+        return architecture_metrics
+    
+    async def check_enhanced_alert_conditions(self):
+        """Enhanced alert checking including new architecture components"""
+        
+        # Get architecture metrics
+        arch_metrics = await self.collect_architecture_metrics()
+        
+        # Rate Limiter Alerts
+        if 'rate_limiter' in arch_metrics and 'error' not in arch_metrics['rate_limiter']:
+            rate_metrics = arch_metrics['rate_limiter']
+            
+            # High denial rate
+            allow_rate = rate_metrics.get('allow_rate', 100)
+            if allow_rate < 90:  # Less than 90% requests allowed
+                self.create_alert(
+                    AlertSeverity.WARNING,
+                    "High Rate Limiting Activity",
+                    f"Only {allow_rate:.1f}% of requests are being allowed through rate limiting"
+                )
+            
+            # Redis unavailable
+            if not rate_metrics.get('redis_available', True):
+                self.create_alert(
+                    AlertSeverity.WARNING,
+                    "Rate Limiter Redis Unavailable",
+                    "Rate limiter is using fallback mode due to Redis unavailability"
+                )
+        
+        # Quota Manager Alerts
+        if 'quota_manager' in arch_metrics and 'error' not in arch_metrics['quota_manager']:
+            quota_metrics = arch_metrics['quota_manager']
+            
+            # High quota violations
+            quota_violations = quota_metrics.get('quota_violations', 0)
+            if quota_violations > self.alert_thresholds['quota_violations']:
+                self.create_alert(
+                    AlertSeverity.ERROR,
+                    "High Quota Violations",
+                    f"{quota_violations} quota violations detected"
+                )
+        
+        # GCP Indexer Alerts
+        if 'gcp_indexer' in arch_metrics and 'error' not in arch_metrics['gcp_indexer']:
+            indexer_metrics = arch_metrics['gcp_indexer']
+            
+            # Low cache hit rate
+            cache_hit_rate = indexer_metrics.get('cache_hit_rate', 0)
+            if cache_hit_rate < self.alert_thresholds['cache_hit_rate']:
+                self.create_alert(
+                    AlertSeverity.WARNING,
+                    "Low Indexer Cache Hit Rate",
+                    f"GCP indexer cache hit rate is {cache_hit_rate:.1f}% (threshold: {self.alert_thresholds['cache_hit_rate']}%)"
+                )
+            
+            # Large queue size
+            queue_size = indexer_metrics.get('queue_size', 0)
+            if queue_size > 1000:
+                self.create_alert(
+                    AlertSeverity.WARNING,
+                    "Large Indexer Queue",
+                    f"GCP indexer queue has {queue_size} pending items"
+                )
+        
+        # Health Check Service Alerts
+        if 'health_check' in arch_metrics and 'error' not in arch_metrics['health_check']:
+            health_metrics = arch_metrics['health_check']
+            
+            # Low health check success rate
+            success_rate = health_metrics.get('success_rate', 100)
+            if success_rate < 95:
+                self.create_alert(
+                    AlertSeverity.ERROR,
+                    "Health Check Failures",
+                    f"Health check success rate is {success_rate:.1f}% (target: 95%+)"
+                )
+            
+            # SLO breaches detected
+            slo_breaches = health_metrics.get('slo_breaches', 0)
+            if slo_breaches > 0:
+                self.create_alert(
+                    AlertSeverity.WARNING,
+                    "SLO Breaches Detected",
+                    f"Health check service detected {slo_breaches} SLO breaches"
+                )
+        
+        # System Health Alerts
+        if 'system_health' in arch_metrics:
+            system_health = arch_metrics['system_health']
+            
+            # Overall system status degraded
+            overall_status = system_health.get('overall_status', 'unknown')
+            if overall_status in ['critical', 'unhealthy']:
+                self.create_alert(
+                    AlertSeverity.CRITICAL,
+                    "System Health Critical",
+                    f"Overall system health status is {overall_status}"
+                )
+            elif overall_status == 'degraded':
+                self.create_alert(
+                    AlertSeverity.WARNING,
+                    "System Health Degraded",
+                    f"Overall system health status is {overall_status}"
+                )
+            
+            # Low SLO compliance
+            slo_compliance = system_health.get('slo_compliance_rate', 100)
+            if slo_compliance < 90:
+                self.create_alert(
+                    AlertSeverity.ERROR,
+                    "Low SLO Compliance",
+                    f"System SLO compliance rate is {slo_compliance:.1f}% (target: 90%+)"
+                )
+                
     async def start_monitoring(self):
         """Start background monitoring tasks"""
         if self.is_running:
@@ -365,8 +677,12 @@ class ProductionAPMService:
                 system_metrics = self.system_monitor.collect_system_metrics()
                 await self._process_system_metrics(system_metrics)
                 
-                # Check for alerts
+                # Collect architecture metrics
+                architecture_metrics = await self.collect_architecture_metrics()
+                
+                # Check for alerts (enhanced version)
                 await self._check_alert_conditions()
+                await self.check_enhanced_alert_conditions()
                 
                 # Clean old data
                 await self._cleanup_old_data()
@@ -546,7 +862,7 @@ class ProductionAPMService:
         alert_cutoff = datetime.utcnow() - timedelta(days=7)
         self.alerts = [a for a in self.alerts if a.timestamp > alert_cutoff]
     
-    def get_dashboard_data(self) -> Dict[str, Any]:
+    async def get_dashboard_data(self) -> Dict[str, Any]:
         """Get comprehensive dashboard data"""
         now = datetime.utcnow()
         
@@ -555,6 +871,9 @@ class ProductionAPMService:
         
         # Batch health
         batch_health = self.batch_monitor.get_batch_health_summary()
+        
+        # Architecture metrics
+        architecture_metrics = await self.collect_architecture_metrics()
         
         # Performance stats
         recent_traces = []
@@ -571,10 +890,18 @@ class ProductionAPMService:
             reverse=True
         )[:10]
         
+        # Performance counters summary
+        total_requests = self.counters.get('requests_total', 0)
+        success_rate = (
+            (self.counters.get('requests_successful', 0) / total_requests * 100) 
+            if total_requests > 0 else 100
+        )
+        
         return {
             'timestamp': now.isoformat(),
             'system_health': system_health,
             'batch_health': batch_health,
+            'architecture': architecture_metrics,
             'performance': {
                 'recent_traces_count': len(recent_traces),
                 'active_spans_count': len(self.active_spans),
@@ -583,18 +910,134 @@ class ProductionAPMService:
                         'name': name,
                         'stats': self.profiler.get_function_stats(name)
                     } for name, _ in slow_operations
-                ]
+                ],
+                'counters': self.counters,
+                'success_rate': success_rate
             },
             'alerts': {
                 'active_count': len(active_alerts),
-                'recent_alerts': [asdict(a) for a in active_alerts[-5:]]
+                'recent_alerts': [asdict(a) for a in active_alerts[-5:]],
+                'severity_breakdown': {
+                    severity.value: len([a for a in active_alerts if a.severity == severity])
+                    for severity in AlertSeverity
+                }
             },
-            'cache_stats': getattr(self, '_cache_stats', {}),  # Will be populated by cache service
+            'integrations': {
+                'rate_limiter_available': RATE_LIMITER_AVAILABLE,
+                'quota_manager_available': QUOTA_MANAGER_AVAILABLE,
+                'gcp_indexer_available': GCP_INDEXER_AVAILABLE,
+                'opentelemetry_enabled': OTEL_AVAILABLE and self.otel_tracer is not None
+            },
             'uptime_seconds': (now - self.system_monitor.start_time).total_seconds()
         }
 
 # Global APM service instance
 apm_service = ProductionAPMService()
+
+# Enhanced middleware integration functions
+async def record_request_start(request_id: str, endpoint: str, user_id: str = None):
+    """Record the start of a request for tracking"""
+    apm_service.increment_counter('requests_total')
+    
+    # Record rate limiter metrics if available
+    if RATE_LIMITER_AVAILABLE:
+        try:
+            rate_metrics = rate_limiter.get_metrics()
+            if rate_metrics.get('requests_denied', 0) > 0:
+                apm_service.increment_counter('rate_limit_violations')
+        except:
+            pass
+
+async def record_request_success(request_id: str, response_time_ms: float):
+    """Record successful request completion"""
+    apm_service.increment_counter('requests_successful')
+    apm_service.record_metric('request.response_time_ms', response_time_ms, 
+                             tags={'status': 'success'}, metric_type=MetricType.TIMER)
+
+async def record_request_failure(request_id: str, error_type: str, response_time_ms: float):
+    """Record failed request"""
+    apm_service.increment_counter('requests_failed')
+    apm_service.record_metric('request.response_time_ms', response_time_ms, 
+                             tags={'status': 'error', 'error_type': error_type}, 
+                             metric_type=MetricType.TIMER)
+
+async def record_modal_call(call_id: str, model_type: str, success: bool = True):
+    """Record Modal function call"""
+    apm_service.increment_counter('modal_calls')
+    
+    if success:
+        apm_service.increment_counter('modal_successes')
+    else:
+        apm_service.increment_counter('modal_failures')
+    
+    apm_service.record_metric('modal.call', 1, 
+                             tags={'model_type': model_type, 'success': str(success)}, 
+                             metric_type=MetricType.COUNTER)
+
+async def record_quota_violation(user_id: str, resource_type: str):
+    """Record quota violation"""
+    apm_service.increment_counter('quota_violations')
+    apm_service.record_metric('quota.violation', 1, 
+                             tags={'user_id': user_id, 'resource_type': resource_type}, 
+                             metric_type=MetricType.COUNTER)
+
+async def record_cache_operation(operation: str, hit: bool = True):
+    """Record cache operation"""
+    if hit:
+        apm_service.increment_counter('cache_hits')
+    else:
+        apm_service.increment_counter('cache_misses')
+    
+    apm_service.record_metric(f'cache.{operation}', 1, 
+                             tags={'hit': str(hit)}, 
+                             metric_type=MetricType.COUNTER)
+
+async def initialize_apm_service(
+    enable_otel: bool = None,
+    otel_endpoint: str = None,
+    alert_webhook_url: str = None
+):
+    """Initialize the APM service with configuration"""
+    
+    # Set environment variables if provided
+    if otel_endpoint:
+        os.environ["OTEL_EXPORTER_OTLP_ENDPOINT"] = otel_endpoint
+    
+    # Re-initialize OpenTelemetry with new config
+    if enable_otel or otel_endpoint:
+        apm_service._initialize_otel()
+    
+    # Start monitoring
+    await apm_service.start_monitoring()
+    
+    logger.info("✅ Enhanced APM service initialized with architecture integration")
+    return apm_service
+
+# Enhanced tracing context manager
+@asynccontextmanager
+async def trace_request(request_id: str, operation: str, user_id: str = None):
+    """Enhanced request tracing with architecture integration"""
+    start_time = time.time()
+    
+    # Record request start
+    await record_request_start(request_id, operation, user_id)
+    
+    try:
+        async with apm_service.trace_operation(operation, tags={
+            'request_id': request_id,
+            'user_id': user_id or 'unknown'
+        }) as span:
+            yield span
+            
+        # Record success
+        response_time = (time.time() - start_time) * 1000
+        await record_request_success(request_id, response_time)
+        
+    except Exception as e:
+        # Record failure
+        response_time = (time.time() - start_time) * 1000
+        await record_request_failure(request_id, type(e).__name__, response_time)
+        raise
 
 # Decorator for automatic operation tracing
 def trace_operation(operation_name: str = None):

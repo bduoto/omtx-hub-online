@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: omtx-hub-config
+  namespace: omtx-hub
+data:
+  # GCP Configuration
+  GOOGLE_CLOUD_PROJECT: "your-project-id"
+  
+  # Application Configuration
+  ENVIRONMENT: "production"
+  LOG_LEVEL: "INFO"
+  
+  # API Configuration
+  API_HOST: "0.0.0.0"
+  API_PORT: "8000"
+  
+  # Cache Configuration
+  REDIS_HOST: "redis-service"
+  REDIS_PORT: "6379"
+  CACHE_TTL: "300"
+  
+  # Rate Limiting
+  RATE_LIMIT_ENABLED: "true"
+  DEFAULT_RATE_LIMIT: "60"
+  PREMIUM_RATE_LIMIT: "300"
+  ENTERPRISE_RATE_LIMIT: "1000"
+  
+  # Modal Configuration
+  MODAL_ENVIRONMENT: "production"
+  
+  # Monitoring
+  ENABLE_TRACING: "true"
+  APM_ENABLED: "true"
+  HEALTH_CHECK_ENABLED: "true"
+  
+  # Performance
+  WORKERS: "4"
+  MAX_CONCURRENT_JOBS: "100"
+  
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: omtx-hub-config-staging
+  namespace: omtx-hub-staging
+data:
+  # GCP Configuration
+  GOOGLE_CLOUD_PROJECT: "your-project-id-staging"
+  
+  # Application Configuration
+  ENVIRONMENT: "staging"
+  LOG_LEVEL: "DEBUG"
+  
+  # API Configuration
+  API_HOST: "0.0.0.0"
+  API_PORT: "8000"
+  
+  # Cache Configuration
+  REDIS_HOST: "redis-service"
+  REDIS_PORT: "6379"
+  CACHE_TTL: "60"
+  
+  # Rate Limiting
+  RATE_LIMIT_ENABLED: "true"
+  DEFAULT_RATE_LIMIT: "30"
+  PREMIUM_RATE_LIMIT: "150"
+  ENTERPRISE_RATE_LIMIT: "500"
+  
+  # Modal Configuration
+  MODAL_ENVIRONMENT: "staging"
+  
+  # Monitoring
+  ENABLE_TRACING: "true"
+  APM_ENABLED: "true"
+  HEALTH_CHECK_ENABLED: "true"
+  
+  # Performance
+  WORKERS: "2"
+  MAX_CONCURRENT_JOBS: "20"

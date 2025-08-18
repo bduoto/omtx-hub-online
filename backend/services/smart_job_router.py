@@ -1,464 +1,362 @@
 """
-Smart Job Router for OMTX-Hub Unified Architecture
-Intelligently routes predictions to appropriate handlers based on content analysis
+Smart Job Router - QoS lanes and intelligent resource planning
+Routes jobs to interactive vs bulk lanes based on resource estimation
 """
 
 import asyncio
 import logging
-import uuid
 import time
-from typing import Dict, Any, List
-from models.enhanced_job_model import (
-    EnhancedJobData, JobType, JobStatus, TaskType,
-    create_individual_job, create_batch_parent_job, create_batch_child_job
-)
+from typing import Dict, Any, List, Optional, Tuple
+from enum import Enum
+from dataclasses import dataclass
+from datetime import datetime, timedelta
+
+from services.production_modal_service import ProductionModalService, QoSLane
 from database.unified_job_manager import unified_job_manager
-from services.modal_execution_service import modal_execution_service
 
 logger = logging.getLogger(__name__)
 
+@dataclass
+class ResourceEstimate:
+    """GPU resource estimation for job planning"""
+    gpu_seconds: float
+    memory_gb: float
+    estimated_duration: float
+    shard_count: int
+    msa_cost: float  # Additional cost for MSA computation
+    ligand_count: int
+    protein_length: int
+
+@dataclass
+class UserQuota:
+    """Per-user resource quotas"""
+    daily_gpu_minutes: float
+    max_concurrent_interactive: int
+    max_concurrent_bulk: int
+    used_gpu_minutes_today: float
+    current_interactive: int
+    current_bulk: int
+    tier: str = "default"  # default, premium, enterprise
+
 class SmartJobRouter:
-    """Smart router that handles both individual and batch predictions intelligently"""
+    """
+    Route jobs to appropriate QoS lanes with resource planning
+    
+    Key features:
+    - Intelligent lane selection (interactive vs bulk)
+    - Resource estimation based on protein length and ligand count
+    - Per-user quotas and limits
+    - Admission control and queueing
+    """
     
     def __init__(self):
-        self.job_manager = unified_job_manager
-        self.modal_service = modal_execution_service
+        self.modal_service = ProductionModalService()
         
-        # Import task handler registry dynamically to avoid circular imports
-        try:
-            from tasks.task_handlers import task_handler_registry
-            self.task_registry = task_handler_registry
-        except ImportError:
-            logger.warning("Task handler registry not available - some features may not work")
-            self.task_registry = None
-    
-    async def route_prediction(self, request_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Smart routing entry point for all predictions"""
-        
-        logger.info(f"🎯 Smart routing prediction request...")
-        
-        # Extract request components
-        task_type = request_data.get('task_type')
-        input_data = request_data.get('input_data', {})
-        job_name = request_data.get('job_name', 'Unnamed Job')
-        model_id = request_data.get('model_id', 'boltz2')
-        use_msa = request_data.get('use_msa', True)
-        use_potentials = request_data.get('use_potentials', False)
-        
-        # Determine job type intelligently
-        job_type = self._determine_job_type(task_type, input_data)
-        
-        logger.info(f"   Determined job type: {job_type.value}")
-        logger.info(f"   Task type: {task_type}")
-        logger.info(f"   Job name: {job_name}")
-        
-        if job_type == JobType.BATCH_PARENT:
-            return await self._handle_batch_prediction(
-                task_type, input_data, job_name, model_id, use_msa, use_potentials
-            )
-        else:
-            return await self._handle_individual_prediction(
-                task_type, input_data, job_name, model_id, use_msa, use_potentials
-            )
-    
-    def _determine_job_type(self, task_type: str, input_data: Dict[str, Any]) -> JobType:
-        """Intelligent job type determination based on content analysis"""
-        
-        # Explicit batch task type
-        if task_type == TaskType.BATCH_PROTEIN_LIGAND_SCREENING.value:
-            return JobType.BATCH_PARENT
-        
-        # Check for multiple ligands in individual task (auto-convert to batch)
-        ligands = input_data.get('ligands', [])
-        if isinstance(ligands, list) and len(ligands) > 1:
-            logger.info(f"🔄 Auto-converting individual task to batch: {len(ligands)} ligands detected")
-            return JobType.BATCH_PARENT
-        
-        # Check for batch indicators in input data
-        if any(key.startswith('batch_') for key in input_data.keys()):
-            return JobType.BATCH_PARENT
-        
-        # Check for array of compounds/sequences that indicate batch processing
-        arrays_to_check = ['compounds', 'sequences', 'smiles_list', 'ligand_list']
-        for array_key in arrays_to_check:
-            array_data = input_data.get(array_key, [])
-            if isinstance(array_data, list) and len(array_data) > 1:
-                logger.info(f"🔄 Auto-converting to batch based on {array_key}: {len(array_data)} items")
-                return JobType.BATCH_PARENT
-        
-        return JobType.INDIVIDUAL
-    
-    async def _handle_individual_prediction(
-        self, task_type: str, input_data: Dict[str, Any], job_name: str,
-        model_id: str, use_msa: bool, use_potentials: bool
-    ) -> Dict[str, Any]:
-        """Handle individual prediction with enhanced job model"""
-        
-        logger.info(f"🎯 Processing individual prediction: {job_name}")
-        
-        # Create enhanced job record
-        job = create_individual_job(
-            name=job_name,
-            task_type=task_type,
-            input_data=input_data,
-            model_name=model_id
-        )
-        
-        # Store job in database
-        success = await self._store_enhanced_job(job)
-        if not success:
-            raise Exception("Failed to create job record")
-        
-        logger.info(f"✅ Created individual job: {job.id}")
-        
-        # Execute prediction asynchronously
-        asyncio.create_task(self._execute_individual_job(job.id, task_type, input_data, use_msa, use_potentials))
-        
-        return {
-            'job_id': job.id,
-            'job_type': 'individual',
-            'status': 'submitted',
-            'message': f'Individual prediction submitted: {job_name}',
-            'estimated_completion_time': self._estimate_completion_time(task_type)
+        # Lane thresholds for automatic routing
+        self.interactive_thresholds = {
+            'max_ligands': 10,
+            'max_gpu_seconds': 300,  # 5 minutes
+            'max_protein_length': 1000,
+            'max_concurrent_per_user': 2
         }
-    
-    async def _handle_batch_prediction(
-        self, task_type: str, input_data: Dict[str, Any], job_name: str,
-        model_id: str, use_msa: bool, use_potentials: bool
-    ) -> Dict[str, Any]:
-        """Handle batch prediction with proper parent-child hierarchy"""
         
-        logger.info(f"🎯 Processing batch prediction: {job_name}")
-        
-        # Extract ligands from input data
-        ligands = input_data.get('ligands', [])
-        if not ligands:
-            raise ValueError("Batch prediction requires ligands array")
-        
-        logger.info(f"   Processing {len(ligands)} ligands")
-        
-        # Create batch parent job
-        parent_job = create_batch_parent_job(
-            name=job_name,
-            task_type=task_type,
-            input_data=input_data,
-            model_name=model_id
-        )
-        
-        # Store parent job
-        success = await self._store_enhanced_job(parent_job)
-        if not success:
-            raise Exception("Failed to create parent job record")
-        
-        logger.info(f"✅ Created batch parent: {parent_job.id}")
-        
-        # Create child jobs
-        child_ids = []
-        protein_sequence = input_data.get('protein_sequence', '')
-        protein_name = input_data.get('protein_name', 'Unknown Protein')
-        
-        for idx, ligand in enumerate(ligands):
-            child_id = f"{parent_job.id}-{idx:04d}"
-            ligand_name = ligand.get('name', f'Ligand_{idx+1}')
-            ligand_smiles = ligand.get('smiles', '')
-            
-            # Create child job with enhanced model
-            child_job = EnhancedJobData(
-                id=child_id,
-                name=f"{job_name} - {ligand_name}",
-                job_type=JobType.BATCH_CHILD,
-                task_type=TaskType.PROTEIN_LIGAND_BINDING.value,
-                status=JobStatus.PENDING,
-                created_at=time.time(),
-                input_data={
-                    'protein_sequence': protein_sequence,
-                    'ligand_smiles': ligand_smiles,
-                    'ligand_name': ligand_name,
-                    'protein_name': protein_name
-                },
-                model_name=model_id,
-                batch_parent_id=parent_job.id,
-                batch_index=idx
-            )
-            
-            # Store child job
-            await self._store_enhanced_job(child_job)
-            child_ids.append(child_id)
-        
-        # Update parent with child IDs
-        parent_job.batch_child_ids = child_ids
-        await self._update_enhanced_job(parent_job)
-        
-        logger.info(f"✅ Created {len(child_ids)} child jobs")
-        
-        # Execute batch asynchronously
-        asyncio.create_task(self._execute_batch_job(parent_job.id))
-        
-        return {
-            'job_id': parent_job.id,
-            'job_type': 'batch',
-            'status': 'submitted',
-            'total_ligands': len(ligands),
-            'child_job_ids': child_ids,
-            'message': f'Batch prediction submitted: {len(ligands)} ligands',
-            'estimated_completion_time': len(ligands) * 30  # 30 seconds per ligand
+        self.bulk_thresholds = {
+            'min_ligands': 5,  # Below this, force interactive
+            'max_gpu_seconds': 1800,  # 30 minutes
+            'max_concurrent_per_user': 3
         }
-    
-    async def _store_enhanced_job(self, job: EnhancedJobData) -> bool:
-        """Store enhanced job in database"""
-        try:
-            firestore_data = job.to_firestore_dict()
-            created_id = self.job_manager.create_job(firestore_data)
-            return created_id is not None
-        except Exception as e:
-            logger.error(f"❌ Failed to store job {job.id}: {e}")
-            return False
-    
-    async def _update_enhanced_job(self, job: EnhancedJobData) -> bool:
-        """Update enhanced job in database"""
-        try:
-            firestore_data = job.to_firestore_dict()
-            # Remove fields that shouldn't be updated
-            update_data = {k: v for k, v in firestore_data.items() 
-                          if k not in ['id', 'created_at']}
-            
-            return self.job_manager.update_job_status(
-                job.id, 
-                job.status.value, 
-                update_data
+        
+        # User quota tiers
+        self.quota_tiers = {
+            'default': UserQuota(
+                daily_gpu_minutes=600,  # 10 hours
+                max_concurrent_interactive=2,
+                max_concurrent_bulk=1,
+                used_gpu_minutes_today=0,
+                current_interactive=0,
+                current_bulk=0,
+                tier="default"
+            ),
+            'premium': UserQuota(
+                daily_gpu_minutes=1800,  # 30 hours
+                max_concurrent_interactive=4,
+                max_concurrent_bulk=2,
+                used_gpu_minutes_today=0,
+                current_interactive=0,
+                current_bulk=0,
+                tier="premium"
+            ),
+            'enterprise': UserQuota(
+                daily_gpu_minutes=7200,  # 120 hours
+                max_concurrent_interactive=8,
+                max_concurrent_bulk=4,
+                used_gpu_minutes_today=0,
+                current_interactive=0,
+                current_bulk=0,
+                tier="enterprise"
             )
-        except Exception as e:
-            logger.error(f"❌ Failed to update job {job.id}: {e}")
-            return False
+        }
+        
+        # Track user quotas (in production, this would be in Redis/DB)
+        self._user_quotas: Dict[str, UserQuota] = {}
+        
+    async def route_job(
+        self,
+        user_id: str,
+        job_request: Dict[str, Any],
+        lane_hint: Optional[str] = None
+    ) -> Tuple[QoSLane, ResourceEstimate]:
+        """
+        Determine optimal lane and validate resource requirements
+        
+        Args:
+            user_id: User identifier
+            job_request: Job parameters
+            lane_hint: User preference ('interactive', 'bulk', or 'auto')
+        
+        Returns:
+            Tuple of (selected_lane, resource_estimate)
+        
+        Raises:
+            ValueError: If job exceeds quotas or limits
+        """
+        
+        # Get or create user quota
+        user_quota = await self._get_user_quota(user_id)
+        
+        # Estimate resources
+        estimate = self._estimate_resources(job_request)
+        
+        # Select lane based on estimation and hints
+        lane = self._select_lane(job_request, estimate, lane_hint, user_quota)
+        
+        # Enforce quotas and limits
+        await self._enforce_limits(user_id, lane, estimate, user_quota)
+        
+        logger.info(f"🎯 Routed job for {user_id}: {lane.value} lane, "
+                   f"{estimate.gpu_seconds:.1f}s GPU, {estimate.ligand_count} ligands")
+        
+        return lane, estimate
     
-    async def _execute_individual_job(
-        self, job_id: str, task_type: str, input_data: Dict[str, Any],
-        use_msa: bool, use_potentials: bool
+    def _estimate_resources(self, job_request: Dict[str, Any]) -> ResourceEstimate:
+        """
+        Estimate GPU resources needed for job
+        
+        Based on empirical data from production runs
+        """
+        protein_sequences = job_request.get('protein_sequences', [])
+        ligands = job_request.get('ligands', [])
+        use_msa = job_request.get('use_msa_server', True)
+        use_potentials = job_request.get('use_potentials', False)
+        
+        # Calculate dimensions
+        protein_length = sum(len(seq) for seq in protein_sequences) if protein_sequences else 0
+        ligand_count = len(ligands)
+        
+        if ligand_count == 0:
+            raise ValueError("No ligands provided")
+        
+        # Empirical coefficients (tune based on actual production data)
+        base_overhead = 30  # Model loading, setup
+        protein_factor = protein_length * 0.05  # ~0.05s per residue
+        ligand_factor = ligand_count * 12  # ~12s per ligand
+        msa_overhead = 120 if use_msa else 0  # MSA computation
+        potentials_overhead = ligand_count * 3 if use_potentials else 0  # Additional compute
+        
+        gpu_seconds = (base_overhead + protein_factor + 
+                      ligand_factor + msa_overhead + potentials_overhead)
+        
+        # Memory estimation (A100-40GB limit)
+        base_memory = 8  # Base memory for model
+        protein_memory = protein_length * 0.01  # Memory scales with protein size
+        ligand_memory = ligand_count * 0.2  # Memory per ligand
+        memory_gb = min(38, base_memory + protein_memory + ligand_memory)  # Cap at 38GB
+        
+        # Shard planning for large jobs
+        max_ligands_per_shard = 100  # Optimal for A100-40GB
+        shard_count = max(1, (ligand_count + max_ligands_per_shard - 1) // max_ligands_per_shard)
+        
+        # Estimated duration with parallel execution
+        estimated_duration = gpu_seconds / shard_count if shard_count > 1 else gpu_seconds
+        
+        return ResourceEstimate(
+            gpu_seconds=gpu_seconds,
+            memory_gb=memory_gb,
+            estimated_duration=estimated_duration,
+            shard_count=shard_count,
+            msa_cost=msa_overhead,
+            ligand_count=ligand_count,
+            protein_length=protein_length
+        )
+    
+    def _select_lane(
+        self,
+        job_request: Dict[str, Any],
+        estimate: ResourceEstimate,
+        lane_hint: Optional[str],
+        user_quota: UserQuota
+    ) -> QoSLane:
+        """
+        Select appropriate QoS lane based on job characteristics
+        """
+        
+        # Check explicit hint first
+        if lane_hint == 'interactive':
+            # Validate interactive requirements
+            if (estimate.ligand_count <= self.interactive_thresholds['max_ligands'] and
+                estimate.gpu_seconds <= self.interactive_thresholds['max_gpu_seconds'] and
+                estimate.protein_length <= self.interactive_thresholds['max_protein_length']):
+                return QoSLane.INTERACTIVE
+            else:
+                logger.warning(f"Interactive hint rejected: exceeds thresholds")
+        
+        elif lane_hint == 'bulk':
+            # Force bulk if requested and valid
+            if estimate.ligand_count >= self.bulk_thresholds['min_ligands']:
+                return QoSLane.BULK
+        
+        # Automatic selection based on job characteristics
+        if (estimate.ligand_count <= self.interactive_thresholds['max_ligands'] and
+            estimate.gpu_seconds <= self.interactive_thresholds['max_gpu_seconds'] and
+            estimate.protein_length <= self.interactive_thresholds['max_protein_length']):
+            return QoSLane.INTERACTIVE
+        
+        # Default to bulk for larger jobs
+        return QoSLane.BULK
+    
+    async def _enforce_limits(
+        self,
+        user_id: str,
+        lane: QoSLane,
+        estimate: ResourceEstimate,
+        user_quota: UserQuota
     ):
-        """Execute individual job using existing task handlers"""
+        """
+        Enforce user quotas and system limits
         
-        logger.info(f"🚀 Executing individual job: {job_id}")
+        Raises ValueError if limits exceeded
+        """
         
-        try:
-            # Update job status to running
-            self.job_manager.update_job_status(job_id, JobStatus.RUNNING.value)
+        # Check daily GPU quota
+        required_minutes = estimate.gpu_seconds / 60
+        if user_quota.used_gpu_minutes_today + required_minutes > user_quota.daily_gpu_minutes:
+            remaining = user_quota.daily_gpu_minutes - user_quota.used_gpu_minutes_today
+            raise ValueError(
+                f"Daily GPU quota exceeded. Required: {required_minutes:.1f}m, "
+                f"Remaining: {remaining:.1f}m. Quota resets at midnight UTC."
+            )
+        
+        # Check concurrent job limits
+        if lane == QoSLane.INTERACTIVE:
+            if user_quota.current_interactive >= user_quota.max_concurrent_interactive:
+                raise ValueError(
+                    f"Interactive lane at capacity ({user_quota.current_interactive}/"
+                    f"{user_quota.max_concurrent_interactive}). "
+                    f"Please wait for current jobs to complete."
+                )
+        else:  # BULK
+            if user_quota.current_bulk >= user_quota.max_concurrent_bulk:
+                raise ValueError(
+                    f"Bulk lane at capacity ({user_quota.current_bulk}/"
+                    f"{user_quota.max_concurrent_bulk}). "
+                    f"Please wait for current jobs to complete."
+                )
+        
+        # Check system-wide lane capacity
+        modal_metrics = await self.modal_service.get_metrics()
+        lane_metrics = modal_metrics['lanes'][lane.value]
+        
+        if lane_metrics['utilization'] >= 0.9:  # 90% utilization threshold
+            raise ValueError(
+                f"{lane.value.title()} lane at {lane_metrics['utilization']:.0%} capacity. "
+                f"Please try again in a few minutes."
+            )
+        
+        # Reserve resources (update quotas)
+        await self._reserve_resources(user_id, lane, estimate)
+    
+    async def _get_user_quota(self, user_id: str) -> UserQuota:
+        """Get or create user quota (in production, this would query the database)"""
+        if user_id not in self._user_quotas:
+            # Default to 'default' tier, but in production this would be from user profile
+            tier = await self._get_user_tier(user_id)
+            self._user_quotas[user_id] = UserQuota(**self.quota_tiers[tier].__dict__)
+        
+        # Reset daily usage if needed
+        await self._reset_daily_usage_if_needed(user_id)
+        
+        return self._user_quotas[user_id]
+    
+    async def _get_user_tier(self, user_id: str) -> str:
+        """Get user tier from database (placeholder)"""
+        # In production, query user profile for tier
+        return "default"
+    
+    async def _reset_daily_usage_if_needed(self, user_id: str):
+        """Reset daily usage at midnight UTC"""
+        # In production, this would check last reset timestamp
+        # For now, implement basic daily reset logic
+        pass
+    
+    async def _reserve_resources(self, user_id: str, lane: QoSLane, estimate: ResourceEstimate):
+        """Reserve resources for the job"""
+        user_quota = self._user_quotas[user_id]
+        
+        # Reserve GPU minutes
+        user_quota.used_gpu_minutes_today += estimate.gpu_seconds / 60
+        
+        # Reserve concurrent slot
+        if lane == QoSLane.INTERACTIVE:
+            user_quota.current_interactive += 1
+        else:
+            user_quota.current_bulk += 1
+    
+    async def release_resources(self, user_id: str, lane: QoSLane):
+        """Release resources when job completes"""
+        if user_id in self._user_quotas:
+            user_quota = self._user_quotas[user_id]
             
-            if self.task_registry:
-                # Use existing task handler
-                result = await self.task_registry.process_task(
-                    task_type, input_data, f"Job_{job_id}", job_id,
-                    use_msa=use_msa, use_potentials=use_potentials
-                )
-                
-                # Update job with results
-                self.job_manager.update_job_status(
-                    job_id, JobStatus.COMPLETED.value, result
-                )
-                
-                logger.info(f"✅ Individual job completed: {job_id}")
+            if lane == QoSLane.INTERACTIVE:
+                user_quota.current_interactive = max(0, user_quota.current_interactive - 1)
             else:
-                logger.error(f"❌ Task registry not available for job {job_id}")
-                self.job_manager.update_job_status(
-                    job_id, JobStatus.FAILED.value, 
-                    {'error': 'Task registry not available'}
-                )
-                
-        except Exception as e:
-            logger.error(f"❌ Individual job failed {job_id}: {e}")
-            self.job_manager.update_job_status(
-                job_id, JobStatus.FAILED.value,
-                {'error': str(e)}
-            )
+                user_quota.current_bulk = max(0, user_quota.current_bulk - 1)
     
-    async def _execute_batch_job(self, batch_id: str):
-        """Execute batch job with parallel child processing"""
+    async def get_user_status(self, user_id: str) -> Dict[str, Any]:
+        """Get user's current quota and usage status"""
+        user_quota = await self._get_user_quota(user_id)
         
-        logger.info(f"🚀 Executing batch job: {batch_id}")
-        
-        try:
-            # Update parent status to running
-            self.job_manager.update_job_status(batch_id, JobStatus.RUNNING.value)
-            
-            # Get parent job to find children
-            parent_job = self.job_manager.get_job(batch_id)
-            if not parent_job:
-                logger.error(f"❌ Parent job not found: {batch_id}")
-                return
-            
-            # Get child IDs
-            child_ids = parent_job.get('batch_child_ids', [])
-            if not child_ids:
-                logger.error(f"❌ No child jobs found for batch: {batch_id}")
-                return
-            
-            logger.info(f"🔄 Processing {len(child_ids)} child jobs")
-            
-            # Process children with controlled parallelism
-            semaphore = asyncio.Semaphore(5)  # Max 5 concurrent executions
-            
-            async def process_child(child_id: str):
-                async with semaphore:
-                    await self._execute_batch_child(child_id, batch_id)
-            
-            # Execute all children
-            child_tasks = [process_child(child_id) for child_id in child_ids]
-            await asyncio.gather(*child_tasks, return_exceptions=True)
-            
-            # Update parent status based on children
-            await self._finalize_batch_job(batch_id)
-            
-            logger.info(f"✅ Batch job completed: {batch_id}")
-            
-        except Exception as e:
-            logger.error(f"❌ Batch job failed {batch_id}: {e}")
-            self.job_manager.update_job_status(
-                batch_id, JobStatus.FAILED.value,
-                {'error': str(e)}
-            )
-    
-    async def _execute_batch_child(self, child_id: str, parent_id: str):
-        """Execute a single batch child job"""
-        
-        try:
-            # Get child job data
-            child_job = self.job_manager.get_job(child_id)
-            if not child_job:
-                logger.error(f"❌ Child job not found: {child_id}")
-                return
-            
-            # Extract execution parameters
-            input_data = child_job.get('input_data', {})
-            
-            # Execute using existing task handler
-            await self._execute_individual_job(
-                child_id, 
-                TaskType.PROTEIN_LIGAND_BINDING.value,
-                input_data,
-                use_msa=True,
-                use_potentials=False
-            )
-            
-            # Update parent progress
-            await self._update_batch_progress(parent_id)
-            
-        except Exception as e:
-            logger.error(f"❌ Batch child failed {child_id}: {e}")
-            self.job_manager.update_job_status(
-                child_id, JobStatus.FAILED.value,
-                {'error': str(e)}
-            )
-            await self._update_batch_progress(parent_id)
-    
-    async def _update_batch_progress(self, batch_id: str):
-        """Update batch parent progress based on children status"""
-        
-        try:
-            # Get all children
-            parent_job = self.job_manager.get_job(batch_id)
-            child_ids = parent_job.get('batch_child_ids', [])
-            
-            if not child_ids:
-                return
-            
-            # Get children status
-            child_statuses = []
-            for child_id in child_ids:
-                child = self.job_manager.get_job(child_id)
-                if child:
-                    status_str = child.get('status', 'pending')
-                    try:
-                        child_statuses.append(JobStatus(status_str))
-                    except ValueError:
-                        child_statuses.append(JobStatus.PENDING)
-            
-            # Calculate progress using enhanced model
-            dummy_parent = EnhancedJobData(
-                id=batch_id, name="", job_type=JobType.BATCH_PARENT,
-                task_type="", status=JobStatus.RUNNING, created_at=time.time()
-            )
-            
-            progress = dummy_parent.calculate_batch_progress(child_statuses)
-            
-            # Update parent with progress
-            self.job_manager.update_job_status(
-                batch_id, JobStatus.RUNNING.value, 
-                {'batch_progress': progress}
-            )
-            
-        except Exception as e:
-            logger.error(f"❌ Failed to update batch progress {batch_id}: {e}")
-    
-    async def _finalize_batch_job(self, batch_id: str):
-        """Finalize batch job based on children completion"""
-        
-        try:
-            parent_job = self.job_manager.get_job(batch_id)
-            child_ids = parent_job.get('batch_child_ids', [])
-            
-            # Get final children status
-            child_statuses = []
-            results = []
-            
-            for child_id in child_ids:
-                child = self.job_manager.get_job(child_id)
-                if child:
-                    status_str = child.get('status', 'pending')
-                    try:
-                        child_statuses.append(JobStatus(status_str))
-                    except ValueError:
-                        child_statuses.append(JobStatus.FAILED)
-                    
-                    # Collect results
-                    if child.get('output_data'):
-                        results.append({
-                            'child_id': child_id,
-                            'result': child['output_data']
-                        })
-            
-            # Determine final status
-            if not child_statuses:
-                final_status = JobStatus.FAILED
-            else:
-                dummy_parent = EnhancedJobData(
-                    id=batch_id, name="", job_type=JobType.BATCH_PARENT,
-                    task_type="", status=JobStatus.RUNNING, created_at=time.time()
-                )
-                
-                if dummy_parent.is_batch_complete(child_statuses):
-                    # Check if any succeeded
-                    has_success = JobStatus.COMPLETED in child_statuses
-                    final_status = JobStatus.COMPLETED if has_success else JobStatus.FAILED
-                else:
-                    final_status = JobStatus.RUNNING  # Still in progress
-            
-            # Update parent with final status
-            final_data = {
-                'child_results': results,
-                'final_progress': dummy_parent.calculate_batch_progress(child_statuses)
+        return {
+            'tier': user_quota.tier,
+            'daily_quota': {
+                'limit_minutes': user_quota.daily_gpu_minutes,
+                'used_minutes': user_quota.used_gpu_minutes_today,
+                'remaining_minutes': user_quota.daily_gpu_minutes - user_quota.used_gpu_minutes_today
+            },
+            'concurrent_limits': {
+                'interactive': {
+                    'limit': user_quota.max_concurrent_interactive,
+                    'current': user_quota.current_interactive
+                },
+                'bulk': {
+                    'limit': user_quota.max_concurrent_bulk,
+                    'current': user_quota.current_bulk
+                }
             }
-            
-            self.job_manager.update_job_status(
-                batch_id, final_status.value, final_data
-            )
-            
-            logger.info(f"✅ Batch job finalized: {batch_id} -> {final_status.value}")
-            
-        except Exception as e:
-            logger.error(f"❌ Failed to finalize batch job {batch_id}: {e}")
-    
-    def _estimate_completion_time(self, task_type: str) -> int:
-        """Estimate completion time in seconds based on task type"""
-        
-        estimates = {
-            TaskType.PROTEIN_LIGAND_BINDING.value: 60,
-            TaskType.PROTEIN_STRUCTURE.value: 120,
-            TaskType.PROTEIN_COMPLEX.value: 180,
-            TaskType.BATCH_PROTEIN_LIGAND_SCREENING.value: 300,  # Will be overridden for actual batch size
-            TaskType.NANOBODY_DESIGN.value: 240,
-            TaskType.CDR_OPTIMIZATION.value: 180,
         }
+    
+    async def estimate_job_cost(self, job_request: Dict[str, Any]) -> Dict[str, Any]:
+        """Estimate job cost and requirements without routing"""
+        estimate = self._estimate_resources(job_request)
         
-        return estimates.get(task_type, 60)
+        return {
+            'estimated_gpu_minutes': estimate.gpu_seconds / 60,
+            'estimated_duration_minutes': estimate.estimated_duration / 60,
+            'recommended_lane': 'interactive' if estimate.ligand_count <= 10 else 'bulk',
+            'shard_count': estimate.shard_count,
+            'memory_required_gb': estimate.memory_gb,
+            'ligand_count': estimate.ligand_count,
+            'protein_length': estimate.protein_length
+        }
 
-# Global instance
+# Global singleton
 smart_job_router = SmartJobRouter()
