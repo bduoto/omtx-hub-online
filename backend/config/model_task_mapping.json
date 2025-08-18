@@ -1,0 +1,46 @@
+{
+  "model_mappings": {
+    "task_to_model": {
+      "protein_ligand_binding": "Boltz-2",
+      "protein_structure": "Boltz-2",
+      "protein_complex": "Boltz-2",
+      "batch_protein_ligand_screening": "Boltz-2",
+      "binding_site_prediction": "Boltz-2",
+      "variant_comparison": "Boltz-2",
+      "drug_discovery": "Boltz-2",
+      "nanobody_design": "RFAntibody",
+      "cdr_optimization": "RFAntibody",
+      "epitope_targeted_design": "RFAntibody",
+      "antibody_de_novo_design": "RFAntibody",
+      "protein_protein_complex": "Chai-1",
+      "multimer_prediction": "Chai-1",
+      "alphafold3_prediction": "AlphaFold3",
+      "esm_folding": "ESMFold",
+      "rosettafold_all_atom": "RoseTTAFold-AA"
+    },
+    "task_to_folder": {
+      "protein_ligand_binding": "Protein-Ligand",
+      "protein_structure": "Protein-Structure",
+      "protein_complex": "Protein-Complex",
+      "batch_protein_ligand_screening": "Batch-Screen",
+      "binding_site_prediction": "Binding-Site",
+      "variant_comparison": "Variant-Comparison",
+      "drug_discovery": "Drug-Discovery",
+      "nanobody_design": "Nanobody-Design",
+      "cdr_optimization": "CDR-Optimization",
+      "epitope_targeted_design": "Epitope-Targeted",
+      "antibody_de_novo_design": "Antibody-DeNovo",
+      "protein_protein_complex": "Protein-Complex",
+      "multimer_prediction": "Multimer",
+      "alphafold3_prediction": "AlphaFold3-Prediction",
+      "esm_folding": "ESM-Folding",
+      "rosettafold_all_atom": "RoseTTAFold-AllAtom"
+    }
+  },
+  "inference_rules": {
+    "antibody_keywords": ["antibody", "nanobody", "fab", "scfv", "vhh"],
+    "complex_keywords": ["complex", "multimer", "dimer", "trimer", "oligomer"],
+    "folding_keywords": ["fold", "structure", "conformation"],
+    "design_keywords": ["design", "engineer", "optimize", "scaffold"]
+  }
+}
