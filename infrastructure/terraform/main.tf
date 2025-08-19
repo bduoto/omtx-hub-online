@@ -33,9 +33,17 @@ provider "google-beta" {
   region  = var.region
 }
 
-# Local values for consistency
+# Local values
 locals {
-  project_id = var.project_id
+  project_id  = var.project_id
+  region      = var.region
+  environment = var.environment
+  
+  labels = {
+    environment = var.environment
+    project     = "omtx-hub"
+    managed_by  = "terraform"
+  }
   region     = var.region
   zones      = var.zones
   

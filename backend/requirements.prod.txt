@@ -1,0 +1,27 @@
+# Production requirements - minimal for container deployment
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+pydantic>=2.10.0
+python-multipart==0.0.6
+requests>=2.31.0
+python-dotenv>=1.0.0
+pyyaml>=6.0
+
+# Database & Storage
+google-cloud-storage>=2.10.0
+google-cloud-firestore>=2.11.0
+google-auth>=2.17.0
+
+# Redis for caching
+redis>=5.0.1
+
+# Monitoring
+google-cloud-monitoring>=2.15.0
+
+# Modal for ML inference (production optimized)
+modal==1.0.5
+
+# Essential utilities
+numpy>=1.24.3
+scipy>=1.11.4
+biopython>=1.81

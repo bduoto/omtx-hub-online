@@ -1,0 +1,177 @@
+# Boltz-2 GPU Container for Cloud Run
+# Distinguished Engineer Implementation - L4 GPU optimized for production
+
+FROM nvidia/cuda:12.2.0-devel-ubuntu22.04
+
+# Prevent interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3.10-dev \
+    python3-pip \
+    python3.10-venv \
+    git \
+    wget \
+    curl \
+    build-essential \
+    cmake \
+    libssl-dev \
+    libffi-dev \
+    libbz2-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    libncurses5-dev \
+    libncursesw5-dev \
+    xz-utils \
+    tk-dev \
+    libxml2-dev \
+    libxmlsec1-dev \
+    liblzma-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set Python 3.10 as default
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1
+
+# Upgrade pip
+RUN python3 -m pip install --upgrade pip setuptools wheel
+
+# Install PyTorch with CUDA 12.1 support (optimized for L4)
+RUN pip install --no-cache-dir \
+    torch==2.1.0+cu121 \
+    torchvision==0.16.0+cu121 \
+    torchaudio==2.1.0+cu121 \
+    --index-url https://download.pytorch.org/whl/cu121
+
+# Install Flash Attention 2 for L4 optimization
+RUN pip install --no-cache-dir flash-attn==2.3.3 --no-build-isolation
+
+# Install scientific computing libraries
+RUN pip install --no-cache-dir \
+    numpy==1.24.3 \
+    scipy==1.11.3 \
+    pandas==2.0.3 \
+    scikit-learn==1.3.0
+
+# Install molecular modeling libraries
+RUN pip install --no-cache-dir \
+    rdkit==2023.9.1 \
+    biopython==1.81 \
+    mdanalysis==2.6.1 \
+    openmm==8.0.0 \
+    pdbfixer==1.9
+
+# Install Boltz-2 and dependencies
+RUN pip install --no-cache-dir \
+    boltz==0.3.0 \
+    hydra-core==1.3.2 \
+    pytorch_lightning==2.0.9 \
+    wandb==0.15.12 \
+    omegaconf==2.3.0
+
+# Install Google Cloud libraries
+RUN pip install --no-cache-dir \
+    google-cloud-storage==2.10.0 \
+    google-cloud-firestore==2.13.1 \
+    google-cloud-run==0.10.3 \
+    google-cloud-monitoring==2.16.0 \
+    google-cloud-logging==3.8.0
+
+# Install additional dependencies
+RUN pip install --no-cache-dir \
+    pyyaml==6.0.1 \
+    requests==2.31.0 \
+    aiohttp==3.8.6 \
+    uvloop==0.17.0 \
+    psutil==5.9.6
+
+# Create app directory
+WORKDIR /app
+
+# Copy Cloud Run execution script
+COPY models/boltz2_cloud_run.py /app/boltz2_cloud_run.py
+COPY services/cloud_run_service.py /app/cloud_run_service.py
+COPY services/cloud_run_batch_processor.py /app/cloud_run_batch_processor.py
+
+# Create necessary directories
+RUN mkdir -p /app/data /app/models /app/cache /tmp/boltz2
+
+# Pre-download Boltz-2 model weights (saves startup time)
+RUN python3 -c "
+try:
+    from boltz.model import Boltz
+    print('Downloading Boltz-2 model weights...')
+    model = Boltz.from_pretrained('boltz-1')
+    print('Model weights downloaded successfully')
+    
+    # Create flag file to indicate model is ready
+    with open('/tmp/model_loaded.flag', 'w') as f:
+        f.write('Model loaded at startup')
+        
+except Exception as e:
+    print(f'Warning: Could not pre-download model: {e}')
+    print('Model will be downloaded on first use')
+"
+
+# Set environment variables for L4 GPU optimization
+ENV CUDA_VISIBLE_DEVICES=0
+ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:1024,roundup_power2_divisions:16
+ENV TORCH_CUDNN_V8_API_ENABLED=1
+ENV CUDA_LAUNCH_BLOCKING=0
+
+# L4-specific optimizations
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
+ENV NVIDIA_REQUIRE_CUDA="cuda>=12.0"
+
+# Enable TF32 for L4 Ada Lovelace architecture
+ENV TORCH_ALLOW_TF32_CUBLAS_OVERRIDE=1
+
+# Memory management for 24GB VRAM
+ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:1024
+
+# Cloud Run specific settings
+ENV PORT=8080
+ENV WORKERS=1
+
+# Set working directory permissions
+RUN chmod -R 755 /app
+RUN chmod +x /app/boltz2_cloud_run.py
+
+# Health check for Cloud Run
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
+    CMD python3 -c "
+import torch
+import sys
+try:
+    # Check CUDA availability
+    if not torch.cuda.is_available():
+        print('CUDA not available')
+        sys.exit(1)
+    
+    # Check GPU memory
+    gpu_memory = torch.cuda.get_device_properties(0).total_memory
+    if gpu_memory < 20 * 1024**3:  # Less than 20GB
+        print(f'Insufficient GPU memory: {gpu_memory / 1024**3:.1f}GB')
+        sys.exit(1)
+    
+    # Test GPU computation
+    test_tensor = torch.randn(100, 100, device='cuda')
+    result = torch.matmul(test_tensor, test_tensor)
+    
+    print('Health check passed')
+    sys.exit(0)
+    
+except Exception as e:
+    print(f'Health check failed: {e}')
+    sys.exit(1)
+"
+
+# Expose port for Cloud Run
+EXPOSE 8080
+
+# Default command - runs the Boltz-2 Cloud Run script
+CMD ["python3", "/app/boltz2_cloud_run.py"]

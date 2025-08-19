@@ -34,6 +34,7 @@ import { BatchResultsDataTable } from './BatchResultsDataTable';
 import { BatchStructureViewer } from './BatchStructureViewer';
 import { BatchIndividualResults } from './BatchIndividualResults';
 import { BatchDashboard } from './BatchDashboard';
+import { getAffinityColor, formatAffinityValue } from '@/utils/boltz2Metrics';
 
 interface IndividualResult {
   job_id: string;
@@ -321,6 +322,7 @@ export const BatchProteinLigandOutput: React.FC<BatchProteinLigandOutputProps> =
   }) : [];
 
   // Get top performers - handle empty results and check for any completed status
+  // Note: For Boltz-2, more negative affinity = better binding
   const topPerformers = individual_results.length > 0 ? individual_results
     .filter(r => {
       // Accept completed, completed_reconstructed, or any status that isn't failed/pending
@@ -331,7 +333,7 @@ export const BatchProteinLigandOutput: React.FC<BatchProteinLigandOutputProps> =
                          (r.affinity !== undefined && r.affinity !== null);
       return isCompleted && hasAffinity;
     })
-    .sort((a, b) => (b.result?.affinity || b.affinity || 0) - (a.result?.affinity || a.affinity || 0))
+    .sort((a, b) => (a.result?.affinity || a.affinity || 0) - (b.result?.affinity || b.affinity || 0)) // Sort ascending (more negative first)
     .slice(0, 5) : [];
 
   const currentJob = sortedResults.length > 0 ? sortedResults[currentJobIndex] : null;
@@ -748,35 +750,43 @@ export const BatchProteinLigandOutput: React.FC<BatchProteinLigandOutputProps> =
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <BarChart3 className="h-5 w-5" />
-                Top 5 Binding Compounds
+                Top 5 Strongest Binders (Most Negative Affinity)
               </CardTitle>
             </CardHeader>
             <CardContent>
               {topPerformers.length > 0 ? (
                 <div className="space-y-3">
-                  {topPerformers.map((job, index) => (
-                    <div key={job.job_id} className="bg-gray-900/50 rounded-lg p-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="text-2xl font-bold text-yellow-400">
-                            #{index + 1}
+                  {topPerformers.map((job, index) => {
+                    const affinityValue = job.result?.affinity || job.affinity || 0;
+                    return (
+                      <div key={job.job_id} className="bg-gray-900/50 rounded-lg p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="text-2xl font-bold text-yellow-400">
+                              #{index + 1}
+                            </div>
+                            <div>
+                              <h4 className="text-white font-semibold">{job.ligand_name || job.input_data?.ligand_name || job.name || 'Unknown'}</h4>
+                              <p className="text-xs text-gray-400 font-mono">{job.ligand_smiles || job.input_data?.ligand_smiles || ''}</p>
+                            </div>
                           </div>
-                          <div>
-                            <h4 className="text-white font-semibold">{job.ligand_name || job.input_data?.ligand_name || job.name || 'Unknown'}</h4>
-                            <p className="text-xs text-gray-400 font-mono">{job.ligand_smiles || job.input_data?.ligand_smiles || ''}</p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-lg font-bold text-green-400">
-                            {(job.result?.affinity || job.affinity || 0).toFixed(3)}
-                          </div>
-                          <div className="text-xs text-gray-400">
-                            {(job.result?.confidence || job.confidence) ? `${((job.result?.confidence || job.confidence) * 100).toFixed(1)}% conf` : ''}
+                          <div className="text-right">
+                            <div className={`text-lg font-bold ${getAffinityColor(affinityValue)}`}>
+                              {affinityValue.toFixed(3)}
+                            </div>
+                            <div className="text-xs text-gray-500">
+                              {affinityValue <= -1 ? '< 0.1 µM' : 
+                               affinityValue <= 0 ? '0.1-1 µM' :
+                               affinityValue <= 1 ? '1-10 µM' : '> 10 µM'}
+                            </div>
+                            <div className="text-xs text-gray-400">
+                              {(job.result?.confidence || job.confidence) ? `${((job.result?.confidence || job.confidence) * 100).toFixed(1)}% conf` : ''}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <Alert className="border-yellow-700 bg-yellow-900/20">

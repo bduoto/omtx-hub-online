@@ -42,6 +42,15 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
+import { 
+  getAffinityColor, 
+  getProbabilityColor,
+  getConfidenceColor,
+  getPLDDTColor,
+  getIPDEColor,
+  getMetricColor,
+  getMetricDescription
+} from '@/utils/boltz2Metrics';
 
 interface IndividualJob {
   id: string;
@@ -208,6 +217,7 @@ export const BatchResultsDataTable: React.FC<BatchResultsDataTableProps> = ({
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
             className="h-8 px-2 whitespace-nowrap"
+            title="Log scale with 1 µM reference. More negative = stronger binding"
           >
             Affinity
             <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -225,7 +235,7 @@ export const BatchResultsDataTable: React.FC<BatchResultsDataTableProps> = ({
           <div className="text-center">
             <span className={cn(
               'font-mono text-sm',
-              affinity > 0 ? 'text-green-400' : 'text-yellow-400'
+              getAffinityColor(affinity)
             )}>
               {Number(affinity).toFixed(4)}
             </span>
@@ -298,7 +308,10 @@ export const BatchResultsDataTable: React.FC<BatchResultsDataTableProps> = ({
         
         return (
           <div className="text-center">
-            <span className="font-mono text-sm text-blue-400">
+            <span className={cn(
+              'font-mono text-sm',
+              getAffinityColor(ensemble_affinity)
+            )}>
               {Number(ensemble_affinity).toFixed(4)}
             </span>
           </div>
@@ -328,7 +341,10 @@ export const BatchResultsDataTable: React.FC<BatchResultsDataTableProps> = ({
         
         return (
           <div className="text-center">
-            <span className="font-mono text-sm text-blue-400">
+            <span className={cn(
+              'font-mono text-sm',
+              getProbabilityColor(ensemble_prob)
+            )}>
               {Number(ensemble_prob).toFixed(4)}
             </span>
           </div>
@@ -365,7 +381,10 @@ export const BatchResultsDataTable: React.FC<BatchResultsDataTableProps> = ({
         
         return (
           <div className="text-center">
-            <span className="font-mono text-sm text-purple-400">
+            <span className={cn(
+              'font-mono text-sm',
+              getAffinityColor(ensemble_affinity2)
+            )}>
               {Number(ensemble_affinity2).toFixed(4)}
             </span>
           </div>
@@ -395,7 +414,10 @@ export const BatchResultsDataTable: React.FC<BatchResultsDataTableProps> = ({
         
         return (
           <div className="text-center">
-            <span className="font-mono text-sm text-purple-400">
+            <span className={cn(
+              'font-mono text-sm',
+              getProbabilityColor(ensemble_prob2)
+            )}>
               {Number(ensemble_prob2).toFixed(4)}
             </span>
           </div>
@@ -739,6 +761,24 @@ export const BatchResultsDataTable: React.FC<BatchResultsDataTableProps> = ({
 
   return (
     <div className="space-y-4">
+      {/* Metric Legend */}
+      <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-3">
+        <div className="text-xs text-gray-400 space-y-1">
+          <div className="flex items-center gap-4 flex-wrap">
+            <div className="flex items-center gap-2">
+              <span className="font-semibold">Affinity Color Legend:</span>
+              <span className="text-green-400">≤ -1 (Strong, {'<'}0.1 µM)</span>
+              <span className="text-yellow-400">-1 to 0 (Moderate, 0.1-1 µM)</span>
+              <span className="text-orange-400">0 to 1 (Weak, 1-10 µM)</span>
+              <span className="text-red-400">{'>'}1 (Poor, {'>'}10 µM)</span>
+            </div>
+          </div>
+          <div className="text-xs text-gray-500 mt-1">
+            <strong>Note:</strong> Affinity uses log scale with 1 µM reference. More negative = stronger binding (per Boltz-2 paper)
+          </div>
+        </div>
+      </div>
+
       {/* Header with search */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">

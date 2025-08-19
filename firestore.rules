@@ -1,0 +1,229 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // === USER ISOLATION RULES ===
+    // Users can only access their own data - complete tenant isolation
+    
+    match /users/{userId} {
+      // Users can read/write their own profile
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // User's jobs collection - complete isolation
+      match /jobs/{jobId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+        
+        // Job results and logs
+        match /results/{resultId} {
+          allow read, write: if request.auth != null && request.auth.uid == userId;
+        }
+        
+        match /logs/{logId} {
+          allow read, write: if request.auth != null && request.auth.uid == userId;
+        }
+      }
+      
+      // User's batches collection - complete isolation
+      match /batches/{batchId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+        
+        // Batch results
+        match /results/{resultId} {
+          allow read, write: if request.auth != null && request.auth.uid == userId;
+        }
+      }
+      
+      // User's usage tracking - read-only for users
+      match /usage/{month} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if false; // Only backend service can write usage data
+      }
+      
+      // User's storage usage - read-only for users
+      match /storage_usage/{document} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if false; // Only backend service can write
+      }
+      
+      // User's events stream - read-only for users
+      match /events/{eventId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if false; // Only backend service can write events
+      }
+      
+      // User's webhook logs - read-only for users
+      match /webhook_logs/{logId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if false; // Only backend service can write logs
+      }
+      
+      // User's API keys - read-only for users (no secrets exposed)
+      match /api_keys/{keyId} {
+        allow read: if request.auth != null && 
+                   request.auth.uid == userId &&
+                   !('key_hash' in resource.data); // Never expose key hash
+        allow write: if false; // Only backend service can manage API keys
+      }
+    }
+    
+    // === ADMIN COLLECTIONS ===
+    // Admin-only access for monitoring and analytics
+    
+    match /admin_jobs/{jobId} {
+      // Only admin users can read job summaries (no user data)
+      allow read: if request.auth != null && 
+                 request.auth.token.admin == true;
+      allow write: if false; // Only backend service can write
+    }
+    
+    match /admin_stats/{statId} {
+      // Only admin users can read system statistics
+      allow read: if request.auth != null && 
+                 request.auth.token.admin == true;
+      allow write: if false; // Only backend service can write
+    }
+    
+    match /admin_alerts/{alertId} {
+      // Only admin users can read system alerts
+      allow read: if request.auth != null && 
+                 request.auth.token.admin == true;
+      allow write: if false; // Only backend service can write
+    }
+    
+    // === SYSTEM COLLECTIONS ===
+    // Backend service only access
+    
+    match /api_keys/{keyId} {
+      // Global API keys collection - backend service only
+      allow read, write: if false; // Only backend service via admin SDK
+    }
+    
+    match /sessions/{sessionId} {
+      // User sessions - backend service only
+      allow read, write: if false; // Only backend service via admin SDK
+    }
+    
+    match /system_config/{configId} {
+      // System configuration - backend service only
+      allow read, write: if false; // Only backend service via admin SDK
+    }
+    
+    // === HELPER FUNCTIONS ===
+    
+    // Check if user owns the resource
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Check if user is admin
+    function isAdmin() {
+      return request.auth != null && 
+             request.auth.token.admin == true;
+    }
+    
+    // Check if user has specific role
+    function hasRole(role) {
+      return request.auth != null && 
+             request.auth.token.roles != null &&
+             role in request.auth.token.roles;
+    }
+    
+    // Check if resource belongs to user
+    function belongsToUser(userId) {
+      return resource.data.user_id == userId;
+    }
+    
+    // Check if user tier allows access
+    function hasTierAccess(requiredTier) {
+      return request.auth != null &&
+             request.auth.token.tier != null &&
+             getTierLevel(request.auth.token.tier) >= getTierLevel(requiredTier);
+    }
+    
+    // Get numeric tier level for comparison
+    function getTierLevel(tier) {
+      return tier == 'enterprise' ? 4 :
+             tier == 'pro' ? 3 :
+             tier == 'basic' ? 2 :
+             1; // free
+    }
+    
+    // === ADVANCED RULES ===
+    
+    // Rate limiting collection (for distributed rate limiting)
+    match /rate_limits/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+    
+    // User preferences and settings
+    match /user_preferences/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+    
+    // Shared resources (if any) - with proper access control
+    match /shared_resources/{resourceId} {
+      allow read: if request.auth != null &&
+                 (resource.data.public == true ||
+                  request.auth.uid in resource.data.allowed_users);
+      allow write: if request.auth != null &&
+                  request.auth.uid == resource.data.owner;
+    }
+    
+    // === AUDIT LOGGING ===
+    
+    match /audit_logs/{logId} {
+      // Audit logs are write-only for users, read-only for admins
+      allow read: if isAdmin();
+      allow write: if request.auth != null; // Users can create audit entries
+    }
+    
+    // === BILLING AND USAGE ===
+    
+    match /billing_events/{eventId} {
+      // Billing events - backend service only
+      allow read, write: if false; // Only backend service via admin SDK
+    }
+    
+    match /usage_aggregates/{aggregateId} {
+      // Usage aggregates - read-only for users if it's their data
+      allow read: if request.auth != null &&
+                 resource.data.user_id == request.auth.uid;
+      allow write: if false; // Only backend service can write
+    }
+    
+    // === INTEGRATION LOGS ===
+    
+    match /integration_logs/{logId} {
+      // Integration logs - users can read their own
+      allow read: if request.auth != null &&
+                 resource.data.user_id == request.auth.uid;
+      allow write: if false; // Only backend service can write
+    }
+    
+    // === FEATURE FLAGS ===
+    
+    match /feature_flags/{flagId} {
+      // Feature flags - read-only for authenticated users
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+    
+    // === NOTIFICATIONS ===
+    
+    match /notifications/{userId} {
+      // User notifications
+      allow read, write: if isOwner(userId);
+      
+      match /messages/{messageId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+    
+    // === FALLBACK RULE ===
+    // Deny all other access by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

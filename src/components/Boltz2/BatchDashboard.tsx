@@ -3,6 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { 
+  getAffinityColor, 
+  formatAffinityValue, 
+  getMetricDescription,
+  isGoodValue,
+  getMetricColor
+} from '@/utils/boltz2Metrics';
 import {
   Select,
   SelectContent,
@@ -240,22 +247,23 @@ const getTriageStatus = (job: any, percentiles: any) => {
   const ensembleSD = calculateEnsembleSD(job);
   const complexIplddt = raw_modal.confidence_metrics?.complex_iplddt || 0;
   
-  // High Priority (green): High affinity AND high iPTM AND low uncertainty AND good structure
-  if (affinity >= percentiles.affinity.p75 && 
+  // High Priority (green): Strong negative affinity AND high iPTM AND low uncertainty AND good structure
+  // Note: For affinity, more negative is better (p10 is best for negative-better metrics)
+  if (affinity <= percentiles.affinity.p25 && // More negative = better, so use p25 as threshold
       iptm >= Math.max(0.60, percentiles.iptm.p50) && 
       ensembleSD <= percentiles.ensembleSD.p25 &&
       (complexIplddt >= 0.60 || complexIplddt === 0)) { // Allow 0 as fallback
     return 'green';
   }
   
-  // Inspect Pose (yellow): High affinity but fails either iPTM or ensemble agreement
-  if (affinity >= percentiles.affinity.p75 && 
+  // Inspect Pose (yellow): Strong negative affinity but fails either iPTM or ensemble agreement
+  if (affinity <= percentiles.affinity.p25 && 
       (iptm < Math.max(0.60, percentiles.iptm.p50) || ensembleSD > percentiles.ensembleSD.p25)) {
     return 'yellow';
   }
   
-  // Low Priority (red): Low affinity OR low iPTM OR very low structure quality
-  if (affinity < percentiles.affinity.p75 || 
+  // Low Priority (red): Weak affinity (positive values) OR low iPTM OR very low structure quality
+  if (affinity > percentiles.affinity.p50 || // Positive or weak negative affinity
       iptm < percentiles.iptm.p50 || 
       complexIplddt < 0.50) {
     return 'red';
@@ -268,11 +276,12 @@ const getTriageStatus = (job: any, percentiles: any) => {
 // Calculate percentiles for a field
 const calculatePercentiles = (values: number[]) => {
   const sorted = [...values].sort((a, b) => a - b);
+  const p10 = sorted[Math.floor(sorted.length * 0.10)];
   const p25 = sorted[Math.floor(sorted.length * 0.25)];
   const p50 = sorted[Math.floor(sorted.length * 0.50)];
   const p75 = sorted[Math.floor(sorted.length * 0.75)];
   const p90 = sorted[Math.floor(sorted.length * 0.90)];
-  return { p25, p50, p75, p90 };
+  return { p10, p25, p50, p75, p90 };
 };
 
 export const BatchDashboard: React.FC<DashboardProps> = ({ data, batchId }) => {
@@ -387,7 +396,7 @@ export const BatchDashboard: React.FC<DashboardProps> = ({ data, batchId }) => {
         triage: statistics ? getTriageStatus(job, statistics) : 'yellow',
         raw: job
       }))
-      .sort((a, b) => b.affinity - a.affinity)
+      .sort((a, b) => a.affinity - b.affinity) // Sort ascending because more negative = better
       .slice(0, 50); // Top 50 for waterfall
   }, [completedJobs, statistics]);
 
@@ -841,15 +850,21 @@ export const BatchDashboard: React.FC<DashboardProps> = ({ data, batchId }) => {
                   tick={{ fill: '#9CA3AF', fontSize: 10 }}
                 />
                 <YAxis 
-                  label={{ value: 'Affinity Score', angle: -90, position: 'insideLeft', style: { fill: '#9CA3AF' } }}
+                  label={{ value: 'Affinity (log scale, 1 µM ref)', angle: -90, position: 'insideLeft', style: { fill: '#9CA3AF' } }}
                   tick={{ fill: '#9CA3AF' }}
+                  domain={['dataMin - 0.5', 'dataMax + 0.5']}
                 />
                 <Tooltip 
                   contentStyle={{ backgroundColor: '#1F2937', border: '1px solid #374151' }}
                   labelStyle={{ color: '#F3F4F6' }}
                   itemStyle={{ color: '#F3F4F6' }}
                   formatter={(value: number, name: string) => {
-                    if (name === 'affinity') return [`${value.toFixed(3)}`, 'Affinity Score'];
+                    if (name === 'affinity') {
+                      const label = value <= -1 ? 'Strong (<0.1 µM)' : 
+                                   value <= 0 ? 'Moderate (0.1-1 µM)' : 
+                                   value <= 1 ? 'Weak (1-10 µM)' : 'Poor (>10 µM)';
+                      return [`${value.toFixed(3)} (${label})`, 'Affinity'];
+                    }
                     return [value, name];
                   }}
                 />
@@ -889,7 +904,7 @@ export const BatchDashboard: React.FC<DashboardProps> = ({ data, batchId }) => {
                 </div>
               </div>
               <p className="text-xs text-gray-500 text-center">
-                Affinity is a unitless Boltz-2 score; higher is better; not IC₅₀
+                Affinity: log scale with 1 µM reference. More negative = stronger binding (not IC₅₀)
               </p>
             </div>
           </CardContent>
@@ -910,9 +925,10 @@ export const BatchDashboard: React.FC<DashboardProps> = ({ data, batchId }) => {
                 <XAxis 
                   type="number" 
                   dataKey="x" 
-                  name="Affinity Score"
-                  label={{ value: 'Affinity Score', position: 'insideBottom', offset: -5, style: { fill: '#9CA3AF' } }}
+                  name="Affinity"
+                  label={{ value: 'Affinity (log scale, more negative = better)', position: 'insideBottom', offset: -5, style: { fill: '#9CA3AF' } }}
                   tick={{ fill: '#9CA3AF' }}
+                  domain={['dataMin - 0.5', 'dataMax + 0.5']}
                 />
                 <YAxis 
                   type="number" 
@@ -949,10 +965,10 @@ export const BatchDashboard: React.FC<DashboardProps> = ({ data, batchId }) => {
                 {statistics && (
                   <>
                     <ReferenceLine 
-                      x={statistics.affinity.p75} 
-                      stroke="#4B5563" 
+                      x={statistics.affinity.p25} 
+                      stroke="#10b981" 
                       strokeDasharray="5 5" 
-                      label={{ value: "P75", position: "top", fill: "#6B7280", fontSize: 10 }}
+                      label={{ value: "Strong (P25)", position: "top", fill: "#10b981", fontSize: 10 }}
                     />
                     <ReferenceLine 
                       y={statistics.iptm.p75} 
@@ -979,10 +995,10 @@ export const BatchDashboard: React.FC<DashboardProps> = ({ data, batchId }) => {
             </ResponsiveContainer>
             <div className="mt-2 bg-gray-900/50 rounded p-2 space-y-1">
               <p className="text-xs text-gray-400">
-                <span className="text-green-400">Green zone</span>: High affinity & high interface confidence (P75+)
+                <span className="text-green-400">Green zone</span>: Strong negative affinity (P25) & high interface confidence
               </p>
               <p className="text-xs text-gray-500">
-                Top-right = progress; Bottom-right = inspect pose; Bottom-left = low priority
+                Top-left = progress (negative affinity, high iPTM); Bottom-left = inspect pose; Right = weak binding
               </p>
             </div>
           </CardContent>
@@ -1004,9 +1020,9 @@ export const BatchDashboard: React.FC<DashboardProps> = ({ data, batchId }) => {
               {/* Affinity ECDF */}
               <div>
                 <div className="flex justify-between items-center mb-2">
-                  <h4 className="text-sm font-medium text-blue-400">Affinity Score</h4>
+                  <h4 className="text-sm font-medium text-blue-400">Affinity (log scale)</h4>
                   <div className="text-xs text-gray-400">
-                    median {statistics?.affinity.p50.toFixed(3)} | P75 {statistics?.affinity.p75.toFixed(3)} | ≥P75: {((1 - 0.75) * 100).toFixed(0)}%
+                    median {statistics?.affinity.p50.toFixed(3)} | Strong≤{statistics?.affinity.p25.toFixed(3)} | {((0.25) * 100).toFixed(0)}% strong binders
                   </div>
                 </div>
                 <ResponsiveContainer width="100%" height={100}>
@@ -1058,16 +1074,16 @@ export const BatchDashboard: React.FC<DashboardProps> = ({ data, batchId }) => {
                           label={{ value: "P50", position: "top", fill: "#9CA3AF", fontSize: 9 }}
                         />
                         <ReferenceLine 
-                          x={statistics.affinity.p75} 
-                          stroke="#f59e0b" 
-                          strokeDasharray="3 3"
-                          label={{ value: "P75", position: "top", fill: "#f59e0b", fontSize: 9 }}
-                        />
-                        <ReferenceLine 
-                          x={statistics.affinity.p90} 
+                          x={statistics.affinity.p25} 
                           stroke="#10b981" 
                           strokeDasharray="3 3"
-                          label={{ value: "P90", position: "top", fill: "#10b981", fontSize: 9 }}
+                          label={{ value: "Strong (P25)", position: "top", fill: "#10b981", fontSize: 9 }}
+                        />
+                        <ReferenceLine 
+                          x={statistics.affinity.p10} 
+                          stroke="#22c55e" 
+                          strokeDasharray="3 3"
+                          label={{ value: "Very Strong (P10)", position: "top", fill: "#22c55e", fontSize: 9 }}
                         />
                       </>
                     )}
@@ -1220,9 +1236,10 @@ export const BatchDashboard: React.FC<DashboardProps> = ({ data, batchId }) => {
                 <XAxis 
                   type="number" 
                   dataKey="x" 
-                  name="Affinity Score"
-                  label={{ value: 'Affinity Score', position: 'insideBottom', offset: -5, style: { fill: '#9CA3AF' } }}
+                  name="Affinity"
+                  label={{ value: 'Affinity (log scale, more negative = better)', position: 'insideBottom', offset: -5, style: { fill: '#9CA3AF' } }}
                   tick={{ fill: '#9CA3AF' }}
+                  domain={['dataMin - 0.5', 'dataMax + 0.5']}
                 />
                 <YAxis 
                   type="number" 
@@ -1492,8 +1509,8 @@ Model: Boltz-2 | Hardware: A100-40GB`;
               <h4 className="text-sm font-medium text-gray-400 mb-2">Top 10% Thresholds</h4>
               <div className="space-y-1 text-xs">
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Affinity ≥</span>
-                  <span className="text-white font-mono">{statistics?.affinity.p90.toFixed(3)}</span>
+                  <span className="text-gray-500">Affinity ≤</span>
+                  <span className="text-white font-mono">{statistics?.affinity.p10.toFixed(3)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-500">iPTM ≥</span>

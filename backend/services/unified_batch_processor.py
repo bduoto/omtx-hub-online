@@ -31,7 +31,7 @@ from models.enhanced_job_model import (
 )
 from database.unified_job_manager import unified_job_manager
 from services.gcp_storage_service import gcp_storage_service
-from services.modal_job_status_service import modal_job_status_service  # NEW: On-demand Modal status checking
+from services.cloud_run_batch_processor import cloud_run_batch_processor  # REPLACED: Cloud Run batch processing
 from tasks.task_handlers import task_handler_registry
 
 logger = logging.getLogger(__name__)
@@ -557,17 +557,15 @@ class UnifiedBatchProcessor:
             'monitoring_enabled': True
         }
         
-        # Use Modal spawn_map for optimal batch execution
-        use_modal_spawn_map = True  # Feature flag for new Modal optimization
-        
-        if use_modal_spawn_map and len(child_jobs) > 1:
-            # Use Modal's spawn_map for efficient parallel execution
-            logger.info(f"🚀 Using Modal spawn_map for {len(child_jobs)} jobs")
-            
+        # Use Cloud Run batch processing for optimal execution
+        use_cloud_run_batch = True  # Feature flag for Cloud Run batch processing
+
+        if use_cloud_run_batch and len(child_jobs) > 1:
+            # Use Cloud Run batch processing for efficient parallel execution
+            logger.info(f"🚀 Using Cloud Run batch processing for {len(child_jobs)} jobs")
+
             try:
-                from services.modal_batch_executor import modal_batch_executor
-                
-                # Prepare batch for Modal spawn_map
+                # Prepare batch for Cloud Run
                 ligands = []
                 for job in child_jobs:
                     ligands.append({
@@ -575,29 +573,34 @@ class UnifiedBatchProcessor:
                         'smiles': job.input_data.get('ligand_smiles'),
                         'job_id': job.id
                     })
-                
-                # Submit entire batch to Modal at once
-                modal_result = await modal_batch_executor.submit_batch_to_modal(
+
+                # Submit entire batch to Cloud Run at once
+                cloud_run_result = await cloud_run_batch_processor.submit_batch(
+                    user_id=batch_parent.user_id,
                     batch_id=batch_parent.id,
                     protein_sequence=child_jobs[0].input_data.get('protein_sequence'),
-                    ligands=ligands
+                    ligands=ligands,
+                    job_name=batch_parent.job_name,
+                    use_msa=child_jobs[0].input_data.get('use_msa', True),
+                    use_potentials=child_jobs[0].input_data.get('use_potentials', False)
                 )
-                
-                if modal_result['success']:
+
+                if cloud_run_result.get('status') == 'running':
                     execution_results['started_jobs'] = len(child_jobs)
                     execution_results['queued_jobs'] = 0
-                    execution_results['modal_spawn_map'] = True
-                    logger.info(f"✅ Modal spawn_map submitted all {len(child_jobs)} jobs")
+                    execution_results['cloud_run_batch'] = True
+                    execution_results['task_count'] = cloud_run_result.get('task_count', 1)
+                    logger.info(f"✅ Cloud Run batch submitted all {len(child_jobs)} jobs")
                 else:
                     # Fallback to regular execution
-                    logger.warning("Modal spawn_map failed, falling back to regular execution")
-                    use_modal_spawn_map = False
-                    
+                    logger.warning("Cloud Run batch failed, falling back to regular execution")
+                    use_cloud_run_batch = False
+
             except Exception as e:
-                logger.warning(f"Modal spawn_map not available: {e}, using regular execution")
-                use_modal_spawn_map = False
+                logger.warning(f"Cloud Run batch not available: {e}, using regular execution")
+                use_cloud_run_batch = False
         
-        if not use_modal_spawn_map:
+        if not use_cloud_run_batch:
             # Original execution logic as fallback
             if execution_plan.scheduling_timeline[0].get('strategy') == 'sequential':
                 # Sequential: Start first job only

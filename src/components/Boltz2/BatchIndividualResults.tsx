@@ -22,6 +22,13 @@ import {
   CheckCircle,
   Clock
 } from 'lucide-react';
+import { 
+  getAffinityColor as getAffinityColorUtil, 
+  getProbabilityColor,
+  getConfidenceColor,
+  getPLDDTColor,
+  getMetricDescription 
+} from '@/utils/boltz2Metrics';
 
 // MetricTile component copied from OutputSection.tsx
 const MetricTile: React.FC<{
@@ -47,19 +54,9 @@ const MetricTile: React.FC<{
   </div>
 );
 
-// Helper function for score color coding
-const getScoreColor = (score: number): string => {
-  if (score >= 0.8) return 'text-green-400';
-  if (score >= 0.6) return 'text-yellow-400';
-  return 'text-red-400';
-};
-
-// Helper function for affinity color coding
-const getAffinityColor = (affinity: number): string => {
-  if (affinity < -7) return 'text-green-400';
-  if (affinity < -5) return 'text-yellow-400';
-  return 'text-red-400';
-};
+// Use the correct color functions from utils
+const getScoreColor = getConfidenceColor;
+const getAffinityColor = getAffinityColorUtil;
 
 interface BatchIndividualResultsProps {
   jobs: any[];
@@ -302,7 +299,7 @@ export const BatchIndividualResults: React.FC<BatchIndividualResultsProps> = ({
                 <MetricTile
                   title="Affinity"
                   value={metrics.affinity.toFixed(4)}
-                  subtitle="Primary binding score (kcal/mol)"
+                  subtitle={`Log scale, 1 µM ref. ${metrics.affinity <= -1 ? '(<0.1 µM)' : metrics.affinity <= 0 ? '(0.1-1 µM)' : metrics.affinity <= 1 ? '(1-10 µM)' : '(>10 µM)'}`}
                   color={getAffinityColor(metrics.affinity)}
                   icon={<TrendingUp className="h-4 w-4" />}
                 />
@@ -369,7 +366,7 @@ export const BatchIndividualResults: React.FC<BatchIndividualResultsProps> = ({
                         title="Affinity 2"
                         value={metrics.ensemble_affinity2.toFixed(4)}
                         subtitle="Secondary ensemble prediction"
-                        color="text-purple-400"
+                        color={getAffinityColor(metrics.ensemble_affinity2)}
                         icon={<BarChart3 className="h-4 w-4" />}
                       />
                     )}

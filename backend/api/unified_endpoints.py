@@ -8,9 +8,15 @@ import logging
 import time
 import uuid
 from typing import Dict, Any, Optional, List
-from fastapi import APIRouter, HTTPException, BackgroundTasks, Query  # type: ignore
+from fastapi import APIRouter, HTTPException, BackgroundTasks, Query, Depends, Request  # type: ignore
 from pydantic import BaseModel, Field, validator  # type: ignore
 
+# User-aware services
+from middleware.auth_middleware import get_current_user
+from database.user_aware_job_manager import user_aware_job_manager
+from services.user_aware_storage_service import user_aware_storage_service
+
+# Legacy services (for gradual migration)
 from database.unified_job_manager import unified_job_manager
 from tasks.task_handlers import task_handler_registry, TaskType
 from schemas.task_schemas import task_schema_registry
@@ -105,38 +111,50 @@ class JobListResponse(BaseModel):
     per_page: int
 
 @router.post("/predict", response_model=PredictionResponse)
-async def submit_prediction(request: PredictionRequest, background_tasks: BackgroundTasks):
-    """Submit prediction job with schema validation and unified job management"""
-    
+async def submit_prediction(
+    request: PredictionRequest,
+    background_tasks: BackgroundTasks,
+    user: Dict[str, str] = Depends(get_current_user)
+):
+    """Submit prediction job with user authentication, L4 optimization and Cloud Run execution"""
+
     # Log the request data for debugging
     logger.info(f"🔍 Request input_data: {request.input_data}")
     logger.info(f"🔍 Task type: {request.task_type}")
-    
+
     # Validate input data against task schema (include job_name from request level)
     validation_data = request.input_data.copy()
     validation_data['job_name'] = request.job_name
-    
+
     validation_result = task_schema_registry.validate_input(
-        request.task_type.value, 
+        request.task_type.value,
         validation_data
     )
-    
+
     logger.info(f"🔍 Validation result: {validation_result}")
-    
+
     if not validation_result["valid"]:
         logger.error(f"❌ Validation failed: {validation_result['errors']}")
         raise HTTPException(
-            status_code=400, 
+            status_code=400,
             detail=f"Input validation failed: {', '.join(validation_result['errors'])}"
         )
-    
+
     # Generate job ID - use proper UUID format
     job_id = str(uuid.uuid4())
-    
+
+    # Extract user information
+    user_id = user['user_id']
+    user_tier = user.get('tier', 'free')
+
     logger.info(f"🚀 Submitting prediction job: {job_id}")
+    logger.info(f"   User: {user_id} (tier: {user_tier})")
     logger.info(f"   Model: {request.model_id}")
     logger.info(f"   Task type: {request.task_type}")
     logger.info(f"   Job name: {request.job_name}")
+
+    # Import Cloud Run service
+    from services.cloud_run_service import cloud_run_service
     
     # Prepare job data
     job_data = {
@@ -158,43 +176,77 @@ async def submit_prediction(request: PredictionRequest, background_tasks: Backgr
     }
     
     try:
-        # Create job in database
-        created_job_id = unified_job_manager.create_job(job_data)
-        
-        # For batch jobs, use asyncio.create_task for true background processing
+        # Determine execution strategy based on task type and size
         if request.task_type == TaskType.BATCH_PROTEIN_LIGAND_SCREENING:
-            # Start true background task that won't block response
-            asyncio.create_task(
-                process_prediction_task(
-                    created_job_id,
-                    request.task_type.value,  # Convert enum to string
-                    request.input_data,
-                    request.job_name,
-                    request.use_msa,
-                    request.use_potentials
-                )
-            )
-            
-            # Return immediately with batch info
+            # Extract batch parameters
+            protein_sequence = request.input_data.get('protein_sequence', '')
             ligands = request.input_data.get('ligands', [])
-            
+
+            logger.info(f"🧬 Batch submission: {len(protein_sequence)}aa protein x {len(ligands)} ligands")
+
+            # Execute batch job on Cloud Run
+            execution = await cloud_run_service.execute_batch_job(
+                user_id=user_id,
+                job_id=job_id,
+                protein_sequence=protein_sequence,
+                ligands=ligands,
+                job_name=request.job_name
+            )
+
+            # Job already created by Cloud Run service, just return the execution info
+            logger.info(f"✅ Batch job submitted: {job_id} → {execution.execution_id}")
+
+            return PredictionResponse(
+                job_id=job_id,
+                task_type=request.task_type.value,
+                status="running",
+                message=f"Batch executing on Cloud Run L4. Processing {len(ligands)} ligands with {execution.shards_count} tasks.",
+                estimated_completion_time=int(execution.estimated_cost_usd * 3600 / 0.65)  # Convert cost to time estimate
+            )
+
+        elif len(request.input_data.get('ligands', [])) == 1:
+            # Single prediction via Cloud Run Service (synchronous)
+            protein_sequence = request.input_data.get('protein_sequence', '')
+            ligand = request.input_data.get('ligands', [''])[0]
+
+            logger.info(f"🔬 Single prediction: {len(protein_sequence)}aa protein x 1 ligand")
+
+            # Execute synchronously for single predictions
+            result = await cloud_run_service.predict_single(
+                protein_sequence=protein_sequence,
+                ligand=ligand
+            )
+
+            # Create completed job record with user context
+            job_data.update({
+                'status': 'completed',
+                'gpu_type': 'L4',
+                'output_data': result,
+                'execution_time_seconds': result.get('performance_metadata', {}).get('execution_time_seconds', 0),
+                'user_tier': user_tier,
+                'auth_method': user.get('auth_method', 'unknown')
+            })
+
+            # Use user-aware job manager
+            created_job_id = await user_aware_job_manager.create_job(user_id, job_data)
+
             return PredictionResponse(
                 job_id=created_job_id,
-                task_type=request.task_type.value,  # Convert enum to string
-                status="processing",
-                message=f"Batch job submitted. Processing {len(ligands)} ligands in background.",
-                estimated_completion_time=len(ligands) * 30  # 30 seconds per ligand
+                task_type=request.task_type.value,
+                status="completed",
+                message="Single prediction completed on Cloud Run L4",
+                result=result
             )
+
         else:
-            # For non-batch jobs, use background_tasks as before
+            # Small batch - process via background task with Cloud Run Service
+            created_job_id = unified_job_manager.create_job(job_data)
+
             background_tasks.add_task(
-                process_prediction_task,
+                process_small_batch_task,
                 created_job_id,
-                request.task_type.value,  # Convert enum to string
                 request.input_data,
-                request.job_name,
-                request.use_msa,
-                request.use_potentials
+                request.job_name
             )
             
             logger.info(f"✅ Job submitted successfully: {created_job_id}")
@@ -1104,6 +1156,68 @@ async def complete_stuck_jobs():
         logger.error(f"❌ Failed to complete stuck jobs: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to complete stuck jobs: {str(e)}")
 
+async def process_small_batch_task(job_id: str, input_data: Dict[str, Any], job_name: str):
+    """Process small batch via Cloud Run Service (background task)"""
+
+    from services.cloud_run_service import cloud_run_service
+
+    try:
+        logger.info(f"🔄 Processing small batch job: {job_id}")
+
+        # Update job status to running
+        unified_job_manager.update_job_status(job_id, "running", {
+            "message": "Processing small batch on Cloud Run L4",
+            "started_at": time.time()
+        })
+
+        # Extract parameters
+        protein_sequence = input_data.get('protein_sequence', '')
+        ligands = input_data.get('ligands', [])
+
+        # Process each ligand via Cloud Run Service
+        results = []
+        for i, ligand in enumerate(ligands):
+            logger.info(f"🧪 Processing ligand {i+1}/{len(ligands)}")
+
+            result = await cloud_run_service.predict_single(
+                protein_sequence=protein_sequence,
+                ligand=ligand
+            )
+
+            results.append({
+                "ligand": ligand,
+                "result": result,
+                "processed_at": time.time()
+            })
+
+            # Update progress
+            progress = (i + 1) / len(ligands) * 100
+            unified_job_manager.update_job_status(job_id, "running", {
+                "progress_percent": progress,
+                "message": f"Processed {i+1}/{len(ligands)} ligands"
+            })
+
+        # Complete job with results
+        unified_job_manager.update_job_status(job_id, "completed", {
+            "results": results,
+            "total_ligands": len(ligands),
+            "gpu_type": "L4",
+            "completed_at": time.time(),
+            "message": f"Small batch completed: {len(ligands)} ligands processed"
+        })
+
+        logger.info(f"✅ Small batch job completed: {job_id}")
+
+    except Exception as e:
+        logger.error(f"❌ Small batch job failed: {job_id} - {str(e)}")
+
+        # Mark job as failed
+        unified_job_manager.update_job_status(job_id, "failed", {
+            "error": str(e),
+            "failed_at": time.time(),
+            "message": f"Small batch processing failed: {str(e)}"
+        })
+
 @router.get("/health")
 async def health_check():
     """Health check endpoint"""
@@ -1141,4 +1255,81 @@ async def legacy_boltz_predict(request: Dict[str, Any], background_tasks: Backgr
     )
     
     # Route to unified endpoint
-    return await submit_prediction(unified_request, background_tasks) 
+    return await submit_prediction(unified_request, background_tasks)
+
+# === USER-AWARE SECURE ENDPOINTS ===
+
+@router.get("/jobs", response_model=JobListResponse)
+async def list_user_jobs(
+    limit: int = Query(50, ge=1, le=100, description="Number of jobs to return"),
+    offset: int = Query(0, ge=0, description="Number of jobs to skip"),
+    status: Optional[str] = Query(None, description="Filter by job status"),
+    user: Dict[str, str] = Depends(get_current_user)
+):
+    """List jobs for authenticated user only - complete user isolation"""
+
+    user_id = user['user_id']
+
+    try:
+        # Get jobs using user-aware job manager (complete isolation)
+        jobs = await user_aware_job_manager.list_user_jobs(
+            user_id=user_id,
+            limit=limit,
+            offset=offset,
+            status_filter=status
+        )
+
+        # Get user usage statistics
+        usage = await user_aware_job_manager.get_user_usage(user_id)
+
+        logger.info(f"📋 Listed {len(jobs)} jobs for user {user_id}")
+
+        return JobListResponse(
+            jobs=jobs,
+            total=len(jobs),
+            page=offset // limit + 1,
+            per_page=limit,
+            user_context={
+                'user_id': user_id,
+                'tier': user.get('tier', 'free'),
+                'current_jobs': usage.current_jobs,
+                'monthly_jobs': usage.monthly_jobs
+            }
+        )
+
+    except Exception as e:
+        logger.error(f"❌ Failed to list jobs for user {user_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to list jobs: {str(e)}")
+
+@router.get("/jobs/{job_id}")
+async def get_user_job(
+    job_id: str,
+    user: Dict[str, str] = Depends(get_current_user)
+):
+    """Get specific job for authenticated user with ownership validation"""
+
+    user_id = user['user_id']
+
+    try:
+        # Get job with user validation (complete isolation)
+        job = await user_aware_job_manager.get_job(user_id, job_id)
+
+        if not job:
+            raise HTTPException(status_code=404, detail="Job not found or access denied")
+
+        logger.info(f"📄 Retrieved job {job_id} for user {user_id}")
+
+        return {
+            "job": job,
+            "user_context": {
+                "user_id": user_id,
+                "tier": user.get('tier', 'free'),
+                "access_level": "owner"
+            }
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"❌ Failed to get job {job_id} for user {user_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to get job: {str(e)}")

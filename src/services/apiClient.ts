@@ -1,10 +1,11 @@
 /**
- * Standardized API Client for OMTX-Hub
+ * Cloud Run API Client for OMTX-Hub
+ * Distinguished Engineer Implementation - Real-time updates with Firestore integration
  * All requests/responses use snake_case and include Zod validation
  */
 
-import { 
-  JobCreate, JobResponse, JobDetailResponse, JobListResponse, 
+import {
+  JobCreate, JobResponse, JobDetailResponse, JobListResponse,
   SystemStatusResponse, TaskListResponse, LogListResponse,
   validateJobResponse, validateJobListResponse, validateSystemStatusResponse,
   validateApiResponse, safeParseApiResponse,
@@ -12,8 +13,22 @@ import {
   JobListResponseSchema, SystemStatusResponseSchema, TaskListResponseSchema
 } from '../schemas/apiSchemas';
 
-// Base API configuration
-const API_BASE_URL = '/api/v2';
+// Firebase for real-time updates
+import { initializeApp } from 'firebase/app';
+import { getFirestore, doc, onSnapshot, collection, query, where, orderBy, limit } from 'firebase/firestore';
+
+// Base API configuration - Updated to v4 for Cloud Run
+const API_BASE_URL = '/api/v4';
+
+// Firebase configuration (will be injected via environment)
+const firebaseConfig = {
+  projectId: process.env.REACT_APP_GCP_PROJECT_ID || 'om-models',
+  // Other config will be auto-detected in GCP environment
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const firestore = getFirestore(app);
 
 // Request configuration
 interface RequestConfig {
@@ -98,6 +113,70 @@ class ApiClient {
       { method: 'GET' },
       JobDetailResponseSchema
     );
+  }
+
+  // Real-time subscription methods for Cloud Run integration
+  subscribeToJob(jobId: string, callback: (job: any) => void): () => void {
+    /**
+     * Subscribe to real-time job updates via Firestore
+     * Returns unsubscribe function
+     */
+    const jobDoc = doc(firestore, 'jobs', jobId);
+
+    const unsubscribe = onSnapshot(jobDoc, (doc) => {
+      if (doc.exists()) {
+        const jobData = {
+          id: doc.id,
+          ...doc.data(),
+          // Convert Firestore timestamps to ISO strings
+          created_at: doc.data().created_at?.toDate?.()?.toISOString(),
+          updated_at: doc.data().updated_at?.toDate?.()?.toISOString(),
+          started_at: doc.data().started_at?.toDate?.()?.toISOString(),
+          completed_at: doc.data().completed_at?.toDate?.()?.toISOString(),
+        };
+
+        callback(jobData);
+      }
+    }, (error) => {
+      console.error('Job subscription error:', error);
+    });
+
+    return unsubscribe;
+  }
+
+  subscribeToBatch(batchId: string, callback: (batch: any) => void): () => void {
+    /**
+     * Subscribe to real-time batch updates via Firestore
+     * Returns unsubscribe function
+     */
+    const batchDoc = doc(firestore, 'batches', batchId);
+
+    const unsubscribe = onSnapshot(batchDoc, (doc) => {
+      if (doc.exists()) {
+        const batchData = {
+          id: doc.id,
+          ...doc.data(),
+          // Convert Firestore timestamps
+          created_at: doc.data().created_at?.toDate?.()?.toISOString(),
+          updated_at: doc.data().updated_at?.toDate?.()?.toISOString(),
+          started_at: doc.data().started_at?.toDate?.()?.toISOString(),
+          completed_at: doc.data().completed_at?.toDate?.()?.toISOString(),
+          // Add Cloud Run metadata
+          cloud_run_metadata: {
+            execution_id: doc.data().cloud_run_execution_id,
+            gpu_type: doc.data().gpu_type,
+            estimated_cost_usd: doc.data().estimated_cost_usd,
+            shards_count: doc.data().shards_count,
+          }
+        };
+
+        callback(batchData);
+      }
+    }, (error) => {
+      console.error('Batch subscription error:', error);
+    });
+
+    return unsubscribe;
   }
 
   async listJobs(params?: {

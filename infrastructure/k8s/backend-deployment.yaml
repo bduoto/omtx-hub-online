@@ -20,7 +20,7 @@ spec:
       serviceAccountName: omtx-hub-service-account
       containers:
       - name: backend
-        image: gcr.io/PROJECT_ID/omtx-hub-backend:latest
+        image: gcr.io/om-models/omtx-hub-backend:optimized
         ports:
         - containerPort: 8000
           protocol: TCP
@@ -121,19 +121,29 @@ spec:
           httpGet:
             path: /health
             port: 8000
-          initialDelaySeconds: 45
-          periodSeconds: 20
-          timeoutSeconds: 10
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          timeoutSeconds: 5
           failureThreshold: 3
         
         readinessProbe:
           httpGet:
-            path: /health
+            path: /ready
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+          successThreshold: 1
+        
+        startupProbe:
+          httpGet:
+            path: /startup
             port: 8000
           initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 3
+          periodSeconds: 5
+          timeoutSeconds: 10
+          failureThreshold: 30
         
         # Graceful shutdown
         lifecycle:

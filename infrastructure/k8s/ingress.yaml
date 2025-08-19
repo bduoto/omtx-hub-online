@@ -4,34 +4,33 @@ metadata:
   name: omtx-hub-ingress
   namespace: omtx-hub
   annotations:
-    # Google Cloud Load Balancer annotations
-    kubernetes.io/ingress.class: "gce"
-    kubernetes.io/ingress.global-static-ip-name: "omtx-hub-ip"
-    networking.gke.io/managed-certificates: "omtx-hub-ssl-cert"
-    
-    # Security annotations
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/ssl-protocols: "TLSv1.2 TLSv1.3"
+    # Use nginx ingress controller
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
     
     # Performance annotations
-    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
-    nginx.ingress.kubernetes.io/proxy-connect-timeout: "60"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "60"
+    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
     
     # Rate limiting
     nginx.ingress.kubernetes.io/rate-limit: "100"
     nginx.ingress.kubernetes.io/rate-limit-window: "1m"
     
-    # CORS handling
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://your-frontend-domain.com"
+    # CORS handling for development
+    nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    
+    # SSL configuration (ready for cert-manager)
+    # cert-manager.io/cluster-issuer: "letsencrypt-prod"
     
 spec:
   rules:
-  - host: api.omtx-hub.com
-    http:
+  # Default rule for IP access (current setup)
+  - http:
       paths:
       - path: /
         pathType: Prefix
@@ -40,79 +39,37 @@ spec:
             name: omtx-hub-backend-service
             port:
               number: 80
-      - path: /api
-        pathType: Prefix
-        backend:
-          service:
-            name: omtx-hub-backend-service
-            port:
-              number: 80
-      - path: /health
-        pathType: Prefix
-        backend:
-          service:
-            name: omtx-hub-backend-service
-            port:
-              number: 80
+  # Future domain-based rule (uncomment when domain is configured)
+  # - host: api.omtx-hub.com
+  #   http:
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: omtx-hub-backend-service
+  #           port:
+  #             number: 80
   
-  # Add staging ingress rules
-  - host: api-staging.omtx-hub.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: omtx-hub-backend-service
-            port:
-              number: 80
+  # TLS configuration (uncomment when domain and SSL are configured)
+  # tls:
+  # - hosts:
+  #   - api.omtx-hub.com
+  #   secretName: omtx-hub-tls
 
 ---
-# Managed SSL Certificate
-apiVersion: networking.gke.io/v1
-kind: ManagedCertificate
-metadata:
-  name: omtx-hub-ssl-cert
-  namespace: omtx-hub
-spec:
-  domains:
-  - api.omtx-hub.com
-  - api-staging.omtx-hub.com
-
----
-# Backend configuration for GCP Load Balancer
-apiVersion: cloud.google.com/v1
-kind: BackendConfig
-metadata:
-  name: backend-config
-  namespace: omtx-hub
-spec:
-  # Health check configuration
-  healthCheck:
-    checkIntervalSec: 10
-    timeoutSec: 5
-    healthyThreshold: 1
-    unhealthyThreshold: 3
-    type: HTTP
-    requestPath: /health
-    port: 8000
-  
-  # Session affinity
-  sessionAffinity:
-    affinityType: CLIENT_IP
-    affinityCookieTtlSec: 86400
-  
-  # Connection draining
-  connectionDraining:
-    drainingTimeoutSec: 60
-  
-  # Timeout settings
-  timeoutSec: 300
-  
-  # Enable Cloud CDN for static content
-  cdn:
-    enabled: true
-    cachePolicy:
-      includeHost: true
-      includeProtocol: true
-      includeQueryString: false
+# Certificate Issuer for Let's Encrypt (requires cert-manager)
+# apiVersion: cert-manager.io/v1
+# kind: ClusterIssuer
+# metadata:
+#   name: letsencrypt-prod
+# spec:
+#   acme:
+#     server: https://acme-v02.api.letsencrypt.org/directory
+#     email: admin@omtx-hub.com
+#     privateKeySecretRef:
+#       name: letsencrypt-prod
+#     solvers:
+#     - http01:
+#         ingress:
+#           class: nginx
