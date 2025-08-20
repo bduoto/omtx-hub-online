@@ -261,15 +261,10 @@ class AuthService {
   
   // API endpoint helpers with proper versioning
   getApiUrl(endpoint: string): string {
-    const baseUrl = process.env.REACT_APP_API_BASE_URL || '';
-    
-    // Use v4 API for new endpoints, v2 for compatibility
-    if (endpoint.startsWith('/batches') || endpoint.startsWith('/predict') || endpoint.startsWith('/usage')) {
-      return `${baseUrl}/api/v4${endpoint}`;
-    } else {
-      // Legacy endpoints use v2 compatibility layer
-      return `${baseUrl}/api/v2${endpoint}`;
-    }
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+
+    // Use v1 API for all endpoints - clean consolidated API
+    return `${baseUrl}/api/v1${endpoint}`;
   }
   
   // Batch-specific methods

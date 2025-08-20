@@ -40,7 +40,13 @@ class UserAwareJobManager:
     """Enterprise job manager with complete user isolation and quota enforcement"""
     
     def __init__(self):
-        self.db = firestore.Client()
+        # Initialize Firestore client with error handling
+        try:
+            self.db = firestore.Client()
+            print("✅ UserAwareJobManager: Firestore client initialized")
+        except Exception as e:
+            print(f"⚠️ UserAwareJobManager: Firestore initialization failed: {e}")
+            self.db = None
         
         # Tier configurations
         self.tier_quotas = {
@@ -405,5 +411,10 @@ class UserAwareJobManager:
         except Exception as e:
             logger.error(f"⚠️ Failed to emit event for user {user_id}: {str(e)}")
 
-# Global instance
-user_aware_job_manager = UserAwareJobManager()
+# Global instance with error handling
+try:
+    user_aware_job_manager = UserAwareJobManager()
+    print("✅ Global UserAwareJobManager initialized")
+except Exception as e:
+    print(f"⚠️ UserAwareJobManager initialization failed: {e}")
+    user_aware_job_manager = None

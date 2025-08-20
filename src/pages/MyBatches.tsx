@@ -115,7 +115,7 @@ const MyBatches = () => {
       
       // Fallback to Batch API directly
       try {
-        const response = await fetch(`/api/v3/batches/?user_id=current_user&limit=200`);
+        const response = await fetch(`/api/v1/batches?user_id=current_user&limit=200`);
         if (response.ok) {
           const data = await response.json();
           const batches = data.batches || [];
@@ -330,7 +330,7 @@ const MyBatches = () => {
 
   const handleSingleDeleteConfirmed = async (batchId: string) => {
     // Use unified API v3 for batch deletion with fallback
-    let response = await fetch(`/api/v3/batches/${batchId}?user_id=current_user`, {
+    let response = await fetch(`/api/v1/batches/${batchId}?user_id=current_user`, {
       method: 'DELETE',
     });
     
@@ -371,7 +371,7 @@ const MyBatches = () => {
   const handleBulkDeleteConfirmed = async () => {
     const deletePromises = Array.from(selectedBatches).map(async (batchId) => {
       // Try unified API v3 first, fallback to legacy
-      let response = await fetch(`/api/v3/batches/${batchId}?user_id=current_user`, { method: 'DELETE' });
+      let response = await fetch(`/api/v1/batches/${batchId}`, { method: 'DELETE' });
       if (!response.ok && response.status === 404) {
         response = await fetch(`/api/v2/my-batches/${batchId}?user_id=current_user`, { method: 'DELETE' });
       }

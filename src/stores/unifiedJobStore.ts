@@ -108,7 +108,8 @@ class UnifiedJobStore {
       const startTime = performance.now();
       
       // Load lightweight data for instant navigation
-      const response = await fetch('/api/v3/ultra-fast/unified-jobs?user_id=current_user&lightweight=true&limit=200', {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+      const response = await fetch(`${apiBase}/api/v1/jobs?user_id=current_user&limit=200`, {
         headers: {
           'Accept': 'application/json',
           'Cache-Control': 'no-cache'
@@ -319,7 +320,8 @@ class UnifiedJobStore {
       // Fallback to unified API if ultra-fast fails
       if (!response || !response.ok) {
         console.warn('⚠️ Ultra-fast API failed, falling back to unified API');
-        response = await fetch(`/api/v3/batches/?user_id=current_user&limit=200`);
+        const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+        response = await fetch(`${apiBase}/api/v1/batches?user_id=current_user&limit=200`);
         apiUsed = 'unified-fallback';
         
         if (!response.ok) {
@@ -365,7 +367,8 @@ class UnifiedJobStore {
       // Track API usage for intelligent polling
       this.userActivity.set('api_request', Date.now());
       
-      const url = `/api/v3/ultra-fast/unified-jobs?user_id=current_user&lightweight=${lightweight}&include_batches=true&limit=200`;
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+      const url = `${apiBase}/api/v1/jobs?user_id=current_user&limit=200`;
       
       // Create timeout that works across browsers
       const controller = new AbortController();
@@ -538,7 +541,8 @@ class UnifiedJobStore {
    */
   private async _loadBatchJobs(): Promise<void> {
     try {
-      const response = await fetch(`/api/v3/batches/?user_id=current_user&limit=200`);
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+      const response = await fetch(`${apiBase}/api/v1/batches?user_id=current_user&limit=200`);
       if (response.ok) {
         const data = await response.json();
         const batches = data.batches || [];

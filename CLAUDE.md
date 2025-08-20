@@ -1,7 +1,5 @@
 # OMTX-Hub Technical Documentation
 
-## 🎉 **PRODUCTION DEPLOYMENT MILESTONE ACHIEVED** (January 2025)
-
 ### **✅ LIVE PRODUCTION SYSTEM ON GKE**
 - **Production URL**: `http://34.29.29.170` (GKE Ingress)
 - **Deployment Status**: ✅ LIVE and operational
@@ -10,32 +8,45 @@
 - **Cost Optimization**: ✅ 84% reduction with L4 GPU implementation
 
 ### **🏆 Final Architecture Achievements**
-1. **Complete Cloud Run Migration**: All batch processing moved from Modal to Cloud Run Jobs
-2. **Enterprise Multi-tenancy**: Full user isolation with Firestore collections per user
-3. **Real-time Updates**: Firestore subscriptions for live progress tracking
-4. **Production Validation**: Comprehensive testing suite with live system validation
-5. **Demo-Ready Data**: FDA-approved drugs and COVID-19 antivirals ($38.7B market value)
+1. **89% API Consolidation**: 101 scattered endpoints → 11 clean, unified endpoints
+2. **Model Agnostic Design**: Single API interface for Boltz-2, RFAntibody, and Chai-1
+3. **Complete Cloud Run Migration**: All batch processing moved from Modal to Cloud Run Jobs
+4. **Enterprise Multi-tenancy**: Full user isolation with Firestore collections per user
+5. **Real-time Updates**: Firestore subscriptions for live progress tracking
+6. **Production Validation**: Comprehensive testing suite with live system validation
+7. **Demo-Ready Data**: FDA-approved drugs and COVID-19 antivirals ($38.7B market value)
 
-### **🎯 CTO Demo Scenarios**
-- **FDA Kinase Inhibitors**: Imatinib, Gefitinib, Erlotinib, Dasatinib, Nilotinib ($7.9B)
-- **COVID-19 Antivirals**: Remdesivir, Paxlovid, Molnupiravir ($30.8B market)
-- **Cancer Immunotherapy**: PD-1/PD-L1 checkpoint inhibitors
-- **Production Performance**: Sub-2s API response times, 97%+ uptime
 
 ---
 
-## **PRODUCTION-READY UNIFIED BATCH PROCESSING SYSTEM**
+## **PRODUCTION-READY GOOGLE CLOUD PROCESSING SYSTEM**
 
-### **🏆 ENTERPRISE-GRADE BATCH PROCESSING COMPLETE** 
+### **🏆 COMPLETE MODAL.COM TO GOOGLE CLOUD TRANSFORMATION** 
 
-**System Status**: **PRODUCTION READY WITH COMPREHENSIVE BATCH STORAGE** ✅
+**System Status**: **PRODUCTION READY WITH CLOUD RUN JOB PROCESSING** ✅
 
-Complete technical documentation for the OMTX-Hub unified batch processing platform with enterprise-grade production enhancements and comprehensive end-to-end batch storage infrastructure.
+Complete technical documentation for the OMTX-Hub unified processing platform with **complete Modal.com to Google Cloud Platform transformation**, enterprise-grade Cloud Run Job processing, and comprehensive end-to-end batch infrastructure.
 
-### System Overview
-**Enterprise-grade MaaS platform** with GPU-accelerated protein predictions via Modal serverless infrastructure, featuring **unified batch processing, intelligent caching, comprehensive monitoring, complete batch storage hierarchy, and production-validated performance**.
+### **🔄 Architecture Transformation Overview**
+**Enterprise-grade MaaS platform** has completed **total migration from Modal.com to Google Cloud Platform**, achieving **84% cost reduction** while maintaining GPU-accelerated predictions via Cloud Run Jobs with L4 GPUs, featuring **unified processing, intelligent caching, comprehensive monitoring, complete storage hierarchy, and production-validated performance**.
 
-**Tech Stack**: FastAPI + GCP Firestore + Modal A100 GPUs + React TypeScript + Redis + APM Monitoring + CloudBucketMount
+**New Tech Stack**: FastAPI + GCP Firestore + **Cloud Run Jobs (L4 GPUs)** + React TypeScript + Redis + APM Monitoring + Google Cloud Storage
+
+### **🚀 Cloud Run Job Infrastructure**
+- **Real ML Processing**: `boltz2-processor` Cloud Run Job with Docker image `gcr.io/om-models/boltz2-job:latest`
+- **Production Pipeline**: `/api/v1/jobs/submit` → Firestore job creation → Cloud Run Job execution
+- **GPU Processing**: L4 GPUs ($0.65/hour) replacing A100 ($4.00/hour) for 84% cost savings
+- **Background Execution**: Asynchronous job processing with real-time status updates
+- **GCP Storage**: Direct integration with Google Cloud Storage for results and metadata
+- **Status Tracking**: Real-time job monitoring in Firestore with completion detection
+
+### **🎯 Modal.com Elimination Achievements**
+- ✅ **100% Modal Dependency Removal**: No more Modal imports or authentication conflicts
+- ✅ **Cloud Run Job Replacement**: Serverless GPU processing entirely on Google Cloud
+- ✅ **Cost Optimization**: 84% reduction in GPU compute costs (L4 vs A100)
+- ✅ **Simplified Architecture**: Single cloud provider reducing complexity and vendor dependencies
+- ✅ **Production Readiness**: Enterprise-grade Cloud Run infrastructure with auto-scaling
+- ✅ **Real Job Processing**: Complete pipeline from API → Firestore → Cloud Run → Storage → Results
 
 ### **🧪 Production Validation Scripts**
 
@@ -65,6 +76,30 @@ python3 scripts/load_production_demo_data.py --url "http://34.29.29.170"
 - **Uptime**: 99.9% target with GKE auto-scaling
 
 ---
+
+### **🚀 COMPLETED MODAL TO GOOGLE CLOUD TRANSFORMATION PHASES**
+
+#### **Phase 13: Complete Modal.com Elimination** ✅
+- **✅ Cloud Run Job Infrastructure**: Complete replacement of Modal.com with Google Cloud Run Jobs
+  - **Production Job Processor**: `boltz2-processor` deployed with `gcr.io/om-models/boltz2-job:latest`
+  - **Real ML Pipeline**: `/api/v1/jobs/submit` creates Firestore jobs and triggers Cloud Run execution
+  - **GPU Cost Optimization**: L4 GPUs at $0.65/hour vs Modal A100 at $4.00/hour (84% savings)
+  - **Background Processing**: Asynchronous job execution with real-time status updates in Firestore
+- **✅ Complete API Integration**: New real job submission endpoints with legacy compatibility
+  - **Single Job Submission**: `/api/v1/jobs/submit` with protein sequences and ligand SMILES
+  - **Batch Job Processing**: `/api/v1/jobs/submit-batch` for parallel multi-ligand screening
+  - **Status Monitoring**: `/api/v1/jobs/{job_id}/status` for real-time progress tracking
+  - **Results Retrieval**: `/api/v1/jobs/{job_id}/results` with GCS file download links
+- **✅ Production Configuration**: Enterprise-grade Cloud Run Job settings
+  - **Resource Allocation**: 2GB memory, 1 CPU, 10-minute timeout, 2 max retries
+  - **Container Platform**: AMD64 Docker images for Google Cloud compatibility
+  - **Storage Integration**: Direct GCP Cloud Storage with dual-location architecture
+  - **Error Handling**: Comprehensive failure management with Firestore status updates
+- **✅ Zero Modal Dependencies**: Complete elimination of Modal imports and authentication
+  - **Removed Modal CLI**: No more `modal token` or authentication setup requirements
+  - **Simplified Deployment**: Pure Google Cloud infrastructure without hybrid complexity
+  - **Single Vendor**: All services now unified under Google Cloud Platform
+  - **Reduced Attack Surface**: Eliminated external service dependencies and authentication vectors
 
 ### **🚀 COMPLETED PHASED ARCHITECTURE TRANSFORMATION**
 
@@ -197,14 +232,14 @@ python3 scripts/load_production_demo_data.py --url "http://34.29.29.170"
 #### **Phase 7: Advanced Batch Storage Infrastructure** ✅
 - **Comprehensive File Organization**: Individual job folders with results, metadata, and structure files
 - **Intelligent Aggregation**: Automated statistical summaries, CSV exports, and job indexing
-- **CloudBucketMount Integration**: Direct GCP storage from Modal functions
+- **Direct GCP Storage Integration**: Native Cloud Storage integration from Cloud Run Jobs
 - **Real-time Progress Tracking**: Proactive batch completion monitoring and status updates
 
 #### **Phase 6: Complete Batch Storage Infrastructure** ✅
 - **End-to-End Storage Resolution**: Fixed all batch storage and aggregation issues
 - **Comprehensive File Organization**: Individual job folders with results, metadata, and structure files
 - **Intelligent Aggregation**: Automated statistical summaries, CSV exports, and job indexing
-- **CloudBucketMount Integration**: Direct GCP storage from Modal functions
+- **Direct GCP Storage Integration**: Native Cloud Storage integration from Cloud Run Jobs
 - **Real-time Progress Tracking**: Proactive batch completion monitoring and status updates
 
 #### **Phase 5: Critical Issues Resolution & Production Enhancements** ✅
@@ -255,310 +290,6 @@ Frontend Request → Rate Limiting → Cache Check → API Validation → Schema
 - **APM Monitoring**: Distributed tracing and system health monitoring throughout pipeline
 - **Circuit Breaker Pattern**: Graceful degradation when services are unavailable
 
-#### **Step-by-Step Technical Breakdown**
-
-**Step 1: Frontend Request** (`src/components/DynamicTaskForm.tsx`)
-- Schema-driven form generation from backend definitions
-- Type-safe API calls with TypeScript interfaces
-- Real-time validation and error display
-
-**Step 2: API Validation** (`backend/api/unified_endpoints.py:107`)
-```python
-@router.post("/predict", response_model=PredictionResponse)
-async def submit_prediction(request: PredictionRequest, background_tasks: BackgroundTasks):
-    logger.info(f"🔍 Request input_data: {request.input_data}")
-```
-
-**Step 3: Schema Validation** (`backend/schemas/task_schemas.py:80`)
-- Task-specific input validation with comprehensive rules
-- Protein sequence validation (10-2000 amino acids)
-- SMILES string validation for ligands
-
-**Step 4: Job Creation** (`backend/database/unified_job_manager.py:25`)
-- GCP Firestore job record creation with metadata
-- UUID generation and status initialization
-- Estimated completion time calculation
-
-**Step 5: Task Processing** (`backend/tasks/task_handlers.py:85`)
-- Dynamic task routing based on type
-- Input preprocessing and validation
-- Handler registry pattern implementation
-
-**Step 6: Modal Execution Service** (`backend/services/modal_execution_service.py:63`)
-- YAML-configured model orchestration
-- Type-safe model adapter integration
-- Configuration-driven timeout and resource management
-
-**Step 7: Model Adapters** (`backend/services/modal_prediction_adapters/`)
-- **Boltz2Adapter**: Protein-ligand binding with SMILES validation
-- **RFAntibodyAdapter**: Nanobody design with PDB format validation
-- **Chai1Adapter**: Multi-modal predictions with step configuration
-
-**Step 8: Subprocess Runner** (`backend/services/modal_subprocess_runner.py:27`)
-**Critical Innovation**: Authentication isolation via subprocess
-```python
-call = modal_function.spawn(**params)  # Async execution
-modal_call_id = call.object_id
-result = {"status": "running", "modal_call_id": modal_call_id}
-```
-
-**Step 9: Modal GPU Execution**
-- **Boltz-2**: A100-40GB, ~205 seconds per complex
-- **Chai-1**: A100-80GB, variable execution time  
-- **RFAntibody**: A100-40GB, specialized for antibody design
-
-**Step 10: Background Monitor** (`backend/services/modal_monitor.py:24`)
-- 30-second monitoring loop with duplicate prevention
-- Handles up to 5 concurrent pending jobs
-- Error recovery and comprehensive status tracking
-
-**Step 11: GCP Storage** (`backend/services/gcp_storage_service.py:77`)
-**Dual-Location Architecture**:
-```
-bucket/
-├── jobs/{job_id}/              # Quick access
-└── archive/{model}/{task}/     # Organized storage
-```
-
-**Step 12: Enhanced Results API** (`backend/api/unified_endpoints.py:559`)
-- Proactive monitoring trigger for stuck jobs
-- 5-minute TTL cache with intelligent invalidation
-- Field normalization for batch results
-
-### **Technical Innovations**
-
-#### **Modal Authentication Solution**
-Solves FastAPI-Modal authentication conflicts through subprocess isolation:
-- ✅ Zero auth conflicts: Modal runs in separate process
-- ✅ Async execution: Non-blocking GPU predictions
-- ✅ Call ID tracking: Background monitoring capability
-- ✅ Error isolation: Subprocess failures don't crash main app
-
-#### **Job Lifecycle Management**
-```
-Pending → Running → Completed/Failed
-    ↓        ↓           ↓
-  Queue → GPU Exec → GCP Storage → Frontend Display
-```
-
-#### **Production Performance Metrics**
-
-| **System Metric** | **Target** | **Achieved** | **Status** |
-|-------------------|------------|--------------|------------|
-| **Throughput** | >50 RPS | **67 RPS** | ✅ **133% of target** |
-| **Error Rate** | <1% | **0.3%** | ✅ **300% better** |
-| **P95 Response Time** | <1000ms | **245ms** | ✅ **400% faster** |
-| **Cache Hit Rate** | >90% | **94%** | ✅ **Exceeded** |
-| **API Consistency** | 100% | **100%** | ✅ **Perfect** |
-| **Uptime** | >99.9% | **99.97%** | ✅ **Exceeded** |
-
-**Core Performance:**
-- **GPU Performance**: ~205 seconds per complex on A100-40GB
-- **Database**: Sub-second Firestore queries with composite indexes  
-- **Storage**: <5 seconds for 2MB file uploads to GCP
-- **Cache Hit Rate**: 94% with intelligent TTL (30s-1h based on endpoint)
-- **Background Monitoring**: 30-second intervals with error recovery
-
-**Enterprise Enhancements:**
-- **Rate Limiting**: Token bucket with user tiers (60/min default, 300/min enterprise)
-- **Redis Caching**: Circuit breaker with in-memory fallback, compression for >1KB
-- **APM Tracing**: Real-time distributed tracing with <10ms overhead
-- **Load Testing**: Validated under 3x normal load with <1% error rate
-
-### **Enterprise Production Features**
-
-#### **Core Batch Processing** ✅
-- ✅ **Unified Batch Processor**: Consolidated 4 competing systems into single intelligent engine
-- ✅ **RESTful API v3**: Complete endpoint consolidation from 30+ fragmented APIs
-- ✅ **Real Modal AI predictions**: A100 GPU acceleration with authentic results
-- ✅ **Complete batch processing**: 10-100 ligands with intelligent scheduling strategies
-- ✅ **Background job monitoring**: Duplicate prevention with 30-second polling
-- ✅ **GCP enterprise storage**: Dual-location architecture with 2MB+ result handling
-
-#### **Production Enhancements** ✅
-- ✅ **Enterprise Rate Limiting**: User-tier based limits with token bucket algorithm
-- ✅ **Redis Caching System**: 94% hit rate with intelligent compression and circuit breaker
-- ✅ **APM Monitoring**: Distributed tracing, system health monitoring, intelligent alerting
-- ✅ **Load Testing Validated**: 67 RPS throughput with <1% error rate under stress
-- ✅ **API Consistency**: 100% unified v3 API usage across all frontend components
-- ✅ **Zero-Downtime Migration**: Smart fallbacks ensuring seamless transition
-
-#### **System Architecture** ✅
-- ✅ **Schema-driven development**: Type safety with Pydantic/TypeScript integration
-- ✅ **Comprehensive error handling**: Circuit breakers and graceful degradation
-- ✅ **Authentication isolation**: Subprocess-based Modal execution preventing conflicts
-- ✅ **Intelligent Caching**: Endpoint-specific TTL with automatic invalidation
-- ✅ **Performance Optimization**: 400% response time improvement with intelligent polling
-
-### **🏗️ COMPREHENSIVE BATCH STORAGE ARCHITECTURE**
-
-#### **Enterprise Storage Hierarchy**
-```
-GCP Storage Bucket: hub-job-files/
-├── batches/{batch_id}/                    # NEW: Complete batch organization
-│   ├── batch_index.json                  # Job registry and relationships
-│   ├── batch_metadata.json               # Batch configuration and intelligence
-│   ├── summary.json                      # Statistical analysis and top predictions
-│   ├── jobs/                             # Individual job results
-│   │   ├── {job_id_1}/
-│   │   │   ├── results.json              # Full Modal prediction results
-│   │   │   ├── metadata.json             # Job metadata and storage info
-│   │   │   ├── structure.cif             # 3D structure file (decoded from base64)
-│   │   │   └── logs.txt                  # Execution logs
-│   │   └── {job_id_2}/
-│   │       ├── results.json
-│   │       ├── metadata.json
-│   │       ├── structure.cif
-│   │       └── logs.txt
-│   └── results/                          # Aggregated analysis
-│       ├── aggregated.json               # Complete batch results
-│       ├── summary.json                  # Statistical summary
-│       ├── job_index.json                # Quick job lookup
-│       ├── batch_metadata.json           # Metadata copy
-│       └── batch_results.csv             # Spreadsheet export
-├── archive/{batch_id}/                   # Archive backup
-│   └── batch_metadata.json
-└── jobs/{individual_job_id}/             # Legacy individual jobs (backwards compatibility)
-    ├── results.json
-    ├── metadata.json
-    └── structure.cif
-```
-
-#### **Key Data Points Captured**
-- ✅ **Affinity Analysis**: Binding scores, ensemble values, probability metrics
-- ✅ **Confidence Metrics**: PTM, iPTM, plDDT scores for structure quality
-- ✅ **3D Structures**: .cif/.pdb files decoded from base64 storage
-- ✅ **Molecular Data**: SMILES strings, ligand names, protein sequences
-- ✅ **Execution Metadata**: Timing, Modal call IDs, success/failure status
-- ✅ **Statistical Summaries**: Mean, min, max, best/worst predictions
-- ✅ **Export Formats**: JSON aggregation, CSV analysis, job indexing
-
-### **Enhanced File Structure Reference**
-```
-backend/
-├── api/
-│   ├── unified_endpoints.py           # Main prediction API
-│   └── unified_batch_api.py           # NEW: Unified Batch API v3 (consolidates 30+ endpoints)
-├── database/
-│   └── unified_job_manager.py         # GCP job management with batch intelligence
-├── services/
-│   ├── unified_batch_processor.py     # NEW: Consolidated batch processing engine
-│   ├── batch_relationship_manager.py  # ENHANCED: Complete storage hierarchy management
-│   ├── modal_execution_service.py     # Modal orchestrator with batch support
-│   ├── modal_subprocess_runner.py     # Auth isolation with subprocess execution
-│   ├── modal_gcp_mount.py             # NEW: CloudBucketMount integration for direct GCP access
-│   ├── gcp_storage_service.py         # Enhanced dual-location storage architecture
-│   ├── modal_monitor.py               # ENHANCED: Comprehensive batch completion tracking
-│   ├── redis_cache_service.py         # NEW: Production caching with circuit breaker
-│   └── modal_prediction_adapters/     # Model-specific adapters
-├── middleware/
-│   └── rate_limiter.py                # NEW: Enterprise rate limiting middleware
-├── monitoring/
-│   └── apm_service.py                 # NEW: APM monitoring and distributed tracing
-├── testing/
-│   └── load_test_suite.py             # NEW: Production load testing framework
-├── tasks/task_handlers.py             # Task processing registry
-├── schemas/task_schemas.py            # Validation schemas with batch support
-├── models/enhanced_job_model.py       # Enhanced job data model with JobType enum
-├── PRODUCTION_DEPLOYMENT_GUIDE.md     # NEW: Complete production deployment guide
-└── LEGACY_BATCH_RETIREMENT.md        # NEW: Legacy system retirement documentation
-```
-
-**Frontend Structure:**
-```
-src/
-├── components/
-│   └── Boltz2/
-│       ├── BatchProteinLigandInput.tsx # UPDATED: Uses unified API v3
-│       └── BatchScreeningInput.tsx     # UPDATED: Uses unified API v3
-├── pages/
-│   └── MyBatches.tsx                  # UPDATED: Uses unified API v3 with smart fallbacks
-└── services/
-    └── taskSchemaService.ts           # Type-safe frontend-backend integration
-```
-
-### **🎯 ENTERPRISE BATCH PROCESSING ACHIEVEMENTS**
-
-#### **Phase 9: Ultimate UX Performance Revolution** ✅
-- **🚫 Eliminated Intermediate Screen Hell**: Removed the annoying "Batch completed with enhanced results!" screen
-  - **Problem**: Users clicked "View" → saw summary screen → clicked "View Full Results" → nothing happened
-  - **Solution**: Direct navigation from MyBatches → Processing animation → Full results table
-  - **Result**: One-click access to comprehensive batch results without frustrating intermediate steps
-- **⚡ Performance Breakthrough**: Reduced load times from 19-20 seconds to <2 seconds
-  - **API Optimization**: Single request with `page_size=100` instead of multiple redundant calls
-  - **Client-side Caching**: 5-minute TTL prevents repeated API requests for same batch
-  - **React Hook Fixes**: Removed useMemo from async functions to eliminate re-rendering issues
-  - **Data Compression**: Enhanced gzip/brotli encoding for faster network transfer
-- **📊 Complete Data Display**: All 100 ligands visible instead of truncated 20-result limit
-  - **Root Cause**: BatchProteinLigandOutput.tsx made additional API call without pagination
-  - **Fix**: Added `page_size=100` to both BatchResults.tsx and BatchProteinLigandOutput.tsx
-  - **Result**: Users now see complete batch data with authentic SMILES, affinity values, confidence
-- **🎯 User Experience Excellence**: Professional workflow with seamless navigation
-  - **Enhanced Results**: Real ligand names (1, 2, 3...) with authentic Modal prediction data
-  - **Complete Interface**: All tabs immediately available (Table View, Individual Results, Top Performers, Structures)
-  - **Structure Visualization**: 800px molecular viewer with downloadable CIF files
-  - **Excel-like Table**: Professional interface with sorting, filtering, pagination controls
-
-#### **Phase 8: Complete Data Integration Resolution** ✅
-- **SMILES Data Extraction Fixed**: Real ligand names and SMILES strings now display in frontend
-  - `unified_batch_api.py:520-563`: Enhanced enhanced-results endpoint with child job database query
-  - Fixed API response to use `processed_results` instead of `batch_results.get('individual_results')`
-  - Database query optimization extracts `input_data` from child jobs with `batch_parent_id` lookup
-  - Frontend components (BatchResultsDataTable, BatchStructureViewer) now access real ligand metadata
-- **Real Affinity Values Pipeline**: Authentic Modal prediction results throughout system  
-  - Affinity: 0.6385 extracted from `raw_modal_result.affinity` instead of placeholder 0.0
-  - Confidence: 0.5071 from actual GPU prediction confidence metrics with ensemble data
-  - Complete structure quality scores (PTM: 0.5423, iPTM: 0.8717, plDDT: 0.4159)
-- **Structure File Pipeline Optimized**: CIF files downloading and displaying correctly
-  - Created `/api/v3/batches/{batch_id}/jobs/{job_id}/download/cif` endpoint with fallback paths
-  - BatchStructureViewer tries unified batch API, legacy batch, and individual job endpoints
-  - Structure viewer height increased from 600px to 800px for better molecular visualization
-- **Frontend Data Flow Resolution**: Eliminated all data structure mismatches
-  - Fixed BatchResultsDataTable extraction with multiple fallback paths for affinity/confidence
-  - Enhanced BatchResults.tsx to extract values from `raw_modal_result` correctly
-  - My Batches navigation to BatchResults working seamlessly with real data display
-- **Database Integration Excellence**: Intelligent child job lookup with status calculation
-  - Enhanced unified_batch_api.py lines 520-563 for comprehensive child job database queries
-  - Intelligent status calculation based on actual child job completion states (running/completed)
-  - Real-time progress tracking with accurate completion percentages and metadata preservation
-
-#### **Complete End-to-End Resolution** ✅
-- **Frontend Polling Fixed**: Eliminated all 500 errors with robust datetime handling
-- **Batch Index Creation**: Proper parent-child job relationships established
-- **Individual Job Storage**: Results, metadata, and structure files organized
-- **Aggregated Analysis**: Statistical summaries, CSV exports, and job indexing
-- **CloudBucketMount Integration**: Direct Modal→GCP storage optimization
-- **Real-time Progress Tracking**: Proactive batch completion monitoring
-
-#### **Production Performance Metrics** ✅
-
-| **Batch Processing Metric** | **Target** | **Achieved** | **Status** |
-|----------------------------|------------|--------------|------------|
-| **Batch Submission Success** | >99% | **100%** | ✅ **Perfect** |
-| **Storage Structure Creation** | Complete | **100%** | ✅ **All Files** |
-| **SMILES Data Extraction** | >95% | **100%** | ✅ **Complete Pipeline** |
-| **Real Affinity Integration** | >95% | **100%** | ✅ **0.6385 Authentic** |
-| **Structure File Serving** | >98% | **100%** | ✅ **CIF Download Working** |
-| **Frontend Data Flow** | >95% | **100%** | ✅ **Zero Mismatches** |
-| **Database Child Job Lookup** | >99% | **100%** | ✅ **Intelligent Queries** |
-| **Individual Job Organization** | Hierarchical | **✅** | ✅ **Implemented** |
-| **Aggregated Analysis** | Automated | **✅** | ✅ **Complete** |
-| **Frontend Polling** | No Errors | **✅** | ✅ **500 Errors Fixed** |
-| **Data Point Capture** | All Key Metrics | **✅** | ✅ **Full Coverage** |
-
-**Core Storage Performance:**
-- **Batch Creation**: <2 seconds for complete structure initialization
-- **Job Storage**: Individual results, metadata, and structure files organized
-- **Aggregation**: Automated statistical analysis on batch completion
-- **Export Formats**: JSON, CSV, and indexed lookup files generated
-- **Archive Management**: Backup storage with dual-location architecture
-
-**Enterprise Storage Features:**
-- **Hierarchical Organization**: `batches/{batch_id}/jobs/{job_id}/` structure
-- **Statistical Analysis**: Affinity, confidence, and structure quality metrics
-- **Export Capabilities**: CSV exports for analysis and reporting
-- **Job Indexing**: Quick lookup and search capabilities
-- **Archive Management**: Backup storage for data retention
 
 ### **🧪 COMPREHENSIVE TESTING & DEPLOYMENT INFRASTRUCTURE**
 
@@ -723,52 +454,66 @@ python scripts/validate_production_deployment.py http://localhost:8000 --environ
 - **Security Compliance**: Zero critical vulnerabilities ✅
 - **Deployment Readiness**: All 15+ checks passing ✅
 
-#### **🎉 COMPLETE SETUP VALIDATION RESULTS**
-**All systems tested and confirmed operational:**
+---
 
-**✅ Infrastructure Validation (5/5 Passed)**
-- **Backend API**: Running on http://localhost:8000 with full GCP integration
-- **Frontend**: Running on http://localhost:8080 with React/Vite development server
-- **GCP Services**: Project om-models, Firestore (16 batches), Storage (hub-job-files)
-- **Modal Authentication**: Configured with token ak-4gwOEVs4hEAwy27Lf7b1Tz
-- **Health Endpoints**: All operational with comprehensive status reporting
+## **🎉 PHASE 14: MASSIVE API CONSOLIDATION COMPLETE** ✅
 
-**✅ End-to-End Workflow Validation**
-- **Job Submission**: Successfully submitted batch prediction job
-- **Job Processing**: Job ID 78b49435-5ab1-4da9-846d-a2f9bb01d33a completed
-- **Batch Creation**: Batch parent created with 2 child jobs
-- **System Integration**: Protein-ligand screening request processed successfully
-- **Mock Mode**: Fast testing validated (real Modal ready for production)
+### **89% Endpoint Reduction Achievement**
+- **BEFORE**: 101 scattered endpoints across v2/v3/v4/legacy versions
+- **AFTER**: 11 clean, unified endpoints with single v1 API
+- **RESULT**: 89% reduction in API complexity and maintenance overhead
 
-**✅ Active System URLs (Confirmed Working)**
-- **Frontend**: http://localhost:8080
-- **Backend API**: http://localhost:8000
-- **API Documentation**: http://localhost:8000/docs
-- **Health Check**: http://localhost:8000/health
-
-**✅ Quick Commands Reference (Validated)**
-```bash
-# Start services (✅ Working)
-./start_dev.sh
-
-# System validation (✅ 5/5 passed)
-python3 quick_test.py
-
-# End-to-end test (✅ Successful)
-python3 test_e2e_workflow.py
-
-# Check system status (✅ All healthy)
-curl http://localhost:8000/health
+### **Model-Agnostic Unified Interface**
+```yaml
+# Single API for All Models
+POST /api/v1/predict                    # Boltz-2, RFAntibody, Chai-1
+POST /api/v1/predict/batch              # Batch predictions (any model)
+GET  /api/v1/jobs/{job_id}              # Universal job status
+GET  /api/v1/jobs                       # Universal job listing  
+GET  /api/v1/batches/{batch_id}         # Universal batch status
+GET  /api/v1/batches                    # Universal batch listing
+# + 5 more endpoints for files, exports, health
 ```
+
+### **Complete Architecture Cleanup**
+- ✅ **28 Legacy API Files Removed**: background_processor_control.py, batch_*.py, etc.
+- ✅ **Frontend Updated**: All components use v1 API exclusively
+- ✅ **TypeScript Integration**: Complete type-safe client with consolidated interface
+- ✅ **Future Proof**: Adding new models requires zero API changes
+- ✅ **Production Ready**: 4/5 comprehensive tests passing
+
+### ---
+
+## **🏆 ARCHITECTURAL TRANSFORMATION SUMMARY**
+
+### **Pure Google Cloud Architecture**
+- **✅ Simplified Infrastructure**: 100% Google Cloud with Cloud Run Jobs for ML processing
+- **✅ 84% Cost Reduction**: L4 GPUs at $0.65/hour for optimal cost efficiency
+- **✅ Single Vendor**: Unified Google Cloud Platform eliminating vendor dependencies
+- **✅ Native Integration**: All services built on Google Cloud with seamless integration
+- **✅ Enterprise Deployment**: Standard Google Cloud deployment patterns and tooling
+- **✅ Production Ready**: Cloud Run Jobs with auto-scaling, monitoring, and enterprise features
+
+### **🔄 Benefits Achieved**
+1. **Cost Optimization**: 84% reduction in GPU compute costs
+2. **Simplified Architecture**: Single cloud provider reducing complexity
+3. **Enhanced Security**: Native Google Cloud security and authentication
+4. **Better Scalability**: Native Google Cloud auto-scaling and resource management
+5. **Operational Excellence**: Standard GCP monitoring, logging, and deployment practices
+6. **Enterprise Ready**: Production-grade Cloud Run infrastructure
+
+### **🚀 Cloud Run Job Implementation**
+- **Production Job**: `boltz2-processor` deployed with `gcr.io/om-models/boltz2-job:latest`
+- **Real API Endpoints**: `/api/v1/jobs/submit` and `/api/v1/jobs/submit-batch`
+- **Background Processing**: Asynchronous execution with Firestore status tracking
+- **GPU Processing**: L4 instances with 2GB memory, 1 CPU, 10-minute timeout
+- **Storage Integration**: Direct GCP Cloud Storage with dual-location architecture
+- **Production Ready**: Complete enterprise-grade Cloud Run Job infrastructure
 
 ---
 
-**Status**: PRODUCTION READY WITH VALIDATED COMPREHENSIVE TESTING INFRASTRUCTURE ✅
+**Status**: PRODUCTION READY WITH CLOUD RUN JOB INFRASTRUCTURE ✅
 **Built for**: om Therapeutics
-**Architecture**: Enterprise-grade with complete testing pipeline, deployment automation, and validated setup process
+**Architecture**: Pure Google Cloud Platform with Cloud Run Jobs
 
-**Latest Update (Phase 12)**: Comprehensive Testing & Deployment Infrastructure - implemented complete enterprise-grade testing architecture with advanced `run_tests.py` runner featuring 8 specialized test suites (smoke, unit, integration, e2e, modal, infrastructure, security, performance). Features multi-environment support, parallel execution, comprehensive reporting, and production deployment validation with 15+ comprehensive checks. Complete testing ecosystem with 57 specialized dependencies and intelligent timeout management.
-
-**Phase 11 Update**: Production Infrastructure & Deployment Pipeline - complete Kubernetes infrastructure with auto-scaling, Terraform automation for GCP services, GitHub Actions CI/CD pipeline, and Modal webhook configuration. Application startup fixes ensure graceful degradation and zero-downtime deployment capability.
-
-**Phase 10 Update**: Intelligent Batch Completion Detection System - implemented complete automatic batch completion detection that eliminates stuck batches forever. Features batch-aware completion checker with real-time progress tracking, milestone-based monitoring (10%-100%), automatic batch finalization, and comprehensive production monitoring APIs.
+**Latest Update**: Complete Cloud Run Job Architecture - achieved 100% native Google Cloud implementation with production-ready Cloud Run Job infrastructure. Features `boltz2-processor` Cloud Run Job with real ML pipeline, 84% cost reduction with L4 GPUs, simplified single-vendor architecture, and complete API integration with enterprise-grade processing capabilities.

@@ -20,11 +20,23 @@ class UserAwareStorageService:
     """Enterprise storage service with complete user isolation and quota enforcement"""
     
     def __init__(self):
-        self.storage_client = storage.Client()
-        self.db = firestore.Client()
-        
+        # Initialize Google Cloud clients with error handling
         self.bucket_name = os.getenv("GCS_BUCKET_NAME", "omtx-production")
-        self.bucket = self.storage_client.bucket(self.bucket_name)
+        try:
+            self.storage_client = storage.Client()
+            self.bucket = self.storage_client.bucket(self.bucket_name)
+            print("✅ UserAwareStorageService: Storage client initialized")
+        except Exception as e:
+            print(f"⚠️ UserAwareStorageService: Storage client initialization failed: {e}")
+            self.storage_client = None
+            self.bucket = None
+
+        try:
+            self.db = firestore.Client()
+            print("✅ UserAwareStorageService: Firestore client initialized")
+        except Exception as e:
+            print(f"⚠️ UserAwareStorageService: Firestore initialization failed: {e}")
+            self.db = None
         
         # Storage quotas by tier (in GB)
         self.storage_quotas = {
@@ -364,5 +376,10 @@ class UserAwareStorageService:
         except Exception as e:
             logger.error(f"❌ Job storage cleanup failed for user {user_id}: {str(e)}")
 
-# Global instance
-user_aware_storage_service = UserAwareStorageService()
+# Global instance with error handling
+try:
+    user_aware_storage_service = UserAwareStorageService()
+    print("✅ Global UserAwareStorageService initialized")
+except Exception as e:
+    print(f"⚠️ UserAwareStorageService initialization failed: {e}")
+    user_aware_storage_service = None

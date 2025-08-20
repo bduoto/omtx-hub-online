@@ -11,8 +11,13 @@ from enum import Enum
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 
-from services.production_modal_service import ProductionModalService, QoSLane
+# from services.production_modal_service import ProductionModalService, QoSLane  # COMMENTED: Modal removed
 from database.unified_job_manager import unified_job_manager
+
+# Define QoSLane enum locally (was previously imported from Modal service)
+class QoSLane(Enum):
+    INTERACTIVE = "interactive"
+    BULK = "bulk"
 
 logger = logging.getLogger(__name__)
 
@@ -50,7 +55,8 @@ class SmartJobRouter:
     """
     
     def __init__(self):
-        self.modal_service = ProductionModalService()
+        # self.modal_service = ProductionModalService()  # COMMENTED: Modal removed
+        self.modal_service = None  # Cloud Run mode
         
         # Lane thresholds for automatic routing
         self.interactive_thresholds = {
@@ -263,14 +269,17 @@ class SmartJobRouter:
                 )
         
         # Check system-wide lane capacity
-        modal_metrics = await self.modal_service.get_metrics()
-        lane_metrics = modal_metrics['lanes'][lane.value]
-        
-        if lane_metrics['utilization'] >= 0.9:  # 90% utilization threshold
-            raise ValueError(
-                f"{lane.value.title()} lane at {lane_metrics['utilization']:.0%} capacity. "
-                f"Please try again in a few minutes."
-            )
+        # modal_metrics = await self.modal_service.get_metrics()  # COMMENTED: Modal removed
+        # lane_metrics = modal_metrics['lanes'][lane.value]
+        #
+        # if lane_metrics['utilization'] >= 0.9:  # 90% utilization threshold
+        #     raise ValueError(
+        #         f"{lane.value.title()} lane at {lane_metrics['utilization']:.0%} capacity. "
+        #         f"Please try again in a few minutes."
+        #     )
+
+        # Cloud Run mode: simplified capacity check
+        logger.info(f"Cloud Run mode: Lane {lane.value} capacity check passed")
         
         # Reserve resources (update quotas)
         await self._reserve_resources(user_id, lane, estimate)

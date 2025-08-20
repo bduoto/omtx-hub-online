@@ -227,27 +227,26 @@ export const BatchScreeningInput: React.FC<BatchScreeningInputProps> = ({
     setIsRunning(true);
     
     try {
-      // Use the new unified batch API v3
+      // Use the consolidated API v1
       const requestBody = {
-        job_name: jobName,
+        model: "boltz2",
         protein_sequence: proteinSequence.trim(),
-        protein_name: "Batch Target", // Default name for batch screening
         ligands: ligands.map(ligand => ({
           name: ligand.name,
           smiles: ligand.smiles
         })),
-        model_name: "boltz2",
-        use_msa: true,
-        use_potentials: false,
-        configuration: {
-          priority: "normal",
-          scheduling_strategy: "adaptive",
-          max_concurrent_jobs: 5,
-          retry_failed_jobs: true
+        batch_name: jobName,
+        user_id: "current_user",
+        max_concurrent: 5,
+        priority: "normal",
+        parameters: {
+          use_msa: true,
+          use_potentials: false
         }
       };
 
-      const response = await fetch('/api/v3/batches/submit', {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+      const response = await fetch(`${apiBase}/api/v1/predict/batch`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -284,8 +283,9 @@ export const BatchScreeningInput: React.FC<BatchScreeningInputProps> = ({
     
     const pollInterval = setInterval(async () => {
       try {
-        // Use the unified batch status endpoint
-        const response = await fetch(`/api/v3/batches/${batchId}/status`);
+        // Use the consolidated batch endpoint
+        const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+        const response = await fetch(`${apiBase}/api/v1/batches/${batchId}`);
         
         if (!response.ok) {
           throw new Error(`Failed to fetch batch status: ${response.status}`);

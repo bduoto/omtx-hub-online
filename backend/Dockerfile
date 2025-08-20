@@ -54,12 +54,12 @@ ENV PATH=/home/appuser/.local/bin:$PATH
 # Switch to non-root user
 USER appuser
 
-# Expose port
-EXPOSE 8000
+# Expose port (Cloud Run will set PORT env var)
+EXPOSE $PORT
 
-# Health check
+# Health check (use PORT env var)
 HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+    CMD curl -f http://localhost:$PORT/health || exit 1
 
 # Run the application with production settings
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "--worker-class", "uvicorn.workers.UvicornWorker"] 
+CMD ["python", "main_working.py"]

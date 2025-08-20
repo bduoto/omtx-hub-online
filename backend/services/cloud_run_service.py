@@ -19,8 +19,8 @@ from google.cloud import monitoring_v3
 import aiohttp
 import backoff
 
-from services.l4_optimization_engine import l4_batch_processor, L4OptimizationConfig
-from database.gcp_storage_service import gcp_storage_service
+# from services.l4_optimization_engine import l4_batch_processor, L4OptimizationConfig  # COMMENTED: Heavy torch dependency
+# from database.gcp_storage_service import gcp_storage_service  # COMMENTED: Missing dependency
 
 logger = logging.getLogger(__name__)
 
@@ -169,12 +169,17 @@ class CloudRunService:
         logger.info(f"🔬 Single prediction: {len(protein_sequence)}aa protein x 1 ligand")
         
         # Estimate memory requirements
-        memory_estimate = l4_batch_processor.memory_manager.estimate_memory_usage(
-            len(protein_sequence), 1
-        )
-        
-        if not memory_estimate["fits_in_l4"]:
-            logger.warning(f"⚠️ Protein may exceed L4 memory: {memory_estimate['total_gb']:.1f}GB")
+        # memory_estimate = l4_batch_processor.memory_manager.estimate_memory_usage(  # COMMENTED: L4 optimization removed
+        #     len(protein_sequence), 1
+        # )
+        #
+        # if not memory_estimate["fits_in_l4"]:
+        #     logger.warning(f"⚠️ Protein may exceed L4 memory: {memory_estimate['total_gb']:.1f}GB")
+
+        # Simplified memory check
+        protein_length = len(protein_sequence)
+        if protein_length > 2000:
+            logger.warning(f"⚠️ Large protein ({protein_length}aa) may require more memory")
         
         try:
             async with aiohttp.ClientSession(
@@ -317,6 +322,10 @@ class CloudRunService:
             logger.info(f"🚀 Cloud Run Job executing: {operation.name} (tasks: {task_count})")
             return operation
 
+        except Exception as e:
+            logger.error(f"❌ Cloud Run Job execution failed: {e}")
+            raise
+
     async def _update_job_status_firestore(self, user_id: str, job_id: str, status: str, metadata: Dict[str, Any]):
         """Update job status in Firestore"""
 
@@ -349,10 +358,6 @@ class CloudRunService:
 
         l4_cost_per_hour = 0.65
         return total_hours * l4_cost_per_hour
-
-        except Exception as e:
-            logger.error(f"❌ Cloud Run Job execution failed: {str(e)}")
-            raise
     
     async def _create_firestore_job_document(
         self, 
@@ -379,7 +384,8 @@ class CloudRunService:
             "total_ligands": execution.total_ligands,
             
             # Optimization metadata
-            "optimization_config": asdict(L4OptimizationConfig()),
+            # "optimization_config": asdict(L4OptimizationConfig()),  # COMMENTED: L4 optimization removed
+            "optimization_config": {"mode": "standard", "gpu_type": "L4"},
             "shards_metadata": [
                 {
                     "expected_memory_gb": shard["expected_memory_gb"],
@@ -401,10 +407,16 @@ class CloudRunService:
         
         # L4 cost calculation
         l4_cost_per_hour = 0.65
-        estimated_time_hours = l4_batch_processor._calculate_l4_processing_time(
-            protein_length, num_ligands
-        ) / 3600
-        
+        # estimated_time_hours = l4_batch_processor._calculate_l4_processing_time(  # COMMENTED: L4 optimization removed
+        #     protein_length, num_ligands
+        # ) / 3600
+
+        # Simplified time estimation
+        base_time_per_ligand = 30  # seconds
+        protein_factor = max(1.0, protein_length / 500)
+        total_seconds = num_ligands * base_time_per_ligand * protein_factor
+        estimated_time_hours = total_seconds / 3600
+
         return estimated_time_hours * l4_cost_per_hour
     
     async def _emit_batch_submission_metrics(self, execution: CloudRunExecution):

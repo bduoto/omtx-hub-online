@@ -7,9 +7,15 @@ requests>=2.31.0
 python-dotenv>=1.0.0
 pyyaml>=6.0
 
+# Authentication & HTTP
+PyJWT>=2.8.0
+aiohttp>=3.8.0
+backoff>=2.2.0
+
 # Database & Storage
 google-cloud-storage>=2.10.0
 google-cloud-firestore>=2.11.0
+# google-cloud-run>=0.10.0  # Not needed for basic job submission
 google-auth>=2.17.0
 
 # Redis for caching
@@ -18,8 +24,8 @@ redis>=5.0.1
 # Monitoring
 google-cloud-monitoring>=2.15.0
 
-# Modal for ML inference (production optimized)
-modal==1.0.5
+# Modal removed - using Cloud Run Jobs instead
+# modal==1.0.5
 
 # Essential utilities
 numpy>=1.24.3
