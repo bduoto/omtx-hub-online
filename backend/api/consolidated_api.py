@@ -13,7 +13,7 @@ from datetime import datetime
 import logging
 
 # Import our existing services
-from database.unified_job_manager import UnifiedJobManager
+from database.async_job_manager import AsyncJobManager
 from services.gcp_storage_service import GCPStorageService
 from tasks.task_handlers import TaskHandlerRegistry
 
@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/v1", tags=["OMTX-Hub v1 API"])
 
 # Initialize services
-job_manager = UnifiedJobManager()
+job_manager = AsyncJobManager()
 storage_service = GCPStorageService()
 task_registry = TaskHandlerRegistry()
 

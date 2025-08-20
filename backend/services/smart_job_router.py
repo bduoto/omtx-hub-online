@@ -11,10 +11,10 @@ from enum import Enum
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 
-# from services.production_modal_service import ProductionModalService, QoSLane  # COMMENTED: Modal removed
+# QoS lane management for Cloud Run Job routing
 from database.unified_job_manager import unified_job_manager
 
-# Define QoSLane enum locally (was previously imported from Modal service)
+# Define QoSLane enum for Cloud Run Job routing
 class QoSLane(Enum):
     INTERACTIVE = "interactive"
     BULK = "bulk"

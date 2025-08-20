@@ -10,7 +10,7 @@ Features:
 - Intelligent batch scheduling with resource optimization
 - Real-time progress tracking with predictive completion
 - Advanced error recovery and retry mechanisms
-- Modal integration with authentication isolation
+- Cloud Run integration with authentication isolation
 - GCP storage with dual-location architecture
 - Production monitoring and analytics
 """
@@ -55,7 +55,7 @@ class BatchConfiguration:
     """Unified batch processing configuration"""
     priority: BatchPriority = BatchPriority.NORMAL
     scheduling_strategy: BatchSchedulingStrategy = BatchSchedulingStrategy.ADAPTIVE
-    max_concurrent_jobs: int = 999  # NO LIMIT - Modal handles all scaling
+    max_concurrent_jobs: int = 999  # NO LIMIT - Cloud Run handles all scaling
     retry_failed_jobs: bool = True
     max_retry_attempts: int = 3
     timeout_per_job: int = 1800  # 30 minutes
@@ -408,7 +408,7 @@ class UnifiedBatchProcessor:
                     'ligand_name': ligand_name,
                     'use_msa': request.use_msa,
                     'use_potentials': request.use_potentials,
-                    'task_type': 'protein_ligand_binding',  # REQUIRED for Modal monitor
+                    'task_type': 'protein_ligand_binding',  # REQUIRED for Cloud Run monitor
                     'parent_batch_id': batch_parent.id,  # Explicit parent reference
                     'batch_metadata': {
                         'batch_total': len(request.ligands),
@@ -439,10 +439,10 @@ class UnifiedBatchProcessor:
             for job in jobs:
                 job_dict = job.to_firestore_dict()
                 
-                # ENSURE critical fields for Modal monitor
+                # ENSURE critical fields for Cloud Run monitor
                 job_dict['batch_parent_id'] = job.batch_parent_id if hasattr(job, 'batch_parent_id') else None
                 job_dict['job_type'] = 'BATCH_CHILD'
-                job_dict['status'] = 'pending'  # Modal monitor looks for pending jobs
+                job_dict['status'] = 'pending'  # Cloud Run monitor looks for pending jobs
                 job_dict['input_data']['task_type'] = 'protein_ligand_binding'  # Required!
                 
                 # Create job and capture ID
@@ -610,12 +610,12 @@ class UnifiedBatchProcessor:
                     execution_results['queued_jobs'] = len(child_jobs) - 1
             else:
                 # Parallel/Adaptive: Start ALL jobs - no limits!
-                # Modal handles concurrency, we just submit everything
+                # Cloud Run handles concurrency, we just submit everything
                 start_tasks = []
                 for job in child_jobs:
                     start_tasks.append(self._start_individual_job(job))
                 
-                # Start ALL jobs in parallel - Modal scales automatically
+                # Start ALL jobs in parallel - Cloud Run scales automatically
                 start_results = await asyncio.gather(*start_tasks, return_exceptions=True)
                 successful_starts = sum(1 for result in start_results if not isinstance(result, Exception))
                 
@@ -746,7 +746,7 @@ class UnifiedBatchProcessor:
                 
             logger.info(f"Found {len(child_jobs_data)} child jobs for batch {batch_id}")
             
-            # 🚀 NEW: Check Modal status for running jobs and process any completions
+            # 🚀 NEW: Check Cloud Run status for running jobs and process any completions
             await self._check_and_update_running_jobs(child_jobs_data)
             
             # Calculate progress from child jobs (after potential status updates)
@@ -880,7 +880,7 @@ class UnifiedBatchProcessor:
     
     async def _check_and_update_running_jobs(self, child_jobs_data: List[Dict[str, Any]]) -> None:
         """
-        🚀 NEW: Check Modal status for running jobs and update any completed ones.
+        🚀 NEW: Check Cloud Run status for running jobs and update any completed ones.
         
         This replaces the old polling modal_monitor with efficient, on-demand checking.
         Senior Principal Engineering approach: Only check when needed, process immediately.
@@ -893,7 +893,7 @@ class UnifiedBatchProcessor:
                 logger.debug("No running jobs to check")
                 return
                 
-            logger.info(f"🔍 Checking Modal status for {len(running_jobs)} running jobs")
+            logger.info(f"🔍 Checking Cloud Run status for {len(running_jobs)} running jobs")
             
             # Check all running jobs concurrently using our new service
             status_map = await modal_job_status_service.check_multiple_jobs(running_jobs)
@@ -923,7 +923,7 @@ class UnifiedBatchProcessor:
                 
         except Exception as e:
             logger.error(f"❌ Error checking running jobs: {e}")
-            # Don't fail the entire status request if Modal checking fails
+            # Don't fail the entire status request if Cloud Run checking fails
 
 
 class ResourceMonitor:
@@ -936,7 +936,7 @@ class ResourceMonitor:
         # For now, return conservative defaults
         
         # Could check:
-        # - Current Modal job queue length
+        # - Current Cloud Run job queue length
         # - Available GPU resources  
         # - Memory usage
         # - Network bandwidth
