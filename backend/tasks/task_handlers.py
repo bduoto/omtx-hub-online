@@ -426,8 +426,8 @@ class TaskHandlerRegistry:
         if not protein_name or not protein_name.strip():
             raise ValueError("protein_name is required for batch screening")
         
-        # Use streamlined batch processor
-        from services.batch_processor import batch_processor
+        # Use Cloud Run batch processor
+        from services.cloud_run_batch_processor import cloud_run_batch_processor as batch_processor
         
         try:
             result = await batch_processor.submit_batch(

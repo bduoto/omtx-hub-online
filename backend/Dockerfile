@@ -62,4 +62,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
     CMD curl -f http://localhost:$PORT/health || exit 1
 
 # Run the application with production settings
-CMD ["python", "main_working.py"]
+CMD ["python", "main.py"]

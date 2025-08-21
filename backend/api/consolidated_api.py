@@ -12,12 +12,21 @@ from typing import Optional, List, Dict, Any, Literal
 from datetime import datetime
 import logging
 
-# Import our existing services
+# Import our services
 from database.async_job_manager import AsyncJobManager
 from services.gcp_storage_service import GCPStorageService
 from tasks.task_handlers import TaskHandlerRegistry
 
 logger = logging.getLogger(__name__)
+
+# Import our NEW Cloud Tasks integration
+try:
+    from services.job_submission_service import job_submission_service
+    CLOUD_TASKS_AVAILABLE = True
+    logger.info("✅ Cloud Tasks integration available")
+except ImportError as e:
+    CLOUD_TASKS_AVAILABLE = False
+    logger.warning(f"⚠️ Cloud Tasks not available: {e}")
 
 # Initialize router
 router = APIRouter(prefix="/api/v1", tags=["OMTX-Hub v1 API"])
@@ -68,12 +77,16 @@ class BatchPredictionRequest(BaseModel):
 class JobResponse(BaseModel):
     """Unified job response"""
     job_id: str
-    status: Literal["pending", "running", "completed", "failed"]
+    status: Literal["pending", "running", "completed", "failed", "queued"]
     model: str
     job_name: str
     created_at: datetime
-    updated_at: datetime
+    updated_at: Optional[datetime] = None
     estimated_completion_seconds: Optional[int] = None
+    
+    # Cloud Tasks integration fields
+    message: Optional[str] = None
+    queue_info: Optional[Dict[str, Any]] = None
     
     # Results (when completed)
     results: Optional[Dict[str, Any]] = None
@@ -85,17 +98,22 @@ class JobResponse(BaseModel):
 class BatchResponse(BaseModel):
     """Unified batch response"""
     batch_id: str
-    status: Literal["pending", "running", "completed", "failed"]
+    status: Literal["pending", "running", "completed", "failed", "queued"]
     model: str
     batch_name: str
     created_at: datetime
-    updated_at: datetime
+    updated_at: Optional[datetime] = None
     
     # Progress tracking
     total_jobs: int
     completed_jobs: int = 0
     failed_jobs: int = 0
     running_jobs: int = 0
+    
+    # Cloud Tasks integration fields
+    job_ids: Optional[List[str]] = None
+    message: Optional[str] = None
+    queue_info: Optional[Dict[str, Any]] = None
     
     # Batch results (when completed)
     summary: Optional[Dict[str, Any]] = None
@@ -128,7 +146,7 @@ async def submit_prediction(
     Submit a single prediction job
     
     Supports:
-    - Boltz-2: Protein-ligand binding predictions
+    - Boltz-2: Protein-ligand binding predictions (via Cloud Tasks → Cloud Run GPU)
     - RFAntibody: Antibody design and optimization  
     - Chai-1: Multi-modal structure predictions
     """
@@ -137,34 +155,61 @@ async def submit_prediction(
         if request.model == "boltz2" and not request.ligand_smiles:
             raise HTTPException(status_code=400, detail="Boltz-2 requires ligand_smiles")
         
-        # Create unified task data
-        task_data = {
-            "model_id": request.model,
-            "task_type": _get_task_type(request.model),
-            "job_name": request.job_name,
-            "user_id": request.user_id,
-            "input_data": {
-                "protein_sequence": request.protein_sequence,
-                "ligand_smiles": request.ligand_smiles,
-                **request.parameters
+        # NEW: Use Cloud Tasks for Boltz-2 jobs when available
+        if request.model == "boltz2" and CLOUD_TASKS_AVAILABLE:
+            logger.info(f"🚀 Submitting Boltz-2 job via Cloud Tasks: {request.job_name}")
+            
+            # Submit via Cloud Tasks → Cloud Run workflow
+            result = await job_submission_service.submit_individual_job(
+                protein_sequence=request.protein_sequence,
+                ligand_smiles=request.ligand_smiles,
+                ligand_name=request.job_name,  # Use job_name as ligand_name
+                user_id=request.user_id,
+                parameters=request.parameters
+            )
+            
+            return JobResponse(
+                job_id=result["job_id"],
+                status=result["status"],
+                model=request.model,
+                job_name=request.job_name,
+                created_at=datetime.utcnow(),
+                message=f"Job submitted via Cloud Tasks (estimated {result.get('estimated_completion_time', 'N/A')})",
+                queue_info=result.get("queue_info", {})
+            )
+        
+        else:
+            # FALLBACK: Use original workflow for non-Boltz2 or when Cloud Tasks unavailable
+            logger.info(f"📋 Using legacy workflow for {request.model}")
+            
+            # Create unified task data
+            task_data = {
+                "model_id": request.model,
+                "task_type": _get_task_type(request.model),
+                "job_name": request.job_name,
+                "user_id": request.user_id,
+                "input_data": {
+                    "protein_sequence": request.protein_sequence,
+                    "ligand_smiles": request.ligand_smiles,
+                    **request.parameters
+                }
             }
-        }
-        
-        # Submit to unified job manager
-        job = await job_manager.create_job(task_data)
-        
-        # Trigger background processing
-        background_tasks.add_task(_process_job, job["id"])
-        
-        return JobResponse(
-            job_id=job["id"],
-            status=job["status"],
-            model=request.model,
-            job_name=request.job_name,
-            created_at=job["created_at"],
-            updated_at=job["updated_at"],
-            estimated_completion_seconds=_estimate_completion_time(request.model)
-        )
+            
+            # Submit to unified job manager
+            job = await job_manager.create_job(task_data)
+            
+            # Trigger background processing
+            background_tasks.add_task(_process_job, job["id"])
+            
+            return JobResponse(
+                job_id=job["id"],
+                status=job["status"],
+                model=request.model,
+                job_name=request.job_name,
+                created_at=job["created_at"],
+                updated_at=job["updated_at"],
+                estimated_completion_seconds=_estimate_completion_time(request.model)
+            )
         
     except Exception as e:
         logger.error(f"Prediction submission failed: {e}")
@@ -179,22 +224,56 @@ async def submit_batch_prediction(
     Submit a batch of predictions
     
     Creates multiple jobs and manages them as a cohesive batch
+    - Boltz-2: Uses Cloud Tasks → Cloud Run GPU processing
     """
     try:
-        # Create batch container
-        batch_data = {
-            "model_id": request.model,
-            "task_type": f"batch_{_get_task_type(request.model)}",
-            "job_name": request.batch_name,
-            "user_id": request.user_id,
-            "batch_config": {
-                "max_concurrent": request.max_concurrent,
-                "priority": request.priority,
-                "total_ligands": len(request.ligands)
-            }
-        }
+        # NEW: Use Cloud Tasks for Boltz-2 batch jobs when available
+        if request.model == "boltz2" and CLOUD_TASKS_AVAILABLE:
+            logger.info(f"🚀 Submitting Boltz-2 batch via Cloud Tasks: {request.batch_name} ({len(request.ligands)} ligands)")
+            
+            # Submit via Cloud Tasks → Cloud Run workflow
+            result = await job_submission_service.submit_batch_job(
+                batch_name=request.batch_name,
+                protein_sequence=request.protein_sequence,
+                ligands=request.ligands,
+                user_id=request.user_id,
+                parameters={
+                    "max_concurrent": request.max_concurrent,
+                    "priority": request.priority,
+                    **request.parameters
+                }
+            )
+            
+            return BatchResponse(
+                batch_id=result["batch_id"],
+                status=result["status"],
+                model=request.model,
+                batch_name=request.batch_name,
+                created_at=datetime.utcnow(),
+                total_jobs=len(request.ligands),
+                job_ids=result.get("job_ids", []),
+                queue_info=result.get("queue_info", {}),
+                message=f"Batch submitted via Cloud Tasks ({len(request.ligands)} jobs queued)"
+            )
         
-        batch = await job_manager.create_batch(batch_data)
+        else:
+            # FALLBACK: Use original workflow for non-Boltz2 or when Cloud Tasks unavailable
+            logger.info(f"📋 Using legacy workflow for {request.model} batch")
+            
+            # Create batch container
+            batch_data = {
+                "model_id": request.model,
+                "task_type": f"batch_{_get_task_type(request.model)}",
+                "job_name": request.batch_name,
+                "user_id": request.user_id,
+                "batch_config": {
+                    "max_concurrent": request.max_concurrent,
+                    "priority": request.priority,
+                    "total_ligands": len(request.ligands)
+                }
+            }
+            
+            batch = await job_manager.create_batch(batch_data)
         
         # Create individual jobs
         job_ids = []

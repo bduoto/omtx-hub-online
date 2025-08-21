@@ -2,11 +2,11 @@ fastapi>=0.104.1
 uvicorn[standard]>=0.24.0
 pydantic>=2.10.0
 python-multipart==0.0.6
-modal==1.0.5
-torch>=2.6.0
-transformers>=4.36.2
-diffusers>=0.25.0
-huggingface-hub>=0.19.4
+# modal==1.0.5  # Removed - using Cloud Run instead
+# torch>=2.6.0  # Removed - not needed for API server
+# transformers>=4.36.2  # Removed - not needed for API server
+# diffusers>=0.25.0  # Removed - not needed for API server
+# huggingface-hub>=0.19.4  # Removed - not needed for API server
 numpy>=1.24.3
 scipy>=1.11.4
 biopython>=1.81
@@ -22,6 +22,7 @@ redis>=5.0.1
 celery>=5.3.4
 google-cloud-storage>=2.10.0
 google-cloud-firestore>=2.11.0
+google-cloud-tasks>=2.13.0
 google-cloud-pubsub>=2.31.0
 google-cloud-compute>=1.12.0
 google-auth>=2.17.0

@@ -24,8 +24,9 @@ from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import RedirectResponse
 import uvicorn
 
-# Import our clean consolidated API
+# Import our APIs
 from api.consolidated_api import router as api_v1_router
+from api.job_orchestration_api import router as jobs_router
 
 # Configure logging
 logging.basicConfig(
@@ -79,7 +80,9 @@ app.add_middleware(
 )
 
 # Include the consolidated API v1 (prefix already set in router)
-app.include_router(api_v1_router)
+# Include routers (order matters for route precedence)
+app.include_router(jobs_router)      # Job orchestration API  
+app.include_router(api_v1_router)    # General consolidated API
 
 # Root endpoint - redirect to docs
 @app.get("/")

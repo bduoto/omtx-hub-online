@@ -186,7 +186,7 @@ export const SystemHealthSchema = z.object({
   status: z.string(),
   database_status: z.string(),
   storage_status: z.string(),
-  modal_status: z.string(),
+  processing_status: z.string(),
   active_jobs: z.number().int(),
   total_jobs_today: z.number().int(),
   average_response_time: z.number().optional(),
