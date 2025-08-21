@@ -63,9 +63,18 @@ data/
 *.sqlite
 redis-data/
 
-# Secrets
+# Secrets - CRITICAL: Never commit these
 *.pem
 *.key
 *.crt
 secrets/
 credentials/
+production-secrets.yaml
+production-secrets.yaml.*
+*-secrets.yaml
+*-credentials.json
+omtx-hub-credentials.json
+.env.production
+.env.prod
+*.secret
+*.secrets
