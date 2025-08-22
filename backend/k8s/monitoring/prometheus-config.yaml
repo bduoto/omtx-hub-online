@@ -1,0 +1,248 @@
+# Prometheus Configuration for OMTX-Hub GKE Monitoring
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: monitoring
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+      evaluation_interval: 15s
+    
+    rule_files:
+      - "/etc/prometheus/rules/*.yml"
+    
+    alerting:
+      alertmanagers:
+        - static_configs:
+            - targets:
+              - alertmanager:9093
+    
+    scrape_configs:
+      # Prometheus itself
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['localhost:9090']
+      
+      # Kubernetes API server
+      - job_name: 'kubernetes-apiservers'
+        kubernetes_sd_configs:
+          - role: endpoints
+        scheme: https
+        tls_config:
+          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+            action: keep
+            regex: default;kubernetes;https
+      
+      # Kubernetes nodes
+      - job_name: 'kubernetes-nodes'
+        kubernetes_sd_configs:
+          - role: node
+        scheme: https
+        tls_config:
+          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        relabel_configs:
+          - action: labelmap
+            regex: __meta_kubernetes_node_label_(.+)
+          - target_label: __address__
+            replacement: kubernetes.default.svc:443
+          - source_labels: [__meta_kubernetes_node_name]
+            regex: (.+)
+            target_label: __metrics_path__
+            replacement: /api/v1/nodes/${1}/proxy/metrics
+      
+      # Kubernetes pods
+      - job_name: 'kubernetes-pods'
+        kubernetes_sd_configs:
+          - role: pod
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+            action: keep
+            regex: true
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+            action: replace
+            target_label: __metrics_path__
+            regex: (.+)
+          - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+            action: replace
+            regex: ([^:]+)(?::\d+)?;(\d+)
+            replacement: $1:$2
+            target_label: __address__
+          - action: labelmap
+            regex: __meta_kubernetes_pod_label_(.+)
+          - source_labels: [__meta_kubernetes_namespace]
+            action: replace
+            target_label: kubernetes_namespace
+          - source_labels: [__meta_kubernetes_pod_name]
+            action: replace
+            target_label: kubernetes_pod_name
+      
+      # OMTX-Hub API service
+      - job_name: 'omtx-hub-api'
+        kubernetes_sd_configs:
+          - role: service
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_service_label_app]
+            action: keep
+            regex: omtx-hub-api
+          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
+            action: keep
+            regex: true
+          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_path]
+            action: replace
+            target_label: __metrics_path__
+            regex: (.+)
+          - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
+            action: replace
+            regex: ([^:]+)(?::\d+)?;(\d+)
+            replacement: $1:$2
+            target_label: __address__
+      
+      # GPU Worker services (Cloud Run)
+      - job_name: 'gpu-workers'
+        static_configs:
+          - targets: ['gpu-worker-service-338254269321.us-central1.run.app']
+        scheme: https
+        metrics_path: '/metrics'
+        scrape_interval: 30s
+        scrape_timeout: 10s
+      
+      # Node Exporter for detailed node metrics
+      - job_name: 'node-exporter'
+        kubernetes_sd_configs:
+          - role: endpoints
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_name]
+            action: keep
+            regex: node-exporter
+          - source_labels: [__meta_kubernetes_endpoint_port_name]
+            action: keep
+            regex: metrics
+      
+      # cAdvisor for container metrics
+      - job_name: 'kubernetes-cadvisor'
+        kubernetes_sd_configs:
+          - role: node
+        scheme: https
+        tls_config:
+          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        relabel_configs:
+          - action: labelmap
+            regex: __meta_kubernetes_node_label_(.+)
+          - target_label: __address__
+            replacement: kubernetes.default.svc:443
+          - source_labels: [__meta_kubernetes_node_name]
+            regex: (.+)
+            target_label: __metrics_path__
+            replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-rules
+  namespace: monitoring
+data:
+  omtx-hub.yml: |
+    groups:
+      - name: omtx-hub-alerts
+        rules:
+          # API Health Alerts
+          - alert: APIHighErrorRate
+            expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) > 0.05
+            for: 2m
+            labels:
+              severity: critical
+              service: omtx-hub-api
+            annotations:
+              summary: "High error rate detected"
+              description: "API error rate is {{ $value | humanizePercentage }} over the last 5 minutes"
+          
+          - alert: APIHighLatency
+            expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+            for: 5m
+            labels:
+              severity: warning
+              service: omtx-hub-api
+            annotations:
+              summary: "High API latency detected"
+              description: "95th percentile latency is {{ $value }}s over the last 5 minutes"
+          
+          # Job Processing Alerts
+          - alert: HighJobFailureRate
+            expr: rate(omtx_hub_job_failures_total[10m]) / rate(omtx_hub_jobs_total[10m]) > 0.2
+            for: 5m
+            labels:
+              severity: warning
+              service: gpu-workers
+            annotations:
+              summary: "High job failure rate"
+              description: "Job failure rate is {{ $value | humanizePercentage }} over the last 10 minutes"
+          
+          - alert: StuckJobs
+            expr: omtx_hub_stuck_jobs > 5
+            for: 10m
+            labels:
+              severity: critical
+              service: gpu-workers
+            annotations:
+              summary: "Jobs are stuck"
+              description: "{{ $value }} jobs have been running for over 2 hours"
+          
+          # Resource Alerts
+          - alert: HighMemoryUsage
+            expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 90
+            for: 5m
+            labels:
+              severity: critical
+              service: kubernetes
+            annotations:
+              summary: "High memory usage"
+              description: "Memory usage is above 90% on node {{ $labels.instance }}"
+          
+          - alert: HighCPUUsage
+            expr: 100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 90
+            for: 10m
+            labels:
+              severity: warning
+              service: kubernetes
+            annotations:
+              summary: "High CPU usage"
+              description: "CPU usage is above 90% on node {{ $labels.instance }}"
+          
+          - alert: LowDiskSpace
+            expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 10
+            for: 5m
+            labels:
+              severity: critical
+              service: kubernetes
+            annotations:
+              summary: "Low disk space"
+              description: "Disk space is below 10% on node {{ $labels.instance }}"
+          
+          # GPU Alerts
+          - alert: GPUHighUtilization
+            expr: nvidia_gpu_utilization > 95
+            for: 15m
+            labels:
+              severity: warning
+              service: gpu-workers
+            annotations:
+              summary: "GPU high utilization"
+              description: "GPU utilization is above 95% for 15 minutes"
+          
+          # Storage Alerts
+          - alert: HighStorageUsage
+            expr: omtx_hub_storage_usage_gb > 1000
+            for: 5m
+            labels:
+              severity: warning
+              service: storage
+            annotations:
+              summary: "High storage usage"
+              description: "Storage usage is {{ $value }}GB, approaching limits"

@@ -1,0 +1,222 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "OMTX-Hub System Overview",
+    "tags": ["omtx-hub", "overview"],
+    "style": "dark",
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "System Health Status",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "up{job=\"omtx-hub-api\"}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "steps": [
+                {"color": "red", "value": 0},
+                {"color": "green", "value": 1}
+              ]
+            },
+            "mappings": [
+              {"type": "value", "value": "0", "text": "DOWN"},
+              {"type": "value", "value": "1", "text": "UP"}
+            ]
+          }
+        },
+        "gridPos": {"h": 8, "w": 6, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "Active Jobs",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "omtx_hub_active_jobs",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "palette-classic"},
+            "unit": "short"
+          }
+        },
+        "gridPos": {"h": 8, "w": 6, "x": 6, "y": 0}
+      },
+      {
+        "id": 3,
+        "title": "Jobs Completed (Last Hour)",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "omtx_hub_completed_jobs",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "continuous-GrYlRd"},
+            "unit": "short"
+          }
+        },
+        "gridPos": {"h": 8, "w": 6, "x": 12, "y": 0}
+      },
+      {
+        "id": 4,
+        "title": "Error Rate",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "omtx_hub_error_rate",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "steps": [
+                {"color": "green", "value": 0},
+                {"color": "yellow", "value": 5},
+                {"color": "red", "value": 10}
+              ]
+            },
+            "unit": "percent"
+          }
+        },
+        "gridPos": {"h": 8, "w": 6, "x": 18, "y": 0}
+      },
+      {
+        "id": 5,
+        "title": "API Request Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{job=\"omtx-hub-api\"}[5m]) * 60",
+            "refId": "A",
+            "legendFormat": "Requests/min"
+          }
+        ],
+        "yAxes": [
+          {"label": "Requests/min", "min": 0},
+          {"show": false}
+        ],
+        "gridPos": {"h": 9, "w": 12, "x": 0, "y": 8}
+      },
+      {
+        "id": 6,
+        "title": "Response Time (95th Percentile)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job=\"omtx-hub-api\"}[5m]))",
+            "refId": "A",
+            "legendFormat": "95th percentile"
+          }
+        ],
+        "yAxes": [
+          {"label": "Seconds", "min": 0},
+          {"show": false}
+        ],
+        "gridPos": {"h": 9, "w": 12, "x": 12, "y": 8}
+      },
+      {
+        "id": 7,
+        "title": "Job Processing Pipeline",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "omtx_hub_active_jobs",
+            "refId": "A",
+            "legendFormat": "Active Jobs"
+          },
+          {
+            "expr": "rate(omtx_hub_job_completions_total[5m]) * 60",
+            "refId": "B",
+            "legendFormat": "Completions/min"
+          },
+          {
+            "expr": "rate(omtx_hub_job_failures_total[5m]) * 60",
+            "refId": "C",
+            "legendFormat": "Failures/min"
+          }
+        ],
+        "yAxes": [
+          {"label": "Count", "min": 0},
+          {"show": false}
+        ],
+        "gridPos": {"h": 9, "w": 12, "x": 0, "y": 17}
+      },
+      {
+        "id": 8,
+        "title": "GPU Utilization",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "omtx_hub_gpu_utilization",
+            "refId": "A",
+            "legendFormat": "GPU Utilization %"
+          }
+        ],
+        "yAxes": [
+          {"label": "Percentage", "min": 0, "max": 100},
+          {"show": false}
+        ],
+        "gridPos": {"h": 9, "w": 12, "x": 12, "y": 17}
+      },
+      {
+        "id": 9,
+        "title": "Storage Usage",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "omtx_hub_storage_usage",
+            "refId": "A",
+            "legendFormat": "Storage Usage (GB)"
+          }
+        ],
+        "yAxes": [
+          {"label": "GB", "min": 0},
+          {"show": false}
+        ],
+        "gridPos": {"h": 9, "w": 12, "x": 0, "y": 26}
+      },
+      {
+        "id": 10,
+        "title": "Active Users",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "omtx_hub_active_users",
+            "refId": "A",
+            "legendFormat": "Active Users"
+          }
+        ],
+        "yAxes": [
+          {"label": "Users", "min": 0},
+          {"show": false}
+        ],
+        "gridPos": {"h": 9, "w": 12, "x": 12, "y": 26}
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "30s",
+    "schemaVersion": 30,
+    "version": 1
+  }
+}

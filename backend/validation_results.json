@@ -1,0 +1,67 @@
+{
+  "summary": {
+    "total": 5,
+    "passed": 2,
+    "failed": 3,
+    "success_rate": 40.0
+  },
+  "results": [
+    {
+      "test": "Health Check",
+      "status": "PASS",
+      "message": "API is healthy and responding",
+      "timestamp": "2025-08-22T04:06:25.254233",
+      "details": {
+        "response_time": "0.128s",
+        "status": "healthy"
+      }
+    },
+    {
+      "test": "Metrics Endpoint",
+      "status": "FAIL",
+      "message": "Metrics endpoint returned 404",
+      "timestamp": "2025-08-22T04:06:25.391928",
+      "details": {
+        "response": "{\"detail\":\"Not Found\"}"
+      }
+    },
+    {
+      "test": "API Documentation",
+      "status": "PASS",
+      "message": "API documentation accessible",
+      "timestamp": "2025-08-22T04:06:25.526278",
+      "details": {
+        "docs_url": "http://34.29.29.170/docs"
+      }
+    },
+    {
+      "test": "Authentication Required",
+      "status": "FAIL",
+      "message": "Expected 401, got 200",
+      "timestamp": "2025-08-22T04:06:25.666426",
+      "details": {
+        "response": "{\"jobs\":[],\"total\":0,\"page\":1,\"limit\":20,\"has_more\":false}"
+      }
+    },
+    {
+      "test": "Webhook System",
+      "status": "FAIL",
+      "message": "Webhook events endpoint returned 404",
+      "timestamp": "2025-08-22T04:06:25.799460",
+      "details": {
+        "response": "{\"detail\":\"Not Found\"}"
+      }
+    },
+    {
+      "test": "API Authentication",
+      "status": "PASS",
+      "message": "Consolidated API correctly requires authentication",
+      "timestamp": "2025-08-22T04:06:25.935754",
+      "details": {
+        "endpoint": "/api/v1/predict",
+        "status": 401
+      }
+    }
+  ],
+  "timestamp": "2025-08-22T04:06:25.935942"
+}

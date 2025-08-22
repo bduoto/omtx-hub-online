@@ -1,0 +1,175 @@
+{
+  "boltz2": {
+    "name": "boltz2",
+    "version": "2.2.0",
+    "model_type": "protein_ligand",
+    "adapter_type": "boltz2",
+    "deployment_strategy": "cloud_run_gpu",
+    "source": "github.com/jwohlwend/boltz",
+    "installation": "pip install boltz[cuda]",
+    "auto_download_weights": true,
+    "endpoint": null,
+    "resources": {
+      "gpu": "nvidia-l4",
+      "memory": "16Gi",
+      "cpu": "4"
+    },
+    "docker": {
+      "base": "nvidia/cuda:12.1.0-runtime-ubuntu22.04",
+      "build_strategy": "pip_install"
+    }
+  },
+  "alphafold3": {
+    "name": "alphafold3",
+    "version": "3.0.0",
+    "model_type": "protein_structure",
+    "adapter_type": "alphafold",
+    "deployment_strategy": "vertex_ai",
+    "source": "github.com/google-deepmind/alphafold3",
+    "installation": "custom",
+    "resources": {
+      "gpu": "nvidia-a100",
+      "memory": "40Gi",
+      "cpu": "8"
+    }
+  },
+  "esmfold": {
+    "name": "esmfold",
+    "version": "2.0.0",
+    "model_type": "protein_structure",
+    "adapter_type": "esm",
+    "deployment_strategy": "cloud_run_gpu",
+    "source": "github.com/facebookresearch/esm",
+    "installation": "pip install fair-esm",
+    "auto_download_weights": true,
+    "resources": {
+      "gpu": "nvidia-l4",
+      "memory": "16Gi",
+      "cpu": "4"
+    }
+  },
+  "diffdock": {
+    "name": "diffdock",
+    "version": "1.1.0",
+    "model_type": "docking",
+    "adapter_type": "diffdock",
+    "deployment_strategy": "gke_gpu_pool",
+    "source": "github.com/gcorso/DiffDock",
+    "installation": "conda",
+    "resources": {
+      "gpu": "nvidia-t4",
+      "memory": "8Gi",
+      "cpu": "2"
+    }
+  },
+  "proteinmpnn": {
+    "name": "proteinmpnn",
+    "version": "1.0.1",
+    "model_type": "protein_design",
+    "adapter_type": "proteinmpnn",
+    "deployment_strategy": "cloud_run_cpu",
+    "source": "github.com/dauparas/ProteinMPNN",
+    "installation": "pip install",
+    "resources": {
+      "memory": "4Gi",
+      "cpu": "2"
+    }
+  },
+  "rfantibody": {
+    "name": "rfantibody",
+    "version": "1.0.0",
+    "model_type": "antibody",
+    "adapter_type": "rfantibody",
+    "deployment_strategy": "cloud_run_gpu",
+    "source": "proprietary",
+    "installation": "custom",
+    "resources": {
+      "gpu": "nvidia-l4",
+      "memory": "16Gi",
+      "cpu": "4"
+    }
+  },
+  "chai1": {
+    "name": "chai1",
+    "version": "1.0.0",
+    "model_type": "protein_structure",
+    "adapter_type": "chai",
+    "deployment_strategy": "cloud_run_gpu",
+    "source": "github.com/chaidiscovery/chai-lab",
+    "installation": "pip install chai-lab",
+    "auto_download_weights": true,
+    "resources": {
+      "gpu": "nvidia-l4",
+      "memory": "24Gi",
+      "cpu": "8"
+    }
+  },
+  "rfdiffusion": {
+    "name": "rfdiffusion",
+    "version": "1.1.0",
+    "model_type": "protein_design",
+    "adapter_type": "rfdiffusion",
+    "deployment_strategy": "batch_ai",
+    "source": "github.com/RosettaCommons/RFdiffusion",
+    "installation": "conda",
+    "resources": {
+      "gpu": "nvidia-a100",
+      "memory": "32Gi",
+      "cpu": "8"
+    }
+  },
+  "esm2": {
+    "name": "esm2",
+    "version": "2.0.0",
+    "model_type": "language_model",
+    "adapter_type": "esm",
+    "deployment_strategy": "cached_api",
+    "source": "github.com/facebookresearch/esm",
+    "installation": "pip install fair-esm",
+    "cache_embeddings": true,
+    "resources": {
+      "memory": "8Gi",
+      "cpu": "4"
+    }
+  },
+  "chemprop": {
+    "name": "chemprop",
+    "version": "2.0.0",
+    "model_type": "property_prediction",
+    "adapter_type": "chemprop",
+    "deployment_strategy": "serverless",
+    "source": "github.com/chemprop/chemprop",
+    "installation": "pip install chemprop",
+    "resources": {
+      "memory": "2Gi",
+      "cpu": "1"
+    }
+  },
+  "autodock_vina": {
+    "name": "autodock_vina",
+    "version": "1.2.3",
+    "model_type": "docking",
+    "adapter_type": "vina",
+    "deployment_strategy": "cloud_run_cpu",
+    "source": "github.com/ccsb-scripps/AutoDock-Vina",
+    "installation": "apt-get install autodock-vina",
+    "resources": {
+      "memory": "4Gi",
+      "cpu": "4"
+    }
+  },
+  "rosettafold2": {
+    "name": "rosettafold2",
+    "version": "2.0.0",
+    "model_type": "protein_structure",
+    "adapter_type": "rosettafold",
+    "deployment_strategy": "gke_gpu_pool",
+    "source": "github.com/RosettaCommons/RoseTTAFold2",
+    "installation": "custom",
+    "resources": {
+      "gpu": "nvidia-v100",
+      "memory": "32Gi",
+      "cpu": "8"
+    }
+  }
+}

@@ -24,15 +24,18 @@ from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import RedirectResponse
 import uvicorn
 
+# Import monitoring and metrics
+from services.metrics_service import MetricsMiddleware, get_metrics_response
+
 # Import our APIs
 from api.consolidated_api import router as api_v1_router
 from api.job_orchestration_api import router as jobs_router
+from api.auth_api import router as auth_router
+from api.webhook_api import router as webhook_router
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
+# Initialize logging service first
+from services.logging_service import logging_service
+
 logger = logging.getLogger(__name__)
 
 # Create FastAPI app
@@ -61,6 +64,7 @@ app = FastAPI(
 )
 
 # Add middleware
+app.add_middleware(MetricsMiddleware)  # Add metrics collection first
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 # Configure CORS for frontend
@@ -79,8 +83,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include the consolidated API v1 (prefix already set in router)
 # Include routers (order matters for route precedence)
+app.include_router(auth_router)      # Authentication API
+app.include_router(webhook_router)   # Webhook management API
 app.include_router(jobs_router)      # Job orchestration API  
 app.include_router(api_v1_router)    # General consolidated API
 
@@ -111,6 +116,12 @@ async def api_health_check():
     """Health check with API prefix for compatibility"""
     return await health_check()
 
+# Prometheus metrics endpoint
+@app.get("/metrics")
+async def metrics():
+    """Prometheus metrics endpoint for monitoring"""
+    return get_metrics_response()
+
 # Startup event
 @app.on_event("startup")
 async def startup_event():
@@ -135,12 +146,37 @@ async def startup_event():
             
     except Exception as e:
         logger.error(f"❌ Startup health check failed: {e}")
+    
+    # Start job monitoring service
+    try:
+        from services.job_monitoring_service import job_monitoring_service
+        await job_monitoring_service.start_monitoring()
+        logger.info("✅ Job monitoring service started")
+    except Exception as e:
+        logger.error(f"❌ Failed to start job monitoring service: {e}")
+    
+    # Start monitoring service
+    try:
+        from services.monitoring_service import monitoring_service
+        await monitoring_service.start_monitoring()
+        logger.info("✅ Monitoring service started")
+    except Exception as e:
+        logger.error(f"❌ Failed to start monitoring service: {e}")
 
 # Shutdown event
 @app.on_event("shutdown") 
 async def shutdown_event():
     """Application shutdown tasks"""
     logger.info("🛑 OMTX-Hub Consolidated API shutting down")
+    
+    # Stop job monitoring service
+    try:
+        from services.job_monitoring_service import job_monitoring_service
+        await job_monitoring_service.stop_monitoring()
+        logger.info("✅ Job monitoring service stopped")
+    except Exception as e:
+        logger.error(f"❌ Failed to stop job monitoring service: {e}")
+    
     logger.info("✅ Clean shutdown completed")
 
 # Development server

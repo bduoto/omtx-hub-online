@@ -16,6 +16,7 @@ from typing import Dict, List, Any, Optional
 
 import torch
 import yaml
+import jwt
 from google.cloud import storage
 from google.cloud import firestore
 
@@ -27,7 +28,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 class Boltz2CloudRunner:
-    """L4-optimized Boltz-2 execution engine for Cloud Run"""
+    """L4-optimized Boltz-2 execution engine for Cloud Run with user validation"""
     
     def __init__(self):
         # Cloud Run environment variables
@@ -38,22 +39,96 @@ class Boltz2CloudRunner:
         self.input_path = os.getenv("INPUT_PATH")
         self.output_path = os.getenv("OUTPUT_PATH")
         self.gpu_type = os.getenv("GPU_TYPE", "L4")
+        self.auth_token = os.getenv("AUTH_TOKEN")  # JWT token for user validation
         
         # Validate required environment variables
         if not all([self.user_id, self.job_id, self.input_path, self.output_path]):
             raise ValueError("Missing required environment variables")
         
+        # JWT Configuration for validation
+        self.jwt_secret = os.getenv('JWT_SECRET_KEY', 'omtx-hub-default-secret-key-change-in-production')
+        self.jwt_algorithm = 'HS256'
+        
         # Initialize GCP clients
         self.storage_client = storage.Client()
         self.db = firestore.Client()
+        
+        # Validate user authorization before proceeding
+        self._validate_user_authorization()
         
         # L4 GPU optimizations
         self._configure_l4_optimizations()
         
         logger.info(f"🎮 Boltz2CloudRunner initialized for L4 GPU")
         logger.info(f"   Task: {self.task_index}/{self.task_count}")
-        logger.info(f"   User: {self.user_id}")
+        logger.info(f"   User: {self.user_id} (validated)")
         logger.info(f"   Job: {self.job_id}")
+    
+    def _validate_user_authorization(self):
+        """Validate user authorization before processing"""
+        
+        try:
+            # 1. Validate JWT token if provided
+            if self.auth_token:
+                try:
+                    payload = jwt.decode(self.auth_token, self.jwt_secret, algorithms=[self.jwt_algorithm])
+                    token_user_id = payload.get('user_id')
+                    
+                    if token_user_id != self.user_id:
+                        raise ValueError(f"Token user_id ({token_user_id}) doesn't match environment user_id ({self.user_id})")
+                    
+                    logger.info(f"✅ JWT token validated for user: {self.user_id}")
+                    
+                except jwt.ExpiredSignatureError:
+                    raise ValueError("Authentication token has expired")
+                except jwt.InvalidTokenError as e:
+                    raise ValueError(f"Invalid authentication token: {e}")
+            else:
+                # In development mode, allow execution without token but log warning
+                if os.getenv('ENVIRONMENT') == 'development':
+                    logger.warning(f"⚠️ No auth token provided for user {self.user_id} (development mode)")
+                else:
+                    raise ValueError("Authentication token required for GPU job execution")
+            
+            # 2. Validate job ownership in Firestore
+            job_ref = self.db.collection('jobs').document(self.job_id)
+            job_doc = job_ref.get()
+            
+            if not job_doc.exists:
+                raise ValueError(f"Job {self.job_id} not found in database")
+            
+            job_data = job_doc.to_dict()
+            job_user_id = job_data.get('user_id')
+            
+            if job_user_id != self.user_id:
+                raise ValueError(f"Job {self.job_id} does not belong to user {self.user_id}")
+            
+            logger.info(f"✅ Job ownership validated: {self.job_id} belongs to {self.user_id}")
+            
+            # 3. Validate input data path matches user context
+            expected_user_path = f"users/{self.user_id}/"
+            if expected_user_path not in self.input_path:
+                logger.warning(f"⚠️ Input path doesn't match user context: {self.input_path}")
+                # Don't fail here, but log for security monitoring
+            
+            # 4. Validate output path matches user context
+            if expected_user_path not in self.output_path:
+                logger.warning(f"⚠️ Output path doesn't match user context: {self.output_path}")
+                # Don't fail here, but log for security monitoring
+            
+            logger.info(f"🔐 User authorization completed for {self.user_id}")
+            
+        except Exception as e:
+            logger.error(f"❌ User authorization failed: {e}")
+            # Update job status to failed due to authorization
+            try:
+                self._update_task_status("failed", {
+                    "error": f"Authorization failed: {str(e)}",
+                    "error_type": "authorization_error"
+                })
+            except:
+                pass  # Don't fail if we can't update status
+            raise ValueError(f"User authorization failed: {e}")
     
     def _configure_l4_optimizations(self):
         """Configure PyTorch for L4 GPU optimization"""

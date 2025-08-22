@@ -6,7 +6,7 @@ FROM: 101 scattered endpoints across v2/v3/legacy
 TO: 11 core endpoints with unified job model
 """
 
-from fastapi import APIRouter, HTTPException, Query, Path, BackgroundTasks
+from fastapi import APIRouter, HTTPException, Query, Path, BackgroundTasks, Depends
 from pydantic import BaseModel, Field
 from typing import Optional, List, Dict, Any, Literal
 from datetime import datetime
@@ -16,6 +16,27 @@ import logging
 from database.async_job_manager import AsyncJobManager
 from services.gcp_storage_service import GCPStorageService
 from tasks.task_handlers import TaskHandlerRegistry
+
+# Import authentication
+from auth import get_current_user, get_current_user_id, require_admin_role
+from typing import Optional as Opt
+
+# Create optional authentication dependencies for development
+def get_optional_user_id(user_id: Optional[str] = None):
+    """Get user ID with fallback to 'anonymous' for development"""
+    try:
+        from auth import get_current_user_id
+        return get_current_user_id()
+    except:
+        return user_id or "anonymous"
+
+def get_optional_user(user: Optional[dict] = None):
+    """Get user with fallback to anonymous user for development"""
+    try:
+        from auth import get_current_user
+        return get_current_user()
+    except:
+        return user or {"id": "anonymous", "email": "anonymous@omtx.ai", "is_anonymous": True}
 
 logger = logging.getLogger(__name__)
 
@@ -140,7 +161,9 @@ class BatchListResponse(BaseModel):
 @router.post("/predict", response_model=JobResponse)
 async def submit_prediction(
     request: PredictionRequest,
-    background_tasks: BackgroundTasks
+    background_tasks: BackgroundTasks,
+    current_user_id: str = Depends(get_optional_user_id),
+    current_user: dict = Depends(get_optional_user)
 ) -> JobResponse:
     """
     Submit a single prediction job
@@ -159,13 +182,26 @@ async def submit_prediction(
         if request.model == "boltz2" and CLOUD_TASKS_AVAILABLE:
             logger.info(f"🚀 Submitting Boltz-2 job via Cloud Tasks: {request.job_name}")
             
+            # Extract auth token for GPU worker validation
+            auth_token = None
+            if not current_user.get('is_anonymous', False):
+                # Create a fresh token for the GPU worker with extended expiration
+                from auth.jwt_auth import JWTAuth
+                auth_token = JWTAuth.create_access_token(
+                    user_id=current_user_id,
+                    email=current_user.get('email'),
+                    role=current_user.get('role', 'user')
+                )
+                logger.info(f"🔑 Created auth token for GPU worker validation: {current_user_id}")
+            
             # Submit via Cloud Tasks → Cloud Run workflow
             result = await job_submission_service.submit_individual_job(
                 protein_sequence=request.protein_sequence,
                 ligand_smiles=request.ligand_smiles,
                 ligand_name=request.job_name,  # Use job_name as ligand_name
-                user_id=request.user_id,
-                parameters=request.parameters
+                user_id=current_user_id,  # Use authenticated user_id
+                parameters=request.parameters,
+                auth_token=auth_token  # Pass auth token for worker validation
             )
             
             return JobResponse(
@@ -218,7 +254,9 @@ async def submit_prediction(
 @router.post("/predict/batch", response_model=BatchResponse)
 async def submit_batch_prediction(
     request: BatchPredictionRequest,
-    background_tasks: BackgroundTasks
+    background_tasks: BackgroundTasks,
+    current_user_id: str = Depends(get_optional_user_id),
+    current_user: dict = Depends(get_optional_user)
 ) -> BatchResponse:
     """
     Submit a batch of predictions
@@ -231,17 +269,30 @@ async def submit_batch_prediction(
         if request.model == "boltz2" and CLOUD_TASKS_AVAILABLE:
             logger.info(f"🚀 Submitting Boltz-2 batch via Cloud Tasks: {request.batch_name} ({len(request.ligands)} ligands)")
             
+            # Extract auth token for GPU worker validation
+            auth_token = None
+            if not current_user.get('is_anonymous', False):
+                # Create a fresh token for the GPU worker with extended expiration
+                from auth.jwt_auth import JWTAuth
+                auth_token = JWTAuth.create_access_token(
+                    user_id=current_user_id,
+                    email=current_user.get('email'),
+                    role=current_user.get('role', 'user')
+                )
+                logger.info(f"🔑 Created auth token for batch GPU workers: {current_user_id}")
+            
             # Submit via Cloud Tasks → Cloud Run workflow
             result = await job_submission_service.submit_batch_job(
                 batch_name=request.batch_name,
                 protein_sequence=request.protein_sequence,
                 ligands=request.ligands,
-                user_id=request.user_id,
+                user_id=current_user_id,  # Use authenticated user_id
                 parameters={
                     "max_concurrent": request.max_concurrent,
                     "priority": request.priority,
                     **request.parameters
-                }
+                },
+                auth_token=auth_token  # Pass auth token for worker validation
             )
             
             return BatchResponse(
@@ -355,14 +406,19 @@ async def get_job(job_id: str = Path(..., description="Job ID")):
 
 @router.get("/jobs", response_model=JobListResponse)
 async def list_jobs(
-    user_id: str = Query(default="default", description="User ID"),
+    user_id: str = Query(default="current_user", description="User ID"),
     page: int = Query(default=1, ge=1, description="Page number"),
     limit: int = Query(default=20, ge=1, le=100, description="Items per page"),
     status: Optional[str] = Query(default=None, description="Filter by status"),
-    model: Optional[str] = Query(default=None, description="Filter by model")
+    model: Optional[str] = Query(default=None, description="Filter by model"),
+    current_user_id: str = Depends(get_optional_user_id)
 ):
     """List user jobs with pagination"""
     try:
+        # Handle special "current_user" value
+        if user_id == "current_user":
+            user_id = current_user_id
+            
         offset = (page - 1) * limit
         
         jobs, total = await job_manager.list_jobs(
@@ -406,16 +462,23 @@ async def list_jobs(
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/jobs/{job_id}")
-async def delete_job(job_id: str = Path(..., description="Job ID")):
-    """Delete a job and its associated files"""
+async def delete_job(
+    job_id: str = Path(..., description="Job ID"),
+    user_id: str = Query(default="anonymous", description="User ID for access control")
+):
+    """Delete a job and its associated files with user isolation"""
     try:
         # Verify job exists and get user
         job = await job_manager.get_job(job_id)
         if not job:
             raise HTTPException(status_code=404, detail="Job not found")
         
-        # Delete from storage
-        await storage_service.delete_job_files(job_id)
+        # Verify user owns this job
+        if job.get("user_id") != user_id:
+            raise HTTPException(status_code=403, detail="Access denied: You can only delete your own jobs")
+        
+        # Delete from storage with user isolation
+        await storage_service.delete_job_files(job_id, user_id)
         
         # Delete from database
         await job_manager.delete_job(job_id)
@@ -473,14 +536,19 @@ async def get_batch(batch_id: str = Path(..., description="Batch ID")):
 
 @router.get("/batches", response_model=BatchListResponse)
 async def list_batches(
-    user_id: str = Query(default="default", description="User ID"),
+    user_id: str = Query(default="current_user", description="User ID"),
     page: int = Query(default=1, ge=1, description="Page number"),
     limit: int = Query(default=20, ge=1, le=100, description="Items per page"),
     status: Optional[str] = Query(default=None, description="Filter by status"),
-    model: Optional[str] = Query(default=None, description="Filter by model")
+    model: Optional[str] = Query(default=None, description="Filter by model"),
+    current_user_id: str = Depends(get_optional_user_id)
 ):
     """List user batches with pagination"""
     try:
+        # Handle special "current_user" value
+        if user_id == "current_user":
+            user_id = current_user_id
+            
         offset = (page - 1) * limit
         
         batches, total = await job_manager.list_batches(
@@ -553,9 +621,10 @@ async def delete_batch(batch_id: str = Path(..., description="Batch ID")):
 @router.get("/jobs/{job_id}/files/{file_type}")
 async def download_job_file(
     job_id: str = Path(..., description="Job ID"),
-    file_type: Literal["cif", "pdb", "json"] = Path(..., description="File type")
+    file_type: Literal["cif", "pdb", "json"] = Path(..., description="File type"),
+    user_id: str = Query(default="anonymous", description="User ID for access control")
 ):
-    """Download job result files"""
+    """Download job result files with user isolation"""
     try:
         from fastapi.responses import Response
         
@@ -564,11 +633,15 @@ async def download_job_file(
         if not job:
             raise HTTPException(status_code=404, detail="Job not found")
         
+        # Verify user owns this job
+        if job.get("user_id") != user_id:
+            raise HTTPException(status_code=403, detail="Access denied: You can only access your own jobs")
+        
         if job["status"] != "completed":
             raise HTTPException(status_code=400, detail="Job not completed")
         
-        # Get file from storage
-        file_content, content_type = await storage_service.get_job_file(job_id, file_type)
+        # Get file from storage with user isolation
+        file_content, content_type = await storage_service.get_job_file(job_id, file_type, user_id)
         
         filename = f"{job_id}.{file_type}"
         
@@ -589,9 +662,10 @@ async def download_job_file(
 @router.get("/batches/{batch_id}/export")
 async def export_batch(
     batch_id: str = Path(..., description="Batch ID"),
-    format: Literal["csv", "json", "zip"] = Query(..., description="Export format")
+    format: Literal["csv", "json", "zip"] = Query(..., description="Export format"),
+    user_id: str = Query(default="anonymous", description="User ID for access control")
 ):
-    """Export batch results in various formats"""
+    """Export batch results with user isolation"""
     try:
         from fastapi.responses import Response
         
@@ -600,11 +674,15 @@ async def export_batch(
         if not batch:
             raise HTTPException(status_code=404, detail="Batch not found")
         
+        # Verify user owns this batch
+        if batch.get("user_id") != user_id:
+            raise HTTPException(status_code=403, detail="Access denied: You can only access your own batches")
+        
         if batch["status"] != "completed":
             raise HTTPException(status_code=400, detail="Batch not completed")
         
-        # Generate export
-        export_content, content_type = await storage_service.export_batch(batch_id, format)
+        # Generate export with user isolation
+        export_content, content_type = await storage_service.export_batch(batch_id, format, user_id)
         
         filename = f"{batch_id}_results.{format}"
         

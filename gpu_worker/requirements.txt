@@ -1,34 +1,18 @@
-# GPU Worker Dependencies
+# GPU Worker Dependencies - Minimal for Boltz-2
+# Let pip resolve all versions to avoid conflicts
+
 # Core web framework
-flask>=3.0.0
-gunicorn>=21.0.0
+flask
+gunicorn
 
 # Google Cloud dependencies
-google-cloud-firestore>=2.11.0
-google-cloud-storage>=2.10.0
-google-cloud-tasks>=2.13.0
-google-auth>=2.17.0
+google-cloud-firestore
+google-cloud-storage
+google-cloud-logging
 
-# Scientific computing (for Boltz-2)
-numpy>=1.24.0
-scipy>=1.11.0
-pandas>=2.0.0
+# Boltz-2 (includes all scientific dependencies)
+boltz==2.1.1
 
-# Bioinformatics
-biopython>=1.81
-
-# Protein structure handling
-# biotite>=0.37.0  # Uncomment when implementing real Boltz-2
-
-# ML/AI dependencies (for when implementing real Boltz-2)
-# torch>=2.1.0  # Installed separately with CUDA support
-# transformers>=4.30.0
-# accelerate>=0.20.0
-
-# Utility libraries
-requests>=2.31.0
-python-dotenv>=1.0.0
-pydantic>=2.0.0
-
-# Monitoring and logging
-psutil>=5.9.0
+# Essential utilities
+python-dotenv
+pyyaml

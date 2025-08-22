@@ -33,15 +33,23 @@ class GCPDatabaseManager:
     def _initialize(self):
         """Initialize Firestore client"""
         try:
-            # Option 1: Service account JSON from environment variable
-            gcp_creds_json = os.getenv('GCP_CREDENTIALS_JSON')
-            if gcp_creds_json:
-                creds_dict = json.loads(gcp_creds_json)
-                credentials = service_account.Credentials.from_service_account_info(creds_dict)
-                self.db = firestore.Client(project=self.project_id, credentials=credentials)
-            else:
-                # Option 2: Default credentials (for local development or GCP environment)
+            # Option 1: Default credentials (for GCP environment) - PRIORITIZED
+            # This uses the service account attached to the GKE node pool
+            if os.getenv('KUBERNETES_SERVICE_HOST'):  # Running in Kubernetes
+                logger.info("🔧 Using GKE default credentials for Firestore")
                 self.db = firestore.Client(project=self.project_id)
+            else:
+                # Option 2: Service account JSON for local development
+                gcp_creds_json = os.getenv('GCP_CREDENTIALS_JSON')
+                if gcp_creds_json:
+                    logger.info("🔧 Using service account JSON for Firestore")
+                    creds_dict = json.loads(gcp_creds_json)
+                    credentials = service_account.Credentials.from_service_account_info(creds_dict)
+                    self.db = firestore.Client(project=self.project_id, credentials=credentials)
+                else:
+                    # Option 3: Default credentials (for local development)
+                    logger.info("🔧 Using local default credentials for Firestore")
+                    self.db = firestore.Client(project=self.project_id)
             
             # Test connection
             collections_ref = self.db.collections()

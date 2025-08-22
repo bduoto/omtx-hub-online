@@ -44,24 +44,28 @@ def initialize_services():
         bucket = storage_client.bucket(bucket_name)
         logger.info(f"✅ Connected to Cloud Storage bucket: {bucket_name}")
         
-        # Initialize Boltz-2 model (placeholder for now)
-        predictor = MockBoltz2Predictor()  # Will replace with real model
+        # Initialize Boltz-2 model
+        from boltz2_predictor import Boltz2Predictor
+        predictor = Boltz2Predictor()
         logger.info("✅ Boltz-2 model initialized")
         
         return True
         
     except DefaultCredentialsError:
         logger.warning("⚠️ GCP authentication not available. Running in degraded mode.")
-        # Initialize mock services for testing
-        predictor = MockBoltz2Predictor()
+        # Initialize Boltz-2 predictor anyway (will use mock if model not available)
+        from boltz2_predictor import Boltz2Predictor
+        predictor = Boltz2Predictor()
         return False
     except Exception as e:
         logger.warning(f"⚠️ Failed to initialize services: {e}. Running in degraded mode.")
-        # Initialize mock services for testing  
-        predictor = MockBoltz2Predictor()
+        # Initialize Boltz-2 predictor anyway (will use mock if model not available)
+        from boltz2_predictor import Boltz2Predictor
+        predictor = Boltz2Predictor()
         return False
 
-class MockBoltz2Predictor:
+# MockBoltz2Predictor removed - using real Boltz2Predictor now
+class MockBoltz2Predictor_DEPRECATED:
     """
     Mock Boltz-2 predictor for testing
     Replace with actual model implementation

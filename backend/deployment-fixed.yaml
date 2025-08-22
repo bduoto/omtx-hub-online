@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: omtx-hub-api
+  labels:
+    app: omtx-hub-api
+    version: enterprise
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: omtx-hub-api
+  template:
+    metadata:
+      labels:
+        app: omtx-hub-api
+        version: enterprise
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: api
+          image: gcr.io/om-models/omtx-hub-backend:latest
+          ports:
+            - containerPort: 8000
+              name: http
+          env:
+            - name: ENVIRONMENT
+              value: "production"
+            - name: GCP_PROJECT_ID
+              value: "om-models"
+            - name: SERVICE_NAME
+              value: "omtx-hub-api"
+            - name: SERVICE_VERSION
+              value: "enterprise-20250821-214103"
+            - name: JWT_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: omtx-hub-secrets
+                  key: jwt-secret
+            - name: WEBHOOK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: omtx-hub-secrets
+                  key: webhook-secret
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+      serviceAccountName: omtx-hub-service-account

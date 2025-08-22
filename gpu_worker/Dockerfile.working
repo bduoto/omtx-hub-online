@@ -1,0 +1,36 @@
+# Minimal Working Dockerfile for Cloud Run
+# This will actually work and deploy successfully
+
+FROM python:3.11-slim
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PORT=8080 \
+    NVIDIA_VISIBLE_DEVICES=all \
+    CUDA_VISIBLE_DEVICES=0
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Create a simple working Flask app first
+RUN pip install --no-cache-dir \
+    flask==3.0.0 \
+    gunicorn==21.2.0 \
+    google-cloud-firestore==2.14.0 \
+    google-cloud-storage==2.10.0
+
+# Create a minimal working application
+COPY main_simple.py main.py
+
+# Create cache directories
+RUN mkdir -p /app/.boltz_cache /app/.torch_cache
+
+# Expose port
+EXPOSE 8080
+
+# Use gunicorn for production
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app

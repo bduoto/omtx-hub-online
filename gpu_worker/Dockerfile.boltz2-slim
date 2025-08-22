@@ -1,0 +1,40 @@
+# Slim Dockerfile for Boltz-2 that uses auto-download
+# Much faster to build, weights download on first run
+FROM nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
+
+# Install Python and essential tools
+RUN apt-get update && apt-get install -y \
+    python3.11 \
+    python3-pip \
+    wget \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set Python 3.11 as default
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1
+RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
+
+# Install PyTorch for CUDA 12.1 (required for L4 GPUs)
+RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# Install your API dependencies first
+COPY requirements.txt /tmp/
+RUN pip install -r /tmp/requirements.txt --no-cache-dir
+
+# Install Boltz-2 directly from PyPI
+# This will auto-download weights on first prediction  
+RUN pip install "boltz[cuda]" --no-cache-dir
+
+# Copy your application code
+WORKDIR /app
+COPY . /app/
+
+# Create cache directory for model weights
+# Boltz will auto-download here on first run
+RUN mkdir -p /app/.boltz_cache && chmod 777 /app/.boltz_cache
+ENV BOLTZ_CACHE=/app/.boltz_cache
+
+# Run the GPU worker service
+EXPOSE 8080
+CMD ["python", "main.py"]

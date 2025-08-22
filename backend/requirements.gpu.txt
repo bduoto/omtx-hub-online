@@ -1,0 +1,33 @@
+# GPU Worker Service Requirements
+# Optimized for Cloud Run with L4 GPU
+
+# Core dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+
+# Google Cloud dependencies
+google-cloud-firestore==2.13.0
+google-cloud-storage==2.10.0
+google-cloud-tasks==2.13.0
+
+# Authentication
+PyJWT==2.8.0
+python-jose==3.3.0
+
+# ML/GPU dependencies
+torch==2.1.0
+numpy==1.24.3
+scipy==1.11.4
+pyyaml==6.0.1
+
+# Boltz-2 dependencies (placeholder - replace with actual)
+# boltz2==1.0.0  # Uncomment when available
+
+# Utilities
+python-dotenv==1.0.0
+aiofiles==23.2.1
+httpx==0.25.2
+
+# Monitoring
+prometheus-client==0.19.0

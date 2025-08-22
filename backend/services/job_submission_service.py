@@ -23,9 +23,16 @@ class JobSubmissionService:
         self.location = os.getenv('CLOUD_TASKS_LOCATION', 'us-central1')
         self.gpu_worker_url = os.getenv('GPU_WORKER_URL', 'https://gpu-worker-service-338254269321.us-central1.run.app')
         
-        # Initialize clients
+        # Initialize clients with proper credentials
         self.tasks_client = tasks_v2.CloudTasksClient()
-        self.db = firestore.Client(project=self.project_id)
+        
+        # Use default credentials for Firestore in GKE environment
+        if os.getenv('KUBERNETES_SERVICE_HOST'):
+            logger.info("🔧 Job Submission Service using GKE default credentials")
+            self.db = firestore.Client(project=self.project_id)
+        else:
+            logger.info("🔧 Job Submission Service using local credentials")
+            self.db = firestore.Client(project=self.project_id)
         
         # Queue paths
         self.standard_queue = self.tasks_client.queue_path(
@@ -44,7 +51,8 @@ class JobSubmissionService:
         ligand_name: Optional[str] = None,
         user_id: str = "anonymous",
         parameters: Optional[Dict[str, Any]] = None,
-        priority: str = "normal"
+        priority: str = "normal",
+        auth_token: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Submit an individual Boltz-2 prediction job
@@ -97,7 +105,8 @@ class JobSubmissionService:
             task = self._create_task(
                 job_id=job_id,
                 job_type="INDIVIDUAL",
-                priority=priority
+                priority=priority,
+                auth_token=auth_token
             )
             
             # 3. Submit to appropriate queue
@@ -149,7 +158,8 @@ class JobSubmissionService:
         user_id: str = "anonymous",
         parameters: Optional[Dict[str, Any]] = None,
         max_concurrent: int = 10,
-        priority: str = "normal"
+        priority: str = "normal",
+        auth_token: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Submit a batch of Boltz-2 predictions
@@ -266,7 +276,8 @@ class JobSubmissionService:
                     job_type="BATCH_CHILD",
                     batch_id=batch_id,
                     priority=priority,
-                    delay_seconds=i * 2
+                    delay_seconds=i * 2,
+                    auth_token=auth_token
                 )
                 
                 response = self.tasks_client.create_task(
@@ -325,7 +336,8 @@ class JobSubmissionService:
         job_type: str,
         batch_id: Optional[str] = None,
         priority: str = "normal",
-        delay_seconds: int = 0
+        delay_seconds: int = 0,
+        auth_token: Optional[str] = None
     ) -> Dict[str, Any]:
         """Create a Cloud Task for GPU processing"""
         
@@ -334,7 +346,8 @@ class JobSubmissionService:
             "job_id": job_id,
             "job_type": job_type,
             "batch_id": batch_id,
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": datetime.utcnow().isoformat(),
+            "auth_token": auth_token  # Include auth token for worker validation
         }
         
         # Create HTTP request
@@ -430,7 +443,8 @@ class JobSubmissionService:
                 job_id=job_id,
                 job_type="BATCH_CHILD",
                 batch_id=batch_id,
-                delay_seconds=queued * 2  # Stagger by 2 seconds
+                delay_seconds=queued * 2,  # Stagger by 2 seconds
+                auth_token=None  # Note: auth_token not available in continuation jobs
             )
             
             queue = self.standard_queue  # Use standard queue for batch continuation

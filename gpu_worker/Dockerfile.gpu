@@ -1,0 +1,102 @@
+# Production Dockerfile for Boltz-2 GPU Worker
+# Optimized for Cloud Run Jobs with L4 GPUs
+
+# Start with NVIDIA CUDA base image for GPU support
+FROM nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    DEBIAN_FRONTEND=noninteractive \
+    MODEL_DIR=/models/boltz \
+    CUDA_VISIBLE_DEVICES=0
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3-pip \
+    git \
+    wget \
+    curl \
+    build-essential \
+    libxml2-dev \
+    libxslt1-dev \
+    libffi-dev \
+    libssl-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set Python 3.10 as default
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1 \
+    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
+
+# Upgrade pip and install base packages
+RUN python -m pip install --upgrade pip setuptools wheel
+
+# Install PyTorch with CUDA support for L4 GPUs
+RUN pip install torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu121
+
+# Install Boltz-2 and dependencies (let pip resolve versions)
+RUN pip install --no-cache-dir \
+    boltz==2.1.1 \
+    scipy \
+    pandas \
+    biopython \
+    rdkit \
+    pyyaml \
+    tqdm
+
+# Install Flask and GCP dependencies
+RUN pip install --no-cache-dir \
+    flask==3.0.0 \
+    gunicorn==21.2.0 \
+    google-cloud-firestore==2.11.0 \
+    google-cloud-storage==2.10.0 \
+    google-cloud-logging==3.8.0 \
+    requests==2.31.0 \
+    python-dotenv==1.0.0
+
+# Create model directory
+RUN mkdir -p ${MODEL_DIR}
+
+# Download Boltz-2 model weights (or copy from GCS in production)
+# For production, this should be mounted from a GCS bucket or built into the image
+# RUN gsutil -m cp -r gs://om-models/boltz2-weights/* ${MODEL_DIR}/
+
+# Alternative: Download from public source (if available)
+# RUN wget -q -O ${MODEL_DIR}/boltz_model.ckpt \
+#     https://storage.googleapis.com/boltz-models/boltz2_model_weights.ckpt
+
+# Create app directory
+WORKDIR /app
+
+# Copy application code
+COPY main.py .
+COPY boltz2_predictor.py .
+COPY requirements.txt .
+
+# Install any remaining Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt || true
+
+# Create non-root user for security
+RUN useradd -m -u 1000 appuser && \
+    chown -R appuser:appuser /app && \
+    chown -R appuser:appuser ${MODEL_DIR}
+
+# Switch to non-root user
+USER appuser
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8080/health || exit 1
+
+# Expose port
+EXPOSE 8080
+
+# Set Flask environment variables
+ENV FLASK_APP=main.py \
+    FLASK_ENV=production \
+    PORT=8080
+
+# Run with Gunicorn for production
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "--threads", "4", "--timeout", "1800", "main:app"]
