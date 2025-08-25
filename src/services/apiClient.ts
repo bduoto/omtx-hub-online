@@ -20,7 +20,7 @@ import { getFirestore, doc, onSnapshot, collection, query, where, orderBy, limit
 // Base API configuration - Updated to v4 for Cloud Run
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
   ? `${import.meta.env.VITE_API_BASE_URL}/api/v1`
-  : 'http://34.29.29.170/api/v1';
+  : 'http://localhost:8000/api/v1';
 
 // Firebase configuration (will be injected via environment)
 const firebaseConfig = {

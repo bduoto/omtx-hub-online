@@ -1,0 +1,19 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Install minimal dependencies
+RUN pip install --no-cache-dir \
+    fastapi==0.104.1 \
+    uvicorn[standard]==0.24.0 \
+    pydantic==2.5.0 \
+    python-multipart==0.0.6
+
+# Copy the simplified API
+COPY simplified_api.py .
+
+# Expose port
+EXPOSE 8000
+
+# Run the API
+CMD ["uvicorn", "simplified_api:app", "--host", "0.0.0.0", "--port", "8000"]

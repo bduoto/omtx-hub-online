@@ -261,7 +261,7 @@ class AuthService {
   
   // API endpoint helpers with proper versioning
   getApiUrl(endpoint: string): string {
-    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
     // Use v1 API for all endpoints - clean consolidated API
     return `${baseUrl}/api/v1${endpoint}`;

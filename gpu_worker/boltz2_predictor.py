@@ -39,6 +39,9 @@ class Boltz2Predictor:
         # Set Boltz cache environment variable
         os.environ["BOLTZ_CACHE"] = str(self.cache_dir)
         
+        # Set model_dir for compatibility
+        self.model_dir = self.cache_dir
+        
         self.model_initialized = False
         self.execution_count = 0
         

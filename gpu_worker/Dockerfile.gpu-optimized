@@ -1,0 +1,111 @@
+# Multi-stage GPU-optimized Dockerfile for Boltz-2 with CUDA 12.4
+# Stage 1: Build environment with full CUDA development tools
+FROM nvidia/cuda:12.4.1-devel-ubuntu22.04 AS builder
+
+# Install system build dependencies
+RUN apt-get update && apt-get install -y \
+    python3.11 \
+    python3.11-dev \
+    python3.11-venv \
+    python3-pip \
+    git \
+    build-essential \
+    cmake \
+    ninja-build \
+    wget \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create virtual environment for better dependency isolation
+RUN python3.11 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Upgrade pip and install wheel for faster builds
+RUN pip install --no-cache-dir --upgrade pip wheel setuptools
+
+# Install PyTorch with CUDA 12.4 support first (pinned versions)
+RUN pip install --no-cache-dir \
+    torch==2.5.1 \
+    torchvision==0.20.1 \
+    torchaudio==2.5.1 \
+    --index-url https://download.pytorch.org/whl/cu124
+
+# Install Boltz-2 with CUDA acceleration and exact versions
+COPY requirements-gpu-optimized.txt /tmp/
+RUN pip install --no-cache-dir -r /tmp/requirements-gpu-optimized.txt
+
+# Install Boltz-2 with CUDA support
+RUN pip install --no-cache-dir "boltz[cuda]==2.2.0"
+
+# Pre-compile CUDA kernels for L4 GPU (Compute Capability 8.9)
+ENV TORCH_CUDA_ARCH_LIST="8.9"
+ENV CUDA_VISIBLE_DEVICES=0
+
+# Stage 2: Runtime environment with minimal CUDA runtime
+FROM nvidia/cuda:12.4.1-runtime-ubuntu22.04 AS runtime
+
+# Install minimal runtime dependencies
+RUN apt-get update && apt-get install -y \
+    python3.11 \
+    python3.11-venv \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy virtual environment from builder stage
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Set working directory
+WORKDIR /app
+
+# Copy application code
+COPY boltz2_predictor_optimized.py /app/boltz2_predictor.py
+COPY gpu_worker_optimized.py /app/main.py
+COPY startup.sh /app/
+
+# Create optimized cache directories with proper permissions
+RUN mkdir -p /app/.boltz_cache && \
+    mkdir -p /app/.torch_cache && \
+    mkdir -p /app/.huggingface_cache && \
+    chmod -R 777 /app/.boltz_cache /app/.torch_cache /app/.huggingface_cache
+
+# Configure environment variables for GPU optimization
+ENV BOLTZ_CACHE=/app/.boltz_cache
+ENV TORCH_HOME=/app/.torch_cache
+ENV HF_HOME=/app/.huggingface_cache
+
+# CUDA optimization settings
+ENV CUDA_VISIBLE_DEVICES=0
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+# Enable TensorFloat-32 for A100/L4 performance
+ENV NVIDIA_TF32_OVERRIDE=1
+ENV TORCH_CUDNN_USE_HEURISTIC_MODE_B=1
+
+# Memory optimization for L4 GPU (24GB VRAM)
+ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512,garbage_collection_threshold:0.6
+
+# Enable optimized CUDA kernels
+ENV TORCH_BACKENDS_CUDNN_BENCHMARK=true
+ENV TORCH_BACKENDS_CUDNN_DETERMINISTIC=false
+
+# Flash Attention 2 optimization
+ENV FLASH_ATTENTION_FORCE_CUT=1
+
+# GCS Fuse mount point preparation
+RUN mkdir -p /gcs-mount && chmod 777 /gcs-mount
+ENV GCS_MOUNT_PATH=/gcs-mount
+
+# Configure startup script
+RUN chmod +x /app/startup.sh
+
+# Health check for GPU availability
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD python3.11 -c "import torch; print('GPU available:', torch.cuda.is_available()); exit(0 if torch.cuda.is_available() else 1)"
+
+# Expose port
+EXPOSE 8080
+
+# Use startup script for better initialization
+CMD ["/app/startup.sh"]

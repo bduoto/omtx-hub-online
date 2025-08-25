@@ -1,0 +1,26 @@
+# Simple, reliable Dockerfile for Boltz-2 worker
+FROM python:3.11-slim
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements-simple.txt /tmp/
+RUN pip install -r /tmp/requirements-simple.txt --no-cache-dir
+
+# Copy application code
+WORKDIR /app
+COPY simple_main.py /app/main.py
+COPY boltz2_predictor.py /app/
+
+# Create cache directory
+RUN mkdir -p /app/.boltz_cache && chmod 777 /app/.boltz_cache
+ENV BOLTZ_CACHE=/app/.boltz_cache
+
+# Expose port
+EXPOSE 8080
+
+# Run the application
+CMD ["python", "main.py"]

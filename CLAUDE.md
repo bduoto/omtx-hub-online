@@ -767,3 +767,4 @@ GET  /api/v1/batches                    # Universal batch listing
 **Architecture**: Hybrid GKE + Cloud Run Jobs with Complete Observability
 
 **Latest Update**: Complete Enterprise Production System - achieved 100% production-ready implementation with comprehensive user authentication, real-time webhook system, enterprise monitoring with Prometheus + Grafana, structured logging, job status intelligence, and complete observability stack. Features JWT-based multi-tenant architecture, HMAC-secured webhooks, GPU worker user validation, intelligent alerting, and production-grade infrastructure ready for 1000+ concurrent users with 84% cost optimization and complete security isolation.
+- add to memory. make sure you understand how we implemented Boltz-2 to Cloud Run correctly. We will need this later for other models

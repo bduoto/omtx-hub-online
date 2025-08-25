@@ -1,0 +1,45 @@
+# Simple production Dockerfile for Boltz-2 with GPU support
+FROM nvidia/cuda:12.4.1-runtime-ubuntu22.04
+
+# Install Python and pip
+RUN apt-get update && apt-get install -y \
+    python3.11 \
+    python3-pip \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create symlink for python (optional but helpful)
+RUN ln -s /usr/bin/python3.11 /usr/bin/python
+
+# Install Boltz-2 with CUDA support and Flask
+RUN pip install --no-cache-dir \
+    flask==3.1.2 \
+    gunicorn==22.0.0 \
+    google-cloud-firestore==2.21.0 \
+    google-cloud-storage==3.3.0 \
+    python-dotenv==1.1.1 \
+    pyyaml==6.0.2
+
+# Install Boltz-2 with CUDA support (this will auto-download weights ~400MB)
+RUN pip install --no-cache-dir "boltz[cuda]==2.1.1"
+
+# Set working directory
+WORKDIR /app
+
+# Copy application files
+COPY simple_main.py /app/main.py
+COPY boltz2_simple.py /app/
+
+# Create cache directory for Boltz-2 weights
+RUN mkdir -p /app/.boltz_cache && chmod 777 /app/.boltz_cache
+ENV BOLTZ_CACHE=/app/.boltz_cache
+
+# Expose port
+EXPOSE 8080
+
+# Health check for GPU availability
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD python -c "import torch; exit(0 if torch.cuda.is_available() else 1)"
+
+# Run with gunicorn for production
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "--timeout", "600", "main:app"]

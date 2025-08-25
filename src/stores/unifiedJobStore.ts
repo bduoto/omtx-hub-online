@@ -108,7 +108,7 @@ class UnifiedJobStore {
       const startTime = performance.now();
       
       // Load lightweight data for instant navigation
-      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
       const response = await fetch(`${apiBase}/api/v1/jobs?user_id=current_user&limit=200`, {
         headers: {
           'Accept': 'application/json',
@@ -320,7 +320,7 @@ class UnifiedJobStore {
       // Fallback to unified API if ultra-fast fails
       if (!response || !response.ok) {
         console.warn('⚠️ Ultra-fast API failed, falling back to unified API');
-        const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+        const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
         response = await fetch(`${apiBase}/api/v1/batches?user_id=current_user&limit=200`);
         apiUsed = 'unified-fallback';
         
@@ -367,7 +367,7 @@ class UnifiedJobStore {
       // Track API usage for intelligent polling
       this.userActivity.set('api_request', Date.now());
       
-      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
       const url = `${apiBase}/api/v1/jobs?user_id=current_user&limit=200`;
       
       // Create timeout that works across browsers
@@ -541,7 +541,7 @@ class UnifiedJobStore {
    */
   private async _loadBatchJobs(): Promise<void> {
     try {
-      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
       const response = await fetch(`${apiBase}/api/v1/batches?user_id=current_user&limit=200`);
       if (response.ok) {
         const data = await response.json();

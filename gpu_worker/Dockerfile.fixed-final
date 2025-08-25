@@ -1,0 +1,52 @@
+# Fixed Dockerfile with all updated files
+FROM nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
+
+# Install Python and system dependencies
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-dev \
+    wget \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create symlinks for Python
+RUN ln -sf /usr/bin/python3 /usr/bin/python
+
+# Set working directory
+WORKDIR /app
+
+# Install base Python packages
+RUN pip install --no-cache-dir \
+    torch==2.1.2 \
+    torchvision==0.16.2 \
+    torchaudio==2.1.2 \
+    --index-url https://download.pytorch.org/whl/cu121
+
+# Install Flask and other dependencies
+RUN pip install --no-cache-dir \
+    flask==3.0.3 \
+    requests==2.32.3 \
+    pyyaml==6.0.1 \
+    numpy==1.26.4 \
+    scipy==1.14.1
+
+# Copy ALL the updated files with fixes
+COPY simple_main.py /app/simple_main.py
+COPY boltz2_simple.py /app/boltz2_simple.py
+COPY boltz2_predictor.py /app/boltz2_predictor.py
+COPY main.py /app/main.py
+COPY startup_with_boltz.py /app/startup_with_boltz.py
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV INSTALL_BOLTZ=true
+ENV CUDA_VISIBLE_DEVICES=0
+ENV BOLTZ_CACHE=/app/.boltz_cache
+
+# Create cache directory
+RUN mkdir -p /app/.boltz_cache
+
+# Use the startup script that installs Boltz at runtime
+CMD ["python", "/app/startup_with_boltz.py"]

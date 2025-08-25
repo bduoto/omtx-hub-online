@@ -1,0 +1,8 @@
+# Minimal requirements for simple GPU worker
+flask==3.1.2
+google-cloud-firestore==2.21.0
+google-cloud-storage==3.3.0
+python-dotenv==1.1.1
+
+# Try to install Boltz-2 (optional)
+# boltz==2.1.1

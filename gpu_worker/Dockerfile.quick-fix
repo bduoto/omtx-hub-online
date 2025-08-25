@@ -1,0 +1,28 @@
+# Quick fix - Working GPU worker with fast startup
+FROM nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
+
+# Install Python and minimal dependencies
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install only essential packages for quick startup
+RUN pip install --no-cache-dir \
+    flask==3.0.3 \
+    pyyaml==6.0.1
+
+# Copy the fixed files
+COPY simple_main.py /app/simple_main.py
+COPY boltz2_simple.py /app/boltz2_simple.py
+COPY boltz2_predictor.py /app/boltz2_predictor.py
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV CUDA_VISIBLE_DEVICES=0
+
+# Start directly with simple_main.py (no Boltz installation at startup)
+CMD ["python3", "/app/simple_main.py"]
+

@@ -231,7 +231,7 @@ export const BatchProteinLigandInput: React.FC<BatchProteinLigandInputProps> = (
         }
       };
 
-      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
       const response = await fetch(`${apiBase}/api/v1/predict/batch`, {
         method: 'POST',
         headers: {
@@ -268,7 +268,7 @@ export const BatchProteinLigandInput: React.FC<BatchProteinLigandInputProps> = (
     const pollInterval = setInterval(async () => {
       try {
         // Use the unified batch status endpoint
-        const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://34.29.29.170';
+        const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
         const response = await fetch(`${apiBase}/api/v1/batches/${batchId}`);
         
         if (!response.ok) {

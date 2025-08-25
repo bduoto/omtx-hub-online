@@ -1,0 +1,11 @@
+# Simple runtime Boltz installation approach
+FROM gcr.io/om-models/gpu-worker:simple-v3
+
+# Copy startup script that installs Boltz on first run
+COPY startup_with_boltz.py /app/startup_with_boltz.py
+
+# Set environment variable to enable Boltz installation
+ENV INSTALL_BOLTZ=true
+
+# Use startup script instead of main directly
+CMD ["python", "/app/startup_with_boltz.py"]

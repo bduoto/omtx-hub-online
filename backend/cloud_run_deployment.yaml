@@ -1,0 +1,96 @@
+# OMTX-Hub Cloud Run Native Deployment Configuration
+# Optimized for L4 GPU workloads with concurrency=2
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: omtx-hub-native
+  namespace: default
+  labels:
+    app: omtx-hub
+    tier: api
+    version: "2.0"
+    gpu-optimized: "true"
+  annotations:
+    # Cloud Run annotations for GPU and scaling
+    run.googleapis.com/execution-environment: gen2
+    run.googleapis.com/gpu-type: nvidia-l4
+    run.googleapis.com/gpu: "1"
+    run.googleapis.com/cpu-throttling: "false"
+    autoscaling.knative.dev/minScale: "0"
+    autoscaling.knative.dev/maxScale: "3"
+    run.googleapis.com/timeout: "1800"  # 30 minutes for batch processing
+spec:
+  template:
+    metadata:
+      annotations:
+        # Container optimization for GPU workloads
+        autoscaling.knative.dev/maxScale: "3"
+        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/gpu-type: nvidia-l4
+        run.googleapis.com/gpu: "1"
+        run.googleapis.com/cpu-throttling: "false"
+    spec:
+      # Key optimization: concurrency=2 for GPU workloads
+      containerConcurrency: 2
+      timeoutSeconds: 1800  # 30 minutes
+      containers:
+      - name: omtx-hub-api
+        image: gcr.io/om-models/omtx-hub-native:latest
+        ports:
+        - name: http1
+          containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: ENVIRONMENT
+          value: "production"
+        - name: GPU_ENABLED
+          value: "true"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: "/var/secrets/google/key.json"
+        resources:
+          limits:
+            # GPU and memory optimized for L4
+            nvidia.com/gpu: 1
+            memory: "16Gi"
+            cpu: "4"
+          requests:
+            memory: "8Gi"
+            cpu: "2"
+        # Startup and liveness probes optimized for GPU initialization
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 60  # GPU initialization time
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 120
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 5
+          failureThreshold: 3
+        volumeMounts:
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+          readOnly: true
+      volumes:
+      - name: google-cloud-key
+        secret:
+          secretName: google-cloud-key
+  traffic:
+  - percent: 100
+    latestRevision: true

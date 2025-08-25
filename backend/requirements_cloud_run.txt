@@ -1,0 +1,37 @@
+# OMTX-Hub Cloud Run Native Requirements
+# Minimal dependencies optimized for Cloud Run deployment with GPU support
+
+# Core FastAPI stack
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+pydantic>=2.10.0
+python-multipart==0.0.6
+
+# Essential utilities
+requests>=2.31.0
+python-dotenv>=1.0.0
+numpy>=1.24.3
+
+# Google Cloud Platform services
+google-cloud-storage>=2.10.0
+google-cloud-firestore>=2.11.0
+google-auth>=2.17.0
+
+# GPU support for Boltz-2 (installed for production GPU containers)
+torch>=2.6.0
+boltz>=2.1.1
+
+# Additional ML dependencies for Boltz-2
+biopython>=1.81
+scipy>=1.11.4
+
+# REMOVED DEPENDENCIES (handled by company infrastructure):
+# - PyJWT (no JWT auth needed - API gateway handles this)
+# - SQLAlchemy/Alembic (using Firestore instead)
+# - Redis/Celery (Cloud Run handles scaling)
+# - Modal (migrated to Cloud Run Jobs)
+# - Complex ML dependencies (installed at runtime in GPU container)
+
+# Development only
+# pytest>=7.4.0
+# pytest-asyncio>=0.21.0

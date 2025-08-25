@@ -32,6 +32,7 @@ from api.consolidated_api import router as api_v1_router
 from api.job_orchestration_api import router as jobs_router
 from api.auth_api import router as auth_router
 from api.webhook_api import router as webhook_router
+from api.async_prediction_api import router as async_api_router
 
 # Initialize logging service first
 from services.logging_service import logging_service
@@ -86,6 +87,7 @@ app.add_middleware(
 # Include routers (order matters for route precedence)
 app.include_router(auth_router)      # Authentication API
 app.include_router(webhook_router)   # Webhook management API
+app.include_router(async_api_router) # Async prediction API (Cloud Run Jobs)
 app.include_router(jobs_router)      # Job orchestration API  
 app.include_router(api_v1_router)    # General consolidated API
 
