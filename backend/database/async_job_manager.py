@@ -104,7 +104,8 @@ class AsyncJobManager:
         user_id: str = "default",
         offset: int = 0,
         limit: int = 20,
-        status: Optional[str] = None
+        status: Optional[str] = None,
+        model_id: Optional[str] = None
     ) -> Tuple[List[Dict[str, Any]], int]:
         """List batches with pagination"""
         # Get all batch jobs
@@ -113,7 +114,34 @@ class AsyncJobManager:
         # Filter for batch parents only
         batches = [j for j in jobs if j.get("job_type") == "BATCH_PARENT"]
         
+        # Filter by model if specified
+        if model_id:
+            batches = [b for b in batches if b.get("model") == model_id]
+        
         return batches[:limit], len(batches)
+    
+    async def get_batch_stats(self, batch_id: str) -> Dict[str, Any]:
+        """Get batch statistics"""
+        # Get the batch parent job
+        batch = await self.get_job(batch_id)
+        if not batch:
+            return {"total": 0, "completed": 0, "failed": 0, "running": 0, "pending": 0}
+        
+        # Get child jobs for this batch
+        all_jobs, _ = await self.list_jobs(user_id=batch.get("user_id", "default"), limit=1000)
+        child_jobs = [j for j in all_jobs if j.get("batch_parent_id") == batch_id]
+        
+        # Calculate statistics
+        stats = {
+            "total": len(child_jobs),
+            "completed": len([j for j in child_jobs if j.get("status") == "completed"]),
+            "failed": len([j for j in child_jobs if j.get("status") == "failed"]),
+            "running": len([j for j in child_jobs if j.get("status") == "running"]),
+            "pending": len([j for j in child_jobs if j.get("status") == "pending"]),
+            "queued": len([j for j in child_jobs if j.get("status") == "queued"])
+        }
+        
+        return stats
     
     async def delete_job(self, job_id: str) -> bool:
         """Delete a job"""

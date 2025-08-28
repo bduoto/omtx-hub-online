@@ -78,6 +78,12 @@ class UnifiedJobManager:
         """Create a batch job with individual sub-jobs"""
         return self.primary_backend.create_batch_job(batch_data, individual_jobs)
     
+    def create_batch(self, batch_data: Dict[str, Any], individual_jobs: List[Dict[str, Any]] = None) -> Optional[str]:
+        """Create a batch job (alias for create_batch_job for API compatibility)"""
+        if individual_jobs is None:
+            individual_jobs = []
+        return self.create_batch_job(batch_data, individual_jobs)
+    
     def get_batch_jobs(self, batch_id: str) -> List[Dict[str, Any]]:
         """Get all jobs in a batch"""
         return self.primary_backend.get_batch_jobs(batch_id)

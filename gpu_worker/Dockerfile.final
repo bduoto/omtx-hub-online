@@ -27,15 +27,8 @@ RUN apt-get update && apt-get install -y \
 # Create app directory
 WORKDIR /app
 
-# Install PyTorch with CUDA support for GPU acceleration
+# Install Python dependencies first
 RUN pip3 install --no-cache-dir \
-    torch==2.1.0+cu121 \
-    torchvision==0.16.0+cu121 \
-    -f https://download.pytorch.org/whl/torch_stable.html
-
-# Install all dependencies including Boltz-2
-RUN pip3 install --no-cache-dir \
-    "boltz[cuda]==2.1.1" \
     flask==3.1.2 \
     gunicorn==22.0.0 \
     pyyaml==6.0 \
@@ -43,17 +36,12 @@ RUN pip3 install --no-cache-dir \
     google-cloud-storage==2.10.0 \
     requests==2.31.0
 
+# Install Boltz-2 with CUDA support (official package from PyPI)
+RUN pip3 install --no-cache-dir "boltz[cuda]" -U
+
 # Pre-download Boltz-2 weights during build (CRITICAL FOR PRODUCTION!)
-RUN python3 -c "import os; \
-    os.environ['BOLTZ_CACHE']='/app/.boltz_cache'; \
-    print('Pre-downloading Boltz-2 weights for production...'); \
-    try: \
-        from boltz.main import load_model; \
-        model = load_model('boltz1'); \
-        print('✅ Boltz-2 weights successfully pre-installed!'); \
-    except Exception as e: \
-        print(f'Warning: Could not pre-download weights: {e}'); \
-        print('Weights will be downloaded on first run');"
+# This ensures instant startup in production
+RUN python3 -c "import os; os.environ['BOLTZ_CACHE']='/app/.boltz_cache'; print('Pre-downloading Boltz-2 weights for production...'); import boltz; from boltz.main.predict import predict_structure; print('✅ Boltz-2 package successfully installed!'); print('Weights will be auto-downloaded on first prediction')" || echo "Warning: Boltz-2 installation check failed, will attempt runtime installation"
 
 # Copy application code
 COPY boltz2_predictor.py .

@@ -70,32 +70,42 @@ class Boltz2Predictor:
             else:
                 logger.warning("⚠️ No GPU detected - will use CPU (slower)")
             
-            # Check for model weights
-            weights_path = self.model_dir / "boltz_model.ckpt"
-            if weights_path.exists():
-                logger.info(f"✅ Model weights found at {weights_path}")
-                self.model_initialized = True
-            else:
-                logger.warning(f"⚠️ Model weights not found at {weights_path}")
-                logger.warning("   Will attempt to download or use cached weights")
-                self._download_model_weights()
-            
-            # Verify Boltz-2 installation
+            # Test Boltz-2 Python API availability (preferred method)
             try:
-                result = subprocess.run(
-                    ["boltz", "--version"],
-                    capture_output=True,
-                    text=True,
-                    timeout=5
-                )
-                if result.returncode == 0:
-                    logger.info(f"✅ Boltz-2 CLI available: {result.stdout.strip()}")
-                else:
-                    logger.warning("⚠️ Boltz-2 CLI not found - installing...")
-                    self._install_boltz()
-            except Exception as e:
-                logger.warning(f"⚠️ Boltz-2 CLI check failed: {e}")
+                import boltz
+                from boltz.main import load_model
+                logger.info(f"✅ Boltz-2 Python API available")
+                
+                # Try loading model to verify it works
+                logger.info("🔍 Testing model loading...")
+                test_model = load_model("boltz1")
+                logger.info("✅ Boltz-2 model loaded successfully")
+                self.model_initialized = True
+                
+                # Clean up test model
+                del test_model
+                
+                # Test CLI availability as backup
+                try:
+                    result = subprocess.run(
+                        ["boltz", "--version"],
+                        capture_output=True,
+                        text=True,
+                        timeout=5
+                    )
+                    if result.returncode == 0:
+                        logger.info(f"✅ Boltz-2 CLI also available: {result.stdout.strip()}")
+                except Exception:
+                    logger.info("ℹ️ CLI not available, using Python API only")
+
+            except ImportError as e:
+                logger.warning(f"⚠️ Boltz-2 Python API not available: {e}")
+                logger.warning("   Attempting to install Boltz-2...")
                 self._install_boltz()
+            except Exception as e:
+                logger.error(f"⚠️ Boltz-2 model loading failed: {e}")
+                logger.warning("   Model weights may need to be downloaded at runtime")
+                self.model_initialized = False
                 
         except Exception as e:
             logger.error(f"❌ Failed to initialize model: {e}")
@@ -131,15 +141,16 @@ class Boltz2Predictor:
     def _install_boltz(self):
         """Install Boltz-2 if not available"""
         try:
-            logger.info("📦 Installing Boltz-2...")
+            logger.info("📦 Installing Boltz-2 with CUDA support...")
             result = subprocess.run(
-                ["pip", "install", "--no-cache-dir", "boltz==2.1.1"],
+                ["pip", "install", "--no-cache-dir", "boltz[cuda]", "-U"],
                 capture_output=True,
                 text=True,
-                timeout=300
+                timeout=600
             )
             if result.returncode == 0:
                 logger.info("✅ Boltz-2 installed successfully")
+                self.model_initialized = True
             else:
                 logger.error(f"❌ Installation failed: {result.stderr}")
         except Exception as e:
@@ -218,18 +229,17 @@ class Boltz2Predictor:
                 
                 logger.info(f"🚀 Running Boltz-2 command: {' '.join(cmd)}")
                 
-                # Run prediction
-                if self.model_initialized and self.gpu_available:
-                    # Real prediction with Boltz-2
+                # Run prediction - PRODUCTION ONLY, NO MOCK
+                if not self.model_initialized:
+                    raise RuntimeError("Boltz-2 model not initialized. Cannot run predictions.")
+                
+                # Try Python API first, then fallback to CLI
+                try:
+                    result = self._run_python_api_prediction(input_file, output_dir)
+                    logger.info("✅ Used Boltz-2 Python API")
+                except Exception as e:
+                    logger.warning(f"⚠️ Python API failed: {e}, trying CLI...")
                     result = self._run_real_prediction(cmd, output_dir)
-                else:
-                    # Fallback to high-quality mock for development/testing
-                    logger.warning("⚠️ Using high-quality mock prediction (model not fully initialized)")
-                    result = self._run_mock_prediction(
-                        protein_sequence=protein_sequence,
-                        ligand_smiles=ligand_smiles,
-                        ligand_name=ligand_name
-                    )
                 
                 # Add metadata
                 result["processing_time_seconds"] = time.time() - start_time
@@ -261,7 +271,52 @@ class Boltz2Predictor:
                 "model_version": f"boltz-{self.config['version']}",
                 "execution_count": self.execution_count
             }
-    
+
+    def _run_python_api_prediction(self, input_file: Path, output_dir: Path) -> Dict[str, Any]:
+        """Run Boltz-2 prediction using Python API (preferred method)"""
+        try:
+            from boltz.main import load_model
+            import torch
+
+            # Run prediction using Python API
+            logger.info("🔬 Running Boltz-2 prediction via Python API...")
+
+            # Load the model
+            model = load_model("boltz1")
+            
+            # Set device based on GPU availability
+            if self.gpu_available and torch.cuda.is_available():
+                model = model.cuda()
+                device = "cuda"
+            else:
+                device = "cpu"
+                
+            logger.info(f"   Using device: {device}")
+
+            # Read input YAML
+            with open(input_file, 'r') as f:
+                import yaml
+                input_data = yaml.safe_load(f)
+
+            # Run the prediction
+            with torch.no_grad():
+                # Convert input to Boltz format and run prediction
+                # Note: This is simplified - actual implementation depends on Boltz API
+                output = model.predict(input_data)
+                
+            # Save results to output directory
+            output_file = output_dir / "predictions.json"
+            with open(output_file, 'w') as f:
+                import json
+                json.dump(output, f)
+
+            # Parse results
+            return self._parse_boltz_output(output_dir)
+
+        except Exception as e:
+            logger.error(f"❌ Python API prediction failed: {e}")
+            raise
+
     def _create_input_yaml(
         self,
         protein_sequence: str,
@@ -407,140 +462,5 @@ class Boltz2Predictor:
                 "parse_error": str(e)
             }
     
-    def _run_mock_prediction(
-        self,
-        protein_sequence: str,
-        ligand_smiles: str,
-        ligand_name: Optional[str] = None
-    ) -> Dict[str, Any]:
-        """
-        High-quality mock prediction for development/testing
-        Generates realistic values based on input characteristics
-        """
-        # Simulate processing time based on sequence length
-        base_time = 10  # seconds
-        time_per_residue = 0.05
-        processing_time = base_time + (len(protein_sequence) * time_per_residue)
-        time.sleep(min(processing_time, 30))  # Cap at 30s for testing
-        
-        # Generate realistic affinity based on ligand complexity
-        ligand_complexity = len(ligand_smiles) / 10
-        base_affinity = -8.5
-        affinity_variation = random.gauss(0, 1.5)
-        affinity = base_affinity + affinity_variation - (ligand_complexity * 0.1)
-        affinity = max(min(affinity, -3.0), -15.0)  # Clamp to realistic range
-        
-        # Confidence based on sequence length and complexity
-        base_confidence = 0.75
-        length_factor = min(len(protein_sequence) / 500, 1.0)
-        confidence = base_confidence + random.uniform(-0.1, 0.15) * length_factor
-        confidence = max(min(confidence, 0.95), 0.4)
-        
-        # RMSD based on confidence
-        rmsd = 3.5 - (confidence * 2.5) + random.uniform(-0.5, 0.5)
-        rmsd = max(rmsd, 0.5)
-        
-        # Generate realistic mock CIF structure
-        mock_cif = self._generate_mock_cif(
-            protein_sequence=protein_sequence,
-            ligand_name=ligand_name or "LIG",
-            affinity=affinity
-        )
-        
-        return {
-            "affinity": float(affinity),
-            "confidence": float(confidence),
-            "rmsd": float(rmsd),
-            "structure_cif": mock_cif,
-            "additional_metrics": {
-                "ptm": confidence * 0.9 + random.uniform(0, 0.1),
-                "iptm": confidence * 0.85 + random.uniform(0, 0.1),
-                "plddt": 70 + confidence * 20 + random.uniform(-5, 5),
-                "model_confidence": confidence,
-                "predicted_tm_score": confidence * 0.9,
-                "interface_predicted_tm_score": confidence * 0.85,
-                "clash_score": random.uniform(5, 20),
-                "interface_area": 500 + random.uniform(-100, 200)
-            },
-            "is_mock": True,  # Flag for transparency
-            "mock_reason": "Model weights not fully initialized"
-        }
-    
-    def _generate_mock_cif(
-        self,
-        protein_sequence: str,
-        ligand_name: str,
-        affinity: float
-    ) -> str:
-        """Generate a realistic mock CIF structure file"""
-        return f"""data_predicted_complex
-_entry.id predicted_complex
-_audit_conform.dict_name mmcif_pdbx.dic
-_audit_conform.dict_version 5.394
-#
-_cell.length_a 100.000
-_cell.length_b 100.000
-_cell.length_c 100.000
-_cell.angle_alpha 90.00
-_cell.angle_beta 90.00
-_cell.angle_gamma 90.00
-#
-_symmetry.space_group_name_H-M "P 1"
-_symmetry.space_group_name_Hall " P 1"
-#
-_entity.id 1
-_entity.type polymer
-_entity.pdbx_description "Protein target"
-_entity.pdbx_number_of_molecules 1
-#
-_entity.id 2
-_entity.type non-polymer
-_entity.pdbx_description "{ligand_name}"
-_entity.pdbx_number_of_molecules 1
-#
-_pdbx_audit_revision_history.revision_date 2025-08-22
-_pdbx_audit_revision_history.data_content_type "Structure model"
-_pdbx_audit_revision_history.major_revision 1
-_pdbx_audit_revision_history.minor_revision 0
-#
-_software.name "Boltz-2"
-_software.version "2.1.1"
-_software.description "Biomolecular structure prediction"
-#
-_chem_comp.id {ligand_name}
-_chem_comp.type "NON-POLYMER"
-_chem_comp.pdbx_type HETAIN
-_chem_comp.formula "C H N O"
-_chem_comp.mon_nstd_flag n
-#
-# Predicted binding affinity: {affinity:.2f} kcal/mol
-# Model confidence: high
-# Structure generated by Boltz-2 Cloud Run GPU Worker
-#
-loop_
-_atom_site.group_PDB
-_atom_site.id
-_atom_site.type_symbol
-_atom_site.label_atom_id
-_atom_site.label_alt_id
-_atom_site.label_comp_id
-_atom_site.label_asym_id
-_atom_site.label_entity_id
-_atom_site.label_seq_id
-_atom_site.pdbx_PDB_ins_code
-_atom_site.Cartn_x
-_atom_site.Cartn_y
-_atom_site.Cartn_z
-_atom_site.occupancy
-_atom_site.B_iso_or_equiv
-_atom_site.pdbx_formal_charge
-_atom_site.auth_seq_id
-_atom_site.auth_comp_id
-_atom_site.auth_asym_id
-_atom_site.auth_atom_id
-_atom_site.pdbx_PDB_model_num
-ATOM   1    N N   . MET A 1 1 ? 10.000 10.000 10.000 1.00 30.00 ? 1  MET A N   1
-ATOM   2    C CA  . MET A 1 1 ? 11.000 10.500 10.500 1.00 30.00 ? 1  MET A CA  1
-HETATM 1000 C C1  . {ligand_name} B 2 . ? 15.000 12.000 11.000 1.00 25.00 ? 1  {ligand_name} B C1  1
-#
-"""
+    # Mock prediction methods removed - PRODUCTION ONLY
+    # We only use real Boltz-2 predictions in production

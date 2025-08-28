@@ -1,0 +1,34 @@
+# Simple Production Cloud Build Configuration
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/om-models/omtx-hub-backend:latest', '-t', 'gcr.io/om-models/omtx-hub-backend:$SHORT_SHA', '-f', 'backend/Dockerfile.production', '.']
+  
+  # Push the container images
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '--all-tags', 'gcr.io/om-models/omtx-hub-backend']
+  
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'omtx-hub-backend'
+      - '--image=gcr.io/om-models/omtx-hub-backend:$SHORT_SHA'
+      - '--region=us-central1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=8080'
+      - '--memory=2Gi'
+      - '--cpu=2'
+      - '--timeout=300'
+      - '--concurrency=100'
+      - '--max-instances=10'
+      - '--service-account=omtx-hub-service@om-models.iam.gserviceaccount.com'
+      - '--set-env-vars=GOOGLE_CLOUD_PROJECT=om-models,GCP_PROJECT_ID=om-models,GCP_BUCKET_NAME=hub-job-files,CLOUD_TASKS_QUEUE=gpu-jobs-queue,CLOUD_TASKS_LOCATION=us-central1,ENABLE_JOB_MONITORING=false,ENABLE_SYSTEM_MONITORING=false,USE_CLOUD_TASKS=true,USE_CLOUD_RUN_JOBS=true'
+
+timeout: '600s'
+images:
+  - 'gcr.io/om-models/omtx-hub-backend:latest'
+  - 'gcr.io/om-models/omtx-hub-backend:$SHORT_SHA'

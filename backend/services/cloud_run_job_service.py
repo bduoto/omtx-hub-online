@@ -170,36 +170,39 @@ class CloudRunJobService:
     def get_job_status(self, job_id: str) -> Dict[str, Any]:
         """
         Get the status of a submitted job
-        
+
         Args:
             job_id: Job identifier
-            
+
         Returns:
             Job status and results if available
         """
         try:
             # Get job from Firestore
             job_doc = self.db.collection("jobs").document(job_id).get()
-            
+
             if not job_doc.exists:
                 return {
                     "success": False,
                     "error": "Job not found"
                 }
-            
+
             job_data = job_doc.to_dict()
-            
-            # Check if job has results
+
+            # Check if job has results - prioritize output_data.results over legacy results
             if job_data.get("status") == "completed":
-                # Include results if available
-                results = job_data.get("results", {})
+                output_data = job_data.get("output_data", {})
+                results = output_data.get("results", job_data.get("results", {}))
+
                 return {
                     "success": True,
                     "job_id": job_id,
                     "status": "completed",
                     "results": results,
                     "completed_at": job_data.get("completed_at"),
-                    "processing_time": job_data.get("processing_time_seconds")
+                    "processing_time": job_data.get("processing_time_seconds") or job_data.get("execution_time_seconds"),
+                    "files_stored_to_gcp": output_data.get("files_stored_to_gcp", False),
+                    "gcp_results_path": output_data.get("gcp_results_path")
                 }
             else:
                 return {

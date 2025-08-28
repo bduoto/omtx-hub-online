@@ -109,7 +109,7 @@ class UnifiedJobStore {
       
       // Load lightweight data for instant navigation
       const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
-      const response = await fetch(`${apiBase}/api/v1/jobs?user_id=current_user&limit=200`, {
+      const response = await fetch(`${apiBase}/api/v1/jobs?user_id=omtx_deployment_user&limit=200`, {
         headers: {
           'Accept': 'application/json',
           'Cache-Control': 'no-cache'
@@ -442,18 +442,32 @@ class UnifiedJobStore {
     }));
   }
   
-  private populateCache(jobs: UnifiedJob[], isPreload: boolean): void {
+  private populateCache(jobs: any[], isPreload: boolean): void {
     // Clear cache before populating with fresh data
     if (!isPreload) {
       this.jobs.clear();
     }
     
-    // Add jobs to cache
+    // Add jobs to cache, mapping backend fields to frontend format
     jobs.forEach(job => {
-      this.jobs.set(job.id, {
-        ...job,
+      const unifiedJob: UnifiedJob = {
+        id: job.job_id || job.id,
+        job_name: job.job_name || job.name || 'Unnamed Job',
+        type: job.job_type === 'BATCH_PARENT' ? 'batch_parent' : 
+              job.job_type === 'BATCH_CHILD' ? 'batch_child' : 'individual',
+        job_type: job.job_type,
+        task_type: job.task_type || 'boltz2',
+        status: job.status || 'pending',
+        created_at: job.created_at,
+        completed_at: job.completed_at,
+        updated_at: job.updated_at,
+        user_id: job.user_id,
+        results: job.results,
+        input_data: job.input_data || job.inputs || {},
         _loaded_at: Date.now()
-      });
+      };
+      
+      this.jobs.set(unifiedJob.id, unifiedJob);
     });
     
     console.log(`📦 Cache populated with ${this.jobs.size} jobs (preload: ${isPreload})`);
@@ -469,12 +483,13 @@ class UnifiedJobStore {
    */
   private async _loadIndividualJobs(): Promise<void> {
     try {
-      // Try multiple APIs in order of preference - NEW INDIVIDUAL JOBS API FIRST
+      // Get API base URL from environment
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+      
+      // Use the correct v1 API endpoints
       const apiEndpoints = [
-        '/api/individual-jobs?user_id=current_user&limit=200', // NEW: Extract from batch child jobs
-        '/api/v2/my-results?user_id=current_user&limit=200',
-        '/api/v2/my-results?limit=200', // Without user_id param
-        '/api/v2/results/ultra-fast?user_id=current_user&limit=200&page=1'
+        `${apiBase}/api/v1/jobs?user_id=omtx_deployment_user&limit=200`, // Use deployment user
+        `${apiBase}/api/v1/jobs?limit=200` // Fallback without specific user
       ];
       
       let data = null;
@@ -512,19 +527,23 @@ class UnifiedJobStore {
       const results = data.results || data.jobs || [];
       
       // Convert to unified format and add to cache
-      const individualJobs = results.map((job: any) => ({
-        id: job.id,
-        job_name: job.job_name || job.name || 'Unnamed Job',
-        type: 'individual' as const,
-        task_type: job.task_type || 'unknown',
-        status: job.status || 'pending',
-        created_at: job.created_at,
-        updated_at: job.updated_at,
-        user_id: job.user_id,
-        results: job.results,
-        input_data: job.inputs || {},
-        _loaded_at: Date.now()
-      }));
+      const individualJobs = results
+        .filter((job: any) => job.job_type === 'INDIVIDUAL')
+        .map((job: any) => ({
+          id: job.job_id || job.id,
+          job_name: job.job_name || job.name || 'Unnamed Job',
+          type: 'individual' as const,
+          job_type: job.job_type,
+          task_type: job.task_type || 'boltz2',
+          status: job.status || 'pending',
+          created_at: job.created_at,
+          completed_at: job.completed_at,
+          updated_at: job.updated_at,
+          user_id: job.user_id,
+          results: job.results,
+          input_data: job.inputs || job.input_data || {},
+          _loaded_at: Date.now()
+        }));
       
       // Add individual jobs to cache without clearing existing batch jobs
       individualJobs.forEach(job => this.jobs.set(job.id, job));
@@ -542,19 +561,23 @@ class UnifiedJobStore {
   private async _loadBatchJobs(): Promise<void> {
     try {
       const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
-      const response = await fetch(`${apiBase}/api/v1/batches?user_id=current_user&limit=200`);
+      const response = await fetch(`${apiBase}/api/v1/jobs?user_id=omtx_deployment_user&limit=200`);
       if (response.ok) {
         const data = await response.json();
-        const batches = data.batches || [];
+        // Filter for batch parent jobs from the jobs endpoint
+        const allJobs = data.jobs || [];
+        const batches = allJobs.filter((job: any) => job.job_type === 'BATCH_PARENT');
         
         // Convert to unified format and add to cache
         const batchJobs = batches.map((batch: any) => ({
-          id: batch.id,
-          job_name: batch.name || batch.batch_name || 'Unnamed Batch',
+          id: batch.job_id || batch.id,
+          job_name: batch.job_name || batch.batch_name || batch.name || 'Unnamed Batch',
           type: 'batch_parent' as const,
-          task_type: batch.model_name || 'batch',
+          job_type: batch.job_type,
+          task_type: batch.task_type || batch.model_name || 'boltz2',
           status: batch.status || 'pending',
           created_at: batch.created_at,
+          completed_at: batch.completed_at,
           updated_at: batch.updated_at,
           user_id: batch.user_id,
           batch_info: {

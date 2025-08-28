@@ -1,0 +1,38 @@
+
+🚀 FIRESTORE MIGRATION INSTRUCTIONS
+==================================
+
+The migration script has been created: firestore_migration.sh
+
+To execute the migration:
+
+1. Upload the script to Google Cloud Shell:
+   - Go to: https://shell.cloud.google.com
+   - Upload the file: firestore_migration.sh
+   
+2. Run the migration:
+   chmod +x firestore_migration.sh
+   ./firestore_migration.sh
+
+3. Monitor progress:
+   - The script will show progress as it processes batches
+   - Each job update is logged
+   - Final count verification included
+
+4. Verify completion:
+   - Check the final job count for deployment user
+   - Test the frontend My Results page
+   - All historical results should now be visible
+
+Alternative: Manual Firestore Console
+=====================================
+
+1. Go to: https://console.cloud.google.com/firestore/data?project=om-models
+2. Navigate to 'jobs' collection
+3. Use Query Builder:
+   - Field: user_id
+   - Operator: !=
+   - Value: omtx_deployment_user
+4. Select all results and bulk edit user_id field
+
+This will consolidate all 2000+ historical jobs under the deployment user.

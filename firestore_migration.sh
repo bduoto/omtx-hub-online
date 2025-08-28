@@ -1,0 +1,18626 @@
+#!/bin/bash
+# Firestore Job Migration Script
+# Run this in Google Cloud Shell
+
+PROJECT_ID="om-models"
+DEPLOYMENT_USER="omtx_deployment_user"
+
+echo '🚀 Starting Firestore job migration...'
+echo '📊 Migrating all jobs to deployment user'
+
+echo '📦 Processing batch 1/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_94fa574c6cc5_0001" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_94fa574c6cc5_0000" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_94fa574c6cc5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="job_127c3f668f9d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_504e2008080c_0001" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_504e2008080c_0000" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_504e2008080c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="job_03e97613e7a8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4b468757-ff48-42c7-af61-f1dd6772d556" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ef3fbe81-bd38-4ecb-baaa-c0ffeb31651f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8e6d1256-c4e4-4a94-b476-b75206a0cec9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="187d23c4-1fb1-4784-b27c-596544637daf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ae264cab-123c-4ec9-a739-3b9caa0a987e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d1e9cdab-66dd-406c-adb1-1237d832bff6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1ba8752f-e549-4204-b2fe-6359981384f5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="76d1bf19-850c-4d23-b82e-4222959653b3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="82051090-a76d-485a-91f8-8db42c66ae53" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="12f29be9-01e0-4f7e-b7c0-a3af22843e07" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="370f874e-d218-4f4c-b2a9-9f50bfe8b59c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="579e13f1-eaaa-42a7-99d4-ee2cd3f10926" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f07c7b1a-17ae-4103-b4ca-f4b50a65c930" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8161a223-ddd6-486c-a49e-ced451be0c18" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3889c14e-e9e0-4c4e-a8bb-0af4cfc5b310" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4225ac72-371c-4de6-bf16-8c6be4e424cc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6c89d69d-ecf7-4034-8425-b6cda95cfca3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4263ed82-92cd-4e93-9c37-12671cab0f53" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d1bd689e-dc5b-4021-8e9e-2ba9406a21e4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="161d5af5-a2c5-4a53-803b-c9445c8fb8f8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4bb3a201-4ea3-437d-b9f3-503f16b54d37" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="59c15081-1694-4b43-a02a-4178d4b38b58" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7cad53aa-be76-4e83-b19f-bcda449030b1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c80a8c84-baef-4df1-aba7-1df8ede0b88b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="813156e9-3824-4457-b985-792db005044b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0e877d8f-7d32-46ec-acf5-f6cdaf1c4436" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="eb6ac4c7-a478-413b-8ee7-52834c829f63" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cc229733-5a7c-41ce-9430-7418e45b6d85" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2ab3977e-e141-4713-9fb6-1f355c026864" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="50ed3839-f9b0-4bbe-969c-0c0d0fd9befd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="98d7f9db-01bb-4fe8-a65f-730a046a5719" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4bb8a2c2-b539-46ec-984e-4131c28b9ee3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="566d2186-e1eb-433f-9146-391aa1889343" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b3579909-e10a-41ab-bdea-6ef76ff97448" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3a811f7d-2816-40db-a770-f4bee954a4c1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="360633b0-3baa-4f78-9364-7d521bb7a07c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="17384ba2-b442-45b7-bcd7-fc4246ff7291" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="88e41002-458b-4889-9922-57f6da93601a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0d3afcbe-b13f-4fb5-bef8-e745583ba1ec" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="eda0f242-665b-4053-9eac-a739db5a9387" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="18c229ee-3df2-4032-9025-2f2a548c2b0b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3f75cb21-215a-49c7-9e87-a1096f03895e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c363af37-fb3d-494c-bbcd-1973da8bd25d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3e237a63-7091-419a-a64a-1b1f7c74848f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bea3cf5b-ace2-459f-9f90-c81cc49239df" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="406cd205-b28d-4488-b1cc-067ee7e80577" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9ecf5dc4-ff0f-4e54-aecb-6344a5db6f61" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8ec81c33-9ad6-4854-b01c-580c7bdd6443" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="acd40a98-88db-4584-a849-48abf6497d63" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7525a950-1f66-454f-ab69-268411e3d532" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e796944e-1dea-432a-8b12-51a6a52bab88" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2056b13e-d181-4969-8849-f1b73133ba2e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b50da7da-f1cd-45f4-8ec9-d7451b78b29b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="61c9f65e-3488-4a85-b368-73c8ef7517fc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ed31218e-5309-421c-bf30-e4fb01280bed" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1e1840fc-cd9f-4ba3-9d93-76bd60d28caf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="04326d59-ee9c-4987-86ea-db8499208daa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7bc66df4-72f9-480a-9b78-9063ad75637d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8497b1d7-deae-4b71-9574-8f4c7c304a8f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="af8a50af-be3b-4f88-bbfc-67ec71f88968" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="10556f0f-005a-444b-803b-922222eca97b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c8f23e5c-3121-4748-b1fa-7465c5abe142" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="09391b7c-c852-4c48-beb2-f4462890e158" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dba12d4b-b9a7-4d80-a271-2ae7fb1dfabc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6e8ff55b-7c31-430a-b6e2-56c554c1c886" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6ec37960-93d8-4a62-acff-f3d6d75028e8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="76433f87-76df-4a40-9d6f-b097ced88105" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0cfabfe7-bf2b-4f95-a4fb-b631ea201239" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cf8340f0-ea0d-4d84-820f-1c3b2db72e28" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="121a3713-0735-4e3c-a6d6-44686c0a3052" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e11d0476-9ca7-443c-ad4e-f83fed6ae357" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8a87aff8-bcf7-4150-8291-f04919a91b01" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2a47ef01-cf5f-40ed-b9c3-298e3a2c6a97" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="33bbe2f4-d174-44ff-92a8-f68e5133a1a0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7e11eec2-70f9-4245-8cce-ac70697c04fa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e2d2a88b-c387-4c29-83ab-f36380af8732" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1e9707a1-d260-431f-bd4a-24a267f84e20" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1d10ea89-2e7b-4ea6-a886-1e3c5d0657b5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4c9f488a-26ae-4bcc-8c04-06dcd06e25cc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="65ee9526-ddb5-42bc-a9e7-e0a1946c6841" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f3bb2283-610e-4b1c-b6ce-b7af35b7e0a3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2c519911-6f0c-439c-8395-a1e58412a2d9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="174b8a1c-3597-4dee-9651-8769d0e3098e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a40bfac3-a458-4576-8940-50521d6d0f14" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bdf34b73-3caf-4a30-a99a-62ba60db0d41" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cf1ca9f3-757f-4d11-a92f-495125b5cf79" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="88a4a0ee-1459-4ded-805f-35424285faa7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="734fb6f6-1993-43fb-b944-a728756e5c25" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="281236f9-50dd-4abc-a6bb-2148bedfe4c2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6fab409b-57da-48d7-9ceb-0dbf0aecc32d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6c04fc6a-b600-4dad-b429-1cf0f4af3269" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="535b8f0c-f1b2-4dec-99cc-bcc8c2f39382" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 2/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e6528565-3088-43ac-98d6-2399a4913682" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fba78395-5814-46f9-8faf-36c87053b8aa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ceb3bb1f-1bdb-44b3-bf05-3929cf0845e5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="34fec504-a35b-4cd2-9074-257eb3d09d6c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="99f19dec-b03f-479c-9ccb-72f852357ba8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cb075cab-89f0-4ed0-8ccd-41635db763d0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="98a5d366-04e4-49eb-be8b-d0d77078b2c5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7621c176-a9f4-4f98-a3d6-bbc8e3774f46" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="710e4ccb-5466-46de-bfd3-b0ce8983378b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bac99705-d2eb-49be-a5d1-79c7cb13ba4b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="33663636-0c88-421b-9845-4b5f3aedefdf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="21538f81-4c11-4c89-898b-2e8b114ea044" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c8f1bc22-6313-4745-b238-885265bad346" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c1b35a81-dee8-4b0a-be47-c20e28833a5d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="85fcdc50-ea3b-46b9-93a0-9f231175c702" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0a5c81c6-f4bc-4496-af64-4d1a86f11285" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a51b5d14-733e-4b09-8a97-80295d846d58" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e317a5f2-7400-4631-8bd5-50f3b5f6596a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4f2a56a1-8b39-478e-8924-27c4d5738ab4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6561870f-d44b-4fb1-b74c-c78b5beb967a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0c92ebe5-c7f6-49af-ac6a-945d0f03b2ae" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e0bc8bc9-a6d6-45c1-ba35-ff91f89547bf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ec0abd78-3ccc-41dc-a0a1-45fc580fcbc3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9abcc4ce-145b-46f8-b4e7-462a64f8de8f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="923d8ab4-2be5-4175-b470-52200f5db970" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d527e0b9-51c7-4ffd-80a5-4476b5deba7a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="870cbfcc-28dc-4b33-b114-3645f9e85063" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f018807e-0e4a-4147-b249-ad23f16c69e6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bd07e959-4a9c-4eaa-8abf-a8c00aa65db3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9ba765e4-f656-463d-862c-362e09ccc6af" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d4a722f8-b314-466a-a535-3d6f8518ad80" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="91d8a30d-7e3c-4a7f-8128-e80bba55bdfd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="61482abb-6064-4b5b-9307-374bf725ac48" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a6ff224a-a6fe-423a-ac77-bebb7c68e4a2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d884b6b7-f1f6-4f75-9a57-304c1cdc9ee8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f7ae7dbb-619e-459a-b32c-434f71a231fe" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e6ea5bdb-a91e-4ac0-8626-b4876f9ffd08" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5a4af526-15cb-4644-918a-7f12a9aa951f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="856c89b7-0ce9-46f1-bd73-e31ea470e326" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f0aa87ea-f8a6-44b1-82a8-3898e192fdec" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f81b0539-143a-4d0e-94c7-22041080ce3c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="127315b0-872a-4b78-988d-c832a177dee5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="15ee460b-9326-4d94-955e-ecc4e08c3974" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c6029296-6833-4349-9af5-1655c27d1300" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8eebd3c7-a1fd-4d00-8d6b-90428fe73b6f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5326ce42-2f47-4080-bb25-158f2124b994" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e6f89b14-f42c-45b7-9b1c-91604d7b6d1f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5a89241f-6353-4ad8-91b9-76d9d13d6519" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e57363ce-0a8f-4edc-a2da-3f58d6dca76c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4a4c1808-3cb0-415e-9c3d-03a8ce85dfd2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7f4cf346-3a44-4393-9d9b-d847d43cddc0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aaab2ca7-0eae-4e93-8262-09b7153b65c6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dfddca22-5395-48d0-bb66-f25e9869e893" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8bc9db6f-8ed0-4e8c-a74f-38f8375d2091" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="46a986a8-383a-4a8f-923f-a1bc90c2e84b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8a3ec641-d1f9-4d31-9add-64e406de83e5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e7bece0b-2184-4f0d-a378-f135bc4e73cb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c716d9a6-0e30-41e4-ade0-59c0def6d74f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2180bf49-252b-4b19-8949-3088fd610774" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="08f02207-d719-4090-80aa-b890de3fccba" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="49461938-ea86-4dc9-9200-acf2057ef7f4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="00e8ee7c-421e-42c4-99e1-453893173afb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="99002e14-082c-4321-9fd4-f1625593f13c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="91dec00d-55bf-4363-bd92-2130df75a668" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a240642c-c709-4e84-8ef5-5a0f9ab66296" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4c8df30b-3a40-44b2-8c53-ef93e7f3ad10" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a677fa28-396c-412d-9cfc-027c4d0d53e0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ee81b19e-57bc-4f6b-a626-22cacf33d660" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6067c87e-52de-4cd7-b387-90798a77c3f9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3a50485d-29ed-44b6-81df-8295d5b66c0b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4d0ae613-d7ab-4b0f-bc87-9e2e4fcea2f5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="403f9aa2-4255-434b-8168-a0de9c7502e8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="eb2935ec-51c0-46f5-8145-751709383745" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="51a4d58e-94b5-4589-b1ed-07ee63ade2c9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3b5d752d-3045-4653-a618-5179bcc27d75" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e996af00-0b37-4d4b-a760-1a1587ec5170" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7c4c75dd-b27e-4f5c-8b79-49e899b5ce63" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="694871b9-1d22-4ef2-8ba3-724a079ac312" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0f500fbb-fd10-4f08-baab-122886b825d1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="35a9fe8d-7c77-4662-8a9c-b59c53bb2a7e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ffaa93f0-9f94-406c-a183-1c880f972579" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="60df9608-c257-4686-b9f1-363dbe5675bd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="209d5d90-1f5c-40f7-9065-414b298c68e1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6af3d650-1e97-4457-953e-ff624291855c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="72850dff-3952-4a3a-b92b-16b47db72efe" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bb211097-6e9d-42a2-87f1-fa2f0a829842" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fe32ace7-c598-4686-bb35-358a495fef57" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7a82e013-6881-4315-808f-1d1cab36142a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a7bc5d1c-5f38-4680-b669-83d5e59d52ec" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c2beb40c-bdfd-4334-9a41-00746254a4d4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="74cf54c8-4ae7-4fb5-a7f4-568d6e9b29d6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2d002c3a-ff53-4cf3-8108-a690fe1c7b08" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a1578f77-72df-4c57-86c1-eaa6a8f29aa0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b4f6f3c3-cf3d-48a5-8403-a0e2b7d591fa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bd64cc30-892a-4ba8-8878-f347bd62853b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ee24f416-99f8-47df-8fef-80c56f91fd00" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2e9f37be-35d2-4824-9167-a235660438b4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="611366b6-fcc5-4dfc-9f2c-b90a47f6f6a6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1a1d7fe6-370d-4743-868c-e4fb2c06fce9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a3db7920-9a4d-417f-a117-0d8dee95fc81" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 3/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="84fd0f1d-5de4-432b-b480-d7429ca22d78" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a248c36a-ddca-4894-bdbd-df171ae180a6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ef4fa6eb-6f89-4cf2-8450-1d1e30fc581f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1c283d4b-616f-4e99-98ae-86dfc32f9a66" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5757fb14-093d-489a-9110-2cfd6d2f7e4d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f1c8a3ae-951c-476c-a845-ba71fe0576e5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="041c3b2a-ed37-4022-9c7a-1010dad51321" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="782c9bb0-3438-4dca-8ca7-2d9299c07c28" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4924eb87-fcc6-4479-83b9-259ab1aa281e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="de3350e4-eb0d-4b63-b083-f14560eaa383" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b4661fc6-74db-431a-a180-a3b4f1dd7b82" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="28d78008-ba46-4e3c-98be-8e948dd68d50" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f52ddd4a-0976-4000-b531-f5226b8b2af6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cbb8cd94-0da8-4cf0-981b-c5e97bf2a124" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b4e45eaf-66fe-4142-abdb-4dcab22693c6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dd6e7854-5715-4057-943b-c25a4e0f8452" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="83802ed3-d0a7-4440-8b25-b49e507b8d1d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2b954902-e754-467f-83a2-9dde60a3bdab" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="183fbe7b-5665-4bfe-95fb-46aa0480205d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d7e590d8-c891-49cc-b081-308ff1af3c5e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9d5994a0-051d-4fef-846d-8907df43c4c8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a88b1792-c01b-4bed-a10a-655eaa04f6b9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="898fc591-f089-46c5-a568-3a5421669d0e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ed57b582-1163-4474-98eb-78143e313837" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="41246ab8-b9f6-497a-a99d-9d0668d9f101" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a7b3077a-bb44-4ee1-a643-255faae8b089" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ec069589-083e-4fca-8641-e38ee812fe52" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="22b87ff0-8e6f-4778-a46f-9749075c22a8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dd30e19d-face-4ce1-b7ec-eb8f7ab46a0d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3b0f2dd3-6578-419b-8260-674637f3929c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4dd3265c-b8d5-44ca-8f96-2fc48aba46de" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8c5c10f3-e316-483c-8f12-1dd8988a1cfd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3c5de0d1-544e-42da-b6e3-43bfb8438694" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b4745a9c-0644-4417-a378-9b3dc192b1de" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8a25a2d8-7ed1-43f7-ba28-70bbd9637f2b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e07c1736-90d1-425e-998a-b68580988f19" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1b487d25-69e3-4121-afde-2f84a9d42cff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0bf830d3-6c67-40ed-9b67-e352ef56a198" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8c21b46f-b88c-4a5b-925c-4ba0446235a5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="29431d92-06c3-41d6-809d-0b4cc35b2bd9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c3bc3aa8-fa92-46c4-8789-a92264a6d9fc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="97c5bd7c-0a53-404b-9e3f-654e99a6f58b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="79a085f4-e9af-4096-952f-ba45f930e3a6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7a845e33-0abf-4670-bf84-868f65452979" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cfcb96f3-f270-4fd4-b63a-eef7004d7fba" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0f50197b-c915-4811-bf33-c737a9743bbd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="97c8738f-17dc-4948-aa76-ab94772ae0e4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b5e554c5-a34d-4794-b9f7-806c55755921" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="412e0a0d-8505-4c6e-baed-46c9b6d3fdd2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d09f64ef-8a7c-4804-80d5-2a080e760f3a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7ca11f30-c892-4a52-8a73-3677af3a39f5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5df16f65-92ca-4a73-8f7f-8047f7a9e580" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ef6b8b33-011b-4e47-aa42-a86bf5344e11" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c909ced3-d99a-4f8e-bb7b-2a7f5affeaa2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="096bb6ec-beeb-40b0-8c89-6448d15cbde6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8b8f39d1-2677-4b9e-86a5-1ec45aed2b4b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b4ddbf5e-c3c9-4fb1-bdce-0bb0e157af3e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3ab04396-7568-4896-a745-199d14448a82" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9b84df04-5a5e-4acf-b783-059c4ff636ab" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="39c68954-c34d-48ce-b5c7-646e9226dd4d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0388bcfc-69e9-41f1-bb89-24b9c36d1599" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="860214c4-8551-4468-8a89-82f87bd077b6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="15213869-d0a7-4150-9fdb-7dc9327c5448" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a73da9ee-f940-43f8-ad35-c24f2c642d6a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3c202eea-5aef-44be-94ff-2ba0ebc3e010" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ea049fa0-f435-40ee-b161-2bf049f97cbc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="41192288-f59d-4373-a7c5-c1712e41eb73" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="24187b59-ec12-4755-a0ec-3c373820575b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c33d646c-5565-4aa4-a33d-a8e0460c77a5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a6d25b75-1cdd-4c6a-aa06-3a9a9ba16ee7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7bc6e136-9c3c-4405-b17d-fcdc8badf3b1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bb7df23f-5ab9-46d0-ad00-c33f81d16557" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="542ca6cc-37f5-4660-ab83-4ffe815edddd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4a4bdac2-1d58-4bdb-87df-5941d15d8758" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4f135ba9-6aa0-4e97-b442-97ed2d6441c7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6f7b542e-b71c-4c35-b1be-a0695129265d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="75d1c5cc-4a65-466d-b14d-5c68dae381c3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="67ec1eb5-4ffd-4e1a-99e1-982454e303dc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2301dfaa-36fd-4a1d-b492-aca1a9ea8ae6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e402e7ec-fce6-4bc8-a815-13cb1d5a5096" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="99a1895a-d6bc-4336-835a-c4e31cb35916" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6b111da3-97ae-429b-811e-3710cded3c01" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1c8fedbc-ffbe-44d0-911d-0ce50bcb07a1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c0287be0-939b-48c4-aa39-927951048462" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="18db34b0-fb9e-4f5b-be64-a859adc073d9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d0125c5f-cc38-459f-abda-d32e703e9ea4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="420b1a25-0eed-486c-985f-980c2c506f14" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="184eece9-bfd5-49f7-83a1-1f0bc1af530a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bc71c395-76d1-4566-a3ba-59a528bdca52" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5c770914-874d-445e-b41b-9877cf5c28fd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a4f6506d-8657-4dcc-b5b4-0be7df2d45bf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="37ddc38c-4660-41c7-b45f-e5fd4d3cdbb9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d4bb6579-137e-403b-8c34-a2744b7c899f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bc0ea841-f545-465e-bec1-421d2a225686" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b584eb6a-9b0d-4fd2-8e96-7e2c853980f7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="241d469b-c9ae-4adb-bcbe-139777a3a6e1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1b0267bf-63da-4cc8-8c68-abcd7261047c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8850ccef-eead-4e0e-aa7f-da9f9482f4c2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3b929f15-c318-4b31-ab9f-f9ad04fc3162" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="87955649-4d34-480f-9b92-50824f09342b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 4/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0971a103-b360-4734-ba04-4faadc7b232e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ba36c637-65ed-4705-8c9c-f540de331fcb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="332acfc9-4dd5-4992-9638-6e147e4e8f56" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0fe1cd9f-d0c7-4609-a7d6-3c9593a136be" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9b8efcde-6cf9-4f11-87ad-3f13cc407abd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d7d82728-92e4-4b25-b192-e49b619b9859" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="eaa5873e-07cd-430a-8701-5282edafd9d6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f00538f0-a613-453f-9fc2-28246cc90f22" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7a6383bb-70fc-4d4c-9653-dd42ad3a7381" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ce386713-704b-4b9b-b355-57e72ac12880" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e4fbe72d-bbe2-491f-93ef-7341f960bfc7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2979f1ef-34c9-4f85-881b-0087555463ee" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3661d9c5-a3fc-4d14-8dec-64c74e6594b6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7ae57f34-fb64-47d4-9a4c-341f49958421" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="292741f6-9cb9-42c2-a6d5-811b07527009" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e4f1511e-1d6d-471e-8adb-671ae104f446" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ee5eed93-664b-4dad-a585-3e6320aa5ccb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="374162d8-8795-4de5-aed3-499356171037" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ad61b323-edf7-47b8-aca1-474a0a9c67ef" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="74b61343-bd52-41da-a527-faad002954c8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aeb4d102-de47-4b73-b814-b185f9716818" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ec9bf117-b5fa-4dc6-89e0-f585566e28ad" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="21d06603-4809-42c8-9c89-391aa36c447a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="909104c1-e989-4aca-ae9e-5ff47a7680d6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="765ba7d6-a74e-4f88-aad2-fa0b8053019b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9555c29e-46aa-4860-8127-197ba2faf41f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="85fda94b-50fc-42f3-9fdc-7fdbb7fe4bf7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="26d453e1-800f-4d06-b846-dd954341722b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="48cbad70-5dfb-4414-9782-2f655a6038d9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="30e56ca7-62a3-468a-8e14-ce1469c99a15" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="37d3d1b2-344f-4d70-b7f5-8a5d4f19874e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bc8cf1a5-0ae7-4dc8-b5a5-f81e6b6424a7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="509d7e27-aa3d-44e6-a98c-42936dba067e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="60a8548b-6255-46cb-b91f-8fb850a7f473" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="eaf8e8de-3bbd-4407-8114-ce86d74f71b6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9073d82f-5a59-47bd-8c19-3441fe7bb42b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="87a3ccd4-516d-4d38-8349-add5cbf67764" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9b3d4908-eae9-44eb-a236-817d1359eba6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="66e636d5-ee10-4b67-aeea-e8093203e94a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="821cfef3-50a6-410b-b0bd-e66b1b69ce19" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aa0b043e-a8e4-43b4-931c-33a76fdd1108" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d450297a-a59b-41a8-93f9-9bafdec76333" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e84d04b7-f412-4c29-a057-c3ec6482aa11" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9c09b2a4-2ae4-466c-9a7a-d29d2bb3139f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="315ee088-3e06-4267-9b52-7b071fcff7f9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="057b6c67-4801-4708-a6af-ade901c8d9b7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5da67061-9faa-4905-a5c3-c1e5b8528fa7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c8579591-832b-4e01-bf84-d64bd30febf0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="085540f1-e68d-40f8-9662-cc8a9da3337a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6facf567-2aff-4197-bef7-9d7499873c55" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="48ad520a-d394-4f08-8a28-1cd29aa96f44" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d074225e-7cb9-48b5-88b0-ef9c3a35bfaf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a193cd83-6e3b-4343-8612-8cf265804412" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2a6f99b0-0b74-4236-b8fd-6b2e19ed0a4a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4952483d-eca3-4103-9bc6-80de4a9703b3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c0cb5c3c-5f7b-4d06-8747-f5a077a7c6f0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bf3ec511-c7ac-43f6-bbe8-b1aab374c992" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="235a58b1-06f9-4019-bd4f-22f2e3790777" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c496fb8e-a6c1-4d17-8f46-aa238bc37a50" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5a3f0af6-42aa-4042-874a-6b594cf01502" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e3dc522c-ca64-40b3-a747-35279c22fd95" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="667d4349-171d-4829-bacc-194ff279517f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5192c5a1-79a8-4658-88a4-53dd8ef46eb6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="30f89bd7-171c-4bdf-acbb-3542e43c98d8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0da6a641-3b86-4722-a06c-155ae8d08bd8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4bd15626-0659-45b7-aaf4-160dbb0399f1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8bce62fb-b824-44d6-ae21-8382b37cf792" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8e50828a-40fc-4c61-b730-b9fae0d680af" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2f6adf78-2615-4bf7-a7df-ea9fea8f81c4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e2bf412a-0830-487a-9f0c-7d486a957fc4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bf9cd238-0a76-4900-8db9-98cf56d67535" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4bf64c72-21dc-4922-8c11-ec30652663cd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3c6ad933-83c8-441a-bafc-8666034ad133" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aee7aa01-4011-4de6-a5ff-c3eba17bbe7e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="91b1eb30-d7c0-45bf-a415-e02ca8768d07" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="91042917-5705-4e3f-b3a7-b22e4fd5f052" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9e576805-7180-48b5-9a01-d08d442938f8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6e1161bf-49d5-497a-8b66-10ba94821629" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a6b2b0ab-890a-4dc1-a644-699fbc769507" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e9d9dc70-a5f3-46c3-a9a3-e068d54de1de" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3c81a574-62ad-4791-999c-487e95656af6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f78ac9cd-25f2-410a-acc6-961631c85f96" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="de579388-4a56-484b-b306-ea79ea363bcb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1f69c023-3b51-4e2f-8159-1cd661470cb8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0ab98852-24e9-4826-b81d-c7f5b9002b26" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f0876fae-87d4-4841-8c12-4ed60809bdfd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2fd05ebc-29b3-4680-89b2-1dadad867746" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="062c9387-3b54-4b25-800d-7ff474e8c20d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cdba7749-8fe6-4b35-8b63-816220406ea5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b96a39e4-af97-49f7-93c8-3e662010f09e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9db06470-4f7d-4059-981e-0b72cf506a56" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d53bcea5-bf3a-4c1a-97f3-d5e0e9ce4f0a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a4e8cfb2-03e9-4f8b-aff1-fa732ceb8c24" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="27974bca-c635-4f33-b1d7-872d300f4a76" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="584544b3-43a0-4063-a74e-e8386fb3a429" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="edb522c9-775b-4486-a185-70474f3dfe81" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="46daa379-3ddb-40f5-a2a5-1fa616b28809" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bb33a799-ad3f-463c-86f2-d1cb18052746" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a06660da-30e9-44ba-9f7c-a449e993fbc3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e27657d1-4fd7-4f07-a0f7-3f84e48cf044" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 5/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a14d7fa7-5c95-4235-b2e5-5be7d0f0443f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e6dfadca-fc36-456e-bc83-81689d9d5ff0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cb567d1c-6a7f-48fa-a2fb-517824553b4f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0cc586a4-a059-49fb-be52-c763aaaf566c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e8afeeb6-98c8-4c50-a7e3-41a81a31c075" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="40c7a900-af4c-4345-ae13-bb4685ac631f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="94c54e9e-1370-4d11-b16d-fa27af344e23" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0385d3a4-ab21-466b-9c2e-77c13a8323bb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="786b20b7-4d91-4a75-a0b2-b8b2570fefcc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="74111fe4-562d-41f5-b594-865018a639cf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c476fad7-fda8-4c82-bddf-8f5b4f944d29" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="44e25910-8982-48ae-869a-631859cca9eb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="288b9690-8f05-4a74-a41c-19feafb40584" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="40a6ac25-f39f-4dc6-a805-e018d5f261b8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6aa1a55c-0144-4910-af73-20ca7a460e4c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="156871f3-a569-4dac-b0b2-290b446b4667" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="412eee73-3d9c-4f43-958d-5beafa924271" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="366da287-1dc5-4314-b742-58d6c48f3b43" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0ca9c865-01d6-48e9-935f-27bcad7fc872" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="42f3b12b-0a6f-4338-953b-aeb8016c4f49" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d34e56f1-72c7-4cd5-95ce-b112200050fa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="16bb9352-a579-4b9d-9eaa-b73bd4c13e0a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9f243b12-44cd-4c31-8165-c989086ec618" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bcbe3246-7ecf-4d68-89e8-e46abad9062b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7973a0aa-356c-4ec8-847c-02981d58f003" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0f6e1945-5c56-4d8f-ac1b-c9cac724b1d9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1aefc4b9-ac98-4ad8-8482-6754ee159a56" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1367ce60-fa8a-43b3-bdb6-5d071c3e51ac" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4b1236d5-b1b8-49d1-8c05-944b2781f761" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="15897ede-ca7d-46cd-b7c1-e3fbacb31f6c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="149febd4-db14-470e-bf9f-dc8833e80d03" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e5cbb764-524e-4c59-8bd9-e0e30a11c000" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3d0d6659-9b9c-4c8f-9fd4-82f68bc7376b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c2169830-d542-4986-90d3-2932bd00b767" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="387412c5-0f9f-4a71-9946-08376c1c20cf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c4dc1c0e-06f9-409d-aa12-9d15c14a6e5f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aaf39e5e-64d9-4e79-a43d-23c7e4b78ed1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0334ef70-8dfd-4717-bf21-77a80649afa4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="36b13265-89b1-4b7b-8673-41cb4b3669cd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5a3dc41b-4244-49c9-bac4-dcff1b48fa64" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b0d763fa-5a92-43c0-9ab8-8060dcf96123" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="86f8e373-1517-4333-8e5b-43f09a495a94" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7519bba0-8bbb-428a-98c8-ecfabe6d05c2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="41b3d773-0a2e-447e-8352-4a26c5479929" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="50886139-5512-4aa9-b344-decb543e652e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="acb9a8d9-6d8b-43ee-9a55-c17bbf4a4491" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e85c5eff-0f92-4498-9c07-ebd95927ca76" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1b659db4-6a6c-4902-a3cd-6829ac729966" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="92719c7e-5ca9-4046-a2f9-0f1dfb354067" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="af898535-809a-484c-a896-255a2db8a072" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c407ef39-4b07-4570-b5d2-6f2717724627" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1533144e-886c-4383-b59b-05da5fffa424" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="31c1dc7a-921b-4f17-a1b1-d2d942acb965" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="df92ef4e-bcf1-467b-9936-22f19a5c6a23" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="12037f6a-f44f-4cb4-ba74-fd324842ab48" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aa157822-8970-4f08-99c5-0af76d9e42d1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bc3e8577-03ab-421b-aa0b-202ed66126ad" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a019b06a-c1fb-42db-ac53-27cbc7f2e652" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ebd31f1a-9360-4db1-88d2-3fd22798c744" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="127e37b9-700b-4aad-986a-cf768e4d6fd6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="baf0260b-7247-42a7-ae49-bdb19c429087" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5fd7097d-c199-4d22-a39a-7faa4205b790" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="443c64ec-793d-46f2-b5ce-bcaab52b8a3e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="51569311-aa74-4174-a8a6-d60f3f917d92" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f3c77abb-28a1-4485-afea-96a30502837e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="401c6fa6-8cbd-4385-88fd-afa7f93c952d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5af3de3e-fbe8-46e1-aa28-2ceafcebc41b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f1bc6e96-f05c-4c45-a642-a4f830347268" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4d1de1f2-9539-4ab8-b539-e6c4bcecfc23" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="900abe84-66c3-4bd4-ad80-21a4eca57003" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="53353854-5785-402b-9c3c-31d662c2062c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c16de625-54fa-400d-bb6f-48b193a7c4c8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7a377172-d023-4f92-8a5f-5f73afd7b6ed" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2913e57f-5cca-40cf-9b6a-6368297a6c43" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="db0073a3-e1e7-4975-b2e2-e9d324ca8887" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d817b729-6ae3-41d1-80fc-1d11b759fb48" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b791bd55-844d-40a0-a8a3-74e23d9ec77f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="43a332a1-169e-41b5-bc88-0b26ac463be0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1f7d7fba-bfc2-4727-abb3-69ffd6d48409" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b91345d6-65af-4fad-bb97-f48d34e31b92" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="171c3902-3292-4224-a4b7-68da3a971ce1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="becdfe10-3f78-40c9-bb9d-7d224e017f69" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b5792fc7-de4e-48dc-8a9c-97fec15d5a4c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="70d05cf9-08f0-46a1-8994-87b12fe5e518" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="43c4b55c-7114-4e85-934d-61929cfa23a0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="13c1ea42-1716-4a8c-bb1b-a5d930f92e25" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="67afd67b-d0d1-480f-a204-cff90ac6385f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9e9fa3c2-9908-4d6d-8526-8bbca0cd58b7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4eb31676-ac60-48cd-ae83-e97b9ca14d77" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b880dd76-34b1-4201-b0cc-6789a9133c26" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f2cab2e5-5afe-48c1-8af0-26e3b7b9e0f0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="21212c43-eae5-4fcb-b763-2fa70ddf779f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ce79e3f8-7dab-47a5-95f9-410c3c3af9b4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2145538b-24bd-41e6-b472-bf8959a671ac" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="be666256-f7dc-4f36-af7a-a331cc1415cd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a660a08b-1bdb-469e-923c-4a261e594a3e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c29b3bb8-b2b8-4e69-8939-6a41d557e223" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3f270035-1af6-40e3-aba7-8d0362905975" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b3ff133a-14fa-4e5c-8249-0638580eb1a0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dd14a8c5-7dfd-44c9-bd0c-c1dfe0f6a01d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 6/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1efc2ff8-4855-44c4-b588-efab68a597ab" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="498085a5-d13a-4263-8e9b-7b47305b60da" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="81f9eaaa-f7d6-4bc9-bf9f-dbbc82bb9247" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2131a4fe-5c3e-46b4-816e-7bbc6e696da8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f68c4ccb-287d-479f-b9f1-aa9fc1b2d1b5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="30b72e49-1b08-44ff-bd0c-dc9aade24abd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c0aa51e0-d8e3-430c-89e5-449d2d93dcfb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e8b0da60-d276-424e-9f31-3d129239951b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="06554301-3013-45a3-a83c-adf7a92b6041" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9701bd45-9ed2-492b-bdf5-547c91aa025c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c4ad4818-b295-4ad1-8190-513713f9e9e7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="54aa9429-f3cc-4529-97a6-31a2baa3c3b7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c6419323-68c0-4544-881c-a77fd69e57c8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4b8b143d-7e76-4993-8ad3-64e2f01407c0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fe941f9a-b5c5-4874-88e8-0b484aab0b77" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ea399f4e-9be5-41c5-bfb6-8d568873ed75" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7a01639f-eeee-4c94-90a6-b17bed4d2818" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b4343835-4e6f-4982-9e90-fb7bfb2c3c83" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c5dae927-9702-4679-b498-29f70298387f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="52e0deef-5d19-48e4-9bb2-f4e277b01684" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="62774237-19f2-4807-aa89-0c27c4545d56" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="97433b4e-83a6-4fbb-b2b6-0a537f25965a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aa05163b-08ce-4d78-8c41-19af19777b3d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6ebfaf20-2ac2-4f23-a93b-3fadeb6e6286" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a51d6575-d804-41ca-a59e-552f77291022" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e927b00e-07c2-4d37-bcd1-2af0a3a448f6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cc588783-a697-4594-9c23-b3505d287461" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2bda5ca0-7dac-4031-a630-5feb113299b8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fd0323fe-d997-49d5-b2d0-542497c67929" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e6e02d61-b7d3-400e-98a0-e20c13117a65" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6dbc1bcd-b2af-4ac5-b983-f42587dcfa80" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="53059b2e-8143-4dac-a7ce-c28aff8d93ae" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3171302f-cc2a-473b-adbf-3973ae22d509" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c5a44159-5fd8-4309-b6e9-3919888c0e3b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f755305f-8600-45f4-8574-4d2325e18cfc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c7c41389-8b0b-481b-85bf-b1db3aad98eb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ee80c1b8-5168-4e2b-87cc-491568583de8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7186c368-21d2-4bce-9b5d-167d766c83a9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9a445bb0-e966-4563-8f27-7984ec72ab5d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="03479746-7285-4da2-bfe3-500c5c003ba5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0e423305-d7a2-492a-b5df-49004bc5f932" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c0c21011-20c7-4531-9bd6-29f103c149ac" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3d969715-d7f7-4686-910d-b448cc3914d1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e9d49e27-3fc1-4175-a586-5512e8b13582" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="835467e2-642a-45d1-b1c8-9ab3f48ff828" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8776b0ca-0a00-429b-994c-25812cf622d2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ebdaf57d-8043-4e17-9966-c15f4d822101" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="452298c8-104a-408a-afed-c9ed4a19c94c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7455bed9-053b-4b08-b1e7-e2f4a34fd3f5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="604b9b66-e97e-46e7-8bb3-11da0dcf3b13" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5b814b83-7999-429b-a238-58362859599d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d0fef1c5-d1d1-4bca-9fd3-15029474a3cd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9917eb9e-2f3c-49eb-8492-99c1a24152c3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4ea9ca2c-079d-42f7-9241-b7f1fe4bda19" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ac5eb3fe-689d-467a-900a-eb67ccd96967" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bbe09fc0-8830-49f0-8dd7-6bf06ac7fe22" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="968ba304-f4e9-4956-bd80-c6888da772bb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0b31aa42-244e-4c3b-801e-451ac7de6928" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8c5aa4db-f74f-4917-befd-147d2986ba38" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8cdaba04-8ad6-499e-81fc-7b171c054b3b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a25fb52e-6564-49b7-8bff-133f0e5bc5fb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bff03bc4-85ff-48d1-aff5-2394d5cebf8d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="72746d41-2343-46ac-b03f-e8879d07a79b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="260d899b-6645-47db-96f8-0ab7da2bef54" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="598d53b8-6788-4c80-87b8-fe770a07a9bd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bf532d1f-100a-437a-9232-4de56ad774fd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="64c3f1a2-8d17-48aa-a654-9e2831582af1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ac91f8a8-228b-484a-8916-13e0591f259e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="37685743-f7f1-47c8-82ae-2b15225360dd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="67b2becb-2ab7-40c7-b47c-9b0fb3b5355c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2cb37c22-118c-4b1d-9976-f63198810252" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3b97640c-ee4f-4fba-a506-b27afe712198" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="27a1e56d-259e-4c54-a73d-34f9c4225b59" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2409b19e-04b3-4938-b03a-ceb7a1ff4734" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a6e8a47d-4f66-4e15-8986-29f9e8908f3a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="12433c15-d1c1-433f-9ae4-b3c5bdd1719a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="499003e6-be26-43a5-b652-445f83207bdc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="52af176d-e8cb-4768-92b8-5efda138559e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="54193481-e4ae-453c-97a1-86dbc85e7756" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5b2289bd-5491-46f1-adae-7f6196248ef4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="76cc0ded-f7e8-467b-9304-fedb232c5cd0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="57ceb129-44c4-47a4-bd46-bb0348b97165" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="91e6c5ab-1985-4961-91c9-c3a1130a0e2e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ccd4bbe5-a884-4f93-b73a-a1fb9a7d0a65" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="18f914e4-5a7a-4d36-b8f0-d6d4bad27b67" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="50538b6b-3985-46b6-8aed-b970bc3ec3d2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d16902a8-86d7-4d41-b4c6-e902a60e3dfa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7935dade-9cf2-4252-9b26-1d9652685c79" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0c6e4ed4-d7c3-4c1d-abe6-5bc4d6096dd8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5e77321a-3bf7-4472-9891-cd7e73f5bc58" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="191dd585-049d-4f09-b003-2b1b91ec15df" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2e80d6b0-f31f-4cf7-baa0-be0b41eb58b7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2152cc1a-67c4-4ecb-a7f7-3317d268dc62" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f9b6f972-5292-42c0-a6ce-c811225c7803" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0dea89ed-36de-40c0-82c0-496c113f6b76" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="84522375-653b-47a9-bfba-2e10a074698a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="21d01138-5a1d-4da4-be7c-e3f98abf0e70" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="19265109-d4a9-4f4d-b003-8355a51ad2d7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5f788895-751a-41b8-a9dd-61d56e4e76ff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="44c3834a-d887-433d-aeb5-462592527afc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 7/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="73c7f909-a064-45b3-802d-7102c340a44c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a6a1396e-f393-4581-a8da-7323f495f59c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5dcaa88e-924d-414f-a842-f69c88e93ed9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5005eb1a-067e-4c42-ad72-e69b7b4f7fd7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="81fdbf72-0b6f-40e8-931c-ce5a435093cc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="32423885-1ed3-4220-9500-51e5bcbb9a24" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="02cd200b-dd5e-4303-9c0d-4aab7b760149" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="42ce62e8-ae63-4366-b4e5-d4c1499781dc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8753d686-eed2-410f-bece-21ea5dfcd4bb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7f324933-ab98-43c6-a4ef-6ff86129aec2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="95be0166-55cf-4fdd-9cad-25dc56d843a7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="afc04445-ae6c-4a35-81ae-efe8937cae9d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aa205e6f-0352-4786-9b1d-554e2633e8c9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4983b520-e4bf-4e1f-8579-7d35d1920ec3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4b563d0d-a3c8-4783-afab-d6c8516e6714" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d0fc1cf8-fd24-4a53-80da-9a224049693b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3512899c-0262-47a6-9706-69accd219e3d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1be12e28-b921-434b-84e1-8e9a9b6458b6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8b10a4e1-7d70-45f2-9746-027e1c9ab31c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f8260daa-6172-4411-af88-40a43f602970" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8538831d-dac0-41c0-ac94-c04089ccb925" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c35df241-5fb0-4b2d-a966-e4e0f0e0bd08" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d9928190-840b-41f5-ad7c-6baa92f7d0be" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3b4eb623-b46c-4d84-8671-1719fa2f6345" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c62d0274-1f44-4359-91ad-e3fe0e372f50" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="da9cd75c-a030-48ae-9969-cc6ca9c8136e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="de428179-6f5d-41ff-a4f1-f8293e47705c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ee6ec533-efe5-4556-a64a-4f110adee4c1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="54aac8db-6de2-4aed-96ef-34743379dede" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a8deb8b7-788a-4316-a6c9-01bc8d240307" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5fdd3f7b-d5cf-4412-aa5f-b0ba9fde0cd8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cd6c7507-13a5-475d-add6-6c14a2b337d2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="16a956e2-9650-41cc-b772-572880ceffda" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0f894691-975f-4c7c-bf8b-05eb03ed7534" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="61b6859f-610b-47fc-bf61-83b289f22bb4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2c7421af-fc8d-4ec1-9dd1-0894eee89b28" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="255f8717-8c55-42e5-96f1-14ea3bfd7bfa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f5531be0-015b-4cfd-b693-eea98b56d5b0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a8ca3688-1209-40c1-b191-550ecb6a4a7a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aa79a51d-ead8-4490-b649-0995d91fb4eb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d8c8cc80-2d7a-43c8-b317-9bf1b811f29d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f4538bde-6cb1-4315-bfbc-0d3a8b405f54" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f97daccb-f66f-40d1-9cad-1f300e492c34" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bd7bcdc2-ec30-4e31-9035-c04df439ab38" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0fe73801-6b18-4a00-b528-764bd51e9a12" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="720b9646-8464-4f6b-ab2f-023c132773e5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="228391df-25a9-4dd9-b1ab-da4a268567f0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2bb6e985-777a-45f9-aeb7-4d35094f9245" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="eba598ba-118d-4b44-bcc3-7296f1bbbf66" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cc16e107-611c-43b3-a1c3-f3a3b31b08f9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b9ec1a8f-cf54-4f14-8d81-61f2fc179197" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ddb5a37f-951a-4f49-b10d-6c24e7c0b85c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aae981eb-1515-44eb-93f5-523d66609911" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="eb7a7fce-0d24-4cf1-8566-1829fdabd939" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8d9e6132-f780-4319-b553-cb6dba782e6a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b71b240e-a704-4f58-851a-308cb00b59ec" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="08f78161-fec9-48fb-b38c-124c32f0d3fd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bfa91481-ce1e-4091-b153-1b8929f913d2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="afc54553-f18c-4921-aa6b-4f7d1575e6d3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0a64180a-ba9d-40d2-bc5a-521b1097b6d5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d7e8bfac-2fa5-418d-bbe0-4bf10c0792fe" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5e6fba32-fedc-44e4-bb0e-917459c814af" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="70d09c06-dd2a-42e2-9804-31271ef8ae3d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a9b0b873-783e-4d76-844f-296e77391a01" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1badebd5-9b8f-4599-b9b3-e5c7ef3f7213" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9c8ec5ca-262d-4b4b-b4f6-ec9c7b725f89" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="38a96da8-6436-4e94-abcf-5c8580e4f280" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="35caa21e-57be-4a22-ac56-d463cea5cbd7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ee156378-87ac-4d9f-8126-0b1d0cde8fd0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="278039c9-ae0c-4ff1-87b0-40ca5a832ab1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="526aaaf0-e9f7-42f9-98e0-9e0677a8be96" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="23939cf0-e4c7-4600-835d-a1742cfa39e6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2cb3137b-3d56-4f45-ade3-610887f4d10f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4b264813-1201-4108-aa62-3b91bb685625" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="51c52d19-6839-49b4-a3c8-d125335f2bf2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c16a6426-5d4c-4aa3-82fc-61fda1f707db" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a64f0c07-2853-4b57-8676-8c0b49798a39" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5c8afd89-1c0c-41b0-85db-8106bf2adddd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="956b34a9-baea-44ca-9c05-def1e6141cce" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e64fb8eb-9203-4c08-8814-ce4d30b3a89e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2085c34c-e72b-43a1-8534-ea65c04222ec" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2f10f7d1-bb2f-4be0-bb97-a38e11c323eb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e86942b1-d1bb-484b-8f23-8cfeb1b9f4e9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b5596252-f3bd-48f3-a5db-36768a9c6fc3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d6309fe0-a872-41ed-b181-573df815eb7f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5a543ccf-d82f-48ab-b41b-b66f67cab49c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="825f2e83-44ea-449c-a9d7-457533a3aad4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b4e54d5d-8b71-4ab7-9acd-6fa50eaa1e7d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="befc58bc-8c68-4a9b-9426-def1852e4ddb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7a9da7c1-29d1-471d-9fb9-1c4f07329ec0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="758d3048-f9d8-4994-ae30-bdf6c37baffd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2691cc3f-7689-4333-a306-8dc064b67f5b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b0b24944-7e19-467d-8abe-f1a7e1779808" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8209257a-d59b-4783-90fa-a87bf1700d48" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="514293c4-44da-4579-9486-9a05c268aa9d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a8a94b50-c773-4bc0-9b84-854599b40c60" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ebb5ea3a-2594-46fe-9a00-a299c92cdd25" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3a3ea191-a3e5-4e19-ae6e-396f5efa2e0b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4f082d6a-8c17-4b41-bc30-106085d5b0f9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3baffa51-5878-4bf0-8e25-2ea4cebd13bb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 8/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="24f2bda3-0c7f-40c6-83e0-7ab229179c0e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c0e20225-df2b-4e6a-b351-7d11734136ed" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a8e35436-a81d-469f-9660-afd072aed04c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e7b0e4db-b65f-4914-8704-d914e8f501eb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d297d741-1da1-4c1c-837b-b1e76973e789" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a8900521-2e93-4f5d-b178-e5cd02addeb2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="71a1617c-2b16-4e9d-a8bb-950ca3d9abc1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c1f1aee8-6f3a-4d1a-a67e-9f9ff5c7027a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="90e5654f-f9ef-4b93-be1f-e5318c288224" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="07f977e7-fd68-45f3-9e81-48aec996bbb5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2c05c3bd-42bb-45c4-ba1e-f9b0ce9653f6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="20d6f269-f481-4656-9e78-f5af99c8ad67" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a846ff46-86b9-4bc6-ba36-a96c12cc2f6d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="57c5f795-96a1-47d6-8666-23c1793b9711" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c3832fb7-7922-43ab-bd94-bc1c89437f40" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9cfaaf4f-2f32-4945-b64b-a734779df693" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="65555df5-7182-4472-bb32-b559d72c8a0d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="386735d5-a263-4de8-b53d-5485c2277c80" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5445796f-f857-4ad8-8208-7affd70f559f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f1677e3d-12ad-4596-90e8-f7c670a81479" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0abd1c19-3309-4ef5-8aab-3daf4dc85eeb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="00034d29-1593-4a71-a9fa-c0510ac7506a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6ebe4fb2-3a70-4261-bd50-afc70cc50ee8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7e99fb60-5719-463c-8b1c-afab9b0346c2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4f289aeb-013d-45e7-9574-f0e1d960b4a0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ab5a1228-4a99-4af1-bd17-b05c7abead59" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e0daace4-5c67-4276-a96d-6438fa1534f5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7404613f-ace6-42e2-8052-992ea48da81f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="374ca17c-ce40-4e1c-95ec-a43cfbd0ec73" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e77c85b1-84ab-4915-91ab-c06ed1020d3c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ed0a1097-ddd1-49d9-9fdb-dbb7a361c268" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bcdba889-82f5-460b-b6ee-649c851bc9d6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="998bebdf-01f2-4540-ab58-5020bd0df1c4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7d1cec16-b6f3-4572-aabf-ff4f421845e4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0a0b216d-93b4-4b30-888f-811bee4fe21e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a8f4ce86-6fdb-4ab0-84df-a7ab7f116a63" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3dc44d17-95c6-4b17-9d76-1f1ba942072d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2efc2b9d-e13d-472d-9952-c5657df95a50" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="50dcca24-c0a9-46a6-a8c5-5aebae0880c7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="118e313f-7e7c-4b85-8df4-5eb3ea229fc6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7f815f50-af84-4f39-95f6-859f3eeb1e26" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a93bd175-97f6-4819-832d-88465114615c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f83a62c6-16f2-4be1-b9f5-b7c4fcfb015c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6eb13114-b1fe-44e1-a355-3b86a065b343" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="36483d58-9303-4361-9139-c40e3633d96f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f2171a0a-4bca-49d1-808b-fbe45e45e9e7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aa10eaa4-8426-4d6e-8f1d-511ff6b77fb7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c31500b9-7e0c-43f5-bbaa-2460053a6e74" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c26d6381-5864-488f-af6b-b3b5bc7bdd47" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e39deef1-e33b-4ac7-ad18-4c0e23c8e9ac" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3b22babe-9ae1-4fb6-acda-d7cadb5f7fb5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="af6f39ad-a8d2-4903-a446-c10d2186fb26" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="64ca2114-3d0f-4d44-8e96-0c39a4fca1f9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d987993d-ba44-448f-9dc2-c731fe17734d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="744067cf-9202-41ca-a87a-7a6f4da4bde6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="068c1516-c5eb-453c-88a6-ab3c35fd3988" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c94cab63-9d79-4a8d-884d-24a169afff18" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f9b67de0-f068-4a66-8c69-f15dfc663b58" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="22609b15-4bf6-48a1-8da2-ef2e6aeee21c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4e26891e-63d8-426e-a76e-d1787b81e8ea" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b5d7b937-16fe-44f1-b596-eb67f1c2d244" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="31360aa9-3972-44fc-b951-e9cf6f4dd1be" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fe1e3032-af41-42cf-be0e-95923a40821f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="76a070a7-eb83-4939-94b5-f9d9f5eb93f7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b0be9bbf-e038-4fcb-a871-ee645b03af78" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e7058336-9cf0-43b1-bd5a-56aa57831e76" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c7e8b4cb-0773-4006-ad3c-e4e1743d8712" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="06960cb5-0bba-4550-a5fb-5049ae391419" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6eb2cc9a-2228-4a2e-adae-f2435d1912bd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="46373192-89b9-4e28-a569-d85ea61728db" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cb217b1f-b8f8-4b65-9689-6c14f08ee2ad" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="26d0817c-42e0-45d1-b59e-119c82bdd1d3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e98dbb28-ede8-4dbc-ae85-080795f32fb2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="98ff413f-abcf-4077-89da-68733d7582fb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1ddf2cbb-b275-4a0c-8cfd-c8ca75ee91ce" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bb36abf4-8efa-49a8-97c2-17a845da4c17" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5cb79c6d-878a-4d26-b023-387b1ec025d8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="76192a75-f6d6-48b3-8cd5-08cee5168690" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c0003433-1150-4b0b-b1a3-d0b00e90e501" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="052d374f-1b98-4e35-bd8d-4f0cd2f5ae81" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d9dc471b-e839-42d5-84eb-2e4798f1e29e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="28256132-d262-43c0-a837-cffadff81635" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8be34bfa-47c5-4510-868c-c57763acf30c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="78b91db1-5987-47bb-8332-ae0005492890" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dcdc3d54-7b8f-4419-894d-0ba8c268912d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8a9641c1-943a-41a6-ac43-50a86c5212a8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e795b452-f948-4e7a-a325-b577696a5021" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="107a8b9f-26e1-4cc8-a3f4-4929255cb6f5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="eddd9008-11c2-44f3-93ff-6e6b480ebe88" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d5729516-e4cb-4fb1-9e1c-7dd7d5398fa1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d9a9046d-c810-4cd2-b19a-71bd10d934ff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7467525d-5c8a-4a14-87a4-4162768fa5dd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="40e6cd2b-e121-41f8-9b9d-e0c6aa91e0db" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3f54beda-4f58-4ed3-93b1-8cbffe432ba9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0d807a50-f91e-4fc9-839d-228543a1a2ff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="196cb10e-ae2f-4ec5-a061-ecabb957b7b0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="93aa2403-b3b1-4d64-aa9e-4d68a6b97885" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="21a0dab2-0ae5-4749-a326-62e2a274ed51" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8a84133a-2bcb-4e64-9154-e6d9a20793d0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a29eed58-0f35-4648-8c8c-88879e93871a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 9/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="20c76539-0d9f-4a67-b8ee-235252aaa1e2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1c2357ca-3d04-4803-bedd-d21bdeae82a7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="71ea5b66-7bb9-4b7a-a7f5-fa585a39b541" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="de7b9927-386e-430b-8525-31411876fb45" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ee0171fb-523a-4789-b213-b7b014e3e528" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="91c64470-00c5-466f-8e78-3e5f87b0318f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a00e3be2-7fab-4267-a973-2e3569882e4c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="33b9790e-6481-4e82-800a-e75a67d2a225" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="de0a4af7-8083-47c5-86b2-42ffd616c3e9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="76c7a5b9-9c79-42e2-a062-d1cb8c40db85" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="27c58511-4321-48e8-857a-668d39218142" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="82cfcaa3-520f-44e8-bf1d-9d73f6f19f04" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7d6790ec-9a99-4d76-9c2d-5cae0778d3b6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9fa93ecc-af90-4ff4-b63b-99480778cd56" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d8238de4-7e80-4c4f-977c-3b40f2a243a2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6af4b14e-8020-44ce-8b62-09bc76b25e90" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="655aa92d-2a53-4de0-8463-6cc2ccbb2967" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7e7696e6-5d1a-4d28-b3a9-dec278bd1bbb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cb3bcaf2-0fb4-447d-8368-745432d2b830" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e4dcccdc-5f4b-4e11-9cef-82e2da42ba18" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aee9799f-c1bb-4512-a616-35caa6ac7b3c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d2be3193-c6d5-4812-b5bd-8858c0c5c882" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4917122f-2d6d-43db-bffb-99cedd39e497" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c3aae928-90e1-4d92-b318-854a4873abb6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="424cb28f-4288-47d3-888a-1292b94973a0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="daa7fbd7-d9c9-484d-891d-236b52eba5da" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7b6913c3-dc0e-43a1-aa93-c7e68fef3ee1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3a722435-6c78-44cd-9222-2e96947e53d4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a79cb5ed-86b1-41b4-8658-ba97fc752d1e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7f45c19d-25b1-4822-8c76-386b177a0791" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="38bb35bc-a484-414d-a111-1e273b472a6c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="17a3d56e-cbd9-413d-a53b-180e602106fa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="60c0845b-d448-45bb-8e4e-43d3110a6f7e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3793bea6-300d-461b-8011-ddcbb4e98fa3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="de38c339-3c1f-487e-8717-a98df1a27019" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aa9d1c8e-ad4e-4e30-99cc-6762f122dfea" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a35da109-1e2a-4286-aa12-5ca9b86363e3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4a3d5821-995b-41dc-afed-8abbc60bcfd0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="53889c1b-905f-4801-9c04-945770dd5c38" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="389aae16-aefa-4621-b309-8fa882ecd6af" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9067afa0-23f0-4772-bf99-d6a78c4a85a8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8b3703a4-bd24-42d8-8ce1-5b677aaaf60b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f4554ef9-e64a-47bc-961e-af82afb556cc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="33954e60-878b-4884-9291-63e93f94068a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e893c788-3085-4bdb-8b56-c78995d4325f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dcaa6c90-dbdd-49fb-8c79-a095ee6f3848" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="17705e06-6917-423e-bff9-a24a92fae615" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="46200059-b0ba-4fe8-b965-6a4b0f552744" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="829a098f-3d8c-462c-bc4c-32b5c8793392" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8f7cc67f-b081-4fa5-8c58-4ff0a4bb916e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ee2d978a-4841-4ed9-b578-9f510622e76d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7f8dfa18-9d79-4f8d-a235-238cc504ad8f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cea61dc1-1259-49d3-853d-69b6a18106c7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ac9455fa-0591-4c3f-a474-733c6c56f262" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a2bb8933-34f3-4929-965e-88e3a720750d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="06c51232-e51d-4f90-89f0-94ba754c3e44" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c0f1d6ef-eb4c-41a6-a76d-333a5c1ce2e9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6b1423a6-c17f-43d6-ad68-f6ec7e59341b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="44a50b2e-47ea-4b50-96b9-6e6a4970112e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="31979602-baba-4fe2-b540-cdd548752188" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="086649bd-58f8-4b7e-91de-3264050138e4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f566e657-14b9-4d35-9f48-ff03b1a575cd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="86d649c3-a26f-437e-ba77-ba8b01cb8a99" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7ab67193-7554-4b75-9e76-60634bd9c53c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fffecbc9-13b5-461a-895b-4ec7428a2812" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="534c644e-b8b6-4169-9391-d2f4ff808285" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5900d901-b922-436d-90e7-38a7059ea979" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e8f2823b-ee3f-444d-846f-71e85f86670c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="720a96ca-452c-4b04-a0de-06fc78d181c4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="163b7126-b1e9-4c37-a357-d7b4fcaa2cd8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="05768b97-d02f-4999-8f5a-691cda9ef320" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e8c69929-7aed-4b51-b571-a561314039a2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5828a0c3-5f50-415a-8ae4-acaad916c19b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ce7909f7-c665-468f-bcb4-7e9d024b08f7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="63836bca-3b18-4b8d-8622-4c7edd834a31" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="74c3bc78-7761-41db-b1a6-93d704612ad0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="95c79b5c-7748-4632-aef3-34e00509e7ff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="da26cb00-9d30-48b0-a1cd-bf83483e117f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f7d1b767-ccf5-4a40-9fcf-259c7b3db352" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cec4ff2a-47b0-4e0e-848d-060fee4277de" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0c9dfce9-b9e5-4145-86ce-62d34b534618" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="08a532fe-7942-48d8-83ee-46146a362621" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c290efd5-59fd-4cda-995c-8ef9aded7763" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0e586843-a2e3-4c05-b012-c7a4f9e4875f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="702f1640-dc8b-49b1-a881-68d2840dc0c6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b825c221-394d-4eee-a75f-1b7499d08f7e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="433ef29f-da15-433a-af8f-a10b2e1f7383" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="171059d4-4f36-4359-a211-4de431c0d329" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4bbeb84d-a977-409f-9302-7b59d3339ab8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="28f61685-b082-455c-a205-f2eadffaaba4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3cbaadc8-8482-4335-a792-337efeabec18" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="29958a7a-b0ee-4225-8a21-4948ce53a144" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="13dd2e50-0a1f-4a2d-8b8e-182fa38a68a5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f3c5f82b-b3b1-4360-ba8b-5334a7358936" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="48462f73-900d-4511-819b-cf0c5e92f187" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fed7f330-e3d2-4cf3-885c-3fef4159ce64" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8edcd610-a723-4ab8-ab08-3b87461a7ec9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a755c2bb-d4c2-4e4c-b29e-f42da9e61655" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="90773f93-fe2d-4364-99ba-fed9b8644730" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4598660d-a2aa-41bc-afc4-2ed2661dc5bb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 10/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="94753315-822f-4800-ba20-7516961a8f0c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e20b1ad5-3a0e-4315-8393-5cb4406fe71c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="04d27d22-f3b6-4dff-b7b2-f086dd3fc742" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="16ba626d-0ac0-478b-b21b-482be2538780" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8104a34d-b59e-4a3a-a500-b0801cf40a9d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cc1aca8f-a245-495e-ae54-d5a36e443311" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0fb2f04c-147d-4fe0-859f-e37e1e9f2458" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4101a8ff-bb2d-4d82-889a-56c73dc3dfb8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8668302d-a3f8-4267-b9a3-edc7fddb8eec" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="15d1cab7-ef8c-42fb-bd5f-465e42feee4f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9e2d0860-0309-4bc2-9fc8-6e21902959cd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="29539e0e-2f48-47c2-81d8-ef9453e19e65" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9dbd78d5-6208-4841-9927-9444b2b2c1e7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4f5e2f7a-6b4a-4ee7-b83b-25063750f4c6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0d7bd43e-9576-4a5b-86ec-ea16a7047864" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c89348cf-188f-4c04-82ca-d0d89fd6b049" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ad198f17-97b3-4425-b12b-ac6104a39813" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fe82df70-30a9-4606-a39f-abee3955c3a3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6d84a314-4cec-4d3e-9ddb-21a46bd10dac" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4094e1c8-803e-490a-ac64-91004074473c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="434946f3-7c8a-4a94-aa96-8d70058a7a32" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="20269d14-3878-4244-ac2d-8d14031dcff8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="653e7181-fadb-42f0-a149-3191dd983959" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="63eaed77-b437-431b-9459-b0932322996c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="033d49fa-e16b-4eba-b25b-61bc6cc5afb3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b43dce8e-caf5-4d15-817a-3cae57170783" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d2e14bc9-545e-4476-8dbb-3ac4b513ed03" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7e798955-1c6b-4a4d-aef5-62de13084058" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8567b5c2-8987-4b50-91fd-74b3ec1370cc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="02f8ae98-d106-4888-ad4a-44f234245258" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e9dc0964-7989-4da9-a3b6-cc220920fe1e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="42e179ef-acfc-4292-913e-d359369b87e9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f08fdad9-cd05-40a8-8110-7bbcc8b87426" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="157c783b-ce8a-4bc3-9a8c-c1b2d0587331" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7b245e5d-acea-4aef-8aee-0651b55fde10" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dfc7f1b3-4e00-42f3-a584-aff54b3e5320" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3ecf254f-11e4-4fa1-a686-033fdd4d09c1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d940380f-08db-44f3-8d0d-8410bce32257" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2321269e-0654-4bcc-9dc1-e6caf8a70b2c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2c68041e-98c5-4bf3-a01c-3d0645a65f21" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4d083105-369d-480d-b983-bbfebc53a1e5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d439ae1d-09ee-47f0-a3ca-55a85a516b97" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="caefca6c-04c5-4054-a0d1-0540916df592" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9694bc58-f657-4c97-85be-c6b344a36a3f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9fbcb261-0fe6-44de-971d-088b1e9632bb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="adaaefac-e007-4b1e-a2b9-769cbb4caf24" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="72cdb304-9d79-412a-a687-99314bf4b710" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1db66a50-a661-48b2-8c8c-1cd34a27587d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ca82693f-fabd-4ccd-a446-9098aa613eff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b1cc6c47-a496-4012-a29c-3ca1589185a2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="75e726bc-00ae-4d59-80ad-a3959065b48f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="825a0e27-34a8-45e2-973a-82568b2b71a7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1719567a-f408-4568-8ed7-76af0a7838ea" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3eb9000b-f4ac-4d01-a78b-5d5c664dade8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b217b0ca-1c77-4f9c-ae17-151a9674bbcf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="14b75e7e-08cf-41b3-85b9-dc2b5189c35a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c48d38a8-630c-46e9-8a6d-c6b5a2246c31" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="43a3c4a8-2f5b-4912-b25f-2d915c497856" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="00aa0e89-85e1-4f71-b073-2f27cbddbf27" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f83cfdb4-e0f6-47ee-a75a-10bbb93ab07b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c511dd8a-2c67-4610-aa21-1c80563977fc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c4214781-3e92-4c54-bd38-112054f0ec5b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="35bd3547-589f-48be-9826-f0fa2e306d5b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="50263c1d-e7e4-4501-9cc4-46aa3b319b20" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="436be823-ef89-4980-8be6-330d69544998" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="afe1ec66-c805-41f9-8713-68dcb19b78ce" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="334ca3ae-e615-4021-8c9c-a4d6b5d1b8ab" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a18eee6b-ef70-4ad4-8c2a-7632e5d52375" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e88caec4-9032-4a1b-a8b8-902bab375342" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="969d6aab-a202-411b-93a0-7f30d5f8cc57" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="27310a5a-843e-4073-8c06-2b0fdd66b1df" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1a9689d9-67a6-4fce-87cc-75debcc5f063" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1eb97f58-087f-4a80-8ed9-85968d6957c1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6d375907-831e-4064-be40-c399d985392b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8f6e4938-a227-4018-9a83-eb6e57ce0e6b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c1319e11-6a29-4f93-9fce-18c97bb9a0e3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d6731cc0-76a5-4f19-a78c-44b16321f78a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="02e2dd5e-5268-445c-9946-75cf295f21b2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7606597b-224f-429a-a60c-c00da43ab7a2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2001579e-f650-423e-9c07-7a1439b46cb1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="945bd0d3-725f-4f6f-b1a4-0a22afb52d7d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="572f8bcc-d149-4646-8517-0fc07681a5a0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cf642591-1665-42e8-aa6e-f3e281c53735" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2499c622-862a-47d7-96bb-7d94d9537388" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4fb2fb1a-da62-407f-a4d3-1fc1a86bd71c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3ac3b138-1dea-4da5-9b21-00f313e1d18d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b90aec20-d074-4894-aa53-4ad78934e4e8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2ceeea4b-ad33-4ba3-a126-adfef7fb8844" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5e3ce1f6-e0d1-4226-81a6-fefabf035d65" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d517ca6d-f7f7-4efe-89fc-81aadcd0aafc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="46bf5958-41c1-4668-83a3-e6bd0ddf984b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="287a2adf-e03f-4652-be9f-3577d63df6da" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9c88bfad-d29f-4b42-96c3-631add67a1eb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1d0a1537-79a3-4b03-9cf6-30f4b00978fd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aa0509d0-4b82-483a-99b8-d3980821bdec" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4903f6bb-ed92-4525-b20c-c33ab4ad894a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="60686d06-0b2c-4b6d-922c-8425c2db02fb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a93f5dac-6e9f-453d-8ac6-b8b30d184a01" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d5d3cd02-1fcd-4605-99eb-9df3daedd4f3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="294c054e-610e-480d-9a17-49524f630907" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:test_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from test_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 11/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_a56deded1c1e_0009" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_a56deded1c1e_0008" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_a56deded1c1e_0007" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_a56deded1c1e_0006" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_a56deded1c1e_0005" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_a56deded1c1e_0004" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_a56deded1c1e_0003" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_a56deded1c1e_0002" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_a56deded1c1e_0001" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_a56deded1c1e_0000" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="batch_a56deded1c1e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="51b24c93-b86a-4621-8c1c-61b0db6344d4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7247ed73-e13e-4204-9b34-ceb76fde9d88" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6cd42f21-8168-479e-a2ce-94105a2487e8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="12db3d98-6189-4871-8620-f175990f1403" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b5a7c89e-c63c-43be-a6ff-4f189a7a0c43" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e643f9f7-3f79-4527-bac1-895b84caeb24" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="df26c81d-37c8-4b34-81ae-b9821959eede" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="54648070-5055-42fc-92b4-62a078d041ce" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cf42fb14-b0c5-4daa-967e-8754a7c26d92" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e6e089f4-ca59-4f82-b391-a520d9aa837b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b6bc40ad-9d8f-41fe-82e3-6449104da134" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fae7e8ae-cf46-48bb-99e7-a1846c9ccda1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8a58e45a-2a3d-476a-ab3c-df306dce03f7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6acb93a2-c0fa-448c-93dc-61ac3b97ea1b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f3f283fb-c4e8-4a29-96e7-221bde490df4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7085e70d-0b2f-46f9-b492-2bcc29832e01" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f257adf5-6c5d-4fc8-91ae-0e4f836881f4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2324fcc1-3abe-4207-9701-837402b777d1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="02534938-e1a4-4276-810c-d7760c972eb7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="07cf9914-3284-4afe-898b-9b9b27b10e8b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8ac1ac38-2ecc-4af0-94fb-572263d8398d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="34bf650a-556d-4345-90da-ba9a937cad9d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7b90b755-fcff-45e7-b03c-f18e981b39fc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c971de69-af8e-479c-8a8c-8d8e418a3aa8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f438fd32-31c5-4dde-998d-298f2d174285" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="23d85ec6-0ad4-4777-a6cd-5cb2da1d87f6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="beb723fa-4e64-4bb7-a871-720e104d25bc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8e44a630-1179-4f00-ad33-30f8f49ce295" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="471ed4f0-7b58-4520-b382-5e616cd1f6a0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e80aeed3-cf6c-4b6d-9f78-82de95d2283c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bcc72a8f-53ba-4fcf-a115-e59ad2a1e77f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e8356ea1-1087-422e-81be-67a45b5cac10" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="320fa3a0-9fcf-483d-a220-36f2febd361a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a910c017-772e-47bb-93ce-607e7f1d0280" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f2d5f46f-24e8-4de3-8bb4-cf530a23a26a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ce15aefd-a8c4-47fc-baad-d85b9ee9fc7f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3c21a8ac-b014-49c0-b90d-b790aa785007" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="982cb504-5469-4dcf-b96f-32bf2e6b9a57" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="18017108-a98e-44bf-8ecb-2dcdfcabd233" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="89164e46-b1c0-4f1d-ab63-13fe28a24568" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c66fe4ce-144a-4d17-9c73-882140ecc0e2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bb72eaeb-0a71-4350-8324-bbaaf7056336" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9172698a-8ae8-4d75-8518-29352b04bf0e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="70ba078b-20f4-45c1-b4e2-bbb5509b14d2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0d6d2e4d-e9e1-41de-a29b-358ea6130031" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d67d672d-abc8-4c2a-be9b-f28d36102d56" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="97066c5c-5fee-483f-84ba-a75f1f7e7bdb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c4381bf7-6e40-42b9-a7b9-2fe6411ef531" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fa3eecfa-8152-46d6-bb62-d357fe5cb165" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="33bcbb29-01b5-4a1c-a626-f8ef1a500728" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4f14eb99-2b08-4aa9-a933-cef6fb1a53fe" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="11037f44-3f0b-41be-a09f-1e2cf0046453" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8431e4f3-d763-4c6c-a42e-5d42ff5424a1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4ae101fc-1f00-417c-81bb-271b1ca7414f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f37ba2f0-1190-4e7b-ad2c-bed0bc468c13" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2abc7fe1-2803-4e66-bd83-faa4bde800c0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ba396ea7-0b1b-4c46-8493-210ac4ca2eb1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="27f4ff6b-196a-484d-bb4a-08ca4dc4cf3f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1deea570-319d-4c15-82b4-9a971ddfce6d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8966eacc-37e8-41f9-b1ae-52754300ee57" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0398b89e-9162-4fbb-81c8-88a1293fc51b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d5b19ed3-9331-47d3-aa6b-93682283eee9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c667b0ae-61e0-4a28-b442-9f7a22cf94a8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="87b2ade6-5f38-4495-ba89-3071467c7bfb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f5a5c23b-3b45-4457-87e3-6f6d68be8283" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="deffeed9-823b-4b7d-9074-afbbd1e64039" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9f54d325-ea23-46fd-80d4-b6d9a16a54f6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="239d629c-3d5e-4d31-b8f5-c9031cea0d77" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="923e6963-5f10-4daf-85a3-5d404adc285d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b82938f3-96aa-4baf-a257-dae10e8af056" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b0cbaad6-e6ca-44d0-bfb5-9061c67b1abf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a74a932a-1efe-4408-820c-c5bdcbadfec9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fcef4e6c-b722-4a82-afed-9a1df1a379e4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0cf782dc-ec10-48fb-9712-785d6484dd17" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2d443fac-525d-4833-a4f9-755b74c11ea6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f3041fc7-79e5-4387-8e7f-f482c83fb0f4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1befa72e-acd4-4f68-a512-891eac5217f0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2ac44358-dc76-4d32-a217-ca0f49942ae9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6e25f1c0-b37a-487c-8800-525332d13b9d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3d7ef01c-9d55-4d32-a075-6ab4fd22ea0f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c5ac861e-ed99-42be-b639-660fceb36bba" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="02fc39b4-8c86-424f-be44-b1bcbb93f2f9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5682ba85-dfac-4983-a538-3cc5ef74cf2e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="266999b4-f3e8-4f78-abc0-7772c8f61e75" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5c7694bd-780a-42ad-8ab7-7bda22363ea0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="159f53c0-1aa9-4a93-a91e-764ad0ca3ca4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9177e163-f1a1-41bf-be68-3417859d5d6c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bbed0680-f1f7-46e9-b2e3-03c3e163a422" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a6f07c26-6d54-42d8-bcd2-83f828a54062" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 12/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="de826d79-2767-42fe-8136-bc22eed379e5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3458a2b6-751e-405b-a806-b2695bfa4162" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c04240b5-1833-4b7b-91be-9879caa06faf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e2754b8d-8639-4206-8fd9-870dccb12656" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="279acbd0-ee43-47d9-9466-bda9661838b1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5c9a3031-9e09-4c0e-acac-ff2faa338b3e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0827158a-b0b6-435f-95fe-9f593e4be1c0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="17eecc6f-c9ae-468b-bfd0-6207b13153a4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8270b316-6b24-4884-a6b1-c4f5a25cfa0e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="50247808-ee6e-417a-9e6d-060ae8225b7e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e044b8de-5b1d-4c92-976b-116beeaa6a07" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e399e931-657b-4d9f-bc47-0e5f9d74bef5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="70246a55-7338-4f09-84df-09c85163478a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ec0c0aec-b29c-43e1-994f-2f791f629f6b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="01638ba6-3963-487e-8a7d-aba2cbc4fbd8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cf5314e8-1085-4e56-81f2-faa51c32af78" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fdd645f6-d67a-4a39-8042-6b7155ea0e44" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3a6b4818-9e6f-43d4-b979-5ba47d9d1985" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4cb1b865-5005-478f-bc8a-d2e620863934" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d5aca031-bc43-41b1-8d04-bd26f87c0f96" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2472a4ab-d608-4804-b530-5f84a5a16c3b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="efd4c642-2133-4a0d-aaf0-1921ff42b6b8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4c85d640-49b4-4075-a3b9-2e5b8aded85e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6b332d8c-c456-4b85-a84b-c06c014abf9c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0aea298b-76f8-43e6-a002-3f850204acfd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a7992e1d-9fda-4a93-b447-9cefe8ec1260" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="247c8a81-daa9-4c6f-8bd3-265b1ca27063" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6d2f9686-32fe-43e5-837b-18e68a67187a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="93df1443-cf7e-4570-af67-425fe1f1154e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9c300f59-9a38-4dd2-9911-6d84b286d0b6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="91f07115-72bc-46e0-b603-adfde55427d2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c827afd8-3a78-41d6-aab1-56672294a55b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a3c7ce2e-3815-46a2-8d15-609ef735ebe9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8beb3d28-ad85-4abc-bfc5-f689c53973ca" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="22231d7e-84bf-45bb-b128-245e6a8b5a22" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="99e47a64-b85f-480d-8d43-e0b96d1e3002" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c2c1ea51-94e8-4e69-9e0b-c1f452d31ef6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3b6e6652-ac20-45ec-b8ec-3cd6cbef0425" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c9eb27e0-2077-4861-ab9a-cabe44a522fd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bff605a5-d85a-4b30-84ca-ceca130a6c57" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c958a18f-11b4-47f6-bce1-4b1a184a61d3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="042294c1-c84b-4c2a-9ce6-ccf7d06711f4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aaa88366-3c39-4f79-bf27-488fa15ca86b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="295e31f6-6620-438c-aef7-a2ebe288f5d7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ce1e537f-a9b9-4944-b4ef-ec33a448ff6a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6adcd6d6-dfc0-4026-939a-f964989ae0b5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="084e12d6-ca75-4fa7-bd95-4cd3c9c05531" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="07339266-9b0c-4a48-8f22-4fe5b9a235b6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0c1fe74e-d3d0-4ef2-ae01-80e0379ffc13" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6405a5f8-f1b2-4a11-a3e4-430dd5c55267" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f4e4ac8e-c0c2-4605-b025-2113d0a36943" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b0e9f602-b44e-4d45-89ca-a960d1e51211" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="22dbfdbc-4234-41b0-aaf8-98b9afa96087" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4f9b5259-b042-4564-9581-d42f99767294" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="78b9b086-8581-45b6-bec0-fcbcb7fd249c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8439f875-c11f-4173-8761-2f964475dd6a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f0b946e1-7524-46d7-9cb2-3884866e976d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5f398bc8-96a9-444f-8949-68b01b21d572" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="707a52f2-e4c4-4e43-bf84-3d9e89b17596" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0b1a6dc4-7af5-448b-84df-41f34a1a00c0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9e34f0fd-3ff3-4471-a418-6ca8dbcae7c8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c8d1efe9-edc1-47b4-ae5e-007524662375" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0e8ec352-f242-4795-982a-cf463fab1be6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7e2be71f-5f4f-4881-a7d7-e80abbe3d76d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2e1eb1ad-f65b-4bfd-ac6b-6914fb46cc2f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b1366164-fb8b-4545-8eaf-469df2bfbb22" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9291553a-441f-47bf-af3b-50cefbe5b181" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4d6471ac-8b72-4f1b-9c48-8a660feac0e2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f2466ced-6165-4970-b9c1-3c3657be446c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c813a765-373d-4f5c-ae70-89442642c33b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2c06b368-37b4-4497-98ca-c127a360ac94" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d1cf01c0-5027-4d77-ba39-156f5ab3fa2f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="75ecf4cd-8c69-42eb-b72b-826ba0b1449a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2010c90a-7487-47ee-a0aa-7156c2581c5b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fe781fc0-af48-46aa-8623-3d1cecaa097d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f522a0e8-d96e-4f17-977b-25b619dc4e45" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5458be03-1aa6-41ad-8fe3-8db0357b2f84" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8ce17112-ce83-42a6-afda-b51f9e722cb4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f344043d-2957-4b2d-99e1-e0d5c63bfecf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="de4bfad9-12ca-477a-94e7-430e79de056f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6b682a50-54f4-40f0-afbb-9fbf40ebbc34" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e532291d-2198-4e9b-b860-289218bad902" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a54e1889-9eac-4aea-bc32-ef841b82f53d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1ebc691e-3d15-41ab-86bf-f10db5411da6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="41f48f06-8621-4364-8ce1-de8dd9ca9cf8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bda59c7b-9263-4b9a-96f6-ec4eb7ed546c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e544f174-cd60-4852-9826-2e2a2e11ebdc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f6f3d922-2ccd-48a2-bcdf-700daa878e3f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e67a97df-554f-40bb-8da4-f23f826d7730" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ee4d0d20-e21e-4cc6-b858-95930c097d20" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9b1bc20e-8f21-4404-99f4-0b309b4b7b33" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c67b799f-c644-4a0e-be3f-9c183ae9f85d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2a3265bb-6e4b-4072-8fc8-9312581de682" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d58548a2-2349-4391-b0fc-421612af4c28" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e3f16905-bedb-4afe-901b-a36c48c7b7aa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d1cb1a33-fae1-4fdb-b989-d7d7d5af93c3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dcd44eac-2188-4708-8380-8325a3383aec" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8d2bf780-f57d-4e82-97cd-1845aedef85d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fb50c3b8-b454-494c-a114-9cea18b38721" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="313379a7-dc97-464f-b106-d4fe4063a460" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 13/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f1c651a4-663e-47f8-b6e0-1e6a9dc8867e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="35500268-dae3-4e50-82c7-dec2b7fe090d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="eee78bd6-e947-496c-93a2-8700718845ff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="19bbb60c-6156-44c7-91f3-18a550aa9775" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="86d7ab91-dcc6-4ee5-80e3-b7de09e7622d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="10bb76c0-cd85-4b9b-84aa-b8a19c15e4d6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dac29b52-c132-4a75-9140-f9cd52310123" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ac6b88e6-473f-42c2-b805-847c5cf39075" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f07ceff4-5073-4d1f-a2d3-246f4874aecb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9c1b1486-b603-48d6-90ab-1dc4364d6cdf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f10af208-3b7d-4154-98c2-d716030d448c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="15a95bfe-9d0a-49d5-aee1-9dcf069cf8b5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="17082c85-1eb7-4514-8e65-12506f499874" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b66a4088-556d-4f17-93a9-8bec8e6402ba" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d28b205a-d93c-4f31-a0be-cf4bfc25b97a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bf05bbfd-aea2-45f5-9072-514467e089e2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2609a336-a5a3-4723-8133-a099ea3d265e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2c9278b9-dae2-4ca4-9049-069e453f78ff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="25a0566c-785a-4291-8f4e-5991575589f8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3e4d57f6-bc2f-47a3-a4e1-99b93278003c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="48234384-b9c9-4ae1-9f71-c20c7a8296c2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f73e869b-5ecb-4f01-8fe9-18af13e499ca" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2ea1c339-a6b3-4067-b285-f6db819e9436" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="12dc9881-5b78-4c5f-a669-69edc0229dbe" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="08647c9c-9c49-40db-97a2-f49487a9e006" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="75317d15-5d02-4f92-ba1a-15d08dc4be09" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="acda0ef1-a47b-4132-b429-2a318b28bd68" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="54640ae9-abe3-4799-8b7b-1484db9a6706" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f2f2a2ed-5751-4ae6-80d0-997a4eb9baf2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cd3eac14-ada8-4832-9528-55b1ee45d089" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f34e0532-c507-4254-938f-b80dade60e65" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6290d1ad-bd36-4c3f-aff0-7dbdd208a61d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="12db6c91-8d36-45a2-a4b9-50baf873458c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b63b69bc-1b94-4f2c-8a7a-8b518c1a4cc7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="92bba796-d35c-40ba-bdf8-90b4ecb27842" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="056db895-8f1d-43fc-ac6d-9160b5578543" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0323b569-c51e-4a06-bca8-49bf8d2e62cb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="127a6b73-956c-4b7f-a680-e75eae646eaf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="68877680-be39-4372-af2e-6af6a7d0f7d1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dee2c07b-4298-4e3e-98cb-a5be45b1a4bb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4a94cdf0-7e62-4043-b0c2-6cfcbe994032" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ea7c2644-0a98-449a-8577-cac8a15c301c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a9af14d2-4dfb-49e1-8d1a-d52ac596980f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7f2e43be-5964-4767-b7f3-2868d781e83b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b7abbac4-067a-45b6-9dfa-814969dd95b3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="582ce2eb-1fa8-4ee8-a7a1-977724ca6423" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c45cc3eb-a47e-4a7b-b83e-73ebb6360468" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b389136b-3972-458d-b276-6e5768328ddf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1c89374c-a9c2-48ba-ac1e-ee72016c4333" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5da6323a-4173-4b2a-b7ad-3deafa6e5b0a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="58417801-a34c-4b7a-94f8-56aaf2fd1d13" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4315d9ad-cf2b-4797-a405-ad575877941c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2a8239c7-7c0c-4db0-a017-4de90e62ff17" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4aaf0649-c4a1-41ad-b975-606b6f85d832" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7732367e-6905-43e9-9183-090892418aa1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bdfa477c-d0eb-4bc5-8506-398e00231046" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="980a301c-326e-4232-b33e-de1557f94a2d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0001db65-2f2b-4ab0-8c8e-1036d0386c0a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6d007845-99fc-4003-b212-35c570fc0347" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="88a9cdba-41c9-4eaa-9b09-62462d251362" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f847b4a8-7700-48e0-ab82-993c9d6546f8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d595725a-3781-4aad-95e9-a445e91dd1c3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1072a00f-8141-45e7-9b5f-1e575ea647d5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="92051b54-6ec7-41f8-bc9d-e8bc9100922c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8e69cbad-bc9d-45d8-bc02-4814d5de2b1d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="060d898c-5579-48e1-b3b0-79ec9a9c67fa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="042e825e-6cd2-4117-a1c1-378b59b22b54" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="01fa6b53-78eb-4724-a7a9-85b2cd2fc056" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="860460c1-5ad9-4093-9edc-bde8577fadfa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="00841c45-c097-4dcf-9678-942e606cc866" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1df8a25e-edca-416e-8eea-1652fb691482" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="40a44dd1-8ac7-49d5-b88b-13accca882d3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f57f2d37-9ffa-40b1-9a6d-273855463e8a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="08a3a33d-af4a-4470-b205-da4c506cd37e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="adfb2bfe-ee40-46bb-b83c-eb382086b49d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="94611821-a563-4da8-9c95-7818f24510d7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="52d516ed-d92f-44f7-a93b-d8eabaf6a2de" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="89c99848-f98c-46bb-bf25-239aa4c424d6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4f382eda-0f66-4649-9976-ce49477a2ac9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b35514fd-8754-4e0f-b6c3-391f8267be8f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="79f42622-0b1b-44cd-84a5-1ac70e9eba77" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="16015df8-3465-4cba-88f3-302b776c98c8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5e3f445f-566f-493b-a832-7adcd11102eb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fd6995ba-899e-417f-98d3-41c5445b75b6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1bd2fb6f-9fde-4c0a-a897-83f8e3e08e9b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ddf1d22d-0b34-41ef-90d8-596034155eb7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="27e6de09-804e-4760-b4a6-f5cf154e5b8b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b6f0ad67-4d68-4f8c-a4b7-ab9d646ffd4e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2e6eb023-d3df-46c3-9ecc-17a433d87e13" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2b7fc2b9-5357-45c4-be90-b5d96760447b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="46ceb149-f38e-403c-98b7-bb33d7bde036" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3377a19f-a4eb-44f9-bcda-8448d19818c6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a0b2be9b-fe0e-404f-a043-80d136b0f4f2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bf081402-7ec8-44aa-923d-beb6dda293e8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2b70aacd-ccdc-4be9-a262-b5c983c52993" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6588700b-c80d-4c93-8085-a9e8eeb17e92" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e66dfa0e-8a78-44f4-9bf8-a09afa787232" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c1ea895b-d584-4250-9689-a5eeeed737f1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e128ab7e-4335-445c-87a4-3bc387634868" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d2d92be4-6025-4757-bf78-31b7a325d89a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 14/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="30350c5d-ae10-465e-917d-c48416b5aec5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="362ef588-4b3a-4df1-ac85-25c6d80e0ea1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dea7b73e-ca34-4379-9791-4d4747196a33" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9cf820bb-a068-4aaf-bb3f-95deecd3d07b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="433bf77a-7982-49c1-88e2-fc28d61ab866" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3cff9764-177d-455e-8c02-f99ad61a889e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2205a86f-b019-4ebb-a62e-278c4e86db00" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5a1e6a0c-6cf8-42ec-916f-377a69b96133" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bda67822-bc0f-4125-a748-17bd17ebfdc6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="315a8d0e-df03-4668-b195-833b68922c25" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="23ca6ee2-5b3c-46f7-95b0-4d0d07d975a0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b7218a42-30ac-4950-bddc-1057aa6a22db" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="503df30b-ae75-4c38-9c99-6f7a5f0c69b4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="02839479-cfe5-4b82-8706-28b8ec51b594" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="df71d125-db8e-42c8-befe-e24e80d4c13b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="84ae06c5-4aad-4f59-9b3f-169fc91b8847" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="da73e734-5d2c-4f1d-8d23-fc7f0a8393ed" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d4f22980-5bb8-40bf-9e88-87b35484e8dd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8de1fc1c-fcbf-42e1-a27b-fb6117885b1b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2c2c0e8e-3b2d-4e1d-a613-ec198167109a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d86d6926-e53b-434b-8b75-ceabba0d61d4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d129e1c5-8aca-4d98-80db-63b2974b6d97" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="703d0212-a5ac-468f-b671-060a147748b1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="565410ee-a546-4ce6-baac-be80ef9694a3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9ae28e33-589e-42e0-8c84-a7e504bd73dc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6214fd1f-ad49-4caf-9c2a-8eae8abc7b0b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8de3ee6a-2f75-4376-b904-d1fe49c2dd3e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c0f6438b-92dc-488d-a3b2-738fabfb7650" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="798337df-49b1-4d59-8f09-377b8e484d84" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="654cfb26-c11d-4285-90fa-39fb7451fe69" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="702671fd-a233-42f3-a160-6922dff1f0c5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9ccd29cc-0b72-49b6-b624-611c6d2dbe35" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2fc3b5c5-5ccd-43be-b001-3de4dbc1d8cd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e3cb8b28-815d-4e6e-bd2d-cbcf9280190a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b6ed0825-0b48-4523-8809-a6fed4c988c1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="818c7a9a-1979-4ed2-98f3-29816b4769ee" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d589f2f4-f0aa-4c42-9d1f-4e91c5398ea5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="42e359ef-ea2d-47cc-9df2-f3ffe16d7e88" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="18d1eb0b-5d89-43e8-aae8-63bf46547502" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="278c5f18-d778-419e-9467-ed7047b3ee6b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2c58f959-42af-4c6f-8513-a9b41379701a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="383a20ac-aaba-4f9b-8e19-2165895263a7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d3333c4b-dd49-4f23-b534-64513ad1b509" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="eb9fe46e-d6f8-4be7-b9f8-aada49821ea1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="21b1db6b-8eab-4bfb-8c00-ac92b6098641" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ad331bcf-c03f-43de-ab64-74a0ca3f0b5b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5d3490ea-4c31-4753-abb8-f0b274fafb89" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d6df0fc6-7b21-4522-bb9c-404709e8b322" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f01980f6-d357-46ee-a532-51858aba4975" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="68f8953a-1d12-422b-a04b-ae7ee9897717" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4ffcc739-8cdb-4ac6-8bcc-d92618b7564f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2cc1398d-cb96-4f6f-a10c-cb5d19a24699" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="29a66bb5-8ac4-4379-af9f-b2d2447c69eb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="602f26d3-aa80-4805-b191-8fa393d651de" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="61e8fec5-ff62-4de5-9b84-55f35178e98f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a2a94b55-fecd-46ba-a15b-2b728125b30f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="adf13f70-dfcf-4e83-88af-35bddb39b9ff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="91591a94-9443-4b02-9c0b-3573788f16fd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="13c7d33e-187e-4693-9b42-cca0cef91a25" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a3d6adec-013b-4109-9e9f-3bf43e437408" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b72560a8-e512-4770-a01e-64a7f9b5d877" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="42643606-d858-487c-b037-18e42e6f27de" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="db593154-d959-486b-b94e-ff6272857302" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="987a065f-8ee5-42f4-b5a6-af8589106485" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="86ce43ce-248a-445d-bb84-b3ec691f8ac7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ae47825a-2091-4398-9a92-c87f11625725" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c6058233-d527-46eb-aa93-08cbf8c2716e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="83abb112-01d6-4b7a-976b-600e2f2f4303" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0e545337-c4b7-47cd-805c-445ada303e90" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ffce502c-e1e0-4b4b-b98f-7be3724a4c2c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6f9f09c9-b88e-4f0f-b913-e6f2dcce483f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4ef903e4-e5ec-434f-a5de-2dd998368324" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="142c32df-cef3-4540-8260-6daab61a82d1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b73966e5-daca-4cfc-8ef0-3d642d801127" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7bf0a531-eacb-49a2-ab36-6f541055fdc7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="52ac2549-12ed-43f4-9900-21f46ac8d67c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="51a00fc4-3774-44a6-b5ef-8257780c16a9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0eec76b2-bfc8-4238-9d49-4e08f046d828" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="598f7b80-e902-4ed2-a912-4b7d8d20a284" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a95688e8-d587-4c4b-af48-2329ce551b70" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="05882418-048e-415e-b4b8-11a93c87809d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ff11d919-b473-4bb2-ba5f-15b187bf1765" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="40d52a93-9776-4b92-9632-37b05e2bbddc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2481508b-6e5f-4266-b764-c9d8d59f1f70" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="494fa84c-f6b5-43e7-9e49-daf11217eb3d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2bd0d8d2-7c90-44ae-8a76-63b488b99d32" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5ec79f00-d7bb-454c-b586-f4d4c9f07589" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bd338d8a-3f9f-4ce0-b0a9-b10a3e11a191" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="89f5c32a-b114-4e46-aa7c-a0f54a5e86e9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3c4c2674-36f6-45e3-9d2f-41ab04fcff0c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="588ad2eb-ecb9-454b-af36-91b71d2feff0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="588db2a1-e64e-4f06-b93a-dccd36ab8df1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8e43f472-b2dc-4767-be20-29d7b6eb634d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8aa80068-f682-44c1-b6d1-9bdf0e8ad649" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8e805953-ca61-4694-8e28-5cd7226b3b29" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="762d33b7-4926-4b5d-9b0f-b3839b7fc2b4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="849386a4-0033-4013-b0a3-4a3eec7af3bb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d1667276-d845-4ceb-b7ca-ce7393d8af3e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fe96af26-48a3-41d8-aeb6-de082ddbfc4e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="56da1161-2c77-4987-af2d-8884537a41a0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 15/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3239bb6d-e387-4f44-9311-8e437202bbda" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cf915677-15f6-43e6-a505-acf431d18c53" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ba6cc7db-d076-4311-82c1-de035463cf0b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bd3b7f35-9e8f-44cd-a13f-f1eac22bd135" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b944ca8c-e839-4ce4-8634-a2824d197129" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c3ef6c8e-f7eb-4319-84c1-3c7535b862d1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ca7005bb-3a02-4794-96c6-1bd35adcdbb5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="96fdcce6-c4e3-40c2-aa4f-bd480c69b6f2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="170e83c4-c595-46d3-a4d6-9ce72f67f323" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fe2d6571-28cf-4b43-bca9-7d908506860f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0b23aa54-7681-4201-80c7-4327f52e7b64" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b4af66ad-821f-4b57-89c2-570634a0e67b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d224cc1f-cc4f-44d2-b99e-bdf4ce43fd3a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2d7a704c-3dc4-40eb-b6dc-da373c5e8380" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b10f1e8b-21c2-4a96-b264-82d85ad92b88" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9a64a8c8-7377-4510-a211-e3daecd9384b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7b6c6cc5-1ef2-4afe-84e6-a5680e2f5728" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0fc62e43-6291-492a-821a-d6f9e9ece763" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9f0f0b51-82de-4b9b-be1b-66341843eac9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d335795a-65b2-4b53-b8b2-26c9d1de60bd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f5bc41a8-e6b2-445f-8160-c779a761993e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="488523d1-1f65-4472-a008-c8f3825b3254" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8a77fe3c-c29e-4d3e-9832-4d8501655b7f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="574afbc7-a7c5-4922-898c-73f4a83e44a4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ec3f508c-c3d5-4672-af85-37881fe8088f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="87dcede1-8a42-4f3e-9c55-894312082ba9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="28c353b6-950c-4282-bc5d-115a5c31eca1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="57d44147-bd93-43a0-88ab-6af796149ad5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="19dd360c-06ac-4ba9-b018-b401d18d35ca" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aceed569-8256-4dc0-9051-84a5403307a3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="742c5aea-e765-4882-9f95-e82bcb7d97eb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="32c0088b-b8b7-4368-bc38-a47c19c14bff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="85241243-5a98-4b08-add2-b611e73e87da" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2a5eba72-dd77-4819-8dcd-6a1d0507f1f6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a5f40278-343e-4ca7-a2d9-0bea24af033b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c9978d35-b9be-4bc0-9e6c-7dd1ec63f061" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cd7174ac-1125-492c-87f3-6ce169663bb6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0256c05d-1566-426a-9303-616454f6d543" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="80f2d4a8-ab51-4d91-9645-b5db4f335973" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="38e87285-cf4b-4b58-b4b1-74cf969bfc37" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9572807f-d403-4c7c-ac69-130151b0c871" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9d07765d-75ca-481c-8e2b-c7595f078651" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c61c8929-7e3b-4778-ac4b-07e7b9a4be3e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2e7895a2-1c45-43b7-9edd-182102c320c6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6b9980a1-a10c-4cb7-8946-2d1de96104d7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0dd28b59-be32-49d4-90fe-4b95015a1465" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a7fcbb7a-e8c4-4515-8450-981a260418fb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c2e74174-e0ce-468a-aa39-2f61afcc10ba" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cf53df43-3f72-4a7c-909e-09afdef9b017" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f665d3b6-703c-4388-a909-f246c798f075" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d09071c5-8052-4f5d-a786-734625405ae8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="df53a4d3-73c9-4b94-a276-0898be3451e8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2fb90274-2b1e-4723-b8f8-105c8c077079" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9ceeb3cd-bf54-45de-8f77-68fbe59df455" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e475d440-b614-41c8-ac23-8eff2ac2c169" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1d53a236-570d-4656-93a3-a738045ecba2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6d5f9c55-e5c4-4aef-8a6d-3655635f34c9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="be7d43a0-f80a-4948-98e4-803453642810" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="663b5b55-3e9b-4ad0-97b5-77183348d0a7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5ae28ecb-914c-4cae-bab9-b5e324c28cdb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6ac9f93d-d0c9-435a-a868-686604fc1009" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="db5c4217-77e3-489a-baba-5a22feef6d11" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e95a2d15-5cc3-43c4-b9f4-6ff40ec0e0c2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="141feaf3-a9b5-40c5-b178-0b5db5820bc2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ac260fa4-62d8-4cf5-9806-e3a59d5a970c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="21881a28-31d4-4592-97c5-ff0c6241c4f8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b19463fc-f5ac-4fb3-9c90-2eead9fa3270" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="16cb44f5-509a-4fec-8033-d0b5761fad3a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8a47f6fa-e262-4fc9-8a1d-a57e7fd4db42" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b53c5a5f-9642-40d7-978b-b073c5e3b12e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bc122098-1a6b-45b2-adf4-8a119df1d125" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7e124d86-466c-42c2-b0ce-64b076b81d41" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="208ee22e-5fc7-4301-aad0-31e4edf09753" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="47b62386-1608-4116-bb9b-f30c9fdd3b9a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9808373f-73f3-4d27-87ed-13b56b36d5b5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b4b7aa16-6c32-4053-9478-0163601f7e63" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="771707a9-1390-48a9-a1e4-ead6a964a63c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="307797a1-aca3-4422-a950-498866b259f2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="668c141e-397c-48f5-b17c-3a377b2d262c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e8db5fb9-0b55-44f4-9b78-f096b63b644a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7f198888-cccb-42e9-814b-0a055fb0fd1a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d1592735-56d8-4d8c-9b42-291e326d6340" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="af33b1c2-ef5a-4aac-b9b5-962730e7874e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9d4d3521-25e0-4d18-b631-883db90565c3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="46d5ceb1-3eee-4247-93b7-d48c9bba9488" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="805c0f07-de15-44dd-901e-3e20dedcad72" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4b9bbf98-cba5-429d-8440-8749ac0d69a4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8c3b45a2-8c80-4f1d-a3a5-0fbd70f8b874" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b972078a-e560-4a78-a9b4-b15e38950276" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="761d87c8-37c0-4d7e-b25b-4c8e7aa40be7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="82a1c26b-87cd-4f17-b2f5-21158d5d5162" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="76cddd72-3bd8-43f9-af3f-401399e3248a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2c5344b2-7e61-4ab9-8413-bfa678d09339" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fd9c6f1c-e518-45b3-8257-f16ac3cc0c58" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="760bccd5-0b82-4637-a4b3-470083cccb43" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="febf15bc-cdad-4e4e-99ad-1093d3eb697e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="884537ce-ef90-4963-aaff-401465f722bf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="90e58854-41c4-45fe-824e-7b5c74215797" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="30679d04-6787-4b87-acf4-a464d9af7d0c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3bd7a6b5-536d-488f-9646-a464a80b1135" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 16/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cd604e58-de18-4d0f-90d6-d5512f608575" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ba32d2af-552a-41b3-8ac4-e1b3c43e820f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="37c73480-687a-4bf9-8f35-34e47efe1fb1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="216c51c1-f883-42ef-ba30-83a81f7f527d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8233fbd5-7e2a-457e-b31b-30a511858e76" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="87f6c07a-6db3-474b-9598-7a8afcc19624" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1f99c4e1-02dd-44b2-899a-feacc29583d1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="be162782-627e-4ff7-b412-29767a4d2bd5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a6891919-db6a-4ee7-a4e3-a48d6aac5349" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e2b234a8-574f-4612-8339-4575cc8fed78" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5898aab2-593b-4578-b823-9d08d0a4aabe" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c5cc03dc-4d72-48b7-9536-b13b2679b82d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2afdbf45-faff-47e2-b0d8-2300f41f9a4c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8d17bfb3-867b-4de4-bdb5-c23160d50716" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bea4b15c-3b69-4d9f-b5a2-3627f365b39d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="74553554-ef81-4f3e-b927-7ca03bcec974" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5d2f48f0-c832-4b2a-b542-60ced8d39c76" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="150a3be1-b85c-40df-8b9d-540fdfb768e5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7c3f6bd7-4527-40c9-bd3b-0ed97eb18984" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a56d6d98-3bda-4577-8d10-0fce316d17ee" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2c0ef283-6fa7-4f50-9012-59bd0e8aa98a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c0f2b417-83b2-457c-a98d-85bb1243e31b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bfef1abb-302b-440a-a167-030038f47dae" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0c0e7768-b0bd-4d5a-b88e-d66e3b06e4ff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="07a9d8af-dcca-4cc1-b6de-d6b5e60dc02f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4b862631-ccb3-470f-87da-64ccc8da7c21" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6d083788-3ce4-40bc-ae92-813ac4cbb3f7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="53c00a8c-54bd-4b89-b4a1-0cb4fe0324a8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6b950aa9-969c-431a-a1d1-45ec39aafd6f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6bc623a7-ece4-4d42-a4c8-3f6c24d4757b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fb53edb1-748f-455b-9129-f9d4018a8982" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ff2a5608-47c1-4e23-9eb1-912d960b1f71" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2595262a-7a38-4bdf-a7a0-9c475af047a9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d6fe1b88-0d68-4024-9615-1553f6e54546" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="122ba521-b1d3-4fea-9c56-22aabae2fd44" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e903b0f1-8656-4ca4-85e6-2535dd094264" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7bc9cd49-1260-4df6-99ca-273640337d8c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bc50978f-3a7d-4606-8d40-72385509a066" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e5bc0e63-c14c-41c0-86a4-3f6949db1ce4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1e7063f3-f19a-48d3-a38b-c5dc0d1eafb3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="030559dd-6b63-497c-8f62-9dd5f8906e83" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3d20f0a7-da32-4620-b1cf-8124203eb320" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="82939a4b-276a-489f-9526-062a48338dc4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="386404db-efe1-4e6b-a3b7-a8fde1af23c9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3d45be22-855a-4ae7-81dd-b786cab85bde" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="abe98a97-e8d0-4d62-b689-0e3dbe60bc8f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2d86c1d3-34ca-40d7-b5d3-6e212a90f754" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="30788ce0-0470-49b5-af0c-21d7ad969399" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="64c34e21-9870-4d57-91ac-700b02b419a0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="deae449e-42cb-4523-a0a2-800fd5f288dc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="933c327d-56ac-4d60-b1c7-fe59d5d9a0a9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d0d5d004-e15a-44a1-8850-cad7854797b2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="66c2626f-5eb7-49f2-8c2f-9c897194d20c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9f2e0524-b8b7-49c5-a94a-97a6cd3de9ad" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a8979a43-3d7e-4078-b09f-d65acf68f8ac" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="34c8487e-b31f-4eae-b54a-d04e8ec29a53" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ee8c803e-625f-4fd8-8fc6-6586c8ac5658" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e2a55bab-a00a-4635-af92-33e483856713" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7f73e203-b5ec-47b2-ab8f-009d7b4a31bf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ca5cb830-5ae3-4720-b9d9-ad22a9bf1c22" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="36fbcdc8-f1a4-4ee7-84d0-2556224edb62" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c98f2e8f-115a-4708-bf40-064fb8a465a8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ea5c8f3a-a0c6-4338-8ff4-ec53d90e6b0f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d2335f81-af71-4a4d-a4aa-d0a5bf4b8c5f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8b84b33f-e8bf-4b12-b890-4053fec3164e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1f71c28d-0a90-414c-89fa-41d675ea4bfc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0fa88ac1-052f-48d2-bbea-db678da369c7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="405c8e99-6f2f-48f9-a8d6-20444044ab9b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0acdc097-4ad9-42dc-a839-14d2c200c8ba" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3589c9f6-a963-4458-95cb-8baab16e8f46" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5a47f1f1-2d6a-4a2d-8e2e-e55cd4910aa9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="752f9359-0ad9-4d7a-bca3-c69750905aaf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cddadec7-9716-4e73-846f-9447b0572950" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7eb595ea-5763-46e7-aea7-573453c1ebd4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="43627135-5bfd-4df2-8a5a-4ac0cebf0e00" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3fdcb238-f28b-4be1-b9f3-b67df2c5378a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8c853018-5f01-4197-819e-d9f8853cd083" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f7400313-0d7d-4802-ab14-7f1ca8af79dd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d51f23b5-b5fe-4c39-8b3c-c1deb09fc9a1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8ffaed96-834e-463a-b9cc-1510df7ec41b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a34def18-17b4-4dd2-81e1-fdf648460843" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="07cb4ef5-4e27-459e-af02-b341b5bddb4f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e4ad88fe-217d-4f06-a066-74d08eb80cc9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a1c13888-8366-44f7-81b2-de30c4b6ec32" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7728e887-b725-4181-90ce-848b4e362cd1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="05e56410-d505-4b8c-af6a-e39ee140e3e8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="84e0b080-8cb5-483b-96f0-3fc775bb9921" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3f0c3992-a463-4012-a3ea-e0179fcf7ee2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0109c43b-59af-4f0f-96cb-19218f4a7099" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f20d1d47-7f42-4d70-bbac-29b57beff341" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="084ad922-02d5-4f93-a8e6-cb2764df5144" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="073213e3-3b43-4438-8077-d64d4631548c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ba8a54f6-64a1-4628-9bf7-8ca98cbc01f6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="97f791ee-f153-4a84-9640-20b572329a9b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7cad27f1-847c-475f-a153-950debaeaae1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="eb86141a-f09f-48a8-9948-7a2e0a1271f2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0584e1eb-4ef3-466e-816c-3e42801fc09c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c4788b6b-a201-4ec6-9572-6e9524db3d43" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="91870d48-4c20-4a49-af12-51292cbadf5f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="de71c1ef-302f-4452-a27f-cbaf71abef57" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 17/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a16628bf-8fc8-4d17-ba90-58b06bba4356" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d2d2400d-10ba-46c9-a762-72f969421a14" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="89522612-054a-4258-9b85-78b338de57d9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="58ff6542-ae2c-46aa-b8cd-0a5d63b484be" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ac75acc1-aceb-4e1b-a63d-c1c759255e68" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fcfe69c8-229e-4991-85f9-13b49a340fcd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aae30b04-99f0-458a-b321-3c87b2b1713d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1a679d59-f7b9-471c-bfca-c1ad34de225e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="49ded8eb-72aa-47f6-b7c2-833796703a3f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4d6cd52a-1dcb-4583-8c8f-c4d36e009d2c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ff26af3c-6629-4651-9ebb-752cf117ef83" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e6e19b00-a725-4450-bdce-164cde3a5372" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a83f9986-fcd5-46bb-830a-d7d05f4bdbe4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="94b3449c-0a1c-4665-b8ed-3885b53f679f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8e4d6831-a498-4bc3-b3f5-7ac49bacef0f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bcd962c4-80b9-44d8-b23d-4d3ec48d2aeb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cedcf7ec-e4d4-436e-8da7-82683a658a97" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="accf899c-c92c-43b2-a692-7d14c6313d02" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="76d352e4-bf82-4816-b365-79821e7ca345" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fba0fbfa-7c17-4d96-83cc-9394ed5292b8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aee52d99-49d0-4b04-b129-98b3ba7d9ae6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="539f52bd-47bc-4725-9ebd-67dbc3152d8b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="32f9a9cf-c614-43bb-82c0-841f465af352" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c8223e69-1b2d-4b5b-884e-b6d875b1aa25" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c208bb62-3612-4e5a-b58a-45c5d427ac0e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c5f77e7b-b348-4618-b20b-37670a88d96c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="58306105-7749-4adf-8c31-712f682301d8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8155f192-43d1-4dad-8b50-7e395d5d6811" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4fe52e10-8314-4064-8646-70fd185c7344" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0405e8c9-a30f-4c3a-89b5-53ad81bc1775" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="17047e6f-2f1f-4736-9cae-07735a27295f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="98dc5725-8968-4f62-a7f8-3d67403054f8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="58e7e3b9-02e4-43e0-b554-68361a78b843" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4f23e27e-e444-4c7b-9f05-bfa83194b18b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e02a7252-b5c9-4b13-89d0-df4833b74b93" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d7c69969-725f-4c6c-86a8-8297ad835f07" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6bb1f752-e1d3-436a-beb0-6c964f8e1bcc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9a96631f-cccd-4702-b9bb-7f76ce540823" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a81d8455-bd2b-4824-97f1-65f120ac29da" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="70346fb7-5b1d-4b30-b441-d66a00b1755d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9c03ffce-1fd5-4472-90b0-2a8c76359086" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7ec5402f-d1fb-463f-8f82-4b56f99c01a8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="38bc02c0-d494-449a-a306-9b1d63fab50e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a6dc9e5c-6405-47a1-be52-0eb296db3adb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="524c6c3f-2444-4e2f-8c55-77184e23dcfe" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="19ac6014-0af7-4014-be15-38305594b303" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0c0e906e-3ab2-4886-8249-6c7ba8a51b2c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="26c8f7af-3645-47d6-84a4-8b8d13d734f9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8bc610a9-e8ee-4a54-8bef-a0485afebccf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0b902137-cfa6-4a7b-ac5b-1fea5f7a394f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="93a11188-eb38-4d4e-9db9-04f5d61622d3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7a185a24-cca7-4aea-aa43-91a361607e92" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bfbedc37-7d4f-46d8-8364-3b05916d2d5e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="84d5f0d4-a828-4a97-877c-eef0ec9f1550" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c308b2dd-287f-4223-b08d-ede7e783e3eb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="34a2fba5-c1d9-4fbe-9b57-280ca08c00bd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2ec93831-9212-4579-92f8-24e6906f6eb9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="93604677-adac-4b26-a9f4-ee9ea7345c05" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cbc2b5a6-916c-4769-a21c-3f8b43fc544e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cc804862-f62c-4afe-b95e-9a194d3ff388" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c7866c33-d875-436d-8eb3-8f816d6b5871" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="efba962d-c4fb-4347-853a-4733b38fba3c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e42aea6d-57c0-48f7-b8e8-d349338465b2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8104b2ab-b52e-43b9-9508-217cb60acaa2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="53d29788-a788-42d4-873b-84bfe46312ee" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="44209a0f-355e-4793-a3a7-7decd9a2df13" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5cc0ecbb-c398-48de-9af8-cd7c4a33e47a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="41d9795d-1bb8-4e4a-bd85-f58fc7b79103" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="892f3c6f-db0b-4dc6-9e51-a20f11e2aa67" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5fdb6a3a-2402-4d5d-9d63-d4ef5ba8baa2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="061d5bfb-24ae-4622-8493-34716f3e8fc7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3108d9ef-6967-4cf5-9920-5d616f8b2daa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6f9c2dc8-f46a-44ad-9d14-2fa4b5bf20c0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9ca2226b-f4db-4631-971b-727dfb77182c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f9285cbc-b24a-4833-827e-f1c97d8bb350" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f5c43432-847c-4f7d-aa16-7ab3d6b5b21a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a7777c36-0597-4b3c-979e-7369ef54eb11" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dbcb614c-2f3f-4e2d-b95f-3ac1185e5592" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b3248c93-099a-41a3-8e3a-dd15720a496b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="638ef2ef-a631-484a-a110-55c2f86a67ba" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8f9286cc-29b0-4d14-9b26-527102fc047c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4b4bbbd3-e9a5-4814-93c1-5f41249f3334" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c7c92a55-0db8-466a-b4db-19585a45784f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6f444433-b62d-4353-975b-3863eec602d2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8102f962-32c3-46ca-b2ee-85a0f41eda6a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="666133ce-eacf-42e8-a774-75db6c40fc3c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7db57f2b-86cc-4949-ac80-92f6d36e7925" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e808a3ea-a321-4817-8cfa-a8ba7a46cead" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d4564991-2fa4-4da8-b949-7993504edc63" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="349b2bf6-38a5-4440-add4-da64f6305cb3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a667fe71-d2f6-4696-b784-e15e80741c17" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="898987e8-95d5-4776-99a8-1d862695d6b5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="92f4cc73-026e-45e4-b8ab-627e22631240" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c64ce1e9-da93-4a54-808f-30092ed3347c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0f0d1ca3-ca0e-4ae8-abae-0c01b0a556f4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="16d74cc1-e0f2-41f6-a447-cbf55c454002" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4636bb01-9f49-4779-abfb-00ac353e9aff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1bdb0703-3df3-4275-87bb-d3a31642c6de" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b266eeb6-1472-4560-89a1-a5c29374ed7a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="047d1403-0b87-4faf-a85c-1cdcd5b4a209" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 18/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="99a0a843-ce2b-46b7-9389-dcf3afb45475" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dbb187eb-d399-40eb-93db-cdff9b8037a9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ef2d7e6c-95d2-4ed7-be78-89701f5cc946" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b8347180-9137-4dbb-a9e3-60fc02a0b6d7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3e10a9dd-ecf4-4c14-a8d5-122a7605f1e1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="195730db-06bf-4c6d-8e54-2148ee29e987" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e495e639-d4e7-4aa9-868a-9598faef593d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c51f5fd0-ce4c-47c2-9ac3-b1145d9b2a83" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8c4b998c-70a1-4bfe-b89e-69ac61b6b4f2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="65f9b197-82bc-4dd3-b7c0-16b4364d7ee1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5fd32a4b-532d-4cdc-800d-133048b20b5f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="46501c07-3222-480a-95a6-c682b69ad62c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7bf47437-89fa-47b3-9ceb-6757dccb3fdc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="62b104d0-cfe1-4959-b4d6-d7cc7e00980a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fe98b71f-0117-468f-8cbb-8b8299621cff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0e8ce695-46dd-4c56-a3dd-1aeaa83907ab" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9d761730-3451-4324-8caa-a184b5cf71bf" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8ee7f7bd-24be-4a1f-9566-d16255c283c1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c9f3224f-2f15-422d-b3c0-72bbef318505" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="28465dda-903f-4902-9adc-123f7bd2b7d9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d588c67c-9993-46ea-8a3f-9c906bcd29c5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d04a1373-0376-4ad4-b66d-3fead8c6a6cd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="531334db-c9f8-4921-8c56-5bbafdf07f9c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e32a235a-30a1-458c-a361-2e94bb9ba7d5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="37609428-9b08-4103-b471-27d990f62333" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fadfb080-95d0-448d-be48-b7cb6f0590d9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2b86890e-bc69-4c28-b43d-47b5d99dc3ff" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e3c1d633-41a1-4041-b6ce-b33ec5762dd8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6c141dcd-108a-4ce0-8354-e4730f58751b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cc8c0f1b-a81f-4954-ad5a-e8e2dc7b4742" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="65e064ef-29e0-46d5-a798-2e5c9b88307b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1c841de1-d880-4d83-966a-527294c4e4cd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f3eb9b61-cd01-4350-9a9b-9c7527e650b0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="598155b3-d806-4b60-99e0-7c245a5ea9a7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6ed0d0ee-80a3-4b9f-b4cf-3358d1ddd5a7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3a1442e1-4ce8-4ebc-a6c3-17e87c0f14d0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0449f901-79ed-4323-85e0-ebe5b742c88a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aeb49e8f-f117-4834-bb73-9d7216a7ef95" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2cd4fef1-6df3-4860-b75c-a606564185c3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8a85bc69-4d95-4822-a6c3-7ebb3c6367aa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="578f78a7-5f3f-46d4-a4e0-c856c96015f7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="03becd88-9a3f-4dcc-939c-74bfc7ad0cab" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d23b7bd3-7e90-4b70-8384-36046fb99e4d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="de61c886-0e12-43e5-9f4f-8c0ef7471659" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aa541921-db40-4f98-8f77-bcae29662083" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="81868ff3-32a2-4aa7-9ba5-83be3ae22abe" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4b1f0413-09c5-41f7-9570-11823a2e7220" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9a3b9e82-3ed1-48d3-91ca-c8b23bc0ddc2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="81dcdcb4-36a7-430c-91a8-ae6cae08decb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="63895a32-c786-4623-ba81-c69579e11f72" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6d3455ed-4b29-401f-8413-12274b8cecd9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ef54a8e1-ccb4-46e9-9852-427c7f711000" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b75ebf6c-0285-4216-a7f7-60df5df854b5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0e4d5969-863c-48cc-b71e-f4f0f5fff1da" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0c49ee35-9752-4600-a18d-d1bf981a3c14" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b58d63e9-354b-4457-9a8d-721d8ee51286" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2da54ac6-78c8-48c6-bb6a-167b6865abed" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="41e7f900-3c19-4dc9-a9a0-9eb9aa344d28" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d2667d66-c157-4cce-8f82-bd22deac5ef9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="db62e4a3-2e14-430e-a213-a05be7af6b53" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1279d7cf-b9ab-486c-b247-4a71e0bc6e56" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c6d12eaf-bae2-44be-b499-d2e4c70bbd89" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ba0eea5b-2bdb-4813-8f5e-8180d6d72da5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="28643372-4d3a-40f7-92cb-17f42a48922f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="970909ae-1241-4a40-9c0a-1b36bdece91c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d94ec3cd-bd5b-4dfd-946e-cdba82e23d55" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8fb70255-24f1-4174-bfe4-e98214dfa452" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cb3e8818-0f7b-4d81-b48a-d2d74798cf55" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c756d241-9af5-40a4-9f48-b24a14946126" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="041057ea-c3af-400e-9238-55c193758f90" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b36cabfd-5319-414d-8420-586605539a2b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="13c3c4db-ccdb-4bc3-8c06-66de69053dc3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="12afa976-44ae-4ed7-8df9-75b92bd12334" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5877f72e-330c-42c4-8ed9-9d6af01c5f09" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ec5c356d-5428-4d25-a2b9-61585790cfb9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cf6616a8-1e2d-447b-85f3-abf855b613ec" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e3f3f8b0-c2bc-48f1-8e0c-c69e5da605c0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aa7230c8-3be7-4303-892b-3e8a87b63508" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="617d36a8-ada1-4b8b-b68c-843d594e2a59" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5898eb41-0c22-4276-87c9-2782202cc76e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5102b248-7d56-402e-bb86-a423ef37007e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6bfafb95-d130-4fd7-a7a7-66828e0fd284" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="55b57f0c-98e4-419f-af58-06211645d846" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="450a3dae-52e9-4fa2-9130-bff542eb09c3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a5077e07-28ec-4e10-b727-bd0037a11789" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9698010c-0984-4988-84b4-19bb67d93230" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2c2d38f3-22c8-4b59-a2cd-fe4b630c04c5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2f8d26a0-8a58-4d3b-bfd7-d2cbf74a363c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8eafbd37-4e7b-41a5-886c-04102d40e596" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6818f873-880e-448f-b838-d7212d9dc17b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f2e65ffd-f668-4a36-bf52-780dba9d47b6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1c65d701-aa8c-4ff4-8ba7-2b8a24851279" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="592e3d82-d6b6-48e1-b0fc-a28db500748c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="38afc084-5a86-4352-a0c9-433312be27cd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4846c73e-aa2c-4e15-8622-9b61a3054ec8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9a85a99e-34a7-4d02-a5b2-c5e9ba9177c5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9931120c-4a81-4a32-8cac-7a4b89e107e6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6a309ae0-abf5-4e3f-96e0-a7bd6d5ad8ed" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="96a152d5-beb5-4ad3-960a-b35567aaf78b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8e291197-f812-456f-bb10-cd5cbc3d4f01" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 19/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e1c57670-52f3-41e2-9ce6-11942adcd599" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9df3a614-29dd-4d4a-816b-97ac3dc5140f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dcd4d59b-743d-463a-bb5b-89d2ebf15362" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f3d0250f-f602-4026-b4d1-b86263235c2d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="695c3f44-f218-45f3-ba87-c978c023240d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cb58b941-4d18-44c8-8395-5193a801184a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e51acd8e-d001-4b8b-8c53-a771e1a207d9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="caa49892-62ad-485d-bad6-1d4e2de10dea" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a707790b-e9bc-48fd-9293-5df856451c10" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="03099ef8-5cf9-48b0-8249-ee27aa963f68" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9d039f28-67fe-4aee-b989-012e1e0b2c2b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="af4c5dc1-bad3-4127-90ca-2547dce247a5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e27d8100-fbb5-445d-b1a9-f92f6c588b29" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e6fcc22d-e8ea-42a3-9d9c-f00a16d3ed53" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2182a16d-51a2-404e-be4b-8c3ce93a0ceb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bac37aa6-0e35-448a-b816-9f5397429e78" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f771fabe-efff-4862-9a96-62adf79e28b9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c9a98475-94af-4449-94b6-c1338a993fe5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a7550415-970b-456b-890e-693ccba4ce0a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a52ff10d-c083-45c0-b966-d2e75ff8a64f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7b98cc33-90cc-4651-9608-adfe1bf4031f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9ba9cb41-1f3c-4f45-98d7-61dec15e3464" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="844153dc-4b52-4add-85fa-4490eb368685" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4ab79924-7722-49e2-981e-29c67ac5c520" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0ce4c7ac-7746-4f44-b745-c2ae7d7d571f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="051cceb7-3488-4221-96ec-68a1a6bce0f6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3334538b-499e-4c3a-98de-56dcb77dc122" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1e52aff4-92cb-44df-b756-691e405d9129" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="352ad22f-b345-49f5-8ef5-4cde3344058e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e6427558-8544-4a1c-a7fd-70227d7ceb6a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="39c8bd0a-0aaa-4053-982b-44270761df86" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3297d310-fc15-4c5f-b62e-28c72f58a2a4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0c90d63c-6dd4-44bf-a486-0f142093e1c2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="506b802a-575a-4eb2-a3fd-3f6abf9adb19" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="73ce7820-ec54-4513-9955-bec0fcf44701" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dd7ab91e-a52e-4cbe-9b37-9e146fe696b9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6d1658be-24b5-47bb-9d37-f7eb25b392df" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="eae654a8-8992-4894-a67a-6f3287fc61b8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="32370e91-461a-42a5-84a7-579c24014931" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d011fd76-865e-4cc1-8b9d-a7ad805dd2be" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="383c3985-abe0-4ed2-9668-502447d0d104" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8d695fc9-5f13-48f0-a818-da1fbc3c3368" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3d71f1dc-d9e3-4532-befb-ecbf164162db" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aae2a111-fbad-4c81-875f-7b6b6de401d1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6f6b8596-6d21-45ac-aa57-32d61cb9a50d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="642817e8-891a-4d6a-8bfa-661abc2d9798" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2b5d7286-8ea9-4d8e-bf2d-a0d9841098fe" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ec9aa376-90e4-4273-aa4c-7bb90002fbe0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a8d4d8b9-0d6c-4e88-a7dd-7ad5ba11299b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="740ead31-db9e-4883-957f-d2eba9f2399d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5cd0f1e9-b3e0-4e6e-8341-37f7bc833379" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c2ec5e88-eb31-4886-b21c-8519ef434361" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1d842f98-4196-4037-afad-2a61e21dd8a9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5ed5d2bc-55ad-47b6-968e-a016f59149ae" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1a249da5-e991-4886-b146-123e355550cd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8c0dfa9b-ae15-4f18-9e36-40c180714efb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="50d7be41-d29e-4edc-bb19-09c00ff049dd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="da2fd072-bed6-45e3-97e2-49fca0d89fe6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b816e185-bac6-4c10-9b89-daf06fb9b6fc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0e079a60-e92d-4d5c-a515-b9e152a16e64" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4a8fce89-788b-4f81-8fcb-24a4d7947ccb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9e483b9d-a02f-43d4-98d9-6ec3a572fed8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8ae6fb29-499a-4eaf-93dd-e80f78ac3e37" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f94001d6-9dbd-44f7-8d17-fdb682ce39e8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d3c970d4-805b-407f-a2cf-41de77693a2a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a8b8d8cf-0f90-459e-b682-f157d8287cd7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3de1674a-d527-450f-aeef-1204575cb33c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f4dbb1c8-1bfb-4432-8131-9bbda727e692" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="43bc06dd-9f44-4280-927d-50dea3bf3cb3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0ab8303d-fd8c-4afd-aae1-00183ec651b0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3304ba33-7d4f-4ca6-92fa-1232c30834fc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5f808fa7-dad3-451d-9ca0-7be175b503fe" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9a1e6a79-1289-4797-b9ab-7eb66b3ad37d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0bf96524-bebf-446e-ba68-17464dbeadc5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2554e2ac-e454-40c5-978d-afbc372eb46c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f03f8a57-1183-435e-a37f-286fe8beb2ec" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d1f80a04-1401-4f23-98b4-76287f509d07" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d385ef1f-3584-4c3e-80e2-50b4eefc382e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8b526709-9db5-4cc3-a24c-8da17663af5d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aba088d9-069c-497f-ba34-ce057469eb0f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d01204c4-185f-44d2-bad0-fe3eb3875167" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1428e7b8-1f71-4015-94e7-e15fc84947b1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="25dad51e-970b-40a4-92d3-4cc88c4ad36b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d09c026b-1b41-4d1d-98f4-9ee1d0be76bd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3c721ac0-8fb4-4ff0-b1b6-fb6f7bbca9c0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="89dc4474-c838-4bcd-93da-c60eaf36f6aa" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e98a3edc-9e61-40fc-8733-8e4540751c23" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d6958553-b1ab-44f3-92bc-3fac87ade5ba" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="aaead0b8-45e5-4f2f-a519-90ba6dd4726a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="15a4e449-7a7c-44d9-ade6-4207d6cdd045" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e25f629d-fc74-4b3a-a8e9-3b5d5b4efa6c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d6bccdd3-b0a8-49a8-899d-10cd5ae13bf1" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="09a2047d-7678-49ef-a697-072d80710562" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a0193f42-4ebf-4679-a70d-032a77386cf3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="df5ba05d-01c9-4cdf-9381-9b650568ddeb" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e2687169-0209-411f-a9a5-ba016b517cc5" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="51651161-45c2-4b89-b149-8bf4093b6d7c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="65e48fd6-2f76-48a4-bdec-1231e2e79a49" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="66903aa8-f784-439a-80a3-b5d4e5e5827f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bb16de48-b91a-414f-9eb5-693fb8af2721" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 20/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bcc53f81-0a88-4a72-8feb-4a949ffc3792" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6ec31bed-769a-4b4b-9339-0fc6844a50f7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1e994887-a10d-4a49-8187-c399b202d675" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e53d836e-3826-4ad2-8840-d4967950c3a0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8e555529-993f-4715-b4fb-18c0a34b62a4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a668d065-ace6-4b36-a171-d7e64e3c3b8f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="74d7b77f-ee0e-4352-a7fb-325ca20cb120" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3e230128-9664-47cb-a64f-bf00b39e8423" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a0693cde-22a3-41b9-8042-976715634461" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fd35bcfa-43ee-4c34-b0d8-786bbf3a77d4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="27267cef-5954-48ca-a79f-f99634204941" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="64a6cd49-e97e-4c54-a4c8-2a9307a78579" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="028c888e-8643-459e-9a3a-cc9ff2e16e28" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5f6785a3-dfb4-4a5e-a5c0-6117971fd4c4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c1d30b63-b423-4723-b6d2-7dfe07c5a1b3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f96111f3-ac85-44de-bda1-60db738a953d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a1c2d968-8297-4c71-9091-4fc4fd35d53f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="47f14d0a-956d-4983-8134-3578333daf74" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dd0481b9-2a4f-442b-ad63-bfc818f6c7fe" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c5709c80-a721-4a75-bff4-3ac0c1018d20" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1b52e0c8-4f7b-4ab9-b2b1-20fa40161375" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0b679b80-b030-4201-8a08-cc398a7bbbd2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2af17100-5e50-4245-bc29-d31e94435c18" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7d065456-26a8-45a6-a148-78ad31ca69a9" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8fd18f02-2dd6-4188-9d9c-3cb58cc05d4f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7a535dd6-5b4a-42ad-b051-36c1e379c9be" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1b174a81-7373-455d-81fc-39007209916d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6950cc17-785c-4f6a-bfa9-298b44e4883d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="65192849-a4c8-4955-8133-e0992da74646" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b47bcaec-7a40-4670-9417-e7857b18b014" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="51bcce58-591f-46a5-8042-5e7f65213ba2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f801ebdb-1e56-421f-a7c8-e6c0a056e602" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c9576db1-d4fe-40c3-8a70-569443bb4810" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="45d61b78-dae0-4df6-a29c-cdaf489675c0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="f7bbfd62-d6b8-45b9-bbcd-25606eb9daab" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cdafda24-303e-4808-bd5f-9ef1c9ccff62" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ca5ac67f-146e-4d68-81a2-0b2d550d0ef0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bdece985-3468-45d4-bad2-4bc4c71fa03a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3e5db0c7-15e1-41bb-bf46-3421b8c48646" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b70f53cd-8fea-4a41-a092-9bf50604d13f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a726f903-60d7-4c9d-8a1d-caa456f7dcf4" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="78899c75-2659-4df1-809a-65d1acc487bc" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="32bc5a1a-08fd-47ef-bd1b-85490c5d9aad" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ba95b6ee-5428-45f2-8d6a-dcd6eaf51645" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="09a2c3e0-56eb-43c6-adaa-c510a940c826" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9bd65617-d682-4705-9c06-564219aae811" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c912f449-f3c1-4952-b0ac-5dc8a04dcbf3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="19a5f8e7-df06-49d6-8123-0776c1de3c42" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0fb1aeb1-7408-4204-89ea-192098043c5d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="e4acc362-d1b1-412a-8db9-7b757aaafa37" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="1e405035-91ab-4d56-9748-e9c4b5526a0b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b7250dc4-ff76-41c6-9489-eb60085ec0e6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="889a5fcb-58d8-4165-b6a0-10e2fb29bf3a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4064211d-155b-4b3a-afbd-9612cd2326e7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="66ae324d-4ce8-4395-9e2f-dc56553478fd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="263eca6d-10f6-407f-83bc-5a475853878c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dbd8936c-ce58-419d-abee-04c39a948a76" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="46826978-1113-4386-b9bc-bb36ea2d5aba" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3452ad93-a14d-4179-a14b-aafe3c46267e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="794ec12b-57f9-4d7c-847a-77231b4b7786" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="bc8f0d85-0c48-491e-b928-e013a2ec454c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="421fafe8-3293-4f5b-8515-4d6f8ab64ff3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="d3f6cf12-68b0-4b6b-96cb-8530892ad28a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6da170fd-a946-42b5-98e4-6a03576a264a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c2d5b03e-b396-4ca6-9171-eb51a4d55b6d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="5af5873a-9d8d-4707-841a-19823a891eb3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0d861d8a-14fa-4812-b352-387bb6615520" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="151d166e-4d1f-4b95-a511-baa7514eced6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="99b27aa4-94ca-4308-80f0-f4061932a02a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="84e852d9-8bdc-49d2-925c-3d4566f2721c" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="794d35fa-3d89-4aa3-a4f2-951fb625f002" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6ff69583-621f-4fb6-9905-e745fe720082" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="84dbcf7f-d32e-4a0e-8a48-1fea3b6da529" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="edc3de41-9e6d-4272-8a06-d9e5d6508ff3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="8464bec2-40b1-4b8d-8e30-cb6261197183" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6c776444-8b79-4808-a97f-85ab05277250" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6adca978-f6f5-437d-8a00-9ebae943d4c7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="3cf0790e-ba94-4b17-b497-b4712cf97f6f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="49159843-dc13-4891-b5b9-89fa4497ad2f" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a92bf678-b65b-4b97-beb8-6d95982fa100" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="378d6cac-9eb2-4de6-b35b-b4e69c324634" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="10c024db-f26f-4d62-9081-cb5c752a999b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2a1b807e-bdc3-482e-a867-a0edd4d5418a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a02180c8-6bf1-4550-89b4-b2b51ad94030" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0c010a1f-3a5b-402f-9428-663f1b6865fd" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="409c9b72-c124-4669-beae-bdaf95252fe0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="123d6f6e-5b92-4fc4-8a4e-6d29643c4940" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6d0970bc-5485-4d6c-a39b-68bb73280a5d" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b8d53e5d-b9fd-404e-be62-22cdac556440" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9221259f-6cd6-4115-9a17-aa2e830ed323" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b8b11781-abab-4f1b-8fca-3d3f184c7871" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c1c49540-d117-42e0-9750-da8f0b168ac7" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="956ba9b7-2eba-44c1-80fc-42bc65066b05" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7858553e-bc27-49fd-a448-fea591a40c8e" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0f67c714-0045-4f55-b83a-258672d01741" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cebfe5d3-c0fb-43be-91cb-dd9d8bb278f6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="dc2a15f6-cb3a-4881-b4ef-09bf8f3204e8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0889d224-65ba-428c-82ed-da781a759fab" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="775c2306-c62b-4750-b4a4-5121ede72ce3" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="063f241a-99c3-43f7-b814-ff7ecabc59d8" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:current_user" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from current_user to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+echo '📦 Processing batch 21/21...'
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="job_b959e6b45058" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="fhkljHoYp4O3rDvMYJKD" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="Q3W2hMTN4Imxb2n7sk2R" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="78b49435-5ab1-4da9-846d-a2f9bb01d33a" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="A3bZAJPml7OgxaJM67QK" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9mp33yHqVTmNSECskYTv" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="iRTVIqqMigXYt0318z3t" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2c7990fc-987b-4e94-80f3-1397d770112b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="a3a4cf3e-3551-4e7e-a51e-7610a130f7c6" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="0ec302d0-efa8-4cc1-ad5d-944fd4405013" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="2JJULwPBjnjGc1hDSlmz" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="icC46VTrMhRQtJAbjQhh" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="VSUKzQq63RNx5mQyUtLN" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="c9ZTqmcIdLp5tgt2XxFW" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="SmyNCehAj15YQ3JUclve" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ma8rdg7ItluI7XqjUTYQ" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="D3bCBShLpREGHAVu8dII" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="vA4b7DEciGBK6KqJcsqH" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="b7nC7VDmOZSYiLxlDvHH" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="LJRlodDrTE9dipZCcRUG" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="gTlHjgQ6JgRivwZcqE2L" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="IWQnoBf7zGLjtstjGowK" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="LQ5iKgMwXWbpOkKeylmW" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="I4iaezZZwcjVaJ4RQLIB" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="YQSJBmrE7hQIyw3nHheF" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="BfX4injun2NcVMHNiANP" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="CgomUYMK4Nb0zmfIbXMs" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="nngH0KMHo3p7xjZtq4Ji" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="cioAJ1aPGVVuy68nTAqg" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="P5jKa3cPwOzBKVux6CZ2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="ppwknKET001dVqCLq7wM" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7bvIYkVFcEeyozkqY7uO" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="luep7LjH0I4LXScefhoB" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7HHzEX90wwe8Ij5nEaF0" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:anonymous" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from anonymous to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="eec823c1-49a8-41ea-a192-33421daadd89" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:frontend_test" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from frontend_test to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="20edbb15-3d8d-4bf1-8450-d3b56fb02315" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:frontend_test" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from frontend_test to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="4831e864-1a03-4740-aa6b-6adbba162088" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:frontend_test" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from frontend_test to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="77677dfb-0a92-4646-9a54-b2f7c30cb17b" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:frontend_test" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from frontend_test to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="6c39d064-c43a-449c-9e99-62c3b5375e89" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:frontend_test" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from frontend_test to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="7e02724e-dd8e-4757-ab97-4429a9c50cab" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:frontend_test" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from frontend_test to deployment user" \
+  --quiet
+sleep 1  # Rate limiting
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="9122ec0a-68b1-41b4-9c74-3831788c64f2" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:frontend_test" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from frontend_test to deployment user" \
+  --quiet
+gcloud firestore documents update \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --document-id="30d83a21-4de9-4fac-b914-b3b7af43f051" \
+  --field-update="user_id:$DEPLOYMENT_USER" \
+  --field-update="original_user_id:frontend_test" \
+  --field-update="migrated_at:$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)" \
+  --field-update="migration_note:Migrated from frontend_test to deployment user" \
+  --quiet
+
+echo '✅ Migration completed!'
+echo '📊 Updated 2042 jobs to deployment user'
+echo '🔍 Verifying migration...'
+
+# Count deployment user jobs
+gcloud firestore documents list \
+  --project=$PROJECT_ID \
+  --collection-group=jobs \
+  --filter='user_id = "$DEPLOYMENT_USER"' \
+  --quiet | wc -l
+
+echo '🎉 Migration script completed!'

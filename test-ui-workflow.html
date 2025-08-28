@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OMTX-Hub UI Workflow Test</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #00ff00;
+            max-width: 1200px;
+        }
+        .success { color: #00ff00; }
+        .error { color: #ff0000; }
+        .info { color: #ffff00; }
+        .pending { color: #ffa500; }
+        pre { 
+            background: #000; 
+            padding: 15px; 
+            border-radius: 4px; 
+            overflow-x: auto;
+            border-left: 3px solid #00ff00;
+        }
+        .test-section {
+            margin: 20px 0;
+            border: 1px solid #333;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        button {
+            background: #333;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 4px;
+        }
+        button:hover { background: #444; }
+        .results { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>🚀 OMTX-Hub Production UI Workflow Test</h1>
+    <p class="info">Testing complete end-to-end workflow: Frontend → Production Backend → Cloud Run Jobs → Results</p>
+    
+    <div class="test-section">
+        <h2>1. Frontend Status Check</h2>
+        <button onclick="checkFrontendStatus()">Check Frontend</button>
+        <div id="frontend-status" class="results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Individual Job Submission</h2>
+        <button onclick="submitIndividualJob()">Submit Individual Job</button>
+        <div id="individual-job" class="results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. Batch Job Submission</h2>
+        <button onclick="submitBatchJob()">Submit Batch Job</button>
+        <div id="batch-job" class="results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>4. Job Status Monitoring</h2>
+        <button onclick="monitorJobs()">Monitor Recent Jobs</button>
+        <div id="job-monitoring" class="results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>5. Results Verification</h2>
+        <button onclick="verifyResults()">Verify Results Storage</button>
+        <div id="results-verification" class="results"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://omtx-hub-backend-zhye5az7za-uc.a.run.app';
+        let currentJobs = [];
+        
+        function log(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            const timestamp = new Date().toISOString().split('T')[1].split('.')[0];
+            const className = type === 'success' ? 'success' : type === 'error' ? 'error' : type === 'pending' ? 'pending' : 'info';
+            element.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+        }
+        
+        function logJSON(elementId, obj, title = '') {
+            const element = document.getElementById(elementId);
+            if (title) element.innerHTML += `<div class="info">${title}</div>`;
+            element.innerHTML += `<pre>${JSON.stringify(obj, null, 2)}</pre>`;
+        }
+        
+        async function checkFrontendStatus() {
+            const elementId = 'frontend-status';
+            document.getElementById(elementId).innerHTML = '';
+            
+            log(elementId, 'Checking frontend and backend connectivity...', 'info');
+            
+            try {
+                // Check if we can access the frontend
+                log(elementId, '✅ Frontend is running (you can see this page)', 'success');
+                
+                // Check backend health
+                const healthRes = await fetch(`${API_BASE}/health`);
+                const health = await healthRes.json();
+                log(elementId, `✅ Backend is healthy: ${health.status}`, 'success');
+                logJSON(elementId, health, '📋 Backend Health Details:');
+                
+                // Check CORS
+                const corsTest = await fetch(`${API_BASE}/api/v1/jobs?limit=1`);
+                if (corsTest.ok) {
+                    log(elementId, '✅ CORS is properly configured', 'success');
+                } else {
+                    log(elementId, `❌ CORS issue: ${corsTest.status}`, 'error');
+                }
+                
+            } catch (error) {
+                log(elementId, `❌ Connection error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function submitIndividualJob() {
+            const elementId = 'individual-job';
+            document.getElementById(elementId).innerHTML = '';
+            
+            log(elementId, 'Submitting individual Boltz-2 job...', 'pending');
+            
+            const jobPayload = {
+                model: 'boltz2',
+                protein_sequence: 'MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHGKKVADALTNAVAHVDDMPNALSALSDLHAHKLRVDPVNFKLLSHCLLVTLAAHLPAEFTPAVHASLDKFLASVSTVLTSKYR',
+                ligand_smiles: 'CC(=O)OC1=CC=CC=C1C(=O)O',
+                job_name: `UI Test Job - ${new Date().toISOString()}`,
+                user_id: 'ui_test_user'
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/predict`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(jobPayload)
+                });
+                
+                if (response.ok) {
+                    const job = await response.json();
+                    log(elementId, `✅ Job submitted successfully: ${job.job_id}`, 'success');
+                    logJSON(elementId, job, '📋 Job Details:');
+                    currentJobs.push(job.job_id);
+                    
+                    // Monitor this job
+                    setTimeout(() => monitorSpecificJob(job.job_id, elementId), 3000);
+                } else {
+                    const error = await response.text();
+                    log(elementId, `❌ Job submission failed: ${response.status}`, 'error');
+                    log(elementId, error, 'error');
+                }
+            } catch (error) {
+                log(elementId, `❌ Job submission error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function submitBatchJob() {
+            const elementId = 'batch-job';
+            document.getElementById(elementId).innerHTML = '';
+            
+            log(elementId, 'Submitting batch Boltz-2 job...', 'pending');
+            
+            const batchPayload = {
+                model: 'boltz2',
+                batch_name: `UI Test Batch - ${new Date().toISOString()}`,
+                protein_sequence: 'MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHGKKVADALTNAVAHVDDMPNALSALSDLHAHKLRVDPVNFKLLSHCLLVTLAAHLPAEFTPAVHASLDKFLASVSTVLTSKYR',
+                ligands: [
+                    { name: 'Aspirin', smiles: 'CC(=O)OC1=CC=CC=C1C(=O)O' },
+                    { name: 'Caffeine', smiles: 'CN1C=NC2=C1C(=O)N(C(=O)N2C)C' },
+                    { name: 'Ibuprofen', smiles: 'CC(C)CC1=CC=C(C=C1)C(C)C(=O)O' }
+                ],
+                user_id: 'ui_test_user'
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/predict/batch`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(batchPayload)
+                });
+                
+                if (response.ok) {
+                    const batch = await response.json();
+                    log(elementId, `✅ Batch submitted successfully: ${batch.batch_id}`, 'success');
+                    logJSON(elementId, batch, '📋 Batch Details:');
+                    currentJobs.push(batch.batch_id);
+                    
+                    // Monitor this batch
+                    setTimeout(() => monitorSpecificJob(batch.batch_id, elementId), 3000);
+                } else {
+                    const error = await response.text();
+                    log(elementId, `❌ Batch submission failed: ${response.status}`, 'error');
+                    log(elementId, error, 'error');
+                }
+            } catch (error) {
+                log(elementId, `❌ Batch submission error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function monitorSpecificJob(jobId, elementId) {
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/jobs/${jobId}`);
+                if (response.ok) {
+                    const job = await response.json();
+                    log(elementId, `📊 Job Status Update: ${job.status}`, job.status === 'completed' ? 'success' : 'pending');
+                    if (job.status === 'running' || job.status === 'queued') {
+                        // Keep monitoring
+                        setTimeout(() => monitorSpecificJob(jobId, elementId), 10000);
+                    }
+                }
+            } catch (error) {
+                log(elementId, `❌ Status check failed: ${error.message}`, 'error');
+            }
+        }
+        
+        async function monitorJobs() {
+            const elementId = 'job-monitoring';
+            document.getElementById(elementId).innerHTML = '';
+            
+            log(elementId, 'Fetching recent jobs...', 'pending');
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/jobs?limit=10`);
+                if (response.ok) {
+                    const jobs = await response.json();
+                    log(elementId, `✅ Found ${jobs.jobs ? jobs.jobs.length : 0} recent jobs`, 'success');
+                    
+                    if (jobs.jobs && jobs.jobs.length > 0) {
+                        // Show job statuses
+                        const statusCounts = {};
+                        jobs.jobs.forEach(job => {
+                            statusCounts[job.status] = (statusCounts[job.status] || 0) + 1;
+                        });
+                        
+                        log(elementId, `📊 Status Summary: ${JSON.stringify(statusCounts)}`, 'info');
+                        
+                        // Show recent jobs
+                        logJSON(elementId, jobs.jobs.slice(0, 5), '📋 Recent Jobs (5 most recent):');
+                        
+                        // Show currently running jobs
+                        const runningJobs = jobs.jobs.filter(j => j.status === 'running' || j.status === 'queued');
+                        if (runningJobs.length > 0) {
+                            log(elementId, `🏃 ${runningJobs.length} jobs currently processing`, 'pending');
+                            logJSON(elementId, runningJobs, '🏃 Currently Processing:');
+                        }
+                    }
+                } else {
+                    log(elementId, `❌ Failed to fetch jobs: ${response.status}`, 'error');
+                }
+            } catch (error) {
+                log(elementId, `❌ Job monitoring error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function verifyResults() {
+            const elementId = 'results-verification';
+            document.getElementById(elementId).innerHTML = '';
+            
+            log(elementId, 'Verifying results storage and retrieval...', 'pending');
+            
+            try {
+                // Get completed jobs
+                const response = await fetch(`${API_BASE}/api/v1/jobs?status=completed&limit=5`);
+                if (response.ok) {
+                    const data = await response.json();
+                    const completedJobs = data.jobs || [];
+                    
+                    if (completedJobs.length > 0) {
+                        log(elementId, `✅ Found ${completedJobs.length} completed jobs`, 'success');
+                        
+                        // Check first completed job for results
+                        const firstJob = completedJobs[0];
+                        log(elementId, `📋 Checking results for job: ${firstJob.job_id}`, 'info');
+                        
+                        if (firstJob.results) {
+                            log(elementId, `✅ Job has results stored`, 'success');
+                            logJSON(elementId, firstJob.results, '📋 Sample Results:');
+                        } else {
+                            log(elementId, `⚠️ Job completed but no results found`, 'pending');
+                        }
+                        
+                        // Test file download if available
+                        if (firstJob.results && firstJob.results.files) {
+                            log(elementId, `📁 Testing file download capabilities...`, 'info');
+                            const files = firstJob.results.files;
+                            Object.keys(files).forEach(fileType => {
+                                log(elementId, `📎 ${fileType}: ${files[fileType]}`, 'info');
+                            });
+                        }
+                        
+                    } else {
+                        log(elementId, `⚠️ No completed jobs found yet`, 'pending');
+                        log(elementId, `💡 Submit some jobs and wait for completion`, 'info');
+                    }
+                    
+                } else {
+                    log(elementId, `❌ Failed to fetch completed jobs: ${response.status}`, 'error');
+                }
+                
+                // Test batch results if any batches exist
+                const batchResponse = await fetch(`${API_BASE}/api/v1/batches?status=completed&limit=3`);
+                if (batchResponse.ok) {
+                    const batchData = await batchResponse.json();
+                    const completedBatches = batchData.batches || [];
+                    
+                    if (completedBatches.length > 0) {
+                        log(elementId, `✅ Found ${completedBatches.length} completed batches`, 'success');
+                        logJSON(elementId, completedBatches[0], '📋 Sample Batch Results:');
+                    }
+                }
+                
+            } catch (error) {
+                log(elementId, `❌ Results verification error: ${error.message}`, 'error');
+            }
+        }
+        
+        // Auto-run basic checks on load
+        window.onload = () => {
+            setTimeout(checkFrontendStatus, 1000);
+        };
+    </script>
+</body>
+</html>

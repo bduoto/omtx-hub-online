@@ -21,7 +21,7 @@ class JobSubmissionService:
     def __init__(self):
         self.project_id = os.getenv('GOOGLE_CLOUD_PROJECT', 'om-models')
         self.location = os.getenv('CLOUD_TASKS_LOCATION', 'us-central1')
-        self.gpu_worker_url = os.getenv('GPU_WORKER_URL', 'https://gpu-worker-service-338254269321.us-central1.run.app')
+        self.gpu_worker_url = os.getenv('GPU_WORKER_URL', 'https://boltz2-gpu-worker-338254269321.us-central1.run.app')
         
         # Initialize clients with proper credentials
         self.tasks_client = tasks_v2.CloudTasksClient()
@@ -49,7 +49,7 @@ class JobSubmissionService:
         protein_sequence: str,
         ligand_smiles: str,
         ligand_name: Optional[str] = None,
-        user_id: str = "anonymous",
+        user_id: str = "omtx_deployment_user",
         parameters: Optional[Dict[str, Any]] = None,
         priority: str = "normal",
         auth_token: Optional[str] = None
@@ -155,7 +155,7 @@ class JobSubmissionService:
         batch_name: str,
         protein_sequence: str,
         ligands: List[Dict[str, str]],
-        user_id: str = "anonymous",
+        user_id: str = "omtx_deployment_user",
         parameters: Optional[Dict[str, Any]] = None,
         max_concurrent: int = 10,
         priority: str = "normal",

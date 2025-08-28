@@ -11,8 +11,7 @@ from typing import Dict, List, Any, Optional
 from fastapi import APIRouter, HTTPException, BackgroundTasks, Depends
 from pydantic import BaseModel, Field
 
-from ..services.cloud_tasks_service import CloudTasksService
-from ..services.cloud_run_job_service import CloudRunJobService
+from services.cloud_tasks_service import CloudTasksService
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -40,10 +39,11 @@ class JobStatusResponse(BaseModel):
     created_at: Optional[datetime] = None
     completed_at: Optional[datetime] = None
     processing_time_seconds: Optional[float] = None
+    files_available: Optional[bool] = None
+    gcp_results_path: Optional[str] = None
 
 # Initialize services - Use Cloud Tasks for queue management
 tasks_service = CloudTasksService()
-job_service = CloudRunJobService()  # Fallback for direct execution
 
 @router.post("/predict/async", summary="Submit async prediction job")
 async def submit_prediction_job(request: PredictionRequest) -> Dict[str, Any]:
@@ -133,24 +133,41 @@ async def submit_batch_prediction_job(request: BatchPredictionRequest) -> Dict[s
 async def get_job_status(job_id: str) -> JobStatusResponse:
     """
     Get the status and results of a submitted prediction job
-    
+
     Returns job status, results (if completed), and processing information
     """
     try:
-        result = job_service.get_job_status(job_id)
-        
-        if not result["success"]:
+        # Get job directly from Firestore
+        from google.cloud import firestore
+        db_client = firestore.Client()
+
+        job_doc = db_client.collection("jobs").document(job_id).get()
+        if not job_doc.exists:
             raise HTTPException(status_code=404, detail="Job not found")
-        
-        return JobStatusResponse(
-            job_id=job_id,
-            status=result["status"],
-            results=result.get("results"),
-            created_at=result.get("created_at"),
-            completed_at=result.get("completed_at"),
-            processing_time_seconds=result.get("processing_time")
-        )
-        
+
+        job_data = job_doc.to_dict()
+
+        # Extract results from output_data or legacy results field
+        output_data = job_data.get("output_data", {})
+        results = output_data.get("results", job_data.get("results", {}))
+
+        # Enhanced response with file information
+        response_data = {
+            "job_id": job_id,
+            "status": job_data.get("status"),
+            "results": results,
+            "created_at": job_data.get("created_at"),
+            "completed_at": job_data.get("completed_at"),
+            "processing_time_seconds": job_data.get("execution_time_seconds") or job_data.get("processing_time_seconds")
+        }
+
+        # Add file information if available
+        if output_data.get("files_stored_to_gcp"):
+            response_data["files_available"] = True
+            response_data["gcp_results_path"] = output_data.get("gcp_results_path")
+
+        return JobStatusResponse(**response_data)
+
     except HTTPException:
         raise
     except Exception as e:
@@ -179,14 +196,18 @@ async def get_batch_status(batch_id: str) -> Dict[str, Any]:
         # Get individual job statuses
         job_ids = batch_data.get("job_ids", [])
         job_statuses = []
-        
+
         for job_id in job_ids:
-            job_result = job_service.get_job_status(job_id)
-            if job_result["success"]:
+            job_doc = db_client.collection("jobs").document(job_id).get()
+            if job_doc.exists:
+                job_data = job_doc.to_dict()
+                output_data = job_data.get("output_data", {})
+                results = output_data.get("results", job_data.get("results", {}))
+
                 job_statuses.append({
                     "job_id": job_id,
-                    "status": job_result["status"],
-                    "results": job_result.get("results")
+                    "status": job_data.get("status"),
+                    "results": results
                 })
         
         return {

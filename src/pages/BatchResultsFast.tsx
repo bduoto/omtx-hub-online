@@ -69,9 +69,12 @@ const BatchResultsFast = () => {
     try {
       setLoading(true);
       
+      // Declare fullData variable at the top of the scope
+      let fullData;
+      
       // Load FULL enhanced results directly - no intermediate steps
       const fullResponse = await fetch(
-        `/api/v3/batches/${batchId}/enhanced-results?page=1&page_size=500&include_raw_modal=true`,
+        `/api/v1/batches/${batchId}?page=1&page_size=500&include_raw_modal=true`,
         {
           headers: {
             'Accept': 'application/json',
@@ -83,10 +86,44 @@ const BatchResultsFast = () => {
       );
 
       if (!fullResponse.ok) {
-        throw new Error(`API failed: ${fullResponse.status}`);
+        console.log(`Primary API failed (${fullResponse.status}), trying fallback...`);
+        
+        // Try alternative endpoints for backwards compatibility
+        const fallbackUrls = [
+          `/api/v3/batches/${batchId}/enhanced-results`,
+          `/api/v2/batches/${batchId}/enhanced-results`,
+          `/api/v1/jobs/batch/${batchId}/children`
+        ];
+        
+        let fallbackData = null;
+        for (const fallbackUrl of fallbackUrls) {
+          try {
+            console.log(`Trying fallback: ${fallbackUrl}`);
+            const fallbackResponse = await fetch(fallbackUrl, {
+              headers: { 'Accept': 'application/json' },
+              signal: abortControllerRef.current.signal
+            });
+            
+            if (fallbackResponse.ok) {
+              fallbackData = await fallbackResponse.json();
+              console.log(`✅ Fallback successful: ${fallbackUrl}`);
+              break;
+            }
+          } catch (fallbackErr) {
+            console.warn(`Fallback failed: ${fallbackUrl}`, fallbackErr);
+          }
+        }
+        
+        if (!fallbackData) {
+          throw new Error(`All API endpoints failed. Primary: ${fullResponse.status}`);
+        }
+        
+        // Use fallback data
+        fullData = fallbackData;
+      } else {
+        fullData = await fullResponse.json();
       }
 
-      const fullData = await fullResponse.json();
       const loadTime = performance.now() - startTime;
       console.log(`⚡ Full enhanced results loaded in ${loadTime.toFixed(0)}ms`);
 

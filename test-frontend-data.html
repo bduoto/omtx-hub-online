@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Frontend Data Test</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #00ff00;
+        }
+        pre { 
+            background: #000; 
+            padding: 15px; 
+            border-radius: 4px; 
+            overflow-x: auto;
+        }
+        .success { color: #00ff00; }
+        .error { color: #ff0000; }
+        .info { color: #ffff00; }
+    </style>
+</head>
+<body>
+    <h1>Frontend Data Loading Test</h1>
+    <div id="results"></div>
+    
+    <script>
+        const API_BASE = 'https://omtx-hub-backend-338254269321.us-central1.run.app';
+        const DEPLOYMENT_USER = 'omtx_deployment_user';
+        
+        async function testDataLoading() {
+            const results = document.getElementById('results');
+            let html = '';
+            
+            try {
+                // Test the exact endpoint the frontend is now using
+                html += '<h2>Testing API: /api/v1/jobs with deployment user</h2>';
+                
+                const response = await fetch(`${API_BASE}/api/v1/jobs?user_id=${DEPLOYMENT_USER}&limit=200`);
+                const data = await response.json();
+                
+                html += `<p class="success">✅ API returned ${data.jobs.length} jobs</p>`;
+                
+                // Show job breakdown
+                const individual = data.jobs.filter(j => j.job_type === 'INDIVIDUAL');
+                const batchParents = data.jobs.filter(j => j.job_type === 'BATCH_PARENT');
+                const batchChildren = data.jobs.filter(j => j.job_type === 'BATCH_CHILD');
+                
+                html += '<h3>Job Breakdown:</h3>';
+                html += `<p class="info">Individual Jobs: ${individual.length}</p>`;
+                html += `<p class="info">Batch Parents: ${batchParents.length}</p>`;
+                html += `<p class="info">Batch Children: ${batchChildren.length}</p>`;
+                
+                // Show sample jobs
+                if (individual.length > 0) {
+                    html += '<h3>Sample Individual Job:</h3>';
+                    html += `<pre>${JSON.stringify(individual[0], null, 2)}</pre>`;
+                }
+                
+                if (batchParents.length > 0) {
+                    html += '<h3>Sample Batch Parent:</h3>';
+                    html += `<pre>${JSON.stringify(batchParents[0], null, 2)}</pre>`;
+                }
+                
+                // Test job details endpoint
+                if (data.jobs.length > 0) {
+                    const firstJobId = data.jobs[0].job_id;
+                    html += `<h3>Testing Job Details for: ${firstJobId}</h3>`;
+                    
+                    const detailsResponse = await fetch(`${API_BASE}/api/v1/jobs/${firstJobId}`);
+                    const details = await detailsResponse.json();
+                    
+                    if (details.results) {
+                        html += '<p class="success">✅ Job has results!</p>';
+                        html += `<pre>${JSON.stringify(details.results, null, 2)}</pre>`;
+                    } else {
+                        html += '<p class="info">⚠️ Job has no results yet</p>';
+                    }
+                }
+                
+            } catch (error) {
+                html += `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+            
+            results.innerHTML = html;
+        }
+        
+        // Run test on load
+        testDataLoading();
+    </script>
+</body>
+</html>

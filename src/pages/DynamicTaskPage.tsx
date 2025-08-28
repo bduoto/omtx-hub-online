@@ -67,16 +67,22 @@ export const DynamicTaskPage: React.FC<DynamicTaskPageProps> = ({
       }
       
       // Submit prediction using the unified API
-      const response = await fetch('/api/v2/predict', {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiBase}/api/v1/predict`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model_id: modelId,
-          task_type: taskId,
-          input_data: formData,
+          model: modelId,
+          protein_sequence: formData.protein_sequence || '',
+          ligand_smiles: formData.ligand_smiles || '',
           job_name: formData.job_name || `${taskId} Prediction`,
+          user_id: "omtx_deployment_user",
+          parameters: {
+            task_type: taskId,
+            ...formData
+          }
         }),
       });
 

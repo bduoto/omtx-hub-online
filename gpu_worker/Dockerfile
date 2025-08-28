@@ -28,13 +28,31 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 WORKDIR /app
 
 # Copy requirements first for better caching
-COPY requirements.txt .
+COPY requirements-gpu.txt ./requirements.txt
 
-# Install Python dependencies
+# Install Python dependencies with CUDA support
 RUN pip3 install --no-cache-dir --upgrade pip && \
-    pip3 install --no-cache-dir -r requirements.txt
+    pip3 install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
-# Note: PyTorch with CUDA will be installed via requirements.txt when needed
+# Clone and install Boltz-2 from official repository
+RUN git clone https://github.com/jwohlwend/boltz.git /tmp/boltz && \
+    cd /tmp/boltz && \
+    pip3 install --no-cache-dir -e . && \
+    rm -rf /tmp/boltz/.git
+
+# Install remaining dependencies
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Download Boltz-2 model weights (cached in image for production)
+# This ensures model weights are available without runtime download
+ENV BOLTZ_CACHE=/app/.boltz_cache
+RUN mkdir -p /app/.boltz_cache && \
+    python3 -c "import os; os.environ['BOLTZ_CACHE']='/app/.boltz_cache'; print('Boltz-2 installation check...'); import boltz; print('✅ Boltz-2 package installed')" || \
+    echo "Model weights will be downloaded at runtime"
+
+# Verify GPU and Boltz-2 setup
+RUN python -c "import torch; print('PyTorch version:', torch.__version__); print('CUDA available:', torch.cuda.is_available())" && \
+    python -c "import boltz; print('Boltz-2 installed successfully')" || true
 
 # Copy application code
 COPY . .

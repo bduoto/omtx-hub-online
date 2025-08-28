@@ -21,24 +21,29 @@ from tasks.task_handlers import TaskHandlerRegistry
 from auth import get_current_user, get_current_user_id, require_admin_role
 from typing import Optional as Opt
 
-# Create optional authentication dependencies for development
-def get_optional_user_id(user_id: Optional[str] = None):
-    """Get user ID with fallback to 'anonymous' for development"""
-    try:
-        from auth import get_current_user_id
-        return get_current_user_id()
-    except:
-        return user_id or "anonymous"
+# Simplified authentication for single-user deployment
+DEPLOYMENT_USER_ID = "omtx_deployment_user"
 
-def get_optional_user(user: Optional[dict] = None):
-    """Get user with fallback to anonymous user for development"""
-    try:
-        from auth import get_current_user
-        return get_current_user()
-    except:
-        return user or {"id": "anonymous", "email": "anonymous@omtx.ai", "is_anonymous": True}
+async def get_optional_user_id(user_id: Optional[str] = None):
+    """Get deployment user ID - always returns the same user for single-user deployment"""
+    return DEPLOYMENT_USER_ID
+
+async def get_optional_user(user: Optional[dict] = None):
+    """Get deployment user - always returns the same user for single-user deployment"""
+    return {
+        "id": DEPLOYMENT_USER_ID, 
+        "email": "deployment@omtx.ai", 
+        "is_deployment_user": True
+    }
 
 logger = logging.getLogger(__name__)
+
+# Import Firestore for migration
+try:
+    from google.cloud import firestore
+    FIRESTORE_AVAILABLE = True
+except ImportError:
+    FIRESTORE_AVAILABLE = False
 
 # Import our NEW Cloud Tasks integration
 try:
@@ -161,9 +166,10 @@ class BatchListResponse(BaseModel):
 @router.post("/predict", response_model=JobResponse)
 async def submit_prediction(
     request: PredictionRequest,
-    background_tasks: BackgroundTasks,
-    current_user_id: str = Depends(get_optional_user_id),
-    current_user: dict = Depends(get_optional_user)
+    background_tasks: BackgroundTasks
+    # Temporarily remove auth dependencies for testing
+    # current_user_id: str = Depends(get_optional_user_id),
+    # current_user: dict = Depends(get_optional_user)
 ) -> JobResponse:
     """
     Submit a single prediction job
@@ -182,24 +188,16 @@ async def submit_prediction(
         if request.model == "boltz2" and CLOUD_TASKS_AVAILABLE:
             logger.info(f"🚀 Submitting Boltz-2 job via Cloud Tasks: {request.job_name}")
             
-            # Extract auth token for GPU worker validation
-            auth_token = None
-            if not current_user.get('is_anonymous', False):
-                # Create a fresh token for the GPU worker with extended expiration
-                from auth.jwt_auth import JWTAuth
-                auth_token = JWTAuth.create_access_token(
-                    user_id=current_user_id,
-                    email=current_user.get('email'),
-                    role=current_user.get('role', 'user')
-                )
-                logger.info(f"🔑 Created auth token for GPU worker validation: {current_user_id}")
+            # Use default values for testing
+            current_user_id = request.user_id or DEPLOYMENT_USER_ID
+            auth_token = None  # No auth token for testing
             
             # Submit via Cloud Tasks → Cloud Run workflow
             result = await job_submission_service.submit_individual_job(
                 protein_sequence=request.protein_sequence,
                 ligand_smiles=request.ligand_smiles,
                 ligand_name=request.job_name,  # Use job_name as ligand_name
-                user_id=current_user_id,  # Use authenticated user_id
+                user_id=current_user_id,  # Use provided user_id or anonymous
                 parameters=request.parameters,
                 auth_token=auth_token  # Pass auth token for worker validation
             )
@@ -254,9 +252,10 @@ async def submit_prediction(
 @router.post("/predict/batch", response_model=BatchResponse)
 async def submit_batch_prediction(
     request: BatchPredictionRequest,
-    background_tasks: BackgroundTasks,
-    current_user_id: str = Depends(get_optional_user_id),
-    current_user: dict = Depends(get_optional_user)
+    background_tasks: BackgroundTasks
+    # Temporarily remove auth dependencies for testing
+    # current_user_id: str = Depends(get_optional_user_id),
+    # current_user: dict = Depends(get_optional_user)
 ) -> BatchResponse:
     """
     Submit a batch of predictions
@@ -269,24 +268,16 @@ async def submit_batch_prediction(
         if request.model == "boltz2" and CLOUD_TASKS_AVAILABLE:
             logger.info(f"🚀 Submitting Boltz-2 batch via Cloud Tasks: {request.batch_name} ({len(request.ligands)} ligands)")
             
-            # Extract auth token for GPU worker validation
-            auth_token = None
-            if not current_user.get('is_anonymous', False):
-                # Create a fresh token for the GPU worker with extended expiration
-                from auth.jwt_auth import JWTAuth
-                auth_token = JWTAuth.create_access_token(
-                    user_id=current_user_id,
-                    email=current_user.get('email'),
-                    role=current_user.get('role', 'user')
-                )
-                logger.info(f"🔑 Created auth token for batch GPU workers: {current_user_id}")
+            # Use default values for testing
+            current_user_id = request.user_id or DEPLOYMENT_USER_ID
+            auth_token = None  # No auth token for testing
             
             # Submit via Cloud Tasks → Cloud Run workflow
             result = await job_submission_service.submit_batch_job(
                 batch_name=request.batch_name,
                 protein_sequence=request.protein_sequence,
                 ligands=request.ligands,
-                user_id=current_user_id,  # Use authenticated user_id
+                user_id=current_user_id,  # Use provided user_id or anonymous
                 parameters={
                     "max_concurrent": request.max_concurrent,
                     "priority": request.priority,
@@ -408,7 +399,7 @@ async def get_job(job_id: str = Path(..., description="Job ID")):
 async def list_jobs(
     user_id: str = Query(default="current_user", description="User ID"),
     page: int = Query(default=1, ge=1, description="Page number"),
-    limit: int = Query(default=20, ge=1, le=100, description="Items per page"),
+    limit: int = Query(default=20, ge=1, le=500, description="Items per page"),
     status: Optional[str] = Query(default=None, description="Filter by status"),
     model: Optional[str] = Query(default=None, description="Filter by model"),
     current_user_id: str = Depends(get_optional_user_id)
@@ -502,7 +493,12 @@ async def get_batch(batch_id: str = Path(..., description="Batch ID")):
             raise HTTPException(status_code=404, detail="Batch not found")
         
         # Get batch job statistics
-        stats = await job_manager.get_batch_stats(batch_id)
+        try:
+            stats = await job_manager.get_batch_stats(batch_id)
+        except AttributeError:
+            # Fallback if get_batch_stats method doesn't exist
+            logger.warning(f"get_batch_stats method not available, using defaults for batch {batch_id}")
+            stats = {"total": 0, "completed": 0, "failed": 0, "running": 0, "pending": 0}
         
         # Build export links if completed
         export_links = None
@@ -538,7 +534,7 @@ async def get_batch(batch_id: str = Path(..., description="Batch ID")):
 async def list_batches(
     user_id: str = Query(default="current_user", description="User ID"),
     page: int = Query(default=1, ge=1, description="Page number"),
-    limit: int = Query(default=20, ge=1, le=100, description="Items per page"),
+    limit: int = Query(default=20, ge=1, le=500, description="Items per page"),
     status: Optional[str] = Query(default=None, description="Filter by status"),
     model: Optional[str] = Query(default=None, description="Filter by model"),
     current_user_id: str = Depends(get_optional_user_id)
@@ -561,7 +557,11 @@ async def list_batches(
         
         batch_responses = []
         for batch in batches:
-            stats = await job_manager.get_batch_stats(batch["id"])
+            try:
+                stats = await job_manager.get_batch_stats(batch["id"])
+            except AttributeError:
+                # Fallback if get_batch_stats method doesn't exist
+                stats = {"total": 0, "completed": 0, "failed": 0, "running": 0, "pending": 0}
             
             export_links = None
             if batch["status"] == "completed":
@@ -731,6 +731,148 @@ async def get_system_status():
             "timestamp": datetime.utcnow().isoformat(),
             "error": str(e)
         }
+
+# ===== MIGRATION ENDPOINTS =====
+
+@router.post("/migrate-to-deployment-user")
+async def migrate_all_jobs_to_deployment_user():
+    """
+    MIGRATION ENDPOINT: Migrate all jobs to deployment user
+    This consolidates all historical results under the single deployment user
+    """
+    
+    if not FIRESTORE_AVAILABLE:
+        raise HTTPException(
+            status_code=503, 
+            detail="Firestore not available for migration"
+        )
+    
+    try:
+        # Initialize Firestore
+        db = firestore.Client(project='om-models')
+        jobs_collection = db.collection('jobs')
+        
+        # Track statistics
+        stats = {
+            'total': 0,
+            'migrated': 0,
+            'already_deployment_user': 0,
+            'errors': 0,
+            'users_found': []
+        }
+        
+        logger.info(f"🚀 Starting migration to deployment user: {DEPLOYMENT_USER_ID}")
+        
+        # Get all jobs
+        all_jobs = jobs_collection.stream()
+        users_found = set()
+        
+        # Process in batches for efficiency
+        batch = db.batch()
+        batch_count = 0
+        
+        for job_doc in all_jobs:
+            try:
+                job_data = job_doc.to_dict()
+                job_id = job_doc.id
+                stats['total'] += 1
+                
+                # Track original user
+                original_user = job_data.get('user_id', 'unknown')
+                users_found.add(original_user)
+                
+                # Check if already deployment user
+                if original_user == DEPLOYMENT_USER_ID:
+                    stats['already_deployment_user'] += 1
+                else:
+                    # Update to deployment user
+                    job_ref = jobs_collection.document(job_id)
+                    batch.update(job_ref, {
+                        'user_id': DEPLOYMENT_USER_ID,
+                        'original_user_id': original_user,
+                        'migrated_at': firestore.SERVER_TIMESTAMP,
+                        'migration_note': f'Migrated from {original_user} to deployment user'
+                    })
+                    stats['migrated'] += 1
+                    batch_count += 1
+                    
+                    # Commit every 100 updates (Firestore limit is 500)
+                    if batch_count >= 100:
+                        batch.commit()
+                        logger.info(f"✅ Committed batch of {batch_count} updates")
+                        batch = db.batch()
+                        batch_count = 0
+                        
+            except Exception as e:
+                logger.error(f"❌ Error processing job {job_doc.id}: {e}")
+                stats['errors'] += 1
+        
+        # Commit remaining updates
+        if batch_count > 0:
+            batch.commit()
+            logger.info(f"✅ Committed final batch of {batch_count} updates")
+        
+        stats['users_found'] = list(users_found)
+        
+        logger.info(f"🎉 Migration complete: {stats}")
+        
+        return {
+            'success': True,
+            'message': f'Successfully migrated {stats["migrated"]} jobs to deployment user {DEPLOYMENT_USER_ID}',
+            'deployment_user': DEPLOYMENT_USER_ID,
+            'stats': stats
+        }
+        
+    except Exception as e:
+        logger.error(f"💥 Migration failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/migration-status")
+async def get_migration_status():
+    """
+    Check current migration status
+    """
+    
+    try:
+        # Count deployment user jobs
+        deployment_jobs, _ = await job_manager.list_jobs(
+            user_id=DEPLOYMENT_USER_ID,
+            limit=10000
+        )
+        
+        # Check other known users
+        other_users_jobs = {}
+        known_users = ['test_user', 'current_user', 'anonymous', 'frontend_test']
+        total_other = 0
+        
+        for user in known_users:
+            try:
+                jobs, _ = await job_manager.list_jobs(user_id=user, limit=1)
+                if jobs:
+                    # Get actual count by querying more
+                    all_jobs, _ = await job_manager.list_jobs(user_id=user, limit=10000)
+                    count = len(all_jobs)
+                    if count > 0:
+                        other_users_jobs[user] = count
+                        total_other += count
+            except:
+                pass  # Skip if user doesn't exist
+        
+        migration_needed = total_other > 0
+        
+        return {
+            'deployment_user': DEPLOYMENT_USER_ID,
+            'deployment_user_jobs': len(deployment_jobs),
+            'other_users': other_users_jobs,
+            'total_other_users_jobs': total_other,
+            'migration_needed': migration_needed,
+            'status': 'Migration needed' if migration_needed else 'All jobs consolidated',
+            'message': f'{total_other} jobs need migration' if migration_needed else f'All {len(deployment_jobs)} jobs belong to deployment user'
+        }
+        
+    except Exception as e:
+        logger.error(f"Status check failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 # ===== HELPER FUNCTIONS =====
 

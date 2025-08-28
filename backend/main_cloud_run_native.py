@@ -218,7 +218,7 @@ async def predict_batch(
 ):
     """
     Submit batch Boltz-2 predictions
-    Optimized for Cloud Run auto-scaling
+    Optimized for Cloud Run auto-scaling with UnifiedJobManager compatibility
     """
     try:
         # Generate batch ID
@@ -230,7 +230,46 @@ async def predict_batch(
         logger.info(f"   Ligands: {len(request.ligands)}")
         logger.info(f"   Max concurrent: {request.max_concurrent}")
         
-        # Add background batch processing
+        # Try to create batch using UnifiedJobManager if available
+        try:
+            from database.unified_job_manager import unified_job_manager
+            
+            # Prepare batch data for UnifiedJobManager
+            batch_data = {
+                "batch_id": batch_id,
+                "batch_name": request.batch_name,
+                "user_id": request.user_id,
+                "protein_sequence": request.protein_sequence,
+                "total_jobs": len(request.ligands),
+                "status": "submitted",
+                "created_at": datetime.utcnow().isoformat()
+            }
+            
+            # Prepare individual jobs
+            individual_jobs = []
+            for i, ligand in enumerate(request.ligands):
+                job_data = {
+                    "job_id": f"{batch_id}_{i+1:03d}",
+                    "ligand_name": ligand.get("name", f"ligand_{i+1}"),
+                    "ligand_smiles": ligand.get("smiles", ""),
+                    "user_id": request.user_id,
+                    "batch_parent_id": batch_id
+                }
+                individual_jobs.append(job_data)
+            
+            # Create batch using UnifiedJobManager
+            created_batch_id = unified_job_manager.create_batch(batch_data, individual_jobs)
+            if created_batch_id:
+                logger.info(f"✅ Batch created in UnifiedJobManager: {created_batch_id}")
+            else:
+                logger.warning("⚠️ UnifiedJobManager.create_batch returned None, proceeding with local processing")
+                
+        except ImportError:
+            logger.warning("⚠️ UnifiedJobManager not available, using simplified batch processing")
+        except Exception as e:
+            logger.warning(f"⚠️ UnifiedJobManager failed: {e}, using simplified batch processing")
+        
+        # Add background batch processing (works regardless of UnifiedJobManager)
         background_tasks.add_task(
             process_boltz2_batch,
             batch_id,

@@ -13,6 +13,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Boltz2ResultsViewer } from '@/components/JobResults/Boltz2ResultsViewer';
 import { 
   Eye, 
   Download, 
@@ -87,6 +89,11 @@ const MyResults = () => {
     isBulk: boolean;
     count: number;
   }>({ isOpen: false, jobId: null, jobName: '', isBulk: false, count: 0 });
+  
+  // State for results viewer dialog
+  const [selectedJobForViewing, setSelectedJobForViewing] = useState<string | null>(null);
+  const [selectedJobData, setSelectedJobData] = useState<any>(null);
+  const [showResultsViewer, setShowResultsViewer] = useState(false);
 
   // INSTANT fetch using unified store - sub-millisecond for cache hits
   const fetchJobsOptimized = async () => {
@@ -116,7 +123,7 @@ const MyResults = () => {
       
       // Fallback to My Results API directly
       try {
-        const response = await fetch(`/api/v2/my-results?user_id=current_user&limit=200`);
+        const response = await fetch(`/api/v1/jobs?user_id=omtx_deployment_user&limit=200`);
         if (response.ok) {
           const data = await response.json();
           const results = data.results || data.jobs || [];
@@ -303,8 +310,23 @@ const MyResults = () => {
     }
 
     const taskType = job.original.task_type;
+    const model = job.original.model || 'boltz2';
     // Use job.id as primary, fallback to job_id field if available
     const originalJobId = job.original.job_id || job.original.id || job.id;
+    
+    // For Boltz-2 protein-ligand jobs, show the new results viewer
+    if (model === 'boltz2' || taskType?.includes('ligand') || taskType?.includes('binding')) {
+      setSelectedJobForViewing(originalJobId);
+      setSelectedJobData(job.original);
+      setShowResultsViewer(true);
+      return;
+    }
+    
+    // For batch jobs, navigate to batch results page
+    if (taskType?.includes('batch')) {
+      navigate(`/batch-results/${originalJobId}`);
+      return;
+    }
     
     // Determine the target page based on task type
     const getTargetPage = (taskType: string): string => {
@@ -336,15 +358,9 @@ const MyResults = () => {
       return;
     }
 
-    // For batch jobs, navigate to batch results page
-    if (taskType?.includes('batch')) {
-      navigate(`/batch-results/${originalJobId}`);
-      return;
-    }
-
     // Try to fetch fresh job data if results are missing
     try {
-      const response = await fetch(`/api/v2/jobs/${originalJobId}`);
+      const response = await fetch(`/api/v1/jobs/${originalJobId}`);
       if (response.ok) {
         const fullJobData = await response.json();
         
@@ -416,7 +432,7 @@ const MyResults = () => {
 
   const handleSingleDeleteConfirmed = async (jobId: string) => {
     // Delete from MyResults table using the MyResults ID
-    const response = await fetch(`/api/v2/my-results/${jobId}?user_id=current_user`, {
+    const response = await fetch(`/api/v1/jobs/${jobId}?user_id=omtx_deployment_user`, {
       method: 'DELETE',
     });
 
@@ -449,7 +465,7 @@ const MyResults = () => {
 
   const handleBulkDeleteConfirmed = async () => {
     const deletePromises = Array.from(selectedJobs).map(jobId =>
-      fetch(`/api/v2/my-results/${jobId}?user_id=current_user`, { method: 'DELETE' })
+      fetch(`/api/v1/jobs/${jobId}?user_id=omtx_deployment_user`, { method: 'DELETE' })
     );
 
     const results = await Promise.allSettled(deletePromises);
@@ -800,6 +816,29 @@ const MyResults = () => {
           </p>
         </div>
       </main>
+
+      {/* Boltz-2 Results Viewer Dialog */}
+      <Dialog open={showResultsViewer} onOpenChange={setShowResultsViewer}>
+        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto" aria-describedby="job-results-description">
+          <DialogHeader>
+            <DialogTitle>Job Results</DialogTitle>
+            <div id="job-results-description" className="sr-only">
+              View detailed results for your Boltz-2 prediction including structure, metrics, and downloadable files
+            </div>
+          </DialogHeader>
+          {selectedJobForViewing && (
+            <Boltz2ResultsViewer
+              jobId={selectedJobForViewing}
+              jobData={selectedJobData}
+              onClose={() => {
+                setShowResultsViewer(false);
+                setSelectedJobForViewing(null);
+                setSelectedJobData(null);
+              }}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

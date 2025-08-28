@@ -926,7 +926,8 @@ export const InputSection: React.FC<InputSectionProps> = ({
     while (attempts < maxAttempts) {
       try {
         console.log(`🔄 Polling attempt ${attempts + 1}/${maxAttempts} for job ${jobId}`);
-        const response = await fetch(`/api/v2/jobs/${jobId}`);
+        const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+        const response = await fetch(`${apiBase}/api/v1/jobs/${jobId}`);
         console.log('📡 Poll response status:', response.status);
         
         if (!response.ok) {
@@ -974,8 +975,8 @@ export const InputSection: React.FC<InputSectionProps> = ({
           console.log('❌ Job failed:', jobStatus.error_message);
           onPredictionError(jobStatus.error_message || 'Job failed');
           return;
-        } else if (jobStatus.status === 'running' || jobStatus.status === 'pending') {
-          // Job still running, continue polling
+        } else if (jobStatus.status === 'running' || jobStatus.status === 'pending' || jobStatus.status === 'queued') {
+          // Job still running/queued, continue polling
           console.log(`⏳ Job still ${jobStatus.status}, continuing to poll...`);
           attempts++;
           await new Promise(resolve => setTimeout(resolve, 10000)); // Wait 10 seconds
@@ -1295,16 +1296,23 @@ export const InputSection: React.FC<InputSectionProps> = ({
       console.log('Unified input data:', unifiedInputData);
       
       const requestBody = {
-        model_id: "boltz2",
-        task_type: selectedTask,
-        input_data: unifiedInputData,
+        model: "boltz2",
+        protein_sequence: unifiedInputData.protein_sequence || unifiedInputData.sequences?.join('') || '',
+        ligand_smiles: unifiedInputData.ligand_smiles || unifiedInputData.ligands?.[0]?.smiles || '',
         job_name: taskInputs.jobName || workflowName,
-        use_msa: useMSAServer,
-        use_potentials: usePotentials
+        user_id: "omtx_deployment_user",
+        parameters: {
+          task_type: selectedTask,
+          use_msa: useMSAServer,
+          use_potentials: usePotentials,
+          num_samples: 5,
+          confidence_threshold: 0.7
+        }
       };
       console.log('API request body:', requestBody);
       
-      const response = await fetch('/api/v2/predict', {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiBase}/api/v1/predict`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

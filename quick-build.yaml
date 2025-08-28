@@ -1,0 +1,13 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/om-models/omtx-hub-backend:paths-fixed', '-f', 'backend/Dockerfile.cloud_run_native', '.']
+  
+  # Push the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/om-models/omtx-hub-backend:paths-fixed']
+
+images:
+  - 'gcr.io/om-models/omtx-hub-backend:paths-fixed'
+
+timeout: '400s'

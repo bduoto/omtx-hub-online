@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Frontend Configuration Check</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #00ff00;
+        }
+        .success { color: #00ff00; }
+        .error { color: #ff0000; }
+        .info { color: #ffff00; }
+        pre { background: #000; padding: 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>OMTX-Hub Frontend Configuration Check</h1>
+    <div id="results"></div>
+    
+    <script>
+        async function checkConfiguration() {
+            const results = document.getElementById('results');
+            let html = '<h2>Configuration Test Results:</h2>';
+            
+            // Expected backend URL
+            const EXPECTED_BACKEND = 'https://omtx-hub-backend-zhye5az7za-uc.a.run.app';
+            
+            try {
+                // 1. Check frontend is running
+                html += '<h3>1. Frontend Status:</h3>';
+                const frontendRes = await fetch('http://localhost:5173/', { mode: 'no-cors' });
+                html += '<p class="success">✅ Frontend is running on localhost:5173</p>';
+            } catch (e) {
+                html += '<p class="error">❌ Frontend is NOT running on localhost:5173</p>';
+            }
+            
+            try {
+                // 2. Check backend health
+                html += '<h3>2. Backend Health Check:</h3>';
+                const healthRes = await fetch(`${EXPECTED_BACKEND}/health`);
+                const health = await healthRes.json();
+                html += `<p class="success">✅ Backend is healthy: ${health.status}</p>`;
+                html += `<pre>${JSON.stringify(health, null, 2)}</pre>`;
+            } catch (e) {
+                html += `<p class="error">❌ Backend health check failed: ${e.message}</p>`;
+            }
+            
+            try {
+                // 3. Test CORS from localhost:5173
+                html += '<h3>3. CORS Configuration:</h3>';
+                const corsRes = await fetch(`${EXPECTED_BACKEND}/api/v1/jobs?limit=1`, {
+                    headers: {
+                        'Origin': 'http://localhost:5173'
+                    }
+                });
+                if (corsRes.ok) {
+                    html += '<p class="success">✅ CORS is properly configured for localhost:5173</p>';
+                } else {
+                    html += `<p class="error">❌ CORS issue: ${corsRes.status}</p>`;
+                }
+            } catch (e) {
+                html += `<p class="error">❌ CORS test failed: ${e.message}</p>`;
+            }
+            
+            // 4. Test job submission
+            html += '<h3>4. Job Submission Test:</h3>';
+            try {
+                const jobRes = await fetch(`${EXPECTED_BACKEND}/api/v1/predict`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Origin': 'http://localhost:5173'
+                    },
+                    body: JSON.stringify({
+                        model: 'boltz2',
+                        protein_sequence: 'MVLSPADKTN',
+                        ligand_smiles: 'CCO',
+                        job_name: 'Config Test Job'
+                    })
+                });
+                
+                if (jobRes.ok) {
+                    const job = await jobRes.json();
+                    html += '<p class="success">✅ Job submission successful!</p>';
+                    html += `<pre>${JSON.stringify(job, null, 2)}</pre>`;
+                } else {
+                    const error = await jobRes.text();
+                    html += `<p class="error">❌ Job submission failed: ${jobRes.status}</p>`;
+                    html += `<pre>${error}</pre>`;
+                }
+            } catch (e) {
+                html += `<p class="error">❌ Job submission error: ${e.message}</p>`;
+            }
+            
+            html += '<h3>Summary:</h3>';
+            html += '<p class="info">Expected Backend URL: ' + EXPECTED_BACKEND + '</p>';
+            html += '<p class="info">Frontend URL: http://localhost:5173</p>';
+            html += '<p class="info">If all tests pass, your frontend should be properly connected!</p>';
+            
+            results.innerHTML = html;
+        }
+        
+        // Run checks on load
+        checkConfiguration();
+    </script>
+</body>
+</html>

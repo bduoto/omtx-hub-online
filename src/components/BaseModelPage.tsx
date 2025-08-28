@@ -93,16 +93,22 @@ export const BaseModelPage: React.FC<BaseModelPageProps> = ({
       setState(prev => ({ ...prev, submitting: true }));
       
       // Submit prediction using the unified API
-      const response = await fetch(`/api/v2/predict`, {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiBase}/api/v1/predict`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model_id: modelId,
-          task_type: inputData.task_type,
-          input_data: inputData,
+          model: modelId,
+          protein_sequence: inputData.protein_sequence || '',
+          ligand_smiles: inputData.ligand_smiles || '',
           job_name: inputData.job_name || `${state.model.name} Prediction`,
+          user_id: "omtx_deployment_user",
+          parameters: {
+            task_type: inputData.task_type,
+            ...inputData
+          }
         }),
       });
 

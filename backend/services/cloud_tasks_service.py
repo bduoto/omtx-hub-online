@@ -22,25 +22,29 @@ class CloudTasksService:
     
     def __init__(self):
         """Initialize Cloud Tasks client"""
-        self.project_id = os.getenv("GCP_PROJECT_ID", "om-models")
+        self.project_id = os.getenv("GOOGLE_CLOUD_PROJECT", os.getenv("GCP_PROJECT_ID", "om-models"))
         self.location = os.getenv("GCP_REGION", "us-central1")
         self.service_url = os.getenv("GPU_WORKER_URL", "https://boltz2-production-zhye5az7za-uc.a.run.app")
-        
+
         # Queue names
         self.individual_queue = "boltz2-predictions"
         self.batch_queue = "boltz2-batch-predictions"
-        
+
         # Initialize clients
         self.tasks_client = tasks_v2.CloudTasksClient()
         self.db = firestore.Client(project=self.project_id)
-        
+
         # Get credentials for service account
         self.credentials, _ = google.auth.default()
-        
+
+        # Cloud Tasks service account for OIDC
+        self.cloud_tasks_sa_email = f"cloud-tasks-service@{self.project_id}.iam.gserviceaccount.com"
+
         logger.info(f"✅ Cloud Tasks Service initialized")
         logger.info(f"   Project: {self.project_id}")
         logger.info(f"   Location: {self.location}")
         logger.info(f"   Service URL: {self.service_url}")
+        logger.info(f"   Cloud Tasks SA: {self.cloud_tasks_sa_email}")
     
     def _get_queue_path(self, queue_name: str) -> str:
         """Get full queue path"""
@@ -106,18 +110,21 @@ class CloudTasksService:
             # Create HTTP request body for Cloud Run
             payload = {
                 "job_id": job_id,
+                "job_type": "BATCH_CHILD" if batch_parent_id else "INDIVIDUAL",
+                "batch_id": batch_parent_id,
+                "timestamp": datetime.utcnow().isoformat(),
                 "protein_sequence": protein_sequence,
                 "ligand_smiles": ligand_smiles,
                 "ligand_name": ligand_name or "unknown",
                 "user_id": user_id or "anonymous",
                 "batch_parent_id": batch_parent_id or ""
             }
-            
+
             # Create Cloud Tasks HTTP request
             task = {
                 "http_request": {
                     "http_method": tasks_v2.HttpMethod.POST,
-                    "url": f"{self.service_url}/predict",
+                    "url": f"{self.service_url}/process",
                     "headers": {
                         "Content-Type": "application/json",
                         "X-Job-ID": job_id,
@@ -126,11 +133,11 @@ class CloudTasksService:
                     "body": json.dumps(payload).encode()
                 }
             }
-            
-            # Add OIDC token for authentication (uses default service account)
+
+            # Add OIDC token for authentication (uses Cloud Tasks service account)
             if self.service_url.startswith("https://"):
                 task["http_request"]["oidc_token"] = {
-                    "service_account_email": f"boltz2-worker@{self.project_id}.iam.gserviceaccount.com"
+                    "service_account_email": self.cloud_tasks_sa_email
                 }
             
             # Set task dispatch deadline (5 minutes for processing)

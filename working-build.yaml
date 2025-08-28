@@ -1,0 +1,9 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/om-models/omtx-hub-backend:working', '-f', 'backend/Dockerfile.cloud_run_native', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/om-models/omtx-hub-backend:working']
+
+images:
+  - 'gcr.io/om-models/omtx-hub-backend:working'
+timeout: '300s'

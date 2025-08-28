@@ -8,7 +8,7 @@ import logging
 from typing import Dict, Any, Optional
 from datetime import datetime
 
-from ..services.post_processing_integration import (
+from services.post_processing_integration import (
     trigger_job_post_processing,
     trigger_batch_post_processing,
     integration_service
