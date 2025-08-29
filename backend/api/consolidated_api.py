@@ -120,6 +120,11 @@ class JobResponse(BaseModel):
     
     # File links
     download_links: Optional[Dict[str, str]] = None
+    
+    # Enhanced fields for complete job metadata
+    input_data: Optional[Dict[str, Any]] = None
+    parameters: Optional[Dict[str, Any]] = None
+    task_type: Optional[str] = None
 
 class BatchResponse(BaseModel):
     """Unified batch response"""
@@ -196,7 +201,8 @@ async def submit_prediction(
             result = await job_submission_service.submit_individual_job(
                 protein_sequence=request.protein_sequence,
                 ligand_smiles=request.ligand_smiles,
-                ligand_name=request.job_name,  # Use job_name as ligand_name
+                ligand_name=None,  # Will be generated automatically
+                job_name=request.job_name,  # Pass job_name correctly
                 user_id=current_user_id,  # Use provided user_id or anonymous
                 parameters=request.parameters,
                 auth_token=auth_token  # Pass auth token for worker validation
@@ -368,6 +374,23 @@ async def get_job(job_id: str = Path(..., description="Job ID")):
         if not job:
             raise HTTPException(status_code=404, detail="Job not found")
         
+        # Try to get input data from Firestore for Cloud Tasks jobs
+        input_data = None
+        if FIRESTORE_AVAILABLE:
+            try:
+                db = firestore.Client(project='om-models')
+                job_ref = db.collection('jobs').document(job_id)
+                firestore_doc = job_ref.get()
+                
+                if firestore_doc.exists:
+                    firestore_data = firestore_doc.to_dict()
+                    input_data = firestore_data.get('input_data')
+                    logger.info(f"Found input_data in Firestore for job {job_id}")
+                else:
+                    logger.warning(f"No Firestore document found for job {job_id}")
+            except Exception as e:
+                logger.warning(f"Failed to fetch input_data from Firestore for job {job_id}: {e}")
+        
         # Build download links if completed
         download_links = None
         if job["status"] == "completed":
@@ -377,6 +400,11 @@ async def get_job(job_id: str = Path(..., description="Job ID")):
                 "pdb": f"/api/v1/jobs/{job_id}/files/pdb"
             }
         
+        # Include input_data in results if available
+        results = job.get("results", {})
+        if input_data:
+            results = {**results, "input_data": input_data}
+        
         return JobResponse(
             job_id=job["id"],
             status=job["status"],
@@ -384,7 +412,7 @@ async def get_job(job_id: str = Path(..., description="Job ID")):
             job_name=job["job_name"],
             created_at=job["created_at"],
             updated_at=job["updated_at"],
-            results=job.get("results"),
+            results=results,
             error_message=job.get("error"),
             download_links=download_links
         )
@@ -421,6 +449,8 @@ async def list_jobs(
         )
         
         job_responses = []
+        
+        # Enhanced job data retrieval with Firestore integration
         for job in jobs:
             download_links = None
             if job["status"] == "completed":
@@ -429,15 +459,21 @@ async def list_jobs(
                     "results": f"/api/v1/jobs/{job['id']}/files/json"
                 }
             
+            # Enrich job data with Firestore metadata for complete job information
+            enhanced_job = await _enrich_job_with_firestore_data(job)
+            
             job_responses.append(JobResponse(
-                job_id=job["id"],
-                status=job["status"],
-                model=job.get("model_id", "unknown"),
-                job_name=job["job_name"],
-                created_at=job["created_at"],
-                updated_at=job["updated_at"],
-                results=job.get("results") if job["status"] == "completed" else None,
-                download_links=download_links
+                job_id=enhanced_job["id"],
+                status=enhanced_job["status"],
+                model=enhanced_job.get("model", enhanced_job.get("model_id", "boltz2")),
+                job_name=enhanced_job.get("job_name", "Unnamed Job"),
+                created_at=enhanced_job["created_at"],
+                updated_at=enhanced_job["updated_at"],
+                results=enhanced_job.get("results") if enhanced_job["status"] == "completed" else None,
+                download_links=download_links,
+                input_data=enhanced_job.get("input_data"),  # Include input data
+                parameters=enhanced_job.get("parameters", enhanced_job.get("input_data", {}).get("parameters")),  # Include parameters
+                task_type=enhanced_job.get("task_type", enhanced_job.get("input_data", {}).get("parameters", {}).get("task_type", "boltz2"))  # Include task type
             ))
         
         return JobListResponse(
@@ -875,6 +911,52 @@ async def get_migration_status():
         raise HTTPException(status_code=500, detail=str(e))
 
 # ===== HELPER FUNCTIONS =====
+
+async def _enrich_job_with_firestore_data(job: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Enrich job data with complete metadata from Firestore
+    This ensures jobs have job_name, input_data, parameters, task_type, etc.
+    """
+    if not FIRESTORE_AVAILABLE:
+        return job
+    
+    try:
+        db = firestore.Client(project='om-models')
+        job_ref = db.collection('jobs').document(job["id"])
+        firestore_doc = job_ref.get()
+        
+        if firestore_doc.exists:
+            firestore_data = firestore_doc.to_dict()
+            
+            # Merge Firestore data with database job data
+            enhanced_job = {**job}  # Start with database data
+            
+            # Override with Firestore data where available
+            if firestore_data.get('job_name'):
+                enhanced_job['job_name'] = firestore_data['job_name']
+            
+            if firestore_data.get('input_data'):
+                enhanced_job['input_data'] = firestore_data['input_data']
+            
+            if firestore_data.get('model'):
+                enhanced_job['model'] = firestore_data['model']
+            
+            # Extract task_type from parameters
+            if firestore_data.get('input_data', {}).get('parameters', {}).get('task_type'):
+                enhanced_job['task_type'] = firestore_data['input_data']['parameters']['task_type']
+            
+            if firestore_data.get('input_data', {}).get('parameters'):
+                enhanced_job['parameters'] = firestore_data['input_data']['parameters']
+            
+            logger.debug(f"Enhanced job {job['id']} with Firestore data")
+            return enhanced_job
+        else:
+            logger.debug(f"No Firestore document found for job {job['id']}")
+            
+    except Exception as e:
+        logger.warning(f"Failed to enrich job {job['id']} with Firestore data: {e}")
+    
+    return job
 
 def _get_task_type(model: str) -> str:
     """Map model to task type"""

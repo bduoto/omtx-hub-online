@@ -49,6 +49,7 @@ class JobSubmissionService:
         protein_sequence: str,
         ligand_smiles: str,
         ligand_name: Optional[str] = None,
+        job_name: Optional[str] = None,
         user_id: str = "omtx_deployment_user",
         parameters: Optional[Dict[str, Any]] = None,
         priority: str = "normal",
@@ -68,6 +69,7 @@ class JobSubmissionService:
         # Create job document structure
         job_data = {
             "job_id": job_id,
+            "job_name": job_name or f"Boltz-2 Job {job_id[:8]}",
             "job_type": "INDIVIDUAL",
             "model": "boltz2",
             "status": "pending",

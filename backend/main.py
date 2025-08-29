@@ -38,7 +38,11 @@ except ImportError as e:
     # Create dummy middleware for compatibility
     class MetricsMiddleware:
         def __init__(self, app): 
-            pass
+            self.app = app
+        
+        async def __call__(self, scope, receive, send):
+            # Pass through without any metrics collection
+            return await self.app(scope, receive, send)
     
     def get_metrics_response():
         return {"error": "metrics not available"}
